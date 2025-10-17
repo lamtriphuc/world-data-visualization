@@ -76,7 +76,39 @@ async function fetchCountries() {
     return Object.values(merged);
 }
 
-async function aggregateRegions() {
+// async function aggregateRegions() {
+//     const regions = await Country.aggregate([
+//         {
+//             $group: {
+//                 _id: '$region',
+//                 totalPopulation: { $sum: '$population' },
+//                 totalArea: { $sum: '$area' },
+//                 averagePopulationDensity: { $avg: '$populationDensity' },
+//                 countryCount: { $sum: 1 }
+//             }
+//         }
+//     ]);
+
+//     for (const r of regions) {
+//         await Region.findOneAndUpdate(
+//             { name: r._id, type: 'region' },
+//             {
+//                 name: r._id,
+//                 type: 'region',
+//                 totalPopulation: r.totalPopulation,
+//                 totalArea: r.totalArea,
+//                 averagePopulationDensity: r.averagePopulationDensity,
+//                 countryCount: r.countryCount,
+//                 lastAggregatedAt: new Date()
+//             },
+//             { upsert: true, new: true }
+//         );
+//     }
+//     console.log(`Đã tổng hợp ${regions.length} regions.`);
+// }
+
+async function aggregateRegionsAndSubregions() {
+    // ----- Tổng hợp theo region -----
     const regions = await Country.aggregate([
         {
             $group: {
@@ -90,6 +122,7 @@ async function aggregateRegions() {
     ]);
 
     for (const r of regions) {
+        if (!r._id) continue;
         await Region.findOneAndUpdate(
             { name: r._id, type: 'region' },
             {
@@ -104,8 +137,44 @@ async function aggregateRegions() {
             { upsert: true, new: true }
         );
     }
+
     console.log(`Đã tổng hợp ${regions.length} regions.`);
+
+    // ----- Tổng hợp theo subregion -----
+    const subregions = await Country.aggregate([
+        {
+            $group: {
+                _id: { region: '$region', subregion: '$subregion' },
+                totalPopulation: { $sum: '$population' },
+                totalArea: { $sum: '$area' },
+                averagePopulationDensity: { $avg: '$populationDensity' },
+                countryCount: { $sum: 1 }
+            }
+        }
+    ]);
+
+    for (const s of subregions) {
+        if (!s._id.subregion) continue; // skip nếu subregion null
+
+        await Region.findOneAndUpdate(
+            { name: s._id.subregion, type: 'subregion' },
+            {
+                name: s._id.subregion,
+                type: 'subregion',
+                parentRegion: s._id.region || null,
+                totalPopulation: s.totalPopulation,
+                totalArea: s.totalArea,
+                averagePopulationDensity: s.averagePopulationDensity,
+                countryCount: s.countryCount,
+                lastAggregatedAt: new Date()
+            },
+            { upsert: true, new: true }
+        );
+    }
+
+    console.log(`Đã tổng hợp ${subregions.length} subregions.`);
 }
+
 
 async function aggregateLanguages() {
     const countries = await Country.find();
@@ -180,7 +249,8 @@ async function runScript() {
             await transformAndUpsert(c);
         }
 
-        await aggregateRegions();
+        // await aggregateRegions();
+        await aggregateRegionsAndSubregions();
         await aggregateLanguages();
         await aggregateCurrencies();
 
