@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const regionSchema = new mongoose.Schema({
-    // tên khu vực or tiểu khu vực
     name: {
         type: String,
         required: true,
@@ -12,6 +11,10 @@ const regionSchema = new mongoose.Schema({
         type: String,
         enum: ['region', 'subregion'],
         required: true
+    },
+    parentRegion: {
+        type: String,
+        default: null
     },
     totalPopulation: Number,
     totalArea: Number,

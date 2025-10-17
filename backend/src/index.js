@@ -5,12 +5,16 @@ import cron from 'node-cron';
 import { connectDB } from "./config/db.js";
 import runCountrySeed from './scripts/fetchCountries.js'
 import Country from "./models/Country.js";
+import routes from './routes/index.js';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Routes
+app.use('/api', routes);
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const PORT = process.env.PORT;
