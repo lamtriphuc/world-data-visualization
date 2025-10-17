@@ -5,6 +5,8 @@ export const formatCountryBasic = (country) => {
     if (!country) return;
 
     return {
+        cca2: country.cca2,
+        cca3: country.cca3,
         name: country.name.common,
         population: country.population,
         region: country.region,
