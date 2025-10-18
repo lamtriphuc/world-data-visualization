@@ -1,8 +1,8 @@
-const CountryCard = ({ name, population, region, capital, image }) => {
+const CountryCard = ({ name, population, region, capital, flag }) => {
 	return (
 		<div className='flex flex-col'>
 			<div>
-				<img className='object-cover' src={image} alt={name} />
+				<img className='object-cover' src={flag} alt={name} />
 			</div>
 			<div className='px-4 py-8 dark:bg-gray-800 shadow-[0_4px_20px_hsla(0,0%,0%,10%)]'>
 				<h2 className='pb-4 font-semibold text-xl'>{name}</h2>
