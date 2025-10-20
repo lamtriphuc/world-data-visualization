@@ -11,7 +11,7 @@ const App = () => {
 			<Routes>
 				<Route path='/' element={<AppLayout />}>
 					<Route index element={<CountryList />} />
-					<Route path='/country' element={<CountryDetails />} />
+					<Route path='/country/:code' element={<CountryDetails />} />
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/dashboard' element={<DashBoard />} />
 				</Route>
