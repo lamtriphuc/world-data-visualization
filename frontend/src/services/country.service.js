@@ -8,3 +8,10 @@ export const getAllCountries = async (page, region, subregion, search) => {
 	);
 	return response.data.data;
 };
+
+export const getCountryDetails = async (code) => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/${code}`
+	);
+	return response.data.data;
+};

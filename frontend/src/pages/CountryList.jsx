@@ -56,7 +56,7 @@ const CountryList = () => {
 			</div>
 			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
 				{countries.map((country) => (
-					<Link to='/country'>
+					<Link to={`/country/${country.cca3}`}>
 						<CountryCard
 							name={country.name}
 							population={country.population}
