@@ -5,6 +5,7 @@ import Country from '../models/Country.js';
 import Region from '../models/Region.js';
 import Language from '../models/Language.js';
 import Currency from '../models/Currency.js';
+import Gdp from '../models/Gdp.js'
 
 dotenv.config();
 
@@ -22,8 +23,6 @@ async function transformAndUpsert(countryRaw) {
     if (!cca3) return;
 
     const area = countryRaw.area || 0;
-    const population = countryRaw.population || 0;
-    const populationDensity = area > 0 ? population / area : null;
     const rawLatLng = countryRaw.latlng || [];
 
     const doc = {
@@ -38,7 +37,6 @@ async function transformAndUpsert(countryRaw) {
         capital: countryRaw.capital || [],
         region: countryRaw.region || 'Unknown',
         subregion: countryRaw.subregion || null,
-        population,
         area,
         latlng: (rawLatLng.length === 2) ? { lat: rawLatLng[0], lng: rawLatLng[1] } : undefined,
         timezones: countryRaw.timezones || [],
@@ -48,7 +46,6 @@ async function transformAndUpsert(countryRaw) {
         flags: countryRaw.flags || {},
         maps: countryRaw.maps || {},
         coatOfArms: countryRaw.coatOfArms || {},
-        populationDensity,
         updatedAt: new Date()
     };
 
@@ -56,56 +53,73 @@ async function transformAndUpsert(countryRaw) {
 }
 
 async function fetchCountries() {
-    const results = [];
-    console.log('Đang fetch dữ liệu từ API...');
+    console.log('Fetching data from rest coutries api...');
 
-    for (const group of FIELD_GROUPS) {
-        const { data } = await axios.get(`${BASE_URL}?fields=${group}`);
-        results.push(data);
-    }
+    // for (const group of FIELD_GROUPS) {
+    //     const { data } = await axios.get(`${BASE_URL}?fields=${group}`);
+    //     results.push(data);
+    // }
 
-    console.log('Đang gộp dữ liệu...');
-    const merged = {};
-    for (const group of results) {
+    const requests = FIELD_GROUPS.map(group =>
+        axios.get(`${BASE_URL}?fields=${group}`)
+    );
+
+    const response = await Promise.all(requests);
+    const results = response.map(res => res.data);
+
+    const merged = results.reduce((acc, group) => {
         for (const c of group) {
-            const key = c.cca3
-            merged[key] = { ...merged[key], ...c };
+            acc[c.cca3] = { ...acc[c.cca3], ...c };
         }
-    }
+        return acc;
+    }, {})
 
     return Object.values(merged);
 }
 
-// async function aggregateRegions() {
-//     const regions = await Country.aggregate([
-//         {
-//             $group: {
-//                 _id: '$region',
-//                 totalPopulation: { $sum: '$population' },
-//                 totalArea: { $sum: '$area' },
-//                 averagePopulationDensity: { $avg: '$populationDensity' },
-//                 countryCount: { $sum: 1 }
-//             }
-//         }
-//     ]);
+async function updateAllPopulations() {
+    try {
+        const year = process.env.LATEST_YEAR || 2024;
+        const url = `https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=${year}&per_page=500`;
+        const { data } = await axios.get(url);
 
-//     for (const r of regions) {
-//         await Region.findOneAndUpdate(
-//             { name: r._id, type: 'region' },
-//             {
-//                 name: r._id,
-//                 type: 'region',
-//                 totalPopulation: r.totalPopulation,
-//                 totalArea: r.totalArea,
-//                 averagePopulationDensity: r.averagePopulationDensity,
-//                 countryCount: r.countryCount,
-//                 lastAggregatedAt: new Date()
-//             },
-//             { upsert: true, new: true }
-//         );
-//     }
-//     console.log(`Đã tổng hợp ${regions.length} regions.`);
-// }
+        if (!Array.isArray(data) || !Array.isArray(data[1])) return;
+
+        const records = data[1].filter(r => r.value !== null && r.countryiso3code);
+
+        console.log(`Fetched population records from World Bank (${year})`);
+
+        // Lấy danh sách { cca3: area } từ DB trước (để tính mật độ nhanh hơn)
+        const areas = await Country.find({}, { cca3: 1, area: 1 }).lean();
+        const areaMap = Object.fromEntries(areas.map(c => [c.cca3, c.area || 0]));
+
+        // Chuẩn bị bulk operations
+        const ops = records.map(r => {
+            const cca3 = r.countryiso3code;
+            const population = r.value;
+            const area = areaMap[cca3] || 0;
+            const populationDensity = area > 0 ? population / area : null;
+
+            return {
+                updateOne: {
+                    filter: { cca3 },
+                    update: {
+                        $set: { population, populationDensity, updatedAt: new Date() }
+                    }
+                }
+            };
+        });
+
+        if (ops.length > 0) {
+            const result = await Country.bulkWrite(ops);
+            console.log(`Updated ${result.modifiedCount || 0} countries with population data.`);
+        } else {
+            console.log("No valid population records to update.");
+        }
+    } catch (err) {
+        console.error("Population batch update failed:", err.message);
+    }
+}
 
 async function aggregateRegionsAndSubregions() {
     // ----- Tổng hợp theo region -----
@@ -236,6 +250,58 @@ async function aggregateCurrencies() {
     console.log(`Đã lưu ${Object.keys(curMap).length} currencies.`);
 }
 
+async function fetchGdpDataForALl() {
+    const endYear = process.env.LATEST_YEAR || 2015;
+    const startYear = endYear - 9;
+
+    try {
+        const url = `https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?format=json&date=${startYear}:${endYear}&per_page=20000`;
+        const { data } = await axios.get(url);
+
+        if (!Array.isArray(data) || !Array.isArray(data[1])) return;
+
+        const records = data[1].filter(r => r.value !== null && r.countryiso3code);
+        console.log(`Fetched ${records.length} GDP records (${startYear}–${endYear})`);
+
+        const map = {};
+        for (const r of records) {
+            const code = r.countryiso3code;
+            if (!map[code]) map[code] = [];
+            map[code].push({
+                year: parseInt(r.date),
+                value: r.value
+            })
+        }
+
+        // Chuẩn bị bulk operations
+        const ops = Object.entries(map).map(([cca3, gdpData]) => ({
+            updateOne: {
+                filter: { cca3 },
+                update: {
+                    $set: {
+                        cca3,
+                        data: gdpData
+                            .filter(d => !isNaN(d.year) && !isNaN(d.value))
+                            .sort((a, b) => a.year - b.year)
+                            .slice(-10),
+                        retrievedAt: new Date(),
+                    },
+                },
+                upsert: true,
+            },
+        }));
+
+        if (ops.length > 0) {
+            const result = await Gdp.bulkWrite(ops);
+            console.log(`GDP updated for ${result.modifiedCount + result.upsertedCount} countries`);
+        } else {
+            console.log("No valid GDP operations to execute");
+        }
+    } catch (err) {
+        console.log(`GDP fetch failed: `, err.message);
+    }
+}
+
 
 async function runScript() {
     try {
@@ -245,14 +311,20 @@ async function runScript() {
         const countries = await fetchCountries();
         console.log(`Fetched ${countries.length} countries`);
 
-        for (const c of countries) {
-            await transformAndUpsert(c);
+        const BATCH_SIZE = 10;
+        for (let i = 0; i < countries.length; i += BATCH_SIZE) {
+            const batch = countries.slice(i, i + BATCH_SIZE);
+            await Promise.all(batch.map(c => transformAndUpsert(c)));
         }
 
-        // await aggregateRegions();
+        await updateAllPopulations();
+
         await aggregateRegionsAndSubregions();
-        await aggregateLanguages();
-        await aggregateCurrencies();
+        // await aggregateLanguages();
+        // await aggregateCurrencies();
+
+        await fetchGdpDataForALl();
+
 
         console.log('save success');
         mongoose.disconnect();

@@ -37,7 +37,7 @@ const countrySchema = new mongoose.Schema({
     },
     coatOfArms: mongoose.Schema.Types.Mixed,
     // Computed fields:
-    populationDensity: { type: Number, index: true }, // population / area
+    populationDensity: { type: Number, default: null, index: true },
     updatedAt: { type: Date, default: Date.now } // thời điểm cập nhật record
 }, { timestamps: true });
 

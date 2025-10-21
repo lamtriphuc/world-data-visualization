@@ -101,7 +101,6 @@ const Dashboard = () => {
 
 	return (
 		<>
-			<div className="header-text pb-6">Dashboard</div>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{/* Total Countries Card */}
 				<StatCard
