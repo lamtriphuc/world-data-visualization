@@ -12,9 +12,12 @@ import MiniMap from '../components/Map/MiniMap';
 import { useEffect, useState } from 'react';
 import { getCountryDetails } from '../services/country.service';
 import { useParams } from 'react-router-dom';
+import { getLatestGdp } from '../services/gdp.service';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
+	const [gdp, setGdp] = useState(null);
+	const [year, setYear] = useState(null);
 	const { code } = useParams();
 
 	useEffect(() => {
@@ -27,6 +30,19 @@ const CountryDetails = () => {
 			}
 		};
 		fetchCountryDetails();
+	}, [code]);
+
+	useEffect(() => {
+		const fetchLatestGdp = async () => {
+			try {
+				const data = await getLatestGdp(code);
+				setGdp(data.value.toLocaleString());
+				setYear(data.year);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		fetchLatestGdp();
 	}, [code]);
 
 	if (!countryDetails) {
@@ -54,9 +70,11 @@ const CountryDetails = () => {
 						<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
 							{countryDetails.region}
 						</span>
-						<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
-							{countryDetails.subregion}
-						</span>
+						{countryDetails.subregion && (
+							<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
+								{countryDetails.subregion}
+							</span>
+						)}
 					</div>
 				</div>
 			</div>
@@ -77,21 +95,21 @@ const CountryDetails = () => {
 							<FiUsers className='w-4 h-4 sm:w-5 sm:h-5  text-green-500' />
 							<div className='flex flex-col'>
 								<span>Population</span>
-								<span>{countryDetails.population}</span>
+								<span>{countryDetails.population.toLocaleString()}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
 							<FiMaximize2 className='w-4 h-4 sm:w-5 sm:h-5  text-orange-500' />
 							<div className='flex flex-col'>
 								<span>Area</span>
-								<span>{countryDetails.area} km²</span>
+								<span>{countryDetails.area.toLocaleString()} km²</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
 							<IoMdTrendingUp className='w-4 h-4 sm:w-5 sm:h-5  text-purple-500' />
 							<div className='flex flex-col'>
-								<span>GDP (Nominal)</span>
-								<span>$777.83B (2024)</span>
+								<span>GDP {year && `(${year})`}</span>
+								<span>{gdp ? `${gdp}` : 'N/A'}</span>
 							</div>
 						</div>
 					</div>
@@ -112,7 +130,7 @@ const CountryDetails = () => {
 							<FiDollarSign className='w-4 h-4 sm:w-5 sm:h-5  text-emerald-500' />
 							<div className='flex flex-col'>
 								<span>Currency</span>
-								<span>{countryDetails.currencies}</span>
+								<span>{countryDetails.currencies === '()' && 'N/A'}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
@@ -135,7 +153,8 @@ const CountryDetails = () => {
 							<div className='flex flex-col'>
 								<span>Region</span>
 								<span>
-									{countryDetails.region} - {countryDetails.subregion}
+									{countryDetails.region}
+									{countryDetails.subregion && ` - ${countryDetails.subregion}`}
 								</span>
 							</div>
 						</div>

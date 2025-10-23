@@ -23,12 +23,12 @@ const CountryList = () => {
 	useEffect(() => {
 		const fetchCountries = async () => {
 			try {
-				const response = await getAllCountries(
+				const response = await getAllCountries({
 					page,
 					regionParam,
 					subregionParam,
-					searchParam
-				);
+					searchParam,
+				});
 				setTotalPages(response.totalPages);
 				setCountries(response.data);
 			} catch (error) {
@@ -59,7 +59,7 @@ const CountryList = () => {
 					<Link to={`/country/${country.cca3}`}>
 						<CountryCard
 							name={country.name}
-							population={country.population}
+							population={country.population.toLocaleString()}
 							region={country.region}
 							capital={country.capital}
 							flag={country.flag}
