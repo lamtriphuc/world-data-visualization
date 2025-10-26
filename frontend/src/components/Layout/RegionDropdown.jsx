@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { SlArrowDown } from 'react-icons/sl';
 import { useSearchParams } from 'react-router-dom';
 
@@ -34,6 +35,7 @@ const groupedSubregions = {
 
 const FilterRegionSubregion = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
+	const { t } = useTranslation();
 
 	const handleFilterChange = (e) => {
 		const value = e.target.value;
@@ -67,17 +69,17 @@ const FilterRegionSubregion = () => {
 					bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 
 					focus:outline-none cursor-pointer pr-10'>
 				<option value='' disabled hidden>
-					Filter by Region or Subregion
+					{t('filter_region')}
 				</option>
 
 				{Object.entries(groupedSubregions).map(([region, subs]) => (
 					<>
 						<option className='font-bold' value={region}>
-							{region}
+							{t(`main_region.${region}`)}
 						</option>
 						{subs.map((sub) => (
 							<option key={sub} value={sub}>
-								&nbsp;&nbsp; {sub}
+								&nbsp;&nbsp; {t(`subregion.${sub}`)}
 							</option>
 						))}
 					</>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getAllCountries } from '../services/country.service';
 import RegionDropdown from '../components/Layout/RegionDropdown';
 import { SlMagnifier } from 'react-icons/sl';
+import { useTranslation } from 'react-i18next';
 
 const CountryList = () => {
 	const [countries, setCountries] = useState([]);
@@ -11,6 +12,7 @@ const CountryList = () => {
 	const [totalPages, setTotalPages] = useState();
 	const [searchParams] = useSearchParams();
 	const [searchTerm, setSearchTerm] = useState('');
+	const { t } = useTranslation();
 
 	const regionParam = searchParams.get('region')
 		? `&region=${searchParams.get('region')}`
@@ -23,12 +25,12 @@ const CountryList = () => {
 	useEffect(() => {
 		const fetchCountries = async () => {
 			try {
-				const response = await getAllCountries(
+				const response = await getAllCountries({
 					page,
 					regionParam,
 					subregionParam,
-					searchParam
-				);
+					searchParam,
+				});
 				setTotalPages(response.totalPages);
 				setCountries(response.data);
 			} catch (error) {
@@ -45,7 +47,7 @@ const CountryList = () => {
 					<SlMagnifier className='text-gray-400' />
 					<input
 						type='text'
-						placeholder='Search for a country...'
+						placeholder={t('search_placeholder')}
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 						className='w-full bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 
@@ -59,7 +61,7 @@ const CountryList = () => {
 					<Link to={`/country/${country.cca3}`}>
 						<CountryCard
 							name={country.name}
-							population={country.population}
+							population={country.population.toLocaleString()}
 							region={country.region}
 							capital={country.capital}
 							flag={country.flag}

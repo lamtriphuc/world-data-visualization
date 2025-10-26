@@ -1,0 +1,54 @@
+{
+  "search_placeholder": "Search for a country...",
+  "filter_region": "Filter by Region",
+  "population": "Population",
+  "region": "Region",
+  "capital": "Capital",
+  "area": "Area",
+  "language": "Language",
+  "currency": "Currency",
+  "timezone": "Time Zone",
+  "dark_mode": "Dark Mode",
+  "light_mode": "Light Mode",
+  "comparison": "Comparison",
+  "dashboard": "Dashboard",
+  "main_region": {
+    "Africa": "Africa",
+    "Americas": "Americas",
+    "Asia": "Asia",
+    "Europe": "Europe",
+    "Oceania": "Oceania",
+    "Antarctic": "Antarctic"
+  },
+  "subregion": {
+    "Southern Asia": "Southern Asia",
+    "Central Asia": "Central Asia",
+    "Western Asia": "Western Asia",
+    "Eastern Asia": "Eastern Asia",
+    "South-Eastern Asia": "South-Eastern Asia",
+
+    "Northern Europe": "Northern Europe",
+    "Southern Europe": "Southern Europe",
+    "Western Europe": "Western Europe",
+    "Eastern Europe": "Eastern Europe",
+
+    "Northern Africa": "Northern Africa",
+    "Sub-Saharan Africa": "Sub-Saharan Africa",
+    "Western Africa": "Western Africa",
+    "Eastern Africa": "Eastern Africa",
+    "Southern Africa": "Southern Africa",
+    "Middle Africa": "Middle Africa",
+
+    "North America": "Northern America",
+    "Central America": "Central America",
+    "South America": "South America",
+    "Caribbean": "Caribbean",
+
+    "Melanesia": "Melanesia",
+    "Micronesia": "Micronesia",
+    "Polynesia": "Polynesia",
+    "Australia and New Zealand": "Australia and New Zealand",
+
+    "Antarctic": "Antarctica"
+  }
+}

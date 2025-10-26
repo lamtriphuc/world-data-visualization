@@ -8,3 +8,15 @@
   font-optical-sizing: auto;
   font-style: normal;
 }
+
+@layer base {
+  :root {
+    --axis-color: #475569;
+    /* gray-600 */
+  }
+
+  .dark {
+    --axis-color: #cbd5e1;
+    /* gray-300 */
+  }
+}

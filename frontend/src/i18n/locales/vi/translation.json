@@ -1,0 +1,54 @@
+{
+  "search_placeholder": "Tìm kiếm quốc gia...",
+  "filter_region": "Lọc theo khu vực",
+  "population": "Dân số",
+  "region": "Khu vực",
+  "capital": "Thủ đô",
+  "area": "Diện tích",
+  "language": "Ngôn ngữ",
+  "currency": "Tiền tệ",
+  "timezone": "Múi giờ",
+  "dark_mode": "Chế độ tối",
+  "light_mode": "Chế độ sáng",
+  "comparison": "So sánh",
+  "dashboard": "Tổng quan",
+  "main_region": {
+    "Africa": "Châu Phi",
+    "Americas": "Châu Mỹ",
+    "Asia": "Châu Á",
+    "Europe": "Châu Âu",
+    "Oceania": "Châu Đại Dương",
+    "Antarctic": "Châu Nam Cực"
+  },
+   "subregion": {
+    "Southern Asia": "Nam Á",
+    "Central Asia": "Trung Á",
+    "Western Asia": "Tây Á",
+    "Eastern Asia": "Đông Á",
+    "South-Eastern Asia": "Đông Nam Á",
+
+    "Northern Europe": "Bắc Âu",
+    "Southern Europe": "Nam Âu",
+    "Western Europe": "Tây Âu",
+    "Eastern Europe": "Đông Âu",
+
+    "Northern Africa": "Bắc Phi",
+    "Sub-Saharan Africa": "Hạ Sahara",
+    "Western Africa": "Tây Phi",
+    "Eastern Africa": "Đông Phi",
+    "Southern Africa": "Nam Phi",
+    "Middle Africa": "Trung Phi",
+
+    "North America": "Bắc Mỹ",
+    "Central America": "Trung Mỹ",
+    "South America": "Nam Mỹ",
+    "Caribbean": "Ca-ri-bê",
+
+    "Melanesia": "Melanesia",
+    "Micronesia": "Micronesia",
+    "Polynesia": "Polynesia",
+    "Australia and New Zealand": "Châu Úc và New Zealand",
+
+    "Antarctic": "Châu Nam Cực"
+  }
+}
