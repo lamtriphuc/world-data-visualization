@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getAllCountries } from '../services/country.service';
 import RegionDropdown from '../components/Layout/RegionDropdown';
 import { SlMagnifier } from 'react-icons/sl';
+import { useTranslation } from 'react-i18next';
 
 const CountryList = () => {
 	const [countries, setCountries] = useState([]);
@@ -11,6 +12,7 @@ const CountryList = () => {
 	const [totalPages, setTotalPages] = useState();
 	const [searchParams] = useSearchParams();
 	const [searchTerm, setSearchTerm] = useState('');
+	const { t } = useTranslation();
 
 	const regionParam = searchParams.get('region')
 		? `&region=${searchParams.get('region')}`
@@ -45,7 +47,7 @@ const CountryList = () => {
 					<SlMagnifier className='text-gray-400' />
 					<input
 						type='text'
-						placeholder='Search for a country...'
+						placeholder={t('search_placeholder')}
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 						className='w-full bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 
