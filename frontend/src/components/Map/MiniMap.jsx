@@ -1,6 +1,7 @@
 import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const MiniMap = ({ lat, lng }) => {
 	const [showLargeMap, setShowLargeMap] = useState(false);
@@ -9,6 +10,7 @@ const MiniMap = ({ lat, lng }) => {
 		latitude: lat,
 		zoom: 4,
 	});
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		if (lat && lng) {
@@ -39,7 +41,7 @@ const MiniMap = ({ lat, lng }) => {
 					<Marker longitude={lng} latitude={lat} color='red' />
 				</Map>
 				<div className='absolute bottom-2 right-2 bg-gray-900/70 text-white text-xs px-3 py-1 rounded'>
-					Click to expand
+					{t('expand')}
 				</div>
 			</div>
 
@@ -61,7 +63,7 @@ const MiniMap = ({ lat, lng }) => {
 						<button
 							onClick={() => setShowLargeMap(false)}
 							className='absolute top-3 right-3 bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-700'>
-							Close
+							X
 						</button>
 					</div>
 				</div>

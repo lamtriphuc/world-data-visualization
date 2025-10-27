@@ -5,9 +5,12 @@
   "region": "Region",
   "capital": "Capital",
   "area": "Area",
+  "borders": "Borders",
+  "iso_codes": "ISO Codes",
   "language": "Language",
   "currency": "Currency",
-  "timezone": "Time Zone",
+  "location": "Location",
+  "timezone": "Timezones",
   "dark_mode": "Dark Mode",
   "light_mode": "Light Mode",
   "comparison": "Comparison",
@@ -29,6 +32,7 @@
 
     "Northern Europe": "Northern Europe",
     "Southern Europe": "Southern Europe",
+    "Southeast Europe": "Southeast Europe",
     "Western Europe": "Western Europe",
     "Eastern Europe": "Eastern Europe",
 
@@ -50,5 +54,8 @@
     "Australia and New Zealand": "Australia and New Zealand",
 
     "Antarctic": "Antarctica"
-  }
+  },
+  "basic_information": "Basic Information",
+  "cultural_economic": "Cultural & Economic",
+  "expand": "Click to expand"
 }

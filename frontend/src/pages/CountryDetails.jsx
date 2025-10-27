@@ -13,12 +13,14 @@ import { useEffect, useState } from 'react';
 import { getCountryDetails } from '../services/country.service';
 import { useParams } from 'react-router-dom';
 import { getLatestGdp } from '../services/gdp.service';
+import { useTranslation } from 'react-i18next';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
 	const [gdp, setGdp] = useState(null);
 	const [year, setYear] = useState(null);
 	const { code } = useParams();
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		const fetchCountryDetails = async () => {
@@ -68,11 +70,11 @@ const CountryDetails = () => {
 					</p>
 					<div className='flex items-center justify-center gap-2'>
 						<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
-							{countryDetails.region}
+							{t(`main_region.${countryDetails.region}`)}
 						</span>
 						{countryDetails.subregion && (
 							<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
-								{countryDetails.subregion}
+								{t(`subregion.${countryDetails.subregion}`)}
 							</span>
 						)}
 					</div>
@@ -82,26 +84,26 @@ const CountryDetails = () => {
 			<div className='grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'>
 				{/* Capital, population, area, gdp */}
 				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
-					<p>Basic Information</p>
+					<p>{t('basic_information')}</p>
 					<div className='mt-10 space-y-4'>
 						<div className='flex gap-2'>
 							<IoLocationOutline className='w-4 h-4 sm:w-5 sm:h-5  text-blue-500' />
 							<div className='flex flex-col'>
-								<span>Capital</span>
+								<span>{t('capital')}</span>
 								<span>{countryDetails.capital}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
 							<FiUsers className='w-4 h-4 sm:w-5 sm:h-5  text-green-500' />
 							<div className='flex flex-col'>
-								<span>Population</span>
+								<span>{t('population')}</span>
 								<span>{countryDetails.population.toLocaleString()}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
 							<FiMaximize2 className='w-4 h-4 sm:w-5 sm:h-5  text-orange-500' />
 							<div className='flex flex-col'>
-								<span>Area</span>
+								<span>{t('area')}</span>
 								<span>{countryDetails.area.toLocaleString()} km²</span>
 							</div>
 						</div>
@@ -117,26 +119,26 @@ const CountryDetails = () => {
 
 				{/* language, currency, timezones, region */}
 				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)] '>
-					<p>Cultural & Economic</p>
+					<p>{t('cultural_economic')}</p>
 					<div className='mt-10 space-y-4'>
 						<div className='flex gap-2'>
 							<IoLanguage className='w-4 h-4 sm:w-5 sm:h-5  text-pink-500' />
 							<div className='flex flex-col'>
-								<span>Language</span>
+								<span>{t('language')}</span>
 								<span>{countryDetails.languages}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
 							<FiDollarSign className='w-4 h-4 sm:w-5 sm:h-5  text-emerald-500' />
 							<div className='flex flex-col'>
-								<span>Currency</span>
-								<span>{countryDetails.currencies === '()' && 'N/A'}</span>
+								<span>{t('currency')}</span>
+								<span>{countryDetails.currencies}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
 							<FiClock className='w-4 h-4 sm:w-5 sm:h-5  text-indigo-500' />
 							<div className='flex flex-col'>
-								<span>Timezones</span>
+								<span>{t('timezone')}</span>
 								<div className='flex flex-wrap gap-x-2'>
 									{countryDetails.timezones?.map((tz) =>
 										tz ? (
@@ -151,10 +153,11 @@ const CountryDetails = () => {
 						<div className='flex gap-2'>
 							<FiGlobe className='w-4 h-4 sm:w-5 sm:h-5  text-cyan-500' />
 							<div className='flex flex-col'>
-								<span>Region</span>
+								<span>{t('region')}</span>
 								<span>
-									{countryDetails.region}
-									{countryDetails.subregion && ` - ${countryDetails.subregion}`}
+									{t(`main_region.${countryDetails.region}`)}
+									{countryDetails.subregion &&
+										` - ${t(`subregion.${countryDetails.subregion}`)}`}
 								</span>
 							</div>
 						</div>
@@ -167,7 +170,7 @@ const CountryDetails = () => {
 				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
 					<div className='flex items-center gap-2'>
 						<IoFlagOutline />
-						<h1>ISO Codes</h1>
+						<h1>{t('iso_codes')}</h1>
 					</div>
 					<div className='mt-10 flex gap-20'>
 						<div className='flex flex-col space-y-2'>
@@ -195,7 +198,7 @@ const CountryDetails = () => {
 				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
 					<div className='flex items-center gap-2'>
 						<LuFlagTriangleRight />
-						<h1>Borders</h1>
+						<h1>{t('borders')}</h1>
 					</div>
 					<div className='mt-10 flex flex-wrap gap-2'>
 						{countryDetails.borders?.map((border) => (
@@ -211,7 +214,7 @@ const CountryDetails = () => {
 
 			{/* Location */}
 			<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
-				<h1>Location</h1>
+				<h1>{t('location')}</h1>
 				{/* Map box */}
 				{countryDetails.latlng?.lat && countryDetails.latlng?.lng && (
 					<MiniMap

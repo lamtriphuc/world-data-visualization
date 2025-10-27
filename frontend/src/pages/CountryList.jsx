@@ -5,6 +5,7 @@ import { getAllCountries } from '../services/country.service';
 import RegionDropdown from '../components/Layout/RegionDropdown';
 import { SlMagnifier } from 'react-icons/sl';
 import { useTranslation } from 'react-i18next';
+import { useDebounce } from '../hooks/useDebounce';
 
 const CountryList = () => {
 	const [countries, setCountries] = useState([]);
@@ -12,6 +13,7 @@ const CountryList = () => {
 	const [totalPages, setTotalPages] = useState();
 	const [searchParams] = useSearchParams();
 	const [searchTerm, setSearchTerm] = useState('');
+	const debouncedSearch = useDebounce(searchTerm, 500);
 	const { t } = useTranslation();
 
 	const regionParam = searchParams.get('region')
@@ -20,16 +22,16 @@ const CountryList = () => {
 	const subregionParam = searchParams.get('subregion')
 		? `&subregion=${searchParams.get('subregion')}`
 		: '';
-	const searchParam = searchTerm ? `&search=${searchTerm}` : '';
+	const searchParam = debouncedSearch ? `&search=${debouncedSearch}` : '';
 
 	useEffect(() => {
 		const fetchCountries = async () => {
 			try {
 				const response = await getAllCountries({
 					page,
-					regionParam,
-					subregionParam,
-					searchParam,
+					region: regionParam,
+					subregion: subregionParam,
+					search: searchParam,
 				});
 				setTotalPages(response.totalPages);
 				setCountries(response.data);
