@@ -4,9 +4,12 @@
   "population": "Dân số",
   "region": "Khu vực",
   "capital": "Thủ đô",
+  "borders": "Biên giới",
+  "iso_codes": "Mã ISO",
   "area": "Diện tích",
   "language": "Ngôn ngữ",
   "currency": "Tiền tệ",
+  "location": "Vị trí",
   "timezone": "Múi giờ",
   "dark_mode": "Chế độ tối",
   "light_mode": "Chế độ sáng",
@@ -29,6 +32,7 @@
 
     "Northern Europe": "Bắc Âu",
     "Southern Europe": "Nam Âu",
+    "Southeast Europe": "Đông Nam Âu",
     "Western Europe": "Tây Âu",
     "Eastern Europe": "Đông Âu",
 
@@ -50,5 +54,8 @@
     "Australia and New Zealand": "Châu Úc và New Zealand",
 
     "Antarctic": "Châu Nam Cực"
-  }
+  },
+  "basic_information": "Thông tin cơ bản",
+  "cultural_economic": "Văn hóa & Kinh tế",
+  "expand": "Nhấp để mở rông"
 }
