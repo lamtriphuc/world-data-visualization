@@ -4,6 +4,7 @@ import CountryDetails from './pages/CountryDetails';
 import AppLayout from './components/Layout/AppLayout';
 import Comparison from './pages/Comparison';
 import DashBoard from './pages/DashBoard';
+import Login from './pages/Login';
 
 const App = () => {
 	return (
@@ -14,6 +15,7 @@ const App = () => {
 					<Route path='/country/:code' element={<CountryDetails />} />
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/dashboard' element={<DashBoard />} />
+					<Route path='/login' element={<Login />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

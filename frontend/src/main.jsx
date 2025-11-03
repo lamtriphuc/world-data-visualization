@@ -4,11 +4,18 @@ import './index.css';
 import App from './App.jsx';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import './i18n';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+const gooleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+console.log(gooleClientId)
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
-		<ThemeProvider>
-			<App />
-		</ThemeProvider>
+		<GoogleOAuthProvider clientId={gooleClientId}>
+			<ThemeProvider>
+				<App />
+			</ThemeProvider>
+		</GoogleOAuthProvider>
 	</StrictMode>
 );
