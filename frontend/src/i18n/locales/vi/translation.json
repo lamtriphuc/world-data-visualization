@@ -23,39 +23,35 @@
     "Oceania": "Châu Đại Dương",
     "Antarctic": "Châu Nam Cực"
   },
-   "subregion": {
+  "subregion": {
     "Southern Asia": "Nam Á",
     "Central Asia": "Trung Á",
     "Western Asia": "Tây Á",
     "Eastern Asia": "Đông Á",
     "South-Eastern Asia": "Đông Nam Á",
-
     "Northern Europe": "Bắc Âu",
     "Southern Europe": "Nam Âu",
     "Southeast Europe": "Đông Nam Âu",
     "Western Europe": "Tây Âu",
     "Eastern Europe": "Đông Âu",
-
     "Northern Africa": "Bắc Phi",
     "Sub-Saharan Africa": "Hạ Sahara",
     "Western Africa": "Tây Phi",
     "Eastern Africa": "Đông Phi",
     "Southern Africa": "Nam Phi",
     "Middle Africa": "Trung Phi",
-
     "North America": "Bắc Mỹ",
     "Central America": "Trung Mỹ",
     "South America": "Nam Mỹ",
     "Caribbean": "Ca-ri-bê",
-
     "Melanesia": "Melanesia",
     "Micronesia": "Micronesia",
     "Polynesia": "Polynesia",
     "Australia and New Zealand": "Châu Úc và New Zealand",
-
     "Antarctic": "Châu Nam Cực"
   },
   "basic_information": "Thông tin cơ bản",
   "cultural_economic": "Văn hóa & Kinh tế",
-  "expand": "Nhấp để mở rông"
+  "expand": "Nhấp để mở rông",
+  "login": "Đăng nhập"
 }
