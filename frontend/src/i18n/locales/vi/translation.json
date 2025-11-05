@@ -53,5 +53,21 @@
   "basic_information": "Thông tin cơ bản",
   "cultural_economic": "Văn hóa & Kinh tế",
   "expand": "Nhấp để mở rông",
-  "login": "Đăng nhập"
+  "login": "Đăng nhập",
+  "countries": "quốc gia",
+  "total_countries": "Tổng số quốc gia",
+  "total_population": "Tổng dân số thế giới",
+  "continents": "Châu lục",
+  "continent": "châu lục",
+  "people": "người",
+  "country_distribution": "Phân Bố Quốc Gia Theo Châu Lục",
+  "top_10_population": "Top 10 Quốc Gia Có Dân Số Lớn Nhất",
+  "top_10_area": "Top 10 Quốc Gia Có Diện Tích Lớn Nhất",
+  "ranking": "Xếp hạng",
+  "flag": "Quốc kì",
+  "country": "Quốc gia",
+  "country_num": "Số quốc gia",
+  "percentage": "Tỷ lệ",
+  "million": "Tr",
+  "billion": "T"
 }

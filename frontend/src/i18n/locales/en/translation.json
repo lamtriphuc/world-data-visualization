@@ -53,5 +53,21 @@
   "basic_information": "Basic Information",
   "cultural_economic": "Cultural & Economic",
   "expand": "Click to expand",
-  "login": "Login"
+  "login": "Login",
+  "countries": "countries",
+  "total_countries": "Total countries",
+  "total_population": "Total world population",
+  "continent": "Continent",
+  "continents": "continents",
+  "people": "people",
+  "country_distribution": "Country Distribution by Continent",
+  "top_10_population": "Top 10 Countries with the Largest Population",
+  "top_10_area": "Top 10 Countries with the Largest Area",
+  "ranking": "Ranking",
+  "flag": "Flag",
+  "country": "Country",
+  "country_num": "Countries",
+  "percentage": "Percentage",
+  "million": "M",
+  "billion": "B"
 }
