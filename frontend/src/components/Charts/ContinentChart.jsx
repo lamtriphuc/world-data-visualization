@@ -1,4 +1,4 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
 	Cell,
 	Legend,
@@ -9,6 +9,8 @@ import {
 } from 'recharts';
 
 const ContinentChart = ({ chartData }) => {
+	const { t } = useTranslation();
+
 	const COLORS = {
 		Africa: '#3b82f6',
 		Americas: '#10b981',
@@ -24,8 +26,12 @@ const ContinentChart = ({ chartData }) => {
 			return (
 				<div className='bg-white p-3 rounded-lg shadow-lg border border-gray-200'>
 					<p className='text-gray-900'>{chartData.name}</p>
-					<p className='text-gray-600'>Số quốc gia: {chartData.value}</p>
-					<p className='text-gray-600'>Tỷ lệ: {chartData.percentage}%</p>
+					<p className='text-gray-600'>
+						{t('country_num')}: {chartData.value}
+					</p>
+					<p className='text-gray-600'>
+						{t('percentage')}: {chartData.percentage}%
+					</p>
 				</div>
 			);
 		}
@@ -34,7 +40,7 @@ const ContinentChart = ({ chartData }) => {
 	return (
 		<div className='mt-6 p-6 bg-white dark:bg-gray-800 shadow-lg rounded-xl'>
 			<h2 className='text-gray-900 dark:text-gray-300 mb-4'>
-				Phân Bố Quốc Gia Theo Châu Lục
+				{t('country_distribution')}
 			</h2>
 			<ResponsiveContainer width='100%' height={300}>
 				<PieChart>
@@ -45,7 +51,9 @@ const ContinentChart = ({ chartData }) => {
 						cx='50%'
 						cy='50%'
 						fill='#8884d8'
-						label={({ name, percentage }) => `${name} (${percentage}%)`}
+						label={({ name, percentage }) =>
+							`${t(`main_region.${name}`)} (${percentage}%)`
+						}
 						labelLine={false}>
 						{chartData.map((entry, index) => (
 							<Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
@@ -63,10 +71,10 @@ const ContinentChart = ({ chartData }) => {
 						/>
 						<div className='flex-1'>
 							<p className='text-gray-700 dark:text-gray-300 text-sm'>
-								{item.name}
+								{t(`main_region.${item.name}`)}
 							</p>
 							<p className='text-gray-500 dark:text-gray-400 text-xs'>
-								{item.value} quốc gia ({item.percentage}%)
+								{item.value} {t('countries')} ({item.percentage}%)
 							</p>
 						</div>
 					</div>

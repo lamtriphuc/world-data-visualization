@@ -1,9 +1,11 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FiMapPin } from 'react-icons/fi';
 import { GoTrophy } from 'react-icons/go';
 import { LuUsers } from 'react-icons/lu';
 
 const TopCountriesTable = ({ countries, title, type }) => {
+	const { t } = useTranslation();
+
 	const formatNumber = (num) => {
 		return new Intl.NumberFormat('vi-VN').format(num);
 	};
@@ -14,9 +16,9 @@ const TopCountriesTable = ({ countries, title, type }) => {
 
 	const formatPopulation = (pop) => {
 		if (pop >= 1_000_000_000) {
-			return `${(pop / 1_000_000_000).toFixed(2)} bilion`;
+			return `${(pop / 1_000_000_000).toFixed(2)} ${t('billion')}`;
 		} else if (pop >= 1_000_000) {
-			return `${(pop / 1_000_000).toFixed(2)} milion`;
+			return `${(pop / 1_000_000).toFixed(2)} ${t('million')}`;
 		}
 		return formatNumber(pop);
 	};
@@ -49,12 +51,12 @@ const TopCountriesTable = ({ countries, title, type }) => {
 				<table className='table-auto text-left w-full border-collapse'>
 					<thead className='text-sm'>
 						<tr>
-							<th className='w-16 pb-2'>Ranking</th>
-							<th className='w-16 pb-2'>Flag</th>
-							<th className='w-50 pb-2'>Country</th>
-							<th className='w-20 pb-2'>Region</th>
+							<th className='w-16 pb-2'>{t('ranking')}</th>
+							<th className='w-16 pb-2'>{t('flag')}</th>
+							<th className='w-50 pb-2'>{t('country')}</th>
+							<th className='w-20 pb-2'>{t('region')}</th>
 							<th className='w-40 pb-2 text-right'>
-								{type === 'population' ? 'Population' : 'Area'}
+								{type === 'population' ? t('population') : t('area')}
 							</th>
 						</tr>
 					</thead>
@@ -91,7 +93,7 @@ const TopCountriesTable = ({ countries, title, type }) => {
 								</td>
 								<td>
 									<span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-blue-100 text-blue-800'>
-										{country.region}
+										{t(`main_region.${country.region}`)}
 									</span>
 								</td>
 								<td>

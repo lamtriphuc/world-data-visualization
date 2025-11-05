@@ -118,15 +118,17 @@ const Comparison = () => {
 					<CompareTable countries={fakeCountries} />
 				</div>
 
-				{/* compare chart */}
-				<div className='bg-white dark:bg-gray-800 p-4 mt-4 rounded-sm'>
-					<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300'>
+				{/* Compare Chart */}
+				<div className='bg-white dark:bg-gray-800 p-6 mt-4 rounded-xl shadow-md items-start'>
+					<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300 mb-4'>
 						Biểu đồ so sánh
 					</p>
-					<CompareChart />
+					<div className='flex items-center overflow-x-auto'>
+						<CompareChart />
+					</div>
 				</div>
 			</div>
 		</>
 	);
 };
-export default Comparison
+export default Comparison;
