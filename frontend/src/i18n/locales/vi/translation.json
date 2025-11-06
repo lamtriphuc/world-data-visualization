@@ -3,6 +3,7 @@
   "filter_region": "Lọc theo khu vực",
   "population": "Dân số",
   "region": "Khu vực",
+  "sub_region": "Tiểu vùng",
   "capital": "Thủ đô",
   "borders": "Biên giới",
   "iso_codes": "Mã ISO",
@@ -69,5 +70,14 @@
   "country_num": "Số quốc gia",
   "percentage": "Tỷ lệ",
   "million": "Tr",
-  "billion": "T"
+  "billion": "T",
+  "select_country": "Chọn quốc gia",
+  "compare": "So sánh",
+  "comparison_table": "Bảng so sán",
+  "properties": "Thuộc tính",
+  "name": "Tên quốc gia",
+  "official_name": "Tên chính thức",
+  "comparison_chart": "Biểu đồ so sánh",
+  "population_area": "Dân số & Diện tích (Biểu đồ kết hợp)",
+  "gdp_10_years": "GDP qua 10 năm (tỷ USD)"
 }
