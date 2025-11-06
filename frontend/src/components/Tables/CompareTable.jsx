@@ -1,14 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const CompareTable = ({ countries }) => {
+	const { t } = useTranslation();
+
 	const fields = [
-		{ key: 'name.common', label: 'Tên quốc gia' },
-		{ key: 'name.official', label: 'Tên chính thức' },
-		{ key: 'area', label: 'Diện tích (km²)' },
-		{ key: 'population', label: 'Dân số' },
-		{ key: 'region', label: 'Khu vực' },
-		{ key: 'subregion', label: 'Tiểu vùng' },
-		{ key: 'capital', label: 'Thủ đô' },
+		{ key: 'name.common', label: t('name') },
+		{ key: 'name.official', label: t('official_name') },
+		{ key: 'area', label: `${t('area')} (km²)` },
+		{ key: 'population', label: t('population') },
+		{ key: 'region', label: t('region') },
+		{ key: 'subregion', label: t('sub_region') },
+		{ key: 'capital', label: t('capital') },
 	];
 
 	const getValue = (obj, path) => {
@@ -21,7 +24,7 @@ const CompareTable = ({ countries }) => {
 				<thead className='bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300'>
 					<tr>
 						<th className='p-3 text-left border-b border-gray-300 dark:border-gray-600'>
-							Thuộc tính
+							{t('properties')}
 						</th>
 						{countries.map((c) => (
 							<th

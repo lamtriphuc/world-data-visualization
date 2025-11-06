@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { FaX } from 'react-icons/fa6';
 import CompareTable from '../components/Tables/CompareTable';
 import CompareChart from '../components/Charts/CompareChart';
+import { useTranslation } from 'react-i18next';
 
 const Comparison = () => {
+	const { t } = useTranslation();
+
 	const countries = [
 		{ cca3: 'VN', label: 'Việt Nam' },
 		{ cca3: 'US', label: 'Mỹ' },
@@ -64,7 +67,9 @@ const Comparison = () => {
 			<div className='p-6 '>
 				<div className='space-y-4  bg-white dark:bg-gray-800 p-4  rounded-sm'>
 					<div className='flex items-center justify-between'>
-						<h2 className='text-gray-900 dark:text-gray-300'>Chọn quốc gia</h2>
+						<h2 className='text-gray-900 dark:text-gray-300'>
+							{t('select_country')}
+						</h2>
 						{selectedCountries.length > 0 && (
 							<button className='flex items-center px-2 py-1 text-sm border border-gray-900 rounded-md text-gray-900 hover:bg-gray-100 hover:border-gray-500 transition cursor-pointer'>
 								<FaX className='w-4 h-4 mr-2' />
@@ -78,7 +83,7 @@ const Comparison = () => {
 						{Array.from({ length: maxCountries }).map((_, index) => (
 							<div key={index} className='flex flex-col'>
 								<label className='text-sm text-gray-600 dark:text-gray-300 mb-2'>
-									Quốc gia {index + 1}
+									{t('country')} {index + 1}
 									{index === 0 && <span className='text-red-500 ml-1'>*</span>}
 								</label>
 
@@ -92,7 +97,7 @@ const Comparison = () => {
 											? 'bg-gray-100 text-gray-400 cursor-not-allowed'
 											: 'focus:ring-blue-500'
 									}`}>
-									<option value=''>-- Chọn quốc gia --</option>
+									<option value=''>-- {t('select_country')} --</option>
 									{countries.map((c) => (
 										<option key={c.cca3} value={c.cca3}>
 											{c.label}
@@ -106,14 +111,14 @@ const Comparison = () => {
 						<button
 							className='p-2 rounded-md bg-blue-400 text-black dark:text-white w-100'
 							onClick={handleCompare}>
-							So sánh
+							{t('compare')}
 						</button>
 					</div>
 				</div>
 				{/* compare table */}
 				<div className='bg-white dark:bg-gray-800 p-4 mt-4 rounded-sm'>
 					<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300'>
-						Bảng so sánh
+						{t('comparison_table')}
 					</p>
 					<CompareTable countries={fakeCountries} />
 				</div>
@@ -121,7 +126,7 @@ const Comparison = () => {
 				{/* Compare Chart */}
 				<div className='bg-white dark:bg-gray-800 p-6 mt-4 rounded-xl shadow-md items-start'>
 					<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300 mb-4'>
-						Biểu đồ so sánh
+						{t('comparison_chart')}
 					</p>
 					<div className='flex items-center overflow-x-auto'>
 						<CompareChart />

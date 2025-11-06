@@ -3,6 +3,7 @@
   "filter_region": "Filter by Region",
   "population": "Population",
   "region": "Region",
+  "sub_region": "Subregion",
   "capital": "Capital",
   "area": "Area",
   "borders": "Borders",
@@ -69,5 +70,14 @@
   "country_num": "Countries",
   "percentage": "Percentage",
   "million": "M",
-  "billion": "B"
+  "billion": "B",
+  "select_country": "Select country",
+  "compare": "Compare",
+  "comparison_table": "Comparison Table",
+  "properties": "Properties",
+  "name": "Name",
+  "official_name": "Official name",
+  "comparison_chart": "Comparison chart",
+  "population_area": "Population & Area (Combined Chart)",
+  "gdp_10_years": "GDP over 10 years (billion USD)"
 }

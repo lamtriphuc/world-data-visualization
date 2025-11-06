@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
 	BarChart,
 	Bar,
@@ -14,6 +15,8 @@ import {
 } from 'recharts';
 
 const CompareChart = () => {
+	const { t } = useTranslation();
+
 	const basicData = [
 		{ name: 'Việt Nam', population: 98_000_000, area: 331_212 },
 		{ name: 'Mỹ', population: 331_000_000, area: 833_520 },
@@ -38,7 +41,7 @@ const CompareChart = () => {
 			{/* --- Biểu đồ dân số & diện tích --- */}
 			<div className='mt-10'>
 				<h2 className='text-lg font-medium text-gray-700 dark:text-gray-300 mb-3'>
-					Dân số & Diện tích (Biểu đồ kết hợp)
+					{t('population_area')}
 				</h2>
 
 				<ResponsiveContainer width='100%' height={500}>
@@ -80,7 +83,7 @@ const CompareChart = () => {
 							yAxisId='left'
 							dataKey='population'
 							fill='#60a5fa'
-							name='Dân số'
+							name={t('population')}
 							barSize={50}
 						/>
 
@@ -91,7 +94,7 @@ const CompareChart = () => {
 							dataKey='area'
 							stroke='#34d399'
 							strokeWidth={3}
-							name='Diện tích (km²)'
+							name={`${t('area')} (km²)`}
 							dot={{ r: 5 }}
 						/>
 					</ComposedChart>
@@ -101,7 +104,7 @@ const CompareChart = () => {
 			{/* --- Biểu đồ GDP 10 năm --- */}
 			<div>
 				<h2 className='text-lg font-medium text-gray-700 dark:text-gray-300 mb-3'>
-					GDP qua 10 năm (tỷ USD)
+					{t('gdp_10_years')}
 				</h2>
 				<LineChart
 					width={1000}
