@@ -1,58 +1,64 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaX } from 'react-icons/fa6';
 import CompareTable from '../components/Tables/CompareTable';
 import CompareChart from '../components/Charts/CompareChart';
 import { useTranslation } from 'react-i18next';
+import {
+	getAllCountries,
+	getCountryDetails,
+} from '../services/country.service';
+import { getGdpOf10Years } from '../services/gdp.service';
 
 const Comparison = () => {
 	const { t } = useTranslation();
-
-	const countries = [
-		{ cca3: 'VN', label: 'Việt Nam' },
-		{ cca3: 'US', label: 'Mỹ' },
-		{ cca3: 'JP', label: 'Nhật Bản' },
-		{ cca3: 'KR', label: 'Hàn Quốc' },
-		{ cca3: 'CN', label: 'Trung Quốc' },
-	];
-
-	const fakeCountries = [
-		{
-			cca3: 'VN',
-			name: {
-				common: 'Việt Nam',
-				official: 'Cộng hòa Xã hội Chủ nghĩa Việt Nam',
-			},
-			area: 331212,
-			population: 98000000,
-			region: 'Asia',
-			subregion: 'South-Eastern Asia',
-			capital: ['Hà Nội'],
-			flags: { png: 'https://flagcdn.com/w320/vn.png' },
-		},
-		{
-			cca3: 'US',
-			name: { common: 'Hoa Kỳ', official: 'Hợp chủng quốc Hoa Kỳ' },
-			area: 9833520,
-			population: 331000000,
-			region: 'Americas',
-			subregion: 'North America',
-			capital: ['Washington D.C.'],
-			flags: { png: 'https://flagcdn.com/w320/us.png' },
-		},
-		{
-			cca3: 'JP',
-			name: { common: 'Nhật Bản', official: 'Quốc gia Nhật Bản' },
-			area: 377975,
-			population: 125000000,
-			region: 'Asia',
-			subregion: 'Eastern Asia',
-			capital: ['Tokyo'],
-			flags: { png: 'https://flagcdn.com/w320/jp.png' },
-		},
-	];
-
+	const [countries, setCountries] = useState([]);
 	const [selectedCountries, setSelectedCountries] = useState([]);
+	const [compareCountries, setCompareCountries] = useState([]);
+	const [gdp, setGdp] = useState([]);
+	const [isTableOpen, setIsTableOpen] = useState(false);
 	const maxCountries = 3;
+
+	useEffect(() => {
+		const fetchCountries = async () => {
+			const data = await getAllCountries({ page: 1, limit: 0 });
+			setCountries(data.data);
+		};
+		fetchCountries();
+	}, []);
+
+	useEffect(() => {
+		const fetchCountryDetails = async () => {
+			if (selectedCountries.length > 0) {
+				const detailsPromises = selectedCountries.map((code) =>
+					code ? getCountryDetails(code) : null
+				);
+				const details = await Promise.all(detailsPromises);
+				const filteredDetails = details.filter((detail) => detail !== null);
+				setCompareCountries(filteredDetails);
+			} else {
+				setCompareCountries([]);
+			}
+		};
+		fetchCountryDetails();
+	}, [selectedCountries]);
+
+	useEffect(() => {
+		const fetchGdp = async () => {
+			if (selectedCountries.length > 0) {
+				const detailsPromises = selectedCountries.map((code) =>
+					code ? getGdpOf10Years(code) : null
+				);
+				const details = await Promise.all(detailsPromises);
+				const filteredDetails = details
+					.filter((detail) => detail !== null)
+					.map((detail) => detail[0]); // Lấy phần tử đầu tiên của mỗi mảng
+				setGdp(filteredDetails);
+			} else {
+				setGdp([]);
+			}
+		};
+		fetchGdp();
+	}, [selectedCountries]);
 
 	const handleAddCountry = (index, countryCode) => {
 		const updated = [...selectedCountries];
@@ -60,7 +66,10 @@ const Comparison = () => {
 		setSelectedCountries(updated.slice(0, maxCountries));
 	};
 
-	const handleCompare = () => {};
+	const handleDelete = () => {
+		setSelectedCountries([]);
+		setIsTableOpen(false);
+	};
 
 	return (
 		<>
@@ -71,7 +80,9 @@ const Comparison = () => {
 							{t('select_country')}
 						</h2>
 						{selectedCountries.length > 0 && (
-							<button className='flex items-center px-2 py-1 text-sm border border-gray-900 rounded-md text-gray-900 hover:bg-gray-100 hover:border-gray-500 transition cursor-pointer'>
+							<button
+								onClick={handleDelete}
+								className='flex items-center px-2 py-1 text-sm border border-gray-900 rounded-md dark:border-gray-200 dark:hover:bg-gray-50/10 dark:hover:border-gray-50/10 dark:text-gray-200 text-gray-900 hover:bg-gray-100 hover:border-gray-500 transition cursor-pointer'>
 								<FaX className='w-4 h-4 mr-2' />
 								Xóa tất cả
 							</button>
@@ -99,8 +110,8 @@ const Comparison = () => {
 									}`}>
 									<option value=''>-- {t('select_country')} --</option>
 									{countries.map((c) => (
-										<option key={c.cca3} value={c.cca3}>
-											{c.label}
+										<option key={c?.cca3} value={c?.cca3}>
+											{c?.name}
 										</option>
 									))}
 								</select>
@@ -110,28 +121,31 @@ const Comparison = () => {
 					<div className='flex justify-center p-4'>
 						<button
 							className='p-2 rounded-md bg-blue-400 text-black dark:text-white w-100'
-							onClick={handleCompare}>
+							onClick={() => setIsTableOpen(true)}>
 							{t('compare')}
 						</button>
 					</div>
 				</div>
 				{/* compare table */}
-				<div className='bg-white dark:bg-gray-800 p-4 mt-4 rounded-sm'>
-					<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300'>
-						{t('comparison_table')}
-					</p>
-					<CompareTable countries={fakeCountries} />
-				</div>
-
-				{/* Compare Chart */}
-				<div className='bg-white dark:bg-gray-800 p-6 mt-4 rounded-xl shadow-md items-start'>
-					<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300 mb-4'>
-						{t('comparison_chart')}
-					</p>
-					<div className='flex items-center overflow-x-auto'>
-						<CompareChart />
-					</div>
-				</div>
+				{isTableOpen && (
+					<>
+						<div className='bg-white dark:bg-gray-800 p-4 mt-4 rounded-sm'>
+							<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300'>
+								{t('comparison_table')}
+							</p>
+							<CompareTable countries={compareCountries} />
+						</div>
+						{/* Compare Chart */}
+						<div className='bg-white dark:bg-gray-800 p-6 mt-4 rounded-xl shadow-md items-start'>
+							<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300 mb-4'>
+								{t('comparison_chart')}
+							</p>
+							<div className='flex items-center overflow-x-auto'>
+								<CompareChart countries={compareCountries} gdp={gdp} />
+							</div>
+						</div>
+					</>
+				)}
 			</div>
 		</>
 	);

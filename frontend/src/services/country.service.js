@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getAllCountries = async ({
-	page,
+	page = 1,
 	region = '',
 	subregion = '',
 	search = '',

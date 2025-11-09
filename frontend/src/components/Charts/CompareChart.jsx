@@ -14,27 +14,29 @@ import {
 	ComposedChart,
 } from 'recharts';
 
-const CompareChart = () => {
+const CompareChart = ({ countries, gdp }) => {
 	const { t } = useTranslation();
 
-	const basicData = [
-		{ name: 'Việt Nam', population: 98_000_000, area: 331_212 },
-		{ name: 'Mỹ', population: 331_000_000, area: 833_520 },
-		{ name: 'Nhật Bản', population: 125_000_000, area: 377_975 },
-	];
+	const basicData = countries.map((country) => ({
+		name: country.name,
+		population: country.population,
+		area: country.area,
+	}));
 
-	const gdpData = [
-		{ year: 2015, VN: 200, US: 18200, JP: 4380 },
-		{ year: 2016, VN: 220, US: 18700, JP: 4930 },
-		{ year: 2017, VN: 245, US: 19400, JP: 4870 },
-		{ year: 2018, VN: 271, US: 20600, JP: 4970 },
-		{ year: 2019, VN: 282, US: 21400, JP: 5080 },
-		{ year: 2020, VN: 295, US: 20900, JP: 5050 },
-		{ year: 2021, VN: 340, US: 23100, JP: 4930 },
-		{ year: 2022, VN: 408, US: 25400, JP: 4230 },
-		{ year: 2023, VN: 430, US: 27000, JP: 4350 },
-		{ year: 2024, VN: 450, US: 28000, JP: 4400 },
-	];
+	// Transform GDP data into the format needed for the chart
+	const gdpData =
+		gdp[0]?.data.map((yearItem) => {
+			const transformed = { year: yearItem.year };
+			gdp.forEach((countryGdp) => {
+				const matchingYear = countryGdp.data.find(
+					(d) => d.year === yearItem.year
+				);
+				if (matchingYear) {
+					transformed[countryGdp.cca3] = matchingYear.value;
+				}
+			});
+			return transformed;
+		}) || [];
 
 	return (
 		<div className='p-6 space-y-12 max-w-5xl mx-auto'>
@@ -122,33 +124,26 @@ const CompareChart = () => {
 						tick={{
 							fill: 'var(--axis-color)',
 						}}
+						tickFormatter={(v) => `${(v / 1_000_000_000).toFixed(0)}B`}
 					/>
 					<Tooltip
 						formatter={(v) => v.toLocaleString()}
 						labelClassName='text-gray-800'
 					/>
 					<Legend />
-					<Line
-						type='monotone'
-						dataKey='VN'
-						stroke='#60a5fa'
-						strokeWidth={2}
-						name='Việt Nam'
-					/>
-					<Line
-						type='monotone'
-						dataKey='US'
-						stroke='#34d399'
-						strokeWidth={2}
-						name='Mỹ'
-					/>
-					<Line
-						type='monotone'
-						dataKey='JP'
-						stroke='#f472b6'
-						strokeWidth={2}
-						name='Nhật Bản'
-					/>
+					{gdp.map((countryGdp, index) => (
+						<Line
+							key={countryGdp.cca3}
+							type='monotone'
+							dataKey={countryGdp.cca3}
+							stroke={['#60a5fa', '#34d399', '#f472b6'][index]}
+							strokeWidth={2}
+							name={
+								countries.find((c) => c.cca3 === countryGdp.cca3)?.name ||
+								countryGdp.cca3
+							}
+						/>
+					))}
 				</LineChart>
 			</div>
 		</div>
