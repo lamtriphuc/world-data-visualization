@@ -5,6 +5,6 @@ const router = express.Router();
 
 // Get all countries
 router.get('/:code', gdpController.getLastestGdpByCountry);
-router.get('/:code/10-year', gdpController.getGdpOf10YearByCountry);
+router.get('/:code/10-years', gdpController.getGdpOf10YearByCountry);
 
 export default router;

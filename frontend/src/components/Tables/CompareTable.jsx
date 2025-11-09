@@ -5,8 +5,8 @@ const CompareTable = ({ countries }) => {
 	const { t } = useTranslation();
 
 	const fields = [
-		{ key: 'name.common', label: t('name') },
-		{ key: 'name.official', label: t('official_name') },
+		{ key: 'name', label: t('name') },
+		{ key: 'officialName', label: t('official_name') },
 		{ key: 'area', label: `${t('area')} (km²)` },
 		{ key: 'population', label: t('population') },
 		{ key: 'region', label: t('region') },
@@ -32,11 +32,11 @@ const CompareTable = ({ countries }) => {
 								className='p-3 text-left border-b border-gray-300 dark:border-gray-600'>
 								<div className='flex items-center gap-2'>
 									<img
-										src={c.flags?.png}
-										alt={c.name?.common}
+										src={c.flag}
+										alt={c.name}
 										className='w-6 h-4 object-cover border'
 									/>
-									{c.name?.common}
+									{c.name}
 								</div>
 							</th>
 						))}
