@@ -76,7 +76,7 @@ const TopCountriesTable = ({ countries, title, type }) => {
 								</td>
 								<td>
 									<img
-										src={country.flags.svg}
+										src={country.flag}
 										alt={`Cờ ${country.name.common}`}
 										className='w-12 h-8 object-cover rounded border border-gray-200'
 									/>
@@ -84,7 +84,7 @@ const TopCountriesTable = ({ countries, title, type }) => {
 								<td>
 									<div>
 										<p className='text-gray-900 dark:text-gray-300'>
-											{country.name.common}
+											{country.name}
 										</p>
 										<p className='text-gray-500 dark:text-gray-400 text-sm'>
 											{country.cca3}

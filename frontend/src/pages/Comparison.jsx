@@ -20,23 +20,31 @@ const Comparison = () => {
 
 	useEffect(() => {
 		const fetchCountries = async () => {
-			const data = await getAllCountries({ page: 1, limit: 0 });
-			setCountries(data.data);
+			try {
+				const data = await getAllCountries({ page: 1, limit: 0 });
+				setCountries(data.data);
+			} catch (error) {
+				console.error(error);
+			}
 		};
 		fetchCountries();
 	}, []);
 
 	useEffect(() => {
 		const fetchCountryDetails = async () => {
-			if (selectedCountries.length > 0) {
-				const detailsPromises = selectedCountries.map((code) =>
-					code ? getCountryDetails(code) : null
-				);
-				const details = await Promise.all(detailsPromises);
-				const filteredDetails = details.filter((detail) => detail !== null);
-				setCompareCountries(filteredDetails);
-			} else {
-				setCompareCountries([]);
+			try {
+				if (selectedCountries.length > 0) {
+					const detailsPromises = selectedCountries.map((code) =>
+						code ? getCountryDetails(code) : null
+					);
+					const details = await Promise.all(detailsPromises);
+					const filteredDetails = details.filter((detail) => detail !== null);
+					setCompareCountries(filteredDetails);
+				} else {
+					setCompareCountries([]);
+				}
+			} catch (error) {
+				console.error(error);
 			}
 		};
 		fetchCountryDetails();
@@ -44,17 +52,21 @@ const Comparison = () => {
 
 	useEffect(() => {
 		const fetchGdp = async () => {
-			if (selectedCountries.length > 0) {
-				const detailsPromises = selectedCountries.map((code) =>
-					code ? getGdpOf10Years(code) : null
-				);
-				const details = await Promise.all(detailsPromises);
-				const filteredDetails = details
-					.filter((detail) => detail !== null)
-					.map((detail) => detail[0]); // Lấy phần tử đầu tiên của mỗi mảng
-				setGdp(filteredDetails);
-			} else {
-				setGdp([]);
+			try {
+				if (selectedCountries.length > 0) {
+					const detailsPromises = selectedCountries.map((code) =>
+						code ? getGdpOf10Years(code) : null
+					);
+					const details = await Promise.all(detailsPromises);
+					const filteredDetails = details
+						.filter((detail) => detail !== null)
+						.map((detail) => detail[0]); // Lấy phần tử đầu tiên của mỗi mảng
+					setGdp(filteredDetails);
+				} else {
+					setGdp([]);
+				}
+			} catch (error) {
+				console.error(error);
 			}
 		};
 		fetchGdp();

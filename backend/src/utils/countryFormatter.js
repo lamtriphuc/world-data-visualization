@@ -8,6 +8,7 @@ export const formatCountryBasic = (country) => {
 		cca2: country.cca2,
 		cca3: country.cca3,
 		name: country.name.common,
+		area: country.area,
 		population: country.population,
 		region: country.region,
 		capital: country.capital,

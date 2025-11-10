@@ -6,6 +6,7 @@ import RegionDropdown from '../components/Layout/RegionDropdown';
 import { SlMagnifier } from 'react-icons/sl';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from '../hooks/useDebounce';
+import Loading from '../components/Layout/Loading';
 
 const CountryList = () => {
 	const [countries, setCountries] = useState([]);
@@ -13,6 +14,7 @@ const CountryList = () => {
 	const [totalPages, setTotalPages] = useState();
 	const [searchParams] = useSearchParams();
 	const [searchTerm, setSearchTerm] = useState('');
+	const [loading, setLoading] = useState(true);
 	const debouncedSearch = useDebounce(searchTerm, 500);
 	const { t } = useTranslation();
 
@@ -37,10 +39,14 @@ const CountryList = () => {
 				setCountries(response.data);
 			} catch (error) {
 				console.error(error);
+			} finally {
+				setLoading(false);
 			}
 		};
 		fetchCountries();
 	}, [page, regionParam, subregionParam, searchParam]);
+
+	if (loading) return <Loading />;
 
 	return (
 		<>
