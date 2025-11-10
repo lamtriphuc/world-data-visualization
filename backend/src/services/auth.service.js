@@ -1,5 +1,6 @@
 import { OAuth2Client } from "google-auth-library";
 import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
 import { generateToken } from "../utils/generateToken.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -23,7 +24,44 @@ export const googleLoginService = async (token) => {
         })
     }
 
-    const jwtToken = generateToken(user._id);
+    const accessToken = generateToken(user._id);
 
-    return { user, token: jwtToken }
+    return { user, accessToken };
+}
+
+export const addFavoriteCountryService = async (userId, countryCode) => {
+    const user = await User.findById(userId);
+    if (!user)
+        throw new Error('User not found');
+
+    countryCode = countryCode.toUpperCase();
+
+    // Tránh trùng
+    if (!user.favoriteCountries.includes(countryCode)) {
+        user.favoriteCountries.push(countryCode);
+        await user.save();
+    }
+
+    return user.favoriteCountries;
+}
+
+export const removeFavoriteCountryService = async (userId, countryCode) => {
+    const user = await User.findById(userId);
+    if (!user)
+        throw new Error('User not found');
+
+    countryCode = countryCode.toUpperCase();
+
+    user.favoriteCountries = user.favoriteCountries.filter(c => c !== countryCode);
+    await user.save();
+
+    return user.favoriteCountries;
+}
+
+export const getFavoriteCountriesService = async (userId) => {
+    const user = await User.findById(userId);
+    if (!user)
+        throw new Error('User not found');
+
+    return user.favoriteCountries;
 }

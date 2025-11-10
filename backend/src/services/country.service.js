@@ -1,7 +1,7 @@
 import Country from '../models/Country.js';
 import { formatCountryBasic, formatCountryDetail } from '../utils/countryFormatter.js';
 
-const getAllCountries = async ({ region, subregion, search, page = 1, limit = 24 }) => {
+const getAllCountries = async ({ region, subregion, search, page = 1, limit = 25 }) => {
     const query = {};
 
     if (region) query.region = region;
