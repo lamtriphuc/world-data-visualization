@@ -10,7 +10,7 @@ const Login = () => {
         try {
             const response = await googleLogin(credentialResponse.credential);
 
-            localStorage.setItem("token", response.token);
+            localStorage.setItem("token", response.accessToken);
             localStorage.setItem("name", response.user.name);
             localStorage.setItem("avatar", response.user.avatar);
 

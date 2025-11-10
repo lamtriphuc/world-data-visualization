@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true },
     avatar: String,
     googleId: String,
+    favoriteCountries: [{
+        type: String,
+        index: true
+    }]
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);
