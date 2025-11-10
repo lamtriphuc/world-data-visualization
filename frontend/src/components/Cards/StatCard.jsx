@@ -16,7 +16,7 @@ const StatCard = ({
 						<p className='text-gray-600 dark:text-gray-300 mb-2'>{title}</p>
 						<div className='flex gap-2'>
 							<p className='text-gray-900 dark:text-white text-2xl font-medium'>
-								{value.toLocaleString()}
+								{value?.toLocaleString()}
 							</p>
 							{subtitle && (
 								<p className='text-gray-500 dark:text-gray-400 text-sm mt-1'>

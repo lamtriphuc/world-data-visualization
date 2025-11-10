@@ -24,19 +24,29 @@ const CompareChart = ({ countries, gdp }) => {
 	}));
 
 	// Transform GDP data into the format needed for the chart
-	const gdpData =
-		gdp[0]?.data.map((yearItem) => {
-			const transformed = { year: yearItem.year };
+	// Tìm tất cả các năm từ tất cả các quốc gia để đảm bảo có dữ liệu đầy đủ
+	const allYears = new Set();
+	gdp.forEach((countryGdp) => {
+		if (countryGdp?.data && Array.isArray(countryGdp.data)) {
+			countryGdp.data.forEach((item) => {
+				allYears.add(item.year);
+			});
+		}
+	});
+
+	const gdpData = Array.from(allYears)
+		.sort()
+		.map((year) => {
+			const transformed = { year };
 			gdp.forEach((countryGdp) => {
-				const matchingYear = countryGdp.data.find(
-					(d) => d.year === yearItem.year
-				);
+				if (!countryGdp?.cca3 || !countryGdp?.data) return;
+				const matchingYear = countryGdp.data.find((d) => d.year === year);
 				if (matchingYear) {
 					transformed[countryGdp.cca3] = matchingYear.value;
 				}
 			});
 			return transformed;
-		}) || [];
+		});
 
 	return (
 		<div className='p-6 space-y-12 max-w-5xl mx-auto'>
@@ -131,19 +141,27 @@ const CompareChart = ({ countries, gdp }) => {
 						labelClassName='text-gray-800'
 					/>
 					<Legend />
-					{gdp.map((countryGdp, index) => (
-						<Line
-							key={countryGdp.cca3}
-							type='monotone'
-							dataKey={countryGdp.cca3}
-							stroke={['#60a5fa', '#34d399', '#f472b6'][index]}
-							strokeWidth={2}
-							name={
-								countries.find((c) => c.cca3 === countryGdp.cca3)?.name ||
-								countryGdp.cca3
-							}
-						/>
-					))}
+					{gdp
+						.filter(
+							(countryGdp) =>
+								countryGdp &&
+								countryGdp.cca3 &&
+								Array.isArray(countryGdp.data) &&
+								countryGdp.data.length > 0
+						)
+						.map((countryGdp, index) => {
+							const country = countries.find((c) => c.cca3 === countryGdp.cca3);
+							return (
+								<Line
+									key={countryGdp.cca3}
+									type='monotone'
+									dataKey={countryGdp.cca3}
+									stroke={['#60a5fa', '#34d399', '#f472b6'][index]}
+									strokeWidth={2}
+									name={country?.name || countryGdp.cca3}
+								/>
+							);
+						})}
 				</LineChart>
 			</div>
 		</div>

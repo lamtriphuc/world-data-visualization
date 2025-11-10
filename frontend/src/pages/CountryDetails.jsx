@@ -14,11 +14,13 @@ import { getCountryDetails } from '../services/country.service';
 import { useParams } from 'react-router-dom';
 import { getLatestGdp } from '../services/gdp.service';
 import { useTranslation } from 'react-i18next';
+import Loading from '../components/Layout/Loading';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
 	const [gdp, setGdp] = useState(null);
 	const [year, setYear] = useState(null);
+	const [loading, setLoading] = useState(true);
 	const { code } = useParams();
 	const { t } = useTranslation();
 
@@ -29,6 +31,8 @@ const CountryDetails = () => {
 				setCountryDetails(response);
 			} catch (error) {
 				console.error(error);
+			} finally {
+				setLoading(false);
 			}
 		};
 		fetchCountryDetails();
@@ -47,9 +51,7 @@ const CountryDetails = () => {
 		fetchLatestGdp();
 	}, [code]);
 
-	if (!countryDetails) {
-		return <div>Loading...</div>;
-	}
+	if (loading) return <Loading />;
 
 	return (
 		<div className='space-y-8 max-w-[1152px] w-full mx-auto px-4 sm:px-6 lg:px-8'>
