@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import { addFavoriteCountryService, getFavoriteCountriesService, googleLoginService, removeFavoriteCountryService } from "../services/auth.service.js";
+import { addFavoriteCountryService, getFavoriteCodeService, getFavoriteCountriesService, googleLoginService, removeFavoriteCountryService } from "../services/auth.service.js";
 import { errorResponse, successResponse } from "../utils/response.js";
 
 export const googleLogin = async (req, res) => {
@@ -32,6 +32,17 @@ export const removeFavoriteCountry = async (req, res) => {
 
         const favorites = await removeFavoriteCountryService(userId, countryCode);
         return successResponse(res, favorites, 200, 'Country removed from favorites');
+    } catch (error) {
+        return errorResponse(res, error.message, 500);
+    }
+};
+
+export const getFavoriteCodes = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const favorites = await getFavoriteCodeService(userId);
+        return successResponse(res, favorites, 200, 'Fetched favorite countries');
     } catch (error) {
         return errorResponse(res, error.message, 500);
     }

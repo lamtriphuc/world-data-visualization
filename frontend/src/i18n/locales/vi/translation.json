@@ -79,5 +79,7 @@
   "official_name": "Tên chính thức",
   "comparison_chart": "Biểu đồ so sánh",
   "population_area": "Dân số & Diện tích (Biểu đồ kết hợp)",
-  "gdp_10_years": "GDP qua 10 năm (tỷ USD)"
+  "gdp_10_years": "GDP qua 10 năm (tỷ USD)",
+  "favorites": "Yêu thích",
+  "logout": "Đăng xuất"
 }

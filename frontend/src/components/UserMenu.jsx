@@ -46,6 +46,7 @@ const UserMenu = () => {
 		localStorage.removeItem('avatar');
 		localStorage.removeItem('name');
 		localStorage.removeItem('token');
+		window.dispatchEvent(new Event('userChanged'));
 		setUser(null);
 		setOpen(false);
 		navigate('/');
@@ -72,7 +73,9 @@ const UserMenu = () => {
 					referrerPolicy='no-referrer'
 				/>
 				{/* Tooltip hiển thị tên */}
-				<span className='absolute bottom-[-1.8rem] left-1/2 -translate-x-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap max-w-[200px] truncate'>
+				<span
+					onClick={() => navigate('/favorite')}
+					className='absolute bottom-[-1.8rem] left-1/2 -translate-x-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap max-w-[200px] truncate'>
 					{user.name}
 				</span>
 			</div>
@@ -83,13 +86,15 @@ const UserMenu = () => {
 					<p className='text-center text-sm font-medium mb-2 text-gray-700 dark:text-gray-200'>
 						{user.name}
 					</p>
-					<button className='w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md transition'>
-						Đã lưu
+					<button
+						onClick={() => navigate('/favorite')}
+						className='cursor-pointer w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md transition'>
+						{t('favorites')}
 					</button>
 					<button
 						onClick={handleLogout}
-						className='w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md transition'>
-						Đăng xuất
+						className='cursor-pointer w-full text-left px-3 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md transition'>
+						{t('logout')}
 					</button>
 				</div>
 			)}

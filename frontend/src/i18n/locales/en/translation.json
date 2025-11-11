@@ -79,5 +79,7 @@
   "official_name": "Official name",
   "comparison_chart": "Comparison chart",
   "population_area": "Population & Area (Combined Chart)",
-  "gdp_10_years": "GDP over 10 years (billion USD)"
+  "gdp_10_years": "GDP over 10 years (billion USD)",
+  "favorites": "Favorites",
+  "logout": "Logout"
 }

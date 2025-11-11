@@ -5,6 +5,7 @@ import AppLayout from './components/Layout/AppLayout';
 import Comparison from './pages/Comparison';
 import DashBoard from './pages/DashBoard';
 import Login from './pages/Login';
+import Favorite from './pages/Favorite';
 
 const App = () => {
 	return (
@@ -16,6 +17,7 @@ const App = () => {
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/dashboard' element={<DashBoard />} />
 					<Route path='/login' element={<Login />} />
+					<Route path='/favorite' element={<Favorite />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
