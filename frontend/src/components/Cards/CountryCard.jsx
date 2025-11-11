@@ -1,5 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useEffect, useRef, useState } from 'react';
+
+const CountryCard = ({ flag, name, population, region, capital }) => {
+	const [imageSrc, setImageSrc] = useState(null);
+	const imgRef = useRef();
+
+	useEffect(() => {
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					setImageSrc(flag);
+					observer.unobserve(entry.target);
+				}
+			});
+		});
+
+		if (imgRef.current) {
+			observer.observe(imgRef.current);
+		}
+
+		return () => observer.disconnect();
+	}, [flag]);
+
 import { IoIosHeart } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
@@ -44,6 +67,14 @@ const CountryCard = ({
 	}
 
 	return (
+		<div className='flex flex-col'>
+			<div>
+				<img
+					ref={imgRef}
+					src={imageSrc}
+					alt={name}
+					className='w-full h-40 object-cover'
+				/>
 		<div className='relative flex flex-col'>
 			<div className='relative'>
 				<img className='object-cover' src={flag} alt={name} />

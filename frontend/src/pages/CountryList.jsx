@@ -55,6 +55,7 @@ const CountryList = () => {
 				});
 				setTotalPages(response.totalPages);
 				setCountries(response.data);
+				window.scrollTo(0, 0);
 			} catch (error) {
 				console.error(error);
 			} finally {
