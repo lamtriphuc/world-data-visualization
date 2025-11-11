@@ -2,6 +2,7 @@ import { OAuth2Client } from "google-auth-library";
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import { generateToken } from "../utils/generateToken.js";
+import { getCountriesByListService } from './country.service.js'
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -58,10 +59,22 @@ export const removeFavoriteCountryService = async (userId, countryCode) => {
     return user.favoriteCountries;
 }
 
-export const getFavoriteCountriesService = async (userId) => {
+export const getFavoriteCodeService = async (userId) => {
     const user = await User.findById(userId);
     if (!user)
         throw new Error('User not found');
 
     return user.favoriteCountries;
+}
+
+export const getFavoriteCountriesService = async (userId) => {
+    const user = await User.findById(userId);
+    if (!user)
+        throw new Error('User not found');
+
+    const favoriteCodes = user.favoriteCountries; // list
+
+    const favoriteCountries = getCountriesByListService(favoriteCodes);
+
+    return favoriteCountries;
 }
