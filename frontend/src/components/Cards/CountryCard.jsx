@@ -1,8 +1,18 @@
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
+import { IoIosHeart } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
-const CountryCard = ({ flag, name, population, region, capital }) => {
+const CountryCard = ({
+	flag,
+	name,
+	population,
+	region,
+	capital,
+	code,
+	isFavorite = false,
+	onToggleFavorite,
+}) => {
 	const [imageSrc, setImageSrc] = useState(null);
 	const imgRef = useRef();
 
@@ -23,19 +33,8 @@ const CountryCard = ({ flag, name, population, region, capital }) => {
 		return () => observer.disconnect();
 	}, [flag]);
 
-import { IoIosHeart } from 'react-icons/io';
-import { Link } from 'react-router-dom';
-
-const CountryCard = ({
-	name,
-	population,
-	region,
-	capital,
-	flag,
-	code,
-	isFavorite = false,
-	onToggleFavorite }) => {
 	const { t } = useTranslation();
+
 	const [favorite, setFavorite] = useState(isFavorite);
 
 	const [user, setUser] = useState(null);
@@ -57,35 +56,33 @@ const CountryCard = ({
 		window.addEventListener('userChanged', loadUser);
 
 		return () => window.removeEventListener('userChanged', loadUser);
-	}, []);
+	}, [favorite]);
 
 	const handleFavoriteClick = (e) => {
 		e.stopPropagation(); // ⛔ chặn event click lan ra ngoài
 		e.preventDefault();
 		setFavorite(!favorite);
 		onToggleFavorite(name, !favorite);
-	}
+	};
 
 	return (
-		<div className='flex flex-col'>
-			<div>
+		<div className='relative flex flex-col'>
+			<div className='relative'>
 				<img
 					ref={imgRef}
 					src={imageSrc}
 					alt={name}
 					className='w-full h-40 object-cover'
 				/>
-		<div className='relative flex flex-col'>
-			<div className='relative'>
-				<img className='object-cover' src={flag} alt={name} />
 				{/* Icon yêu thích */}
 				{user && (
 					<button
 						onClick={handleFavoriteClick}
-						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition'
-					>
+						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition'>
 						<IoIosHeart
-							className={`w-6 h-6 cursor-pointer ${favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'}`}
+							className={`w-6 h-6 cursor-pointer ${
+								favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
+							}`}
 						/>
 					</button>
 				)}
