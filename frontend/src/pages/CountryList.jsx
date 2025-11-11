@@ -7,6 +7,7 @@ import { SlMagnifier } from 'react-icons/sl';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from '../hooks/useDebounce';
 import Loading from '../components/Layout/Loading';
+import { addFavorite, getFavoriteCodes, removeFavorite } from '../services/auth.service';
 
 const CountryList = () => {
 	const [countries, setCountries] = useState([]);
@@ -17,6 +18,7 @@ const CountryList = () => {
 	const [loading, setLoading] = useState(true);
 	const debouncedSearch = useDebounce(searchTerm, 500);
 	const { t } = useTranslation();
+	const [favorites, setFavorites] = useState([]);
 
 	const regionParam = searchParams.get('region')
 		? `&region=${searchParams.get('region')}`
@@ -25,6 +27,22 @@ const CountryList = () => {
 		? `&subregion=${searchParams.get('subregion')}`
 		: '';
 	const searchParam = debouncedSearch ? `&search=${debouncedSearch}` : '';
+
+	useEffect(() => {
+		const fetchFavorites = async () => {
+			const token = localStorage.getItem('token');
+			if (!token) return;
+
+			try {
+				const data = await getFavoriteCodes();
+				setFavorites(data);
+			} catch (error) {
+				console.log('Get favorite fail: ', error);
+			}
+		}
+
+		fetchFavorites();
+	}, [])
 
 	useEffect(() => {
 		const fetchCountries = async () => {
@@ -49,6 +67,20 @@ const CountryList = () => {
 
 	if (loading) return <Loading />;
 
+	const handleToggleFavorite = async (countryCode, newState) => {
+		try {
+			if (newState) {
+				await addFavorite(countryCode);
+				console.log("Đã thêm yêu thích:", countryCode);
+			} else {
+				await removeFavorite(countryCode);
+				console.log('Đã bỏ yêu thích:', countryCode);
+			}
+		} catch (error) {
+			console.log('Favorite err: ', error);
+		}
+	}
+
 	return (
 		<>
 			<div className='flex flex-col items-start justify-between w-full md:flex-row md:items-center pb-8'>
@@ -67,15 +99,17 @@ const CountryList = () => {
 			</div>
 			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
 				{countries.map((country) => (
-					<Link to={`/country/${country.cca3}`}>
-						<CountryCard
-							name={country.name}
-							population={country.population.toLocaleString()}
-							region={country.region}
-							capital={country.capital}
-							flag={country.flag}
-						/>
-					</Link>
+					<CountryCard
+						key={country.cca3}
+						name={country.name}
+						population={country.population.toLocaleString()}
+						region={country.region}
+						capital={country.capital}
+						flag={country.flag}
+						code={country.cca3}
+						isFavorite={favorites.includes(country.cca3)}
+						onToggleFavorite={(name, newState) => handleToggleFavorite(country.cca3, newState)}
+					/>
 				))}
 			</div>
 			<div className='flex justify-center gap-2 mt-15 flex-wrap'>

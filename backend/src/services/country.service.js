@@ -1,7 +1,7 @@
 import Country from '../models/Country.js';
 import { formatCountryBasic, formatCountryDetail } from '../utils/countryFormatter.js';
 
-const getAllCountries = async ({ region, subregion, search, page = 1, limit = 25 }) => {
+export const getAllCountriesService = async ({ region, subregion, search, page = 1, limit = 25 }) => {
     const query = {};
 
     if (region) query.region = region;
@@ -36,7 +36,7 @@ const getAllCountries = async ({ region, subregion, search, page = 1, limit = 25
     }
 }
 
-const getCountryByCode = async (code) => {
+export const getCountryByCodeService = async (code) => {
     const country = await Country.findOne({
         $or: [
             { cca3: code.toUpperCase() },
@@ -47,7 +47,10 @@ const getCountryByCode = async (code) => {
     return formatCountryDetail(country);
 };
 
-export default {
-    getAllCountries,
-    getCountryByCode
-};
+export const getCountriesByListService = async (listCode) => {
+    const res = await Country.find({
+        cca3: { $in: listCode },
+    });
+
+    return res.map(c => formatCountryBasic(c));
+}

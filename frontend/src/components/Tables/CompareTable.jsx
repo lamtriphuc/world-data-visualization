@@ -20,7 +20,7 @@ const CompareTable = ({ countries }) => {
 
 	return (
 		<div className='overflow-x-auto mt-4'>
-			<table className='min-w-full border border-gray-300 dark:border-gray-600 rounded-md text-sm'>
+			<table className='table-fixed min-w-full border border-gray-300 dark:border-gray-600 rounded-md text-sm'>
 				<thead className='bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300'>
 					<tr>
 						<th className='p-3 text-left border-b border-gray-300 dark:border-gray-600'>
@@ -29,7 +29,8 @@ const CompareTable = ({ countries }) => {
 						{countries.map((c) => (
 							<th
 								key={c.cca3}
-								className='p-3 text-left border-b border-gray-300 dark:border-gray-600'>
+								className='p-3 text-left border-b border-gray-300 dark:border-gray-600'
+							>
 								<div className='flex items-center gap-2'>
 									<img
 										src={c.flag}

@@ -5,11 +5,10 @@ export const getAllCountries = async ({
 	region = '',
 	subregion = '',
 	search = '',
-	limit = 24,
+	limit = 25,
 }) => {
 	const response = await axios.get(
-		`${
-			import.meta.env.VITE_BACKEND_URL
+		`${import.meta.env.VITE_BACKEND_URL
 		}/api/countries?page=${page}${region}${subregion}${search}&limit=${limit}`
 	);
 	return response.data.data;
