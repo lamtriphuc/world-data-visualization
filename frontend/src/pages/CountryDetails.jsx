@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import { getLatestGdp } from '../services/gdp.service';
 import { useTranslation } from 'react-i18next';
 import Loading from '../components/Layout/Loading';
+import translated from '../scripts/countries_translated.json';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
@@ -23,6 +24,7 @@ const CountryDetails = () => {
 	const [loading, setLoading] = useState(true);
 	const { code } = useParams();
 	const { t } = useTranslation();
+	const currentLang = localStorage.getItem('lang');
 
 	useEffect(() => {
 		const fetchCountryDetails = async () => {
@@ -51,6 +53,16 @@ const CountryDetails = () => {
 		fetchLatestGdp();
 	}, [code]);
 
+	const getTranslatedName = (name) => {
+		const found = translated.find((c) => c.name === name);
+		return found?.name_vi || name;
+	};
+
+	const getTranslatedOfficialName = (officialName) => {
+		const found = translated.find((c) => c.officialName === officialName);
+		return found?.officialName_vi || officialName;
+	};
+
 	if (loading) return <Loading />;
 
 	return (
@@ -66,9 +78,15 @@ const CountryDetails = () => {
 				</div>
 
 				<div className='flex flex-col items-center justify-center bg-gray-200 dark:bg-gray-700 space-y-4 py-8'>
-					<p className='font-bold'>{countryDetails.name}</p>
+					<p className='font-bold'>
+						{currentLang === 'vi'
+							? getTranslatedName(countryDetails.name)
+							: countryDetails.name}
+					</p>
 					<p className='text-gray-700 dark:text-gray-300'>
-						{countryDetails.officialName}
+						{currentLang === 'vi'
+							? getTranslatedOfficialName(countryDetails.officialName)
+							: countryDetails.officialName}
 					</p>
 					<div className='flex items-center justify-center gap-2'>
 						<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
@@ -113,7 +131,7 @@ const CountryDetails = () => {
 							<IoMdTrendingUp className='w-4 h-4 sm:w-5 sm:h-5  text-purple-500' />
 							<div className='flex flex-col'>
 								<span>GDP {year && `(${year})`}</span>
-								<span>{gdp ? `${gdp}` : 'N/A'}</span>
+								<span>{gdp ? `${gdp} $` : 'N/A'}</span>
 							</div>
 						</div>
 					</div>

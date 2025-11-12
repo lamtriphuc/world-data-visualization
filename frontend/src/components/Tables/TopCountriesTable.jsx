@@ -2,9 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { FiMapPin } from 'react-icons/fi';
 import { GoTrophy } from 'react-icons/go';
 import { LuUsers } from 'react-icons/lu';
+import translated from '../../scripts/countries_translated.json';
 
 const TopCountriesTable = ({ countries, title, type }) => {
 	const { t } = useTranslation();
+	const currentLang = localStorage.getItem('lang');
 
 	const formatNumber = (num) => {
 		return new Intl.NumberFormat('vi-VN').format(num);
@@ -35,6 +37,11 @@ const TopCountriesTable = ({ countries, title, type }) => {
 			return <GoTrophy className='w-4 h-4' />;
 		}
 		return null;
+	};
+
+	const getTranslatedName = (name) => {
+		const found = translated.find((c) => c.name === name);
+		return found?.name_vi || name;
 	};
 
 	return (
@@ -84,7 +91,9 @@ const TopCountriesTable = ({ countries, title, type }) => {
 								<td>
 									<div>
 										<p className='text-gray-900 dark:text-gray-300'>
-											{country.name}
+											{currentLang === 'vi'
+												? getTranslatedName(country.name)
+												: country.name}
 										</p>
 										<p className='text-gray-500 dark:text-gray-400 text-sm'>
 											{country.cca3}

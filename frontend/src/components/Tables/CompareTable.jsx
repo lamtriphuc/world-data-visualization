@@ -1,8 +1,9 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import translated from '../../scripts/countries_translated.json';
 
 const CompareTable = ({ countries }) => {
 	const { t } = useTranslation();
+	const currentLang = localStorage.getItem('lang');
 
 	const fields = [
 		{ key: 'name', label: t('name') },
@@ -18,6 +19,16 @@ const CompareTable = ({ countries }) => {
 		return path.split('.').reduce((acc, part) => acc && acc[part], obj) ?? '—';
 	};
 
+	const getTranslatedName = (name) => {
+		const found = translated.find((c) => c.name === name);
+		return found?.name_vi || name;
+	};
+
+	const getTranslatedOfficialName = (officialName) => {
+		const found = translated.find((c) => c.officialName === officialName);
+		return found?.officialName_vi || officialName;
+	};
+
 	return (
 		<div className='overflow-x-auto mt-4'>
 			<table className='table-fixed min-w-full border border-gray-300 dark:border-gray-600 rounded-md text-sm'>
@@ -29,15 +40,14 @@ const CompareTable = ({ countries }) => {
 						{countries.map((c) => (
 							<th
 								key={c.cca3}
-								className='p-3 text-left border-b border-gray-300 dark:border-gray-600'
-							>
+								className='p-3 text-left border-b border-gray-300 dark:border-gray-600'>
 								<div className='flex items-center gap-2'>
 									<img
 										src={c.flag}
 										alt={c.name}
 										className='w-6 h-4 object-cover border'
 									/>
-									{c.name}
+									{currentLang === 'vi' ? getTranslatedName(c.name) : c.name}
 								</div>
 							</th>
 						))}
@@ -54,8 +64,18 @@ const CompareTable = ({ countries }) => {
 								<td
 									key={c.cca3 + field.key}
 									className='p-3 border-b border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800'>
-									{getValue(c, field.key)?.toLocaleString?.() ||
-										getValue(c, field.key)}
+									{field.key === 'region'
+										? t(`main_region.${getValue(c, 'region')}`)
+										: field.key === 'subregion'
+										? t(`subregion.${getValue(c, 'subregion')}`, {
+												defaultValue: '-',
+										  })
+										: field.key === 'name'
+										? getTranslatedName(getValue(c, 'name'))
+										: field.key === 'officialName'
+										? getTranslatedOfficialName(getValue(c, 'officialName'))
+										: getValue(c, field.key)?.toLocaleString?.() ||
+										  getValue(c, field.key)}
 								</td>
 							))}
 						</tr>
