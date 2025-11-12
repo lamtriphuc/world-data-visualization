@@ -8,6 +8,7 @@ import {
 	getCountryDetails,
 } from '../services/country.service';
 import { getGdpOf10Years } from '../services/gdp.service';
+import translated from '../scripts/countries_translated.json';
 
 const Comparison = () => {
 	const { t } = useTranslation();
@@ -17,6 +18,7 @@ const Comparison = () => {
 	const [gdp, setGdp] = useState([]);
 	const [isTableOpen, setIsTableOpen] = useState(false);
 	const maxCountries = 3;
+	const currentLang = localStorage.getItem('lang');
 
 	useEffect(() => {
 		const fetchCountries = async () => {
@@ -83,6 +85,11 @@ const Comparison = () => {
 		setIsTableOpen(false);
 	};
 
+	const getTranslatedName = (name) => {
+		const found = translated.find((c) => c.name === name);
+		return found?.name_vi || name;
+	};
+
 	return (
 		<>
 			<div className='p-6 '>
@@ -123,7 +130,9 @@ const Comparison = () => {
 									<option value=''>-- {t('select_country')} --</option>
 									{countries.map((c) => (
 										<option key={c?.cca3} value={c?.cca3}>
-											{c?.name}
+											{currentLang === 'vi'
+												? getTranslatedName(c?.name)
+												: c?.name}
 										</option>
 									))}
 								</select>

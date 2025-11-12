@@ -7,7 +7,12 @@ import { SlMagnifier } from 'react-icons/sl';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from '../hooks/useDebounce';
 import Loading from '../components/Layout/Loading';
-import { addFavorite, getFavoriteCodes, removeFavorite } from '../services/auth.service';
+import {
+	addFavorite,
+	getFavoriteCodes,
+	removeFavorite,
+} from '../services/auth.service';
+import translated from '../scripts/countries_translated.json';
 
 const CountryList = () => {
 	const [countries, setCountries] = useState([]);
@@ -19,6 +24,7 @@ const CountryList = () => {
 	const debouncedSearch = useDebounce(searchTerm, 500);
 	const { t } = useTranslation();
 	const [favorites, setFavorites] = useState([]);
+	const currentLang = localStorage.getItem('lang');
 
 	const regionParam = searchParams.get('region')
 		? `&region=${searchParams.get('region')}`
@@ -39,10 +45,10 @@ const CountryList = () => {
 			} catch (error) {
 				console.log('Get favorite fail: ', error);
 			}
-		}
+		};
 
 		fetchFavorites();
-	}, [])
+	}, []);
 
 	useEffect(() => {
 		const fetchCountries = async () => {
@@ -65,13 +71,18 @@ const CountryList = () => {
 		fetchCountries();
 	}, [page, regionParam, subregionParam, searchParam]);
 
+	const getTranslatedName = (name) => {
+		const found = translated.find((c) => c.name === name);
+		return found?.name_vi || name;
+	};
+
 	if (loading) return <Loading />;
 
 	const handleToggleFavorite = async (countryCode, newState) => {
 		try {
 			if (newState) {
 				await addFavorite(countryCode);
-				console.log("Đã thêm yêu thích:", countryCode);
+				console.log('Đã thêm yêu thích:', countryCode);
 			} else {
 				await removeFavorite(countryCode);
 				console.log('Đã bỏ yêu thích:', countryCode);
@@ -79,7 +90,7 @@ const CountryList = () => {
 		} catch (error) {
 			console.log('Favorite err: ', error);
 		}
-	}
+	};
 
 	return (
 		<>
@@ -101,14 +112,20 @@ const CountryList = () => {
 				{countries.map((country) => (
 					<CountryCard
 						key={country.cca3}
-						name={country.name}
+						name={
+							currentLang === 'vi'
+								? getTranslatedName(country.name)
+								: country.name
+						}
 						population={country.population.toLocaleString()}
 						region={country.region}
 						capital={country.capital}
 						flag={country.flag}
 						code={country.cca3}
 						isFavorite={favorites.includes(country.cca3)}
-						onToggleFavorite={(name, newState) => handleToggleFavorite(country.cca3, newState)}
+						onToggleFavorite={(name, newState) =>
+							handleToggleFavorite(country.cca3, newState)
+						}
 					/>
 				))}
 			</div>

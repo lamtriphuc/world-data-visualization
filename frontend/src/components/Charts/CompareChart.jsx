@@ -1,7 +1,5 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-	BarChart,
 	Bar,
 	XAxis,
 	YAxis,
@@ -13,12 +11,19 @@ import {
 	ResponsiveContainer,
 	ComposedChart,
 } from 'recharts';
+import translated from '../../scripts/countries_translated.json';
 
 const CompareChart = ({ countries, gdp }) => {
 	const { t } = useTranslation();
+	const currentLang = localStorage.getItem('lang');
+
+	const getTranslatedName = (name) => {
+		const found = translated.find((c) => c.name === name);
+		return found?.name_vi || name;
+	};
 
 	const basicData = countries.map((country) => ({
-		name: country.name,
+		name: currentLang === 'vi' ? getTranslatedName(country.name) : country.name,
 		population: country.population,
 		area: country.area,
 	}));
@@ -158,7 +163,11 @@ const CompareChart = ({ countries, gdp }) => {
 									dataKey={countryGdp.cca3}
 									stroke={['#60a5fa', '#34d399', '#f472b6'][index]}
 									strokeWidth={2}
-									name={country?.name || countryGdp.cca3}
+									name={
+										currentLang === 'vi'
+											? getTranslatedName(country?.name)
+											: country?.name || countryGdp.cca3
+									}
 								/>
 							);
 						})}

@@ -6,6 +6,7 @@ const LanguageSwitcher = () => {
 
 	// Lấy ngôn ngữ hiện tại
 	const currentLang = i18n.language || 'en';
+	localStorage.setItem('lang', currentLang);
 
 	// Đổi ngôn ngữ khi click
 	const toggleLanguage = () => {
