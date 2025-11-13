@@ -59,7 +59,7 @@ const CountryCard = ({
 	}, [favorite]);
 
 	const handleFavoriteClick = (e) => {
-		e.stopPropagation(); // ⛔ chặn event click lan ra ngoài
+		e.stopPropagation(); // chặn event click lan ra ngoài
 		e.preventDefault();
 		setFavorite(!favorite);
 		onToggleFavorite(name, !favorite);
@@ -80,9 +80,8 @@ const CountryCard = ({
 						onClick={handleFavoriteClick}
 						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition'>
 						<IoIosHeart
-							className={`w-6 h-6 cursor-pointer ${
-								favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
-							}`}
+							className={`w-6 h-6 cursor-pointer ${favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
+								}`}
 						/>
 					</button>
 				)}

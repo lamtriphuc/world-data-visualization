@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 import mongoose, { connect } from 'mongoose';
 import Country from '../models/Country.js';
 import Region from '../models/Region.js';
-import Language from '../models/Language.js';
-import Currency from '../models/Currency.js';
 import Gdp from '../models/Gdp.js'
 
 dotenv.config();
@@ -26,8 +24,8 @@ async function transformAndUpsert(countryRaw) {
     const rawLatLng = countryRaw.latlng || [];
 
     const doc = {
-        cca2: countryRaw.cca2,
         cca3,
+        cca2: countryRaw.cca2,
         cioc: countryRaw.cioc,
         name: {
             common: countryRaw.name?.common,
@@ -43,6 +41,7 @@ async function transformAndUpsert(countryRaw) {
         borders: countryRaw.borders || [],
         currencies: countryRaw.currencies || {},
         languages: countryRaw.languages || {},
+        population: { year: 2018, value: countryRaw.population },
         flags: countryRaw.flags || {},
         maps: countryRaw.maps || {},
         coatOfArms: countryRaw.coatOfArms || {},
@@ -79,7 +78,9 @@ async function fetchCountries() {
 
 async function updateAllPopulations() {
     try {
+        const defaultYear = 2018;
         const year = process.env.LATEST_YEAR || 2024;
+
         const url = `https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=${year}&per_page=500`;
         const { data } = await axios.get(url);
 
@@ -89,22 +90,39 @@ async function updateAllPopulations() {
 
         console.log(`Fetched population records from World Bank (${year})`);
 
+        // Tạo map { CCA3: populationValue }
+        const wbPopulationMap = Object.fromEntries(
+            records.map(r => [r.countryiso3code, r.value || 0])
+        );
+
         // Lấy danh sách { cca3: area } từ DB trước (để tính mật độ nhanh hơn)
-        const areas = await Country.find({}, { cca3: 1, area: 1 }).lean();
-        const areaMap = Object.fromEntries(areas.map(c => [c.cca3, c.area || 0]));
+        const countries = await Country.find({}, { cca3: 1, area: 1, population: 1 }).lean();
 
         // Chuẩn bị bulk operations
-        const ops = records.map(r => {
-            const cca3 = r.countryiso3code;
-            const population = r.value;
-            const area = areaMap[cca3] || 0;
-            const populationDensity = area > 0 ? population / area : null;
+        const ops = countries.map(c => {
+            const cca3 = c.cca3;
+            const wbValue = wbPopulationMap[cca3];
+            const hasValidWB = wbValue && wbValue > 0;
+
+            // Dân số hiện có từ REST Countries
+            const restPopulationValue = c.population?.value || 0;
+
+            // Chọn dân số cuối cùng (ưu tiên WB)
+            const finalPopulation = hasValidWB ? wbValue : restPopulationValue;
+            const finalYear = hasValidWB ? Number(year) : defaultYear;
+
+            const area = c.area || 0;
+            const populationDensity = area > 0 ? finalPopulation / area : null;
 
             return {
                 updateOne: {
                     filter: { cca3 },
                     update: {
-                        $set: { population, populationDensity, updatedAt: new Date() }
+                        $set: {
+                            population: { year: finalYear, value: finalPopulation },
+                            populationDensity,
+                            updatedAt: new Date()
+                        }
                     }
                 }
             };
@@ -189,67 +207,6 @@ async function aggregateRegionsAndSubregions() {
     console.log(`Đã tổng hợp ${subregions.length} subregions.`);
 }
 
-
-async function aggregateLanguages() {
-    const countries = await Country.find();
-    const langMap = {};
-
-    for (const c of countries) {
-        if (!c.languages) continue;
-        for (const [code, name] of Object.entries(c.languages)) {
-            if (!langMap[code]) langMap[code] = { name, countries: [] };
-            langMap[code].countries.push(c.cca3);
-        }
-    }
-
-    for (const [code, val] of Object.entries(langMap)) {
-        await Language.findOneAndUpdate(
-            { code },
-            {
-                code,
-                name: val.name,
-                countries: val.countries,
-                countryCount: val.countries.length
-            },
-            { upsert: true, new: true }
-        );
-    }
-    console.log(`Đã lưu ${Object.keys(langMap).length} languages.`);
-}
-
-async function aggregateCurrencies() {
-    const countries = await Country.find();
-    const curMap = {};
-
-    for (const c of countries) {
-        if (!c.currencies) continue;
-        for (const [code, info] of Object.entries(c.currencies)) {
-            if (!curMap[code])
-                curMap[code] = {
-                    name: info?.name || '',
-                    symbol: info?.symbol || '',
-                    countries: []
-                };
-            curMap[code].countries.push(c.cca3);
-        }
-    }
-
-    for (const [code, val] of Object.entries(curMap)) {
-        await Currency.findOneAndUpdate(
-            { code },
-            {
-                code,
-                name: val.name,
-                symbol: val.symbol,
-                countries: val.countries,
-                countryCount: val.countries.length
-            },
-            { upsert: true, new: true }
-        );
-    }
-    console.log(`Đã lưu ${Object.keys(curMap).length} currencies.`);
-}
-
 async function fetchGdpDataForALl() {
     const endYear = process.env.LATEST_YEAR || 2015;
     const startYear = endYear - 9;
@@ -280,19 +237,18 @@ async function fetchGdpDataForALl() {
                 update: {
                     $set: {
                         cca3,
-                        data: gdpData
+                        gdp: gdpData
                             .filter(d => !isNaN(d.year) && !isNaN(d.value))
                             .sort((a, b) => a.year - b.year)
                             .slice(-10),
-                        retrievedAt: new Date(),
+                        updatedAt: new Date(),
                     },
                 },
-                upsert: true,
             },
         }));
 
         if (ops.length > 0) {
-            const result = await Gdp.bulkWrite(ops);
+            const result = await Country.bulkWrite(ops);
             console.log(`GDP updated for ${result.modifiedCount + result.upsertedCount} countries`);
         } else {
             console.log("No valid GDP operations to execute");
@@ -320,8 +276,6 @@ async function runScript() {
         await updateAllPopulations();
 
         await aggregateRegionsAndSubregions();
-        // await aggregateLanguages();
-        // await aggregateCurrencies();
 
         await fetchGdpDataForALl();
 

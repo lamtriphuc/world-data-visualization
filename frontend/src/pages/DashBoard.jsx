@@ -29,7 +29,7 @@ const Dashboard = () => {
 	}, []);
 	const totalCountries = countries.length;
 	const totalPopulation = countries.reduce(
-		(sum, c) => sum + (c.population || 0),
+		(sum, c) => sum + (c.population.value || 0),
 		0
 	);
 
@@ -49,7 +49,7 @@ const Dashboard = () => {
 
 	// Top 10 dân số
 	const topPopulation = [...countries]
-		.sort((a, b) => b.population - a.population)
+		.sort((a, b) => b.population.value - a.population.value)
 		.slice(0, 10);
 
 	// Top 10 diện tích

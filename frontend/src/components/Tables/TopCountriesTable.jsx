@@ -109,7 +109,7 @@ const TopCountriesTable = ({ countries, title, type }) => {
 									<div className='text-right'>
 										<p className='text-gray-900 dark:text-gray-300'>
 											{type === 'population'
-												? formatPopulation(country.population)
+												? formatPopulation(country.population.value)
 												: formatArea(country.area)}
 										</p>
 										<p className='text-gray-500 dark:text-gray-400 text-xs'>

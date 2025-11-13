@@ -1,5 +1,5 @@
 import Country from '../models/Country.js';
-import { formatCountryBasic, formatCountryDetail } from '../utils/countryFormatter.js';
+import { formatCountryBasic, formatCountryDetail, formatCountryName } from '../utils/countryFormatter.js';
 
 export const getAllCountriesService = async ({ region, subregion, search, page = 1, limit = 25 }) => {
     const query = {};
@@ -53,4 +53,27 @@ export const getCountriesByListService = async (listCode) => {
     });
 
     return res.map(c => formatCountryBasic(c));
+}
+
+export const getLastestGdpService = async (cca3) => {
+    const country = await Country.findOne({ cca3: cca3.toUpperCase() }).lean();
+    if (!country) return null;
+
+    const latest = country.gdp.length
+        ? country.gdp.reduce((a, b) => a.year > b.year ? a : b)
+        : null;
+
+    return latest;
+}
+
+export const getGdpOf10YearService = async (cca3) => {
+    const country = await Country.find({ cca3: cca3.toUpperCase() }).lean();
+    return country.gdp || null;
+}
+
+export const getAllCountryNamesService = async () => {
+    const contries = await Country.find();
+    const res = contries.map(c => formatCountryName(c))
+
+    return res;
 }
