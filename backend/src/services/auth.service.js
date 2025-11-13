@@ -17,7 +17,7 @@ export const googleLoginService = async (token) => {
     // tìm or tạo user
     let user = await User.findOne({ email });
     if (!user) {
-        user = User.create({
+        user = await User.create({
             googleId: sub,
             name,
             email,

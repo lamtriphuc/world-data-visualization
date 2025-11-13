@@ -11,7 +11,7 @@ import { IoMdTrendingUp } from 'react-icons/io';
 import MiniMap from '../components/Map/MiniMap';
 import { useEffect, useState } from 'react';
 import { getCountryDetails } from '../services/country.service';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getLatestGdp } from '../services/gdp.service';
 import { useTranslation } from 'react-i18next';
 import Loading from '../components/Layout/Loading';
@@ -25,6 +25,7 @@ const CountryDetails = () => {
 	const { code } = useParams();
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchCountryDetails = async () => {
@@ -40,18 +41,18 @@ const CountryDetails = () => {
 		fetchCountryDetails();
 	}, [code]);
 
-	useEffect(() => {
-		const fetchLatestGdp = async () => {
-			try {
-				const data = await getLatestGdp(code);
-				setGdp(data.value.toLocaleString());
-				setYear(data.year);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		fetchLatestGdp();
-	}, [code]);
+	// useEffect(() => {
+	// 	const fetchLatestGdp = async () => {
+	// 		try {
+	// 			const data = await getLatestGdp(code);
+	// 			setGdp(data.value.toLocaleString());
+	// 			setYear(data.year);
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 		}
+	// 	};
+	// 	fetchLatestGdp();
+	// }, [code]);
 
 	const getTranslatedName = (name) => {
 		const found = translated.find((c) => c.name === name);
@@ -116,8 +117,8 @@ const CountryDetails = () => {
 						<div className='flex gap-2'>
 							<FiUsers className='w-4 h-4 sm:w-5 sm:h-5  text-green-500' />
 							<div className='flex flex-col'>
-								<span>{t('population')}</span>
-								<span>{countryDetails.population.toLocaleString()}</span>
+								<span>{t('population')} ({countryDetails.population?.year})</span>
+								<span>{countryDetails.population?.value.toLocaleString() || 0}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
@@ -130,8 +131,8 @@ const CountryDetails = () => {
 						<div className='flex gap-2'>
 							<IoMdTrendingUp className='w-4 h-4 sm:w-5 sm:h-5  text-purple-500' />
 							<div className='flex flex-col'>
-								<span>GDP {year && `(${year})`}</span>
-								<span>{gdp ? `${gdp} $` : 'N/A'}</span>
+								<span>GDP {countryDetails.gdp?.length ? (countryDetails.gdp.at(-1)?.year) : ''}</span>
+								<span>{countryDetails.gdp.length ? countryDetails.gdp.at(-1).value.toLocaleString() : 'N/A'}</span>
 							</div>
 						</div>
 					</div>
@@ -224,7 +225,9 @@ const CountryDetails = () => {
 						{countryDetails.borders?.map((border) => (
 							<span
 								key={border}
-								className='px-2 py-1 bg-gray-300 dark:bg-gray-800 rounded-lg'>
+								className='px-2 py-1 bg-gray-300 dark:bg-gray-800 rounded-lg cursor-pointer'
+								onClick={() => navigate(`/country/${border}`)}
+							>
 								{border}
 							</span>
 						))}

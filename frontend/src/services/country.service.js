@@ -20,3 +20,10 @@ export const getCountryDetails = async (code) => {
 	);
 	return response.data.data;
 };
+
+export const getAllCountryNames = async () => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/list-name`
+	);
+	return response.data.data;
+};

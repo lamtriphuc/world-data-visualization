@@ -26,6 +26,8 @@ export const formatCountryDetail = (country) => {
 		country.currencies
 	);
 
+	const currency = currencyName ? `${currencyName} (${currencySymbol})` : '';
+
 	return {
 		name: country.name?.common,
 		area: country.area,
@@ -42,9 +44,19 @@ export const formatCountryDetail = (country) => {
 		capital: country.capital,
 		latlng: country.latlng,
 		languages: Object.values(country.languages || []),
-		currencies: `${currencyName} (${currencySymbol})`,
+		currencies: currency,
+		gdp: country.gdp,
 		flag: country.flags.svg || country.flags.png || '',
 		timezones: country.timezones,
 		maps: country.maps,
+	};
+};
+
+export const formatCountryName = (country) => {
+	if (!country) return;
+
+	return {
+		cca3: country.cca3,
+		name: country?.name?.common,
 	};
 };

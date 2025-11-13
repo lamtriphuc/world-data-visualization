@@ -117,7 +117,7 @@ const CountryList = () => {
 								? getTranslatedName(country.name)
 								: country.name
 						}
-						population={country.population.toLocaleString()}
+						population={country.population.value}
 						region={country.region}
 						capital={country.capital}
 						flag={country.flag}
