@@ -18,7 +18,7 @@ const regionColors = {
     'Default': '#F1FAEE' // Màu khi không lọc
 };
 
-const HomePage = () => {
+const Home = () => {
     const navigate = useNavigate();
     const mapRef = useRef();
     const [geoData, setGeoData] = useState(null);
