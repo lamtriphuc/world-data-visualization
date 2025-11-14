@@ -13,7 +13,7 @@ import {
 } from 'recharts';
 import translated from '../../scripts/countries_translated.json';
 
-const CompareChart = ({ countries, gdp }) => {
+const CompareChart = ({ countries }) => {
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
 
@@ -24,17 +24,17 @@ const CompareChart = ({ countries, gdp }) => {
 
 	const basicData = countries.map((country) => ({
 		name: currentLang === 'vi' ? getTranslatedName(country.name) : country.name,
-		population: country.population,
+		population: country.population.value,
 		area: country.area,
 	}));
 
 	// Transform GDP data into the format needed for the chart
 	// Tìm tất cả các năm từ tất cả các quốc gia để đảm bảo có dữ liệu đầy đủ
 	const allYears = new Set();
-	gdp.forEach((countryGdp) => {
-		if (countryGdp?.data && Array.isArray(countryGdp.data)) {
-			countryGdp.data.forEach((item) => {
-				allYears.add(item.year);
+	countries.forEach((country) => {
+		if (Array.isArray(country.gdp)) {
+			country.gdp.forEach((gdpItem) => {
+				if (gdpItem?.year) allYears.add(gdpItem.year);
 			});
 		}
 	});
@@ -43,11 +43,11 @@ const CompareChart = ({ countries, gdp }) => {
 		.sort()
 		.map((year) => {
 			const transformed = { year };
-			gdp.forEach((countryGdp) => {
-				if (!countryGdp?.cca3 || !countryGdp?.data) return;
-				const matchingYear = countryGdp.data.find((d) => d.year === year);
+			countries.forEach((country) => {
+				if (!country?.cca3 || !Array.isArray(country?.gdp)) return;
+				const matchingYear = country.gdp.find((d) => d?.year === year);
 				if (matchingYear) {
-					transformed[countryGdp.cca3] = matchingYear.value;
+					transformed[country.cca3] = matchingYear.value;
 				}
 			});
 			return transformed;
@@ -146,31 +146,34 @@ const CompareChart = ({ countries, gdp }) => {
 						labelClassName='text-gray-800'
 					/>
 					<Legend />
-					{gdp
-						.filter(
-							(countryGdp) =>
-								countryGdp &&
-								countryGdp.cca3 &&
-								Array.isArray(countryGdp.data) &&
-								countryGdp.data.length > 0
-						)
-						.map((countryGdp, index) => {
-							const country = countries.find((c) => c.cca3 === countryGdp.cca3);
-							return (
-								<Line
-									key={countryGdp.cca3}
-									type='monotone'
-									dataKey={countryGdp.cca3}
-									stroke={['#60a5fa', '#34d399', '#f472b6'][index]}
-									strokeWidth={2}
-									name={
-										currentLang === 'vi'
-											? getTranslatedName(country?.name)
-											: country?.name || countryGdp.cca3
-									}
-								/>
-							);
-						})}
+					{Array.from(
+						new Map(
+							countries
+								.filter(
+									(country) =>
+										country &&
+										country.cca3 &&
+										Array.isArray(country.gdp) &&
+										country.gdp.length > 0
+								)
+								.map((country) => [country.cca3, country])
+						).values()
+					).map((country, index) => {
+						return (
+							<Line
+								key={country.cca3}
+								type='monotone'
+								dataKey={country.cca3}
+								stroke={['#60a5fa', '#34d399', '#f472b6'][index % 3]}
+								strokeWidth={2}
+								name={
+									currentLang === 'vi'
+										? getTranslatedName(country?.name)
+										: country?.name || country.cca3
+								}
+							/>
+						);
+					})}
 				</LineChart>
 			</div>
 		</div>

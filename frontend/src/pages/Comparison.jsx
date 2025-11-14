@@ -7,7 +7,6 @@ import {
 	getAllCountries,
 	getCountryDetails,
 } from '../services/country.service';
-import { getGdpOf10Years } from '../services/gdp.service';
 import translated from '../scripts/countries_translated.json';
 
 const Comparison = () => {
@@ -15,7 +14,6 @@ const Comparison = () => {
 	const [countries, setCountries] = useState([]);
 	const [selectedCountries, setSelectedCountries] = useState([]);
 	const [compareCountries, setCompareCountries] = useState([]);
-	const [gdp, setGdp] = useState([]);
 	const [isTableOpen, setIsTableOpen] = useState(false);
 	const maxCountries = 3;
 	const currentLang = localStorage.getItem('lang');
@@ -50,28 +48,6 @@ const Comparison = () => {
 			}
 		};
 		fetchCountryDetails();
-	}, [selectedCountries]);
-
-	useEffect(() => {
-		const fetchGdp = async () => {
-			try {
-				if (selectedCountries.length > 0) {
-					const detailsPromises = selectedCountries.map((code) =>
-						code ? getGdpOf10Years(code) : null
-					);
-					const details = await Promise.all(detailsPromises);
-					const filteredDetails = details
-						.filter((detail) => detail !== null)
-						.map((detail) => detail[0]); // Lấy phần tử đầu tiên của mỗi mảng
-					setGdp(filteredDetails);
-				} else {
-					setGdp([]);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		fetchGdp();
 	}, [selectedCountries]);
 
 	const handleAddCountry = (index, countryCode) => {
@@ -162,7 +138,7 @@ const Comparison = () => {
 								{t('comparison_chart')}
 							</p>
 							<div className='flex items-center overflow-x-auto'>
-								<CompareChart countries={compareCountries} gdp={gdp} />
+								<CompareChart countries={compareCountries} />
 							</div>
 						</div>
 					</>
