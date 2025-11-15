@@ -11,6 +11,8 @@ export const getAllCountriesService = async ({
 	search,
 	page = 1,
 	limit = 25,
+	sortBy = 'name',
+	sortOrder = 1,
 }) => {
 	const query = {};
 
@@ -27,11 +29,16 @@ export const getAllCountriesService = async ({
 
 	const skip = (page - 1) * limit;
 
+	// Determine sort criteria
+	let sortCriteria = { 'name.common': 1 };
+	if (sortBy === 'population') {
+		sortCriteria = { 'population.value': Number(sortOrder) };
+	} else if (sortBy === 'area') {
+		sortCriteria = { area: Number(sortOrder) };
+	}
+
 	const [countries, total] = await Promise.all([
-		Country.find(query)
-			.sort({ 'name.common': 1 })
-			.skip(skip)
-			.limit(Number(limit)),
+		Country.find(query).sort(sortCriteria).skip(skip).limit(Number(limit)),
 		Country.countDocuments(query),
 	]);
 

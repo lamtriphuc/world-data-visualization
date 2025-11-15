@@ -6,10 +6,13 @@ export const getAllCountries = async ({
 	subregion = '',
 	search = '',
 	limit = 25,
+	sortBy = '',
+	sortOrder = '',
 }) => {
 	const response = await axios.get(
-		`${import.meta.env.VITE_BACKEND_URL
-		}/api/countries?page=${page}${region}${subregion}${search}&limit=${limit}`
+		`${
+			import.meta.env.VITE_BACKEND_URL
+		}/api/countries?page=${page}${region}${subregion}${search}&limit=${limit}${sortBy}${sortOrder}`
 	);
 	return response.data.data;
 };

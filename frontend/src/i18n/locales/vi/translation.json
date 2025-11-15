@@ -1,6 +1,11 @@
 {
   "search_placeholder": "Tìm kiếm quốc gia...",
   "filter_region": "Lọc theo khu vực",
+  "sort_by": "Sắp xếp theo",
+  "population_ascending": "Dân số (Tăng dần)",
+  "population_descending": "Dân số (Giảm dần)",
+  "area_ascending": "Diện tích (Tăng dần)",
+  "area_descending": "Diện tích (Giảm dần)",
   "population": "Dân số",
   "region": "Khu vực",
   "sub_region": "Tiểu vùng",
