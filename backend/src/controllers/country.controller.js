@@ -9,13 +9,16 @@ import { successResponse, errorResponse } from '../utils/response.js';
 
 export const getAllCountries = async (req, res, next) => {
 	try {
-		const { region, subregion, search, page, limit } = req.query;
+		const { region, subregion, search, page, limit, sortBy, sortOrder } =
+			req.query;
 		const data = await getAllCountriesService({
 			region,
 			subregion,
 			search,
 			page,
 			limit,
+			sortBy,
+			sortOrder,
 		});
 		return successResponse(res, data, 200, 'List Countries');
 	} catch (error) {

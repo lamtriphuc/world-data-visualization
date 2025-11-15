@@ -82,9 +82,9 @@ const Dashboard = () => {
 
 				{/* Continents Card */}
 				<StatCard
-					title={t('continent')}
+					title={t('continents')}
 					value={continentData.length}
-					subtitle={t('continents')}
+					subtitle={t('continent')}
 					icon={FiMap}
 					bgColor={'bg-purple-100'}
 					iconColor={'text-purple-600'}

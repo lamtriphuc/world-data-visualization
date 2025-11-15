@@ -1,6 +1,11 @@
 {
   "search_placeholder": "Search for a country...",
   "filter_region": "Filter by Region",
+  "sort_by": "Sort By",
+  "population_ascending": "Population (Low to High)",
+  "population_descending": "Population (High to Low)",
+  "area_ascending": "Area (Low to High)",
+  "area_descending": "Area (High to Low)",
   "population": "Population",
   "region": "Region",
   "sub_region": "Subregion",
