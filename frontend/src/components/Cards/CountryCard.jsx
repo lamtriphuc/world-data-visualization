@@ -80,8 +80,9 @@ const CountryCard = ({
 						onClick={handleFavoriteClick}
 						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition'>
 						<IoIosHeart
-							className={`w-6 h-6 cursor-pointer ${favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
-								}`}
+							className={`w-6 h-6 cursor-pointer ${
+								favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
+							}`}
 						/>
 					</button>
 				)}
@@ -95,7 +96,8 @@ const CountryCard = ({
 						{t('population')}: {population.toLocaleString()}
 					</p>
 					<p className='pb-2'>
-						{t('region')}: {t(`main_region.${region}`)}
+						{t('region')}:{' '}
+						{t(`main_region.${region === 'Antarctic' ? 'Antarctica' : region}`)}
 					</p>
 					<p>
 						{t('capital')}: {capital}

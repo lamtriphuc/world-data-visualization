@@ -6,7 +6,13 @@ import ContinentChart from '../components/Charts/ContinentChart';
 import TopCountriesTable from '../components/Tables/TopCountriesTable';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
-import { getAllCountries, getAllCountryNames, getGlobalStats, getTop10Area, getTop10Population } from '../services/country.service';
+import {
+	getAllCountries,
+	getAllCountryNames,
+	getGlobalStats,
+	getTop10Area,
+	getTop10Population,
+} from '../services/country.service';
 import Loading from '../components/Layout/Loading';
 import CountrySearch from '../components/Layout/CountrySearch';
 import InteractiveMap from '../components/Map/InteractiveMap';
@@ -14,21 +20,23 @@ import RegionFilter from '../components/Layout/RegionFilter';
 import { useNavigate } from 'react-router-dom';
 
 const regionViewStates = {
-	'All': { center: [0, 20], zoom: 1 },
-	'Asia': { center: [90, 30], zoom: 2.5 },
-	'Europe': { center: [15, 50], zoom: 3 },
-	'Africa': { center: [20, 0], zoom: 2.5 },
-	'Americas': { center: [-90, 20], zoom: 2 },
-	'Oceania': { center: [135, -20], zoom: 3 }
+	All: { center: [0, 20], zoom: 1 },
+	Asia: { center: [90, 30], zoom: 2.5 },
+	Europe: { center: [15, 50], zoom: 3 },
+	Africa: { center: [20, 0], zoom: 2.5 },
+	Americas: { center: [-90, 20], zoom: 2 },
+	Oceania: { center: [135, -20], zoom: 3 },
+	Antarctica: { center: [0, -85], zoom: 2 },
 };
 
 const regionColors = {
-	'Asia': '#E63946',
-	'Europe': '#457B9D',
-	'Africa': '#F4A261',
-	'Americas': '#2A9D8F',
-	'Oceania': '#A8DADC',
-	'Default': '#F1FAEE'
+	Asia: '#E63946',
+	Europe: '#457B9D',
+	Africa: '#F4A261',
+	Americas: '#2A9D8F',
+	Oceania: '#A8DADC',
+	Antarctica: '#10b981',
+	Default: '#F1FAEE',
 };
 
 const Dashboard = () => {
@@ -51,10 +59,9 @@ const Dashboard = () => {
 	useEffect(() => {
 		// Tải GeoJSON cho hình dạng bản đồ
 		fetch('/countries.geojson')
-			.then(resp => resp.json())
-			.then(json => setGeoData(json))
-			.catch(err => console.error("Could not load geojson:", err));
-
+			.then((resp) => resp.json())
+			.then((json) => setGeoData(json))
+			.catch((err) => console.error('Could not load geojson:', err));
 
 		const fetchCountries = async () => {
 			try {
@@ -72,36 +79,36 @@ const Dashboard = () => {
 				const res = await getAllCountryNames();
 				setAllCountryNames(res);
 			} catch (error) {
-				console.log('fetchAllCountryNames ', error)
+				console.log('fetchAllCountryNames ', error);
 			}
-		}
+		};
 
 		const fetchTop10Area = async () => {
 			try {
 				const res = await getTop10Area();
 				setTopArea(res);
 			} catch (error) {
-				console.log('fetch top 10 area ', error)
+				console.log('fetch top 10 area ', error);
 			}
-		}
+		};
 
 		const fetchTop10Population = async () => {
 			try {
 				const res = await getTop10Population();
 				setTopPopulaiton(res);
 			} catch (error) {
-				console.log('fetch top 10 populaiton ', error)
+				console.log('fetch top 10 populaiton ', error);
 			}
-		}
+		};
 
 		const fetchStats = async () => {
 			try {
 				const res = await getGlobalStats();
 				setStats(res);
 			} catch (error) {
-				console.log('fetch stats', error)
+				console.log('fetch stats', error);
 			}
-		}
+		};
 
 		fetchStats();
 		fetchTop10Area();
@@ -194,22 +201,22 @@ const Dashboard = () => {
 				/>
 			</div>
 
-			<div className="relative w-full h-[400px] mt-4">
+			<div className='relative w-full h-[400px] mt-4'>
 				{/* === Thanh Header chứa Tìm kiếm và Lọc === */}
-				<div className="absolute top-0 left-0 right-0 z-2 p-4 flex flex-col md:flex-row gap-4">
+				<div className='absolute top-0 left-0 right-0 z-2 p-4 flex flex-col md:flex-row gap-4'>
 					<CountrySearch
 						countries={allCountryNames}
 						onSelect={handleSearchSelect}
 					/>
 					<RegionFilter
-						regions={Object.keys(regionColors).filter(r => r !== 'Default')}
+						regions={Object.keys(regionColors).filter((r) => r !== 'Default')}
 						selectedRegion={regionFilter}
 						onFilterChange={handleRegionChange}
 					/>
 				</div>
 
 				{/* Map */}
-				<div className="w-full h-full">
+				<div className='w-full h-full'>
 					<InteractiveMap
 						ref={mapRef}
 						geoData={geoData}
@@ -232,13 +239,11 @@ const Dashboard = () => {
 						// Dữ liệu và loại (type) vẫn được truyền động
 						countries={topListType === 'population' ? topPopulation : topArea}
 						type={topListType}
-
 						// Truyền state và hàm handler xuống cho ComboBox nội bộ
 						topListType={topListType}
 						onTopListTypeChange={setTopListType}
 					/>
 				</div>
-
 			</div>
 		</>
 	);

@@ -33,17 +33,17 @@ const Header = () => {
 				<h1 className='text-xl font-semibold'>Where in the world?</h1>
 			</Link>
 			<div className='flex items-center gap-5'>
-				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-1 '>
+				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-2 '>
 					<MdOutlineTravelExplore />
 					<Link to='/countries'>{t('explore')}</Link>
 				</div>
-				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-1 '>
+				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-2 '>
 					<LuGitCompare />
 					<Link to='/comparison'>{t('comparison')}</Link>
 				</div>
 				<LanguageSwitcher />
 				<ThemeToggle />
-				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-1 '>
+				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-2 '>
 					{/* {!user ? (
 						<Link to='/login'>{t('login')}</Link>
 					) : (

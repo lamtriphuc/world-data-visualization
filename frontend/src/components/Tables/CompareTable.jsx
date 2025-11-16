@@ -65,7 +65,13 @@ const CompareTable = ({ countries }) => {
 									key={c.cca3 + field.key}
 									className='p-3 border-b border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800'>
 									{field.key === 'region'
-										? t(`main_region.${getValue(c, 'region')}`)
+										? t(
+												`main_region.${
+													getValue(c, 'region') === 'Antarctic'
+														? 'Antarctica'
+														: getValue(c, 'region')
+												}`
+										  )
 										: field.key === 'subregion'
 										? t(`subregion.${getValue(c, 'subregion')}`, {
 												defaultValue: '-',

@@ -60,10 +60,9 @@ const TopCountriesTable = ({
 				<select
 					value={topListType}
 					onChange={(e) => onTopListTypeChange(e.target.value)}
-					className="block w-auto text-base rounded-md border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-				>
-					<option value="population">{t('top_10_population')}</option>
-					<option value="area">{t('top_10_area')}</option>
+					className='block w-auto text-base rounded-md border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'>
+					<option value='population'>{t('top_10_population')}</option>
+					<option value='area'>{t('top_10_area')}</option>
 				</select>
 			</div>
 			<div className='overflow-x-auto'>
@@ -114,7 +113,13 @@ const TopCountriesTable = ({
 								</td>
 								<td>
 									<span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-blue-100 text-blue-800'>
-										{t(`main_region.${country.region}`)}
+										{t(
+											`main_region.${
+												country.region === 'Antarctic'
+													? 'Antarctica'
+													: country.region
+											}`
+										)}
 									</span>
 								</td>
 								<td>
