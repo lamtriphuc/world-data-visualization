@@ -5,7 +5,7 @@ const RegionFilter = ({ regions, selectedRegion, onFilterChange }) => {
     const allRegions = ['All', ...regions];
 
     return (
-        <div className="flex flex-wrap gap-2 p-2 bg-white rounded-md shadow-md z-20">
+        <div className="flex flex-wrap gap-2 p-2 bg-white dark:bg-gray-800 rounded-md shadow-md z-20">
             {allRegions.map((region) => {
                 const isSelected = region === selectedRegion;
                 return (

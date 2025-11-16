@@ -10,8 +10,7 @@ export const getAllCountries = async ({
 	sortOrder = '',
 }) => {
 	const response = await axios.get(
-		`${
-			import.meta.env.VITE_BACKEND_URL
+		`${import.meta.env.VITE_BACKEND_URL
 		}/api/countries?page=${page}${region}${subregion}${search}&limit=${limit}${sortBy}${sortOrder}`
 	);
 	return response.data.data;
@@ -27,6 +26,27 @@ export const getCountryDetails = async (code) => {
 export const getAllCountryNames = async () => {
 	const response = await axios.get(
 		`${import.meta.env.VITE_BACKEND_URL}/api/countries/list-name`
+	);
+	return response.data.data;
+};
+
+export const getTop10Area = async () => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/top-10-area`
+	);
+	return response.data.data;
+};
+
+export const getTop10Population = async () => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/top-10-population`
+	);
+	return response.data.data;
+};
+
+export const getGlobalStats = async () => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/stats`
 	);
 	return response.data.data;
 };

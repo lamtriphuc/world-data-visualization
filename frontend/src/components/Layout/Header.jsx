@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
-import { MdDashboard } from 'react-icons/md';
+import { MdDashboard, MdOutlineTravelExplore } from 'react-icons/md';
 import { LuGitCompare } from 'react-icons/lu';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
@@ -34,8 +34,8 @@ const Header = () => {
 			</Link>
 			<div className='flex items-center gap-5'>
 				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-1 '>
-					<MdDashboard />
-					<Link to='/dashboard'>{t('dashboard')}</Link>
+					<MdOutlineTravelExplore />
+					<Link to='/countries'>{t('explore')}</Link>
 				</div>
 				<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-1 '>
 					<LuGitCompare />

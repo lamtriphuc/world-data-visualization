@@ -91,3 +91,62 @@ export const getAllCountryNamesService = async () => {
 
 	return res;
 };
+
+export const getTop10PopulationService = async () => {
+	const countries = await Country.find({})
+		.sort({ 'population.value': -1 })
+		.limit(10);
+
+	// Định dạng kết quả trả về
+	return countries.map((c) => formatCountryDetail(c));
+};
+
+export const getTop10AreaService = async () => {
+	const countries = await Country.find({})
+		.sort({ 'area': -1 })
+		.limit(10);
+
+	// Định dạng kết quả trả về
+	return countries.map((c) => formatCountryDetail(c));
+};
+
+export const getGlobalStatsService = async () => {
+	// 1. Lấy tổng số quốc gia
+	const totalCountries = await Country.countDocuments({});
+
+	// 2. Dùng Aggregation để tính tổng dân số và đếm số region
+	const stats = await Country.aggregate([
+		{
+			// Nhóm TẤT CẢ document lại làm 1 (_id: null)
+			$group: {
+				_id: null,
+				// Tính tổng của trường 'population.value'
+				totalPopulation: { $sum: '$population.value' },
+				// Thêm các 'region' duy nhất vào một mảng
+				regionSet: { $addToSet: '$region' }
+			}
+		},
+		{
+			// Định dạng lại output
+			$project: {
+				_id: 0,
+				totalPopulation: 1, // Giữ lại tổng dân số
+				totalRegions: { $size: '$regionSet' } // Đếm số phần tử trong mảng regionSet
+			}
+		}
+	]);
+
+	if (stats.length === 0) {
+		return {
+			totalCountries: 0,
+			totalPopulation: 0,
+			totalRegions: 0
+		};
+	}
+
+	return {
+		totalCountries,
+		totalPopulation: stats[0].totalPopulation,
+		totalRegions: stats[0].totalRegions
+	};
+};

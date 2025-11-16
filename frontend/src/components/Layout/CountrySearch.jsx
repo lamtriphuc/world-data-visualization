@@ -41,7 +41,7 @@ const CountrySearch = ({ countries, onSelect }) => {
         <div className="relative w-full md:w-72" ref={inputRef}>
             <input
                 type="text"
-                className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-md focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                className="w-full rounded-md border border-gray-300 bg-white dark:bg-gray-800  py-2 pl-3 pr-10 text-gray-900 shadow-md focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm text-gray-900 dark:text-gray-300"
                 placeholder="Tìm quốc gia..."
                 value={query}
                 onChange={(e) => {
@@ -51,7 +51,7 @@ const CountrySearch = ({ countries, onSelect }) => {
                 onFocus={() => setShowDropdown(true)}
             />
             {showDropdown && filteredCountries.length > 0 && (
-                <ul className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 sm:text-sm">
+                <ul className=" absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 sm:text-sm dark:bg-gray-800">
                     {filteredCountries.map((country) => (
                         <li
                             key={country.cca3}
