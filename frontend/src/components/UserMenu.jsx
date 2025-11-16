@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 const UserMenu = () => {
 	const { t } = useTranslation();
@@ -54,9 +55,12 @@ const UserMenu = () => {
 
 	if (!user) {
 		return (
-			<Link to='/login' className=''>
-				{t('login')}
-			</Link>
+			<div className='flex px-2 py-1 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 items-center justify-center gap-2 '>
+				<FaRegUserCircle />
+				<Link to='/login' className=''>
+					{t('login')}
+				</Link>
+			</div>
 		);
 	}
 

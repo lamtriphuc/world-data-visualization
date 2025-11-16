@@ -12,15 +12,12 @@ import MiniMap from '../components/Map/MiniMap';
 import { useEffect, useState } from 'react';
 import { getCountryDetails } from '../services/country.service';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getLatestGdp } from '../services/gdp.service';
 import { useTranslation } from 'react-i18next';
 import Loading from '../components/Layout/Loading';
 import translated from '../scripts/countries_translated.json';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
-	const [gdp, setGdp] = useState(null);
-	const [year, setYear] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const { code } = useParams();
 	const { t } = useTranslation();
@@ -117,8 +114,12 @@ const CountryDetails = () => {
 						<div className='flex gap-2'>
 							<FiUsers className='w-4 h-4 sm:w-5 sm:h-5  text-green-500' />
 							<div className='flex flex-col'>
-								<span>{t('population')} ({countryDetails.population?.year})</span>
-								<span>{countryDetails.population?.value.toLocaleString() || 0}</span>
+								<span>
+									{t('population')} ({countryDetails.population?.year})
+								</span>
+								<span>
+									{countryDetails.population?.value.toLocaleString() || 0}
+								</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
@@ -131,8 +132,18 @@ const CountryDetails = () => {
 						<div className='flex gap-2'>
 							<IoMdTrendingUp className='w-4 h-4 sm:w-5 sm:h-5  text-purple-500' />
 							<div className='flex flex-col'>
-								<span>GDP {countryDetails.gdp?.length ? (countryDetails.gdp.at(-1)?.year) : ''}</span>
-								<span>{countryDetails.gdp.length ? countryDetails.gdp.at(-1).value.toLocaleString() : 'N/A'}</span>
+								<span>
+									GDP (
+									{countryDetails.gdp?.length
+										? countryDetails.gdp.at(-1)?.year
+										: ''}
+									)
+								</span>
+								<span>
+									{countryDetails.gdp.length
+										? countryDetails.gdp.at(-1).value.toLocaleString()
+										: 'N/A'}
+								</span>
 							</div>
 						</div>
 					</div>
@@ -176,7 +187,13 @@ const CountryDetails = () => {
 							<div className='flex flex-col'>
 								<span>{t('region')}</span>
 								<span>
-									{t(`main_region.${countryDetails.region}`)}
+									{t(
+										`main_region.${
+											countryDetails.region === 'Antarctic'
+												? 'Antarctica'
+												: countryDetails.region
+										}`
+									)}
 									{countryDetails.subregion &&
 										` - ${t(`subregion.${countryDetails.subregion}`)}`}
 								</span>
@@ -226,8 +243,7 @@ const CountryDetails = () => {
 							<span
 								key={border}
 								className='px-2 py-1 bg-gray-300 dark:bg-gray-800 rounded-lg cursor-pointer'
-								onClick={() => navigate(`/country/${border}`)}
-							>
+								onClick={() => navigate(`/country/${border}`)}>
 								{border}
 							</span>
 						))}

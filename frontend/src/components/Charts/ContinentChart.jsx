@@ -25,7 +25,13 @@ const ContinentChart = ({ chartData }) => {
 			const chartData = payload[0].payload;
 			return (
 				<div className='bg-white p-3 rounded-lg shadow-lg border border-gray-200'>
-					<p className='text-gray-900'>{chartData.name}</p>
+					<p className='text-gray-900'>
+						{t(
+							`main_region.${
+								chartData.name === 'Antarctic' ? 'Antarctica' : chartData.name
+							}`
+						)}
+					</p>
 					<p className='text-gray-600'>
 						{t('country_num')}: {chartData.value}
 					</p>
@@ -52,7 +58,9 @@ const ContinentChart = ({ chartData }) => {
 						cy='50%'
 						fill='#8884d8'
 						label={({ name, percentage }) =>
-							`${t(`main_region.${name}`)} (${percentage}%)`
+							`${t(
+								`main_region.${name === 'Antarctic' ? 'Antarctica' : name}`
+							)} (${percentage}%)`
 						}
 						labelLine={false}>
 						{chartData.map((entry, index) => (
@@ -71,7 +79,11 @@ const ContinentChart = ({ chartData }) => {
 						/>
 						<div className='flex-1'>
 							<p className='text-gray-700 dark:text-gray-300 text-sm'>
-								{t(`main_region.${item.name}`)}
+								{t(
+									`main_region.${
+										item.name === 'Antarctic' ? 'Antarctica' : item.name
+									}`
+								)}
 							</p>
 							<p className='text-gray-500 dark:text-gray-400 text-xs'>
 								{item.value} {t('countries')} ({item.percentage}%)
