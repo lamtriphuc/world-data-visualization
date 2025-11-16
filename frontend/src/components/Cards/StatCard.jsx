@@ -7,10 +7,11 @@ const StatCard = ({
 	icon: Icon,
 	iconColor,
 	bgColor,
+	onClick
 }) => {
 	return (
-		<div>
-			<div className='p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl'>
+		<div onClick={onClick}>
+			<div className='p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'>
 				<div className='flex flex-wrap items-center justify-between'>
 					<div>
 						<p className='text-gray-600 dark:text-gray-300 mb-2'>{title}</p>

@@ -14,11 +14,32 @@ const App = () => {
 	const CountryList = lazy(() => import('./pages/CountryList'));
 
 	return (
+		// <BrowserRouter>
+		// 	<Routes>
+		// 		<Route path='/' element={<AppLayout />}>
+		// 			<Route
+		// 				index
+		// 				element={
+		// 					<Suspense fallback={<Loading />}>
+		// 						<CountryList />
+		// 					</Suspense>
+		// 				}
+		// 			/>
+		// 			<Route path='/' element={<DashBoard />} />
+		// 			<Route path='/country/:code' element={<CountryDetails />} />
+		// 			<Route path='/comparison' element={<Comparison />} />
+		// 			<Route path='/login' element={<Login />} />
+		// 			<Route path='/favorite' element={<Favorite />} />
+		// 		</Route>
+		// 	</Routes>
+		// </BrowserRouter>
+
 		<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<AppLayout />}>
+					<Route index element={<DashBoard />} />
 					<Route
-						index
+						path='/countries'
 						element={
 							<Suspense fallback={<Loading />}>
 								<CountryList />
@@ -27,10 +48,9 @@ const App = () => {
 					/>
 					<Route path='/country/:code' element={<CountryDetails />} />
 					<Route path='/comparison' element={<Comparison />} />
-					<Route path='/dashboard' element={<DashBoard />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/favorite' element={<Favorite />} />
-					<Route path='/home' element={<Home />} />
+
 				</Route>
 			</Routes>
 		</BrowserRouter>

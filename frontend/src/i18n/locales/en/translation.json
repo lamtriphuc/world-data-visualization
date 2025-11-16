@@ -65,7 +65,7 @@
   "total_countries": "Total countries",
   "total_population": "Total world population",
   "continent": "Continent",
-  "continents": "continents",
+  "continents": "Continents",
   "people": "people",
   "country_distribution": "Country Distribution by Continent",
   "top_10_population": "Top 10 Countries with the Largest Population",
@@ -87,5 +87,6 @@
   "population_area": "Population & Area (Combined Chart)",
   "gdp_10_years": "GDP over 10 years (billion USD)",
   "favorites": "Favorites",
+  "explore": "Explore",
   "logout": "Logout"
 }

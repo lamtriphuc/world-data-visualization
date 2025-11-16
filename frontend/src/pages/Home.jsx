@@ -25,6 +25,7 @@ const Home = () => {
     const [allCountries, setAllCountries] = useState([]); // Dùng cho tìm kiếm
     const [regionFilter, setRegionFilter] = useState('All');
     const [hoverInfo, setHoverInfo] = useState(null);
+    const [selectedCountryCode, setSelectedCountryCode] = useState(null);
 
     // 2. Tải dữ liệu GeoJSON (cho bản đồ) và Dữ liệu API (cho tìm kiếm)
     useEffect(() => {
@@ -53,10 +54,14 @@ const Home = () => {
     // 3. Hàm xử lý khi chọn một quốc gia từ thanh tìm kiếm
     const handleSearchSelect = (country) => {
         if (country && mapRef.current) {
+            setSelectedCountryCode(country.cca3); // <-- LƯU MÃ QUỐC GIA (giả sử API có cca3)
+            setRegionFilter('All');
+
             mapRef.current.flyTo({
-                center: [country.latlng.lng, country.latlng.lat], // Mapbox dùng [lng, lat]
-                zoom: 4,
-                duration: 2000 // 2 giây
+                // center: [country.latlng.lng, country.latlng.lat],
+                center: [country.latlng[1], country.latlng[0]], // Mapbox dùng [lng, lat]
+                zoom: 5,
+                duration: 2000
             });
         }
     };
@@ -72,9 +77,9 @@ const Home = () => {
             setHoverInfo({
                 longitude: event.lngLat.lng,
                 latitude: event.lngLat.lat,
-                name: props.name_common,
+                name: props.name,
                 flag: props.flag_emoji, // Giả sử GeoJSON có
-                population: props.population.toLocaleString('en-US')
+                population: props.pop_est.toLocaleString('en-US')
             });
             // Đổi con trỏ chuột
             event.target.getCanvas().style.cursor = 'pointer';
@@ -97,6 +102,28 @@ const Home = () => {
 
     // 6. Tạo style cho lớp (layer) tô màu, thay đổi dựa trên bộ lọc
     const fillLayerStyle = useMemo(() => {
+        const SELECTED_COUNTRY_COLOR = '#F9A825';
+
+        // ưu tiên filter country
+        if (selectedCountryCode) {
+            const matchExpression = [
+                'match',
+                ['get', 'iso_a3'],     // Lấy mã 'iso_a3' từ GeoJSON
+                selectedCountryCode,   // Nếu mã BẰNG...
+                SELECTED_COUNTRY_COLOR, // ...tô màu này
+                regionColors.Default   // Mặc định cho TẤT CẢ các nước khác
+            ];
+
+            return {
+                id: 'countries-fill',
+                type: 'fill',
+                paint: {
+                    'fill-color': matchExpression,
+                    'fill-opacity': 0.8 // Tô đậm hơn một chút
+                }
+            };
+        }
+
         if (regionFilter === 'All') {
             return {
                 id: 'countries-fill',
@@ -108,14 +135,26 @@ const Home = () => {
             };
         }
 
-        // Đây là "Data-Driven Styling" của Mapbox
-        const matchExpression = ['match', ['get', 'region']]; // Lấy thuộc tính 'region'
-        for (const [region, color] of Object.entries(regionColors)) {
-            if (region !== 'Default') {
-                matchExpression.push(region, color);
-            }
+        let matchExpression;
+
+        // 2. Xử lý đặc biệt cho "Americas"
+        if (regionFilter === 'Americas') {
+            matchExpression = [
+                'match',
+                ['get', 'continent'], // <-- LẤY THEO 'continent'
+                ['North America', 'South America'], // Gộp cả 2 châu lục này
+                regionColors.Americas, // Tô chung 1 màu 'Americas'
+                regionColors.Default // Mặc định cho phần còn lại
+            ];
+        } else {
+            // 3. Xử lý bình thường cho các châu lục khác (Asia, Europe, Africa, Oceania)
+            matchExpression = [
+                'match',
+                ['get', 'continent'], // <-- LẤY THEO 'continent'
+                regionFilter, regionColors[regionFilter], // Ví dụ: "Asia" -> màu Asia
+                regionColors.Default
+            ];
         }
-        matchExpression.push(regionColors.Default); // Màu mặc định cuối cùng
 
         return {
             id: 'countries-fill',
@@ -125,7 +164,7 @@ const Home = () => {
                 'fill-opacity': 0.7
             }
         };
-    }, [regionFilter]);
+    }, [regionFilter, selectedCountryCode]);
 
     // Lớp viền
     const borderLayerStyle = {
@@ -148,7 +187,10 @@ const Home = () => {
                 <RegionFilter
                     regions={Object.keys(regionColors).filter(r => r !== 'Default')}
                     selectedRegion={regionFilter}
-                    onFilterChange={setRegionFilter}
+                    onFilterChange={(region) => {
+                        setRegionFilter(region);
+                        setSelectedCountryCode(null); // <-- TẮT BỘ LỌC QUỐC GIA
+                    }}
                 />
             </div>
 
@@ -162,7 +204,7 @@ const Home = () => {
                     zoom: 1
                 }}
                 style={{ width: '100%', height: '100%' }}
-                mapStyle="mapbox://styles/mapbox/light-v10" // Dùng style sáng
+                mapStyle="mapbox://styles/mapbox/navigation-day-v1" // Dùng style sáng
                 onMouseMove={onHover}
                 onClick={onClick}
                 interactiveLayerIds={['countries-fill']} // Chỉ bắt sự kiện trên lớp này

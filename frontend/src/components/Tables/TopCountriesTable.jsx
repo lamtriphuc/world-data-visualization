@@ -4,7 +4,12 @@ import { GoTrophy } from 'react-icons/go';
 import { LuUsers } from 'react-icons/lu';
 import translated from '../../scripts/countries_translated.json';
 
-const TopCountriesTable = ({ countries, title, type }) => {
+const TopCountriesTable = ({
+	countries,
+	type,
+	topListType,
+	onTopListTypeChange,
+}) => {
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
 
@@ -52,7 +57,14 @@ const TopCountriesTable = ({ countries, title, type }) => {
 				) : (
 					<FiMapPin className='w-5 h-5 text-green-600' />
 				)}
-				<h2 className='text-gray-900 dark:text-gray-300'>{title}</h2>
+				<select
+					value={topListType}
+					onChange={(e) => onTopListTypeChange(e.target.value)}
+					className="block w-auto text-base rounded-md border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+				>
+					<option value="population">{t('top_10_population')}</option>
+					<option value="area">{t('top_10_area')}</option>
+				</select>
 			</div>
 			<div className='overflow-x-auto'>
 				<table className='table-auto text-left w-full border-collapse'>
@@ -114,7 +126,7 @@ const TopCountriesTable = ({ countries, title, type }) => {
 										</p>
 										<p className='text-gray-500 dark:text-gray-400 text-xs'>
 											{type === 'population'
-												? formatNumber(country.population)
+												? formatNumber(country.population.value)
 												: formatNumber(country.area) + ' km²'}
 										</p>
 									</div>

@@ -145,7 +145,7 @@ async function aggregateRegionsAndSubregions() {
         {
             $group: {
                 _id: '$region',
-                totalPopulation: { $sum: '$population' },
+                totalPopulation: { $sum: '$population.value' },
                 totalArea: { $sum: '$area' },
                 averagePopulationDensity: { $avg: '$populationDensity' },
                 countryCount: { $sum: 1 }
@@ -177,7 +177,7 @@ async function aggregateRegionsAndSubregions() {
         {
             $group: {
                 _id: { region: '$region', subregion: '$subregion' },
-                totalPopulation: { $sum: '$population' },
+                totalPopulation: { $sum: '$population.value' },
                 totalArea: { $sum: '$area' },
                 averagePopulationDensity: { $avg: '$populationDensity' },
                 countryCount: { $sum: 1 }

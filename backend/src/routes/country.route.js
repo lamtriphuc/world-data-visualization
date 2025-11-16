@@ -5,13 +5,19 @@ import {
 	getGdpOf10Year,
 	getLatestGdp,
 	getAllCountryNames,
+	getTop10Area,
+	getTop10Population,
+	getGlobalStats,
 } from '../controllers/country.controller.js';
 
 const router = express.Router();
 
-// Get all countries
 router.get('/', getAllCountries);
 router.get('/list-name', getAllCountryNames);
+router.get('/top-10-area', getTop10Area);
+router.get('/top-10-population', getTop10Population);
+router.get('/stats', getGlobalStats);
+
 router.get('/:code', getCountryDetail);
 router.get('/gdp/:code', getLatestGdp);
 router.get('/gdp/:code/10-year', getGdpOf10Year);
