@@ -33,6 +33,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 		regionFilter,
 		selectedCountryCode,
 		onCountryClick,
+		countries
 	} = props;
 	const { t } = useTranslation();
 
@@ -109,6 +110,19 @@ const InteractiveMap = forwardRef((props, ref) => {
 		};
 	}, [regionFilter, selectedCountryCode, regionColors]);
 
+	const populationMap = useMemo(() => {
+		if (!countries) return;
+
+		const map = {};
+		countries.forEach(c => {
+			map[c.cca3] = {
+				population: c.population.value,
+				area: c.area
+			}
+		})
+		return map;
+	}, [countries])
+
 	// Xử lý khi rê chuột (Hover)
 	const onHover = (event) => {
 		const { features } = event;
@@ -116,12 +130,21 @@ const InteractiveMap = forwardRef((props, ref) => {
 
 		if (hoveredFeature) {
 			const props = hoveredFeature.properties;
+			const iso3 = props.iso_a3;
+
+			const newInfo = populationMap[iso3];
+
 			setHoverInfo({
 				longitude: event.lngLat.lng,
 				latitude: event.lngLat.lat,
 				name: props.name,
 				// Dùng pop_est, vì GeoJSON của bạn có thuộc tính này
-				population: props.pop_est.toLocaleString('en-US'),
+				population: newInfo.population
+					? newInfo.population.toLocaleString('en-US')
+					: props.pop_est.toLocaleString('en-US'),
+				area: newInfo.area
+					? newInfo.area.toLocaleString('en-US')
+					: props.pop_est.toLocaleString('en-US'),
 			});
 			event.target.getCanvas().style.cursor = 'pointer';
 		} else {
@@ -180,6 +203,9 @@ const InteractiveMap = forwardRef((props, ref) => {
 						{/* Đã sửa 'population' */}
 						<p className='text-sm text-gray-600'>
 							{t('population')}: {hoverInfo.population}
+						</p>
+						<p className='text-sm text-gray-600'>
+							{t('area')}: {hoverInfo.area}
 						</p>
 					</div>
 				</Popup>

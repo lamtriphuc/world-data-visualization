@@ -57,7 +57,7 @@ const Dashboard = () => {
 	const [stats, setStats] = useState();
 
 	useEffect(() => {
-		// Tải GeoJSON cho hình dạng bản đồ
+		// Tải geojson cho hình dạng bản đồ
 		fetch('/countries.geojson')
 			.then((resp) => resp.json())
 			.then((json) => setGeoData(json))
@@ -192,6 +192,7 @@ const Dashboard = () => {
 
 				{/* Continents Card */}
 				<StatCard
+					onClick={() => navigate('/continent')}
 					title={t('continents')}
 					value={stats.totalRegions}
 					subtitle={t('continent')}
@@ -224,6 +225,7 @@ const Dashboard = () => {
 						regionFilter={regionFilter}
 						selectedCountryCode={selectedCountryCode}
 						onCountryClick={handleCountryClick}
+						countries={countries}
 					/>
 				</div>
 			</div>

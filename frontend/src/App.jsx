@@ -8,7 +8,7 @@ import DashBoard from './pages/DashBoard';
 import Login from './pages/Login';
 import Loading from './components/Layout/Loading';
 import Favorite from './pages/Favorite';
-import Home from './pages/Home';
+import Continent from './pages/Continent';
 
 const App = () => {
 	const CountryList = lazy(() => import('./pages/CountryList'));
@@ -50,6 +50,7 @@ const App = () => {
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/favorite' element={<Favorite />} />
+					<Route path='/continent' element={<Continent />} />
 
 				</Route>
 			</Routes>
