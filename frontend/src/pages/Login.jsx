@@ -27,7 +27,7 @@ const Login = () => {
 	};
 
 	return (
-		<div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 px-4'>
+		<div className='min-h-[400px] flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 px-4'>
 			<div className='w-full max-w-md'>
 				{/* Card */}
 				<div className='bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 space-y-8'>

@@ -67,7 +67,7 @@ const CountryCard = ({
 
 	return (
 		<div className='relative flex flex-col'>
-			<div className='relative'>
+			<div className='relative group'>
 				<img
 					ref={imgRef}
 					src={imageSrc}
@@ -78,11 +78,10 @@ const CountryCard = ({
 				{user && (
 					<button
 						onClick={handleFavoriteClick}
-						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition'>
+						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition opacity-0 group-hover:opacity-100'>
 						<IoIosHeart
-							className={`w-6 h-6 cursor-pointer ${
-								favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
-							}`}
+							className={`w-6 h-6 cursor-pointer ${favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
+								}`}
 						/>
 					</button>
 				)}

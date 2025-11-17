@@ -91,5 +91,6 @@
   "logout": "Logout",
   "login_description": "Log in to your account",
   "welcome": "Welcome",
-  "login_failed": "Login failed"
+  "login_failed": "Login failed",
+  "back": "Back"
 }
