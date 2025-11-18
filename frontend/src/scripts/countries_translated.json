@@ -1,1239 +1,15 @@
 [
   {
-    "name": "Lithuania",
-    "officialName": "Republic of Lithuania",
-    "name_vi": "Lithuania",
-    "officialName_vi": "Cộng hòa Litva "
-  },
-  {
-    "name": "Chile",
-    "officialName": "Republic of Chile",
-    "name_vi": "Chi Lê",
-    "officialName_vi": "Cộng hòa Chile"
-  },
-  {
-    "name": "Benin",
-    "officialName": "Republic of Benin",
-    "name_vi": "Benin",
-    "officialName_vi": "Cộng hòa Benin"
-  },
-  {
-    "name": "Cyprus",
-    "officialName": "Republic of Cyprus",
-    "name_vi": "Cộng hòa Síp",
-    "officialName_vi": "Cộng hòa Síp"
-  },
-  {
-    "name": "Ghana",
-    "officialName": "Republic of Ghana",
-    "name_vi": "Ghana",
-    "officialName_vi": "Cộng hòa Ghana"
-  },
-  {
-    "name": "Belgium",
-    "officialName": "Kingdom of Belgium",
-    "name_vi": "Bỉ",
-    "officialName_vi": "Vương quốc Bỉ"
-  },
-  {
-    "name": "Cuba",
-    "officialName": "Republic of Cuba",
-    "name_vi": "Cuba",
-    "officialName_vi": "Cộng hòa Cuba"
-  },
-  {
-    "name": "Andorra",
-    "officialName": "Principality of Andorra",
-    "name_vi": "Andorra",
-    "officialName_vi": "Công quốc Andorra"
-  },
-  {
-    "name": "Falkland Islands",
-    "officialName": "Falkland Islands",
-    "name_vi": "Quần đảo Falkland",
-    "officialName_vi": "Quần đảo Falkland"
-  },
-  {
-    "name": "Georgia",
-    "officialName": "Georgia",
-    "name_vi": "Georgia",
-    "officialName_vi": "Georgia"
-  },
-  {
-    "name": "Argentina",
-    "officialName": "Argentine Republic",
-    "name_vi": "Argentina",
-    "officialName_vi": "Cộng hòa Argentina"
-  },
-  {
-    "name": "Uzbekistan",
-    "officialName": "Republic of Uzbekistan",
-    "name_vi": "Uzbekistan",
-    "officialName_vi": "Cộng hòa Uzbekistan;"
-  },
-  {
-    "name": "Belize",
-    "officialName": "Belize",
-    "name_vi": "Belize",
-    "officialName_vi": "Belize"
-  },
-  {
-    "name": "El Salvador",
-    "officialName": "Republic of El Salvador",
-    "name_vi": "El Salvador",
-    "officialName_vi": "Cộng hòa El Salvador"
-  },
-  {
-    "name": "Latvia",
-    "officialName": "Republic of Latvia",
-    "name_vi": "Latvia",
-    "officialName_vi": "Cộng hòa Latvia;"
-  },
-  {
-    "name": "Ivory Coast",
-    "officialName": "Republic of Côte d'Ivoire",
-    "name_vi": "Bờ Biển Ngà",
-    "officialName_vi": "Cộng hòa Côte d 'Ivoire"
-  },
-  {
-    "name": "Republic of the Congo",
-    "officialName": "Republic of the Congo",
-    "name_vi": "Cộng hòa Congo",
-    "officialName_vi": "Cộng hòa Congo"
-  },
-  {
-    "name": "Bangladesh",
-    "officialName": "People's Republic of Bangladesh",
-    "name_vi": "Bangladesh",
-    "officialName_vi": "Cộng hòa Nhân dân Bangladesh"
-  },
-  {
-    "name": "Northern Mariana Islands",
-    "officialName": "Commonwealth of the Northern Mariana Islands",
-    "name_vi": "Quần đảo Bắc Mariana",
-    "officialName_vi": "Khối thịnh vượng chung Quần đảo Bắc Mariana"
-  },
-  {
-    "name": "France",
-    "officialName": "French Republic",
-    "name_vi": "Pháp",
-    "officialName_vi": "Pháp"
-  },
-  {
-    "name": "Palau",
-    "officialName": "Republic of Palau",
-    "name_vi": "Palau",
-    "officialName_vi": "Cộng hòa Palau"
-  },
-  {
     "name": "Afghanistan",
     "officialName": "Islamic Republic of Afghanistan",
     "name_vi": "Afghanistan",
     "officialName_vi": "Cộng hòa Hồi giáo Afghanistan"
   },
   {
-    "name": "New Caledonia",
-    "officialName": "New Caledonia",
-    "name_vi": "New Caledonia",
-    "officialName_vi": "New Caledonia"
-  },
-  {
-    "name": "Turkmenistan",
-    "officialName": "Turkmenistan",
-    "name_vi": "Turkmenistan",
-    "officialName_vi": "Turkmenistan"
-  },
-  {
-    "name": "Ethiopia",
-    "officialName": "Federal Democratic Republic of Ethiopia",
-    "name_vi": "Ethiopia",
-    "officialName_vi": "Cộng hòa Dân chủ Liên bang Ethiopia"
-  },
-  {
-    "name": "Montserrat",
-    "officialName": "Montserrat",
-    "name_vi": "Montserrat",
-    "officialName_vi": "Montserrat"
-  },
-  {
-    "name": "Jordan",
-    "officialName": "Hashemite Kingdom of Jordan",
-    "name_vi": "Jordan",
-    "officialName_vi": "Vương quốc Hashemite Jordan"
-  },
-  {
-    "name": "Bulgaria",
-    "officialName": "Republic of Bulgaria",
-    "name_vi": "Bulgary",
-    "officialName_vi": "Cộng hòa Bulgaria;"
-  },
-  {
-    "name": "Saint Lucia",
-    "officialName": "Saint Lucia",
-    "name_vi": "Saint Lucia",
-    "officialName_vi": "Saint Lucia"
-  },
-  {
-    "name": "Senegal",
-    "officialName": "Republic of Senegal",
-    "name_vi": "Senegal",
-    "officialName_vi": "Cộng hòa Senegal"
-  },
-  {
-    "name": "Uruguay",
-    "officialName": "Oriental Republic of Uruguay",
-    "name_vi": "Uruguay",
-    "officialName_vi": "Cộng hòa phương Đông Uruguay"
-  },
-  {
-    "name": "Tanzania",
-    "officialName": "United Republic of Tanzania",
-    "name_vi": "Tanzania",
-    "officialName_vi": "Cộng hòa Tanzania"
-  },
-  {
-    "name": "Sudan",
-    "officialName": "Republic of the Sudan",
-    "name_vi": "Sudan",
-    "officialName_vi": "Cộng hòa Sudan"
-  },
-  {
-    "name": "Philippines",
-    "officialName": "Republic of the Philippines",
-    "name_vi": "Philippines",
-    "officialName_vi": "Cộng Hòa Philippin"
-  },
-  {
-    "name": "Chad",
-    "officialName": "Republic of Chad",
-    "name_vi": "Chad",
-    "officialName_vi": "Cộng hòa Chad"
-  },
-  {
-    "name": "Guinea-Bissau",
-    "officialName": "Republic of Guinea-Bissau",
-    "name_vi": "Guinea-Bissau",
-    "officialName_vi": "Cộng hòa Guinea-Bissau"
-  },
-  {
-    "name": "Isle of Man",
-    "officialName": "Isle of Man",
-    "name_vi": "Đảo Man",
-    "officialName_vi": "Đảo Man"
-  },
-  {
-    "name": "Sierra Leone",
-    "officialName": "Republic of Sierra Leone",
-    "name_vi": "Sierra Leone",
-    "officialName_vi": "Cộng hòa Sierra Leone"
-  },
-  {
-    "name": "Vanuatu",
-    "officialName": "Republic of Vanuatu",
-    "name_vi": "Vanuatu",
-    "officialName_vi": "Cộng hòa Vanuatu"
-  },
-  {
-    "name": "Rwanda",
-    "officialName": "Republic of Rwanda",
-    "name_vi": "Rwanda",
-    "officialName_vi": "Cộng hòa Rwanda"
-  },
-  {
-    "name": "Kyrgyzstan",
-    "officialName": "Kyrgyz Republic",
-    "name_vi": "Kyrgyzstan",
-    "officialName_vi": "Cộng hòa Kyrgyz"
-  },
-  {
-    "name": "Comoros",
-    "officialName": "Union of the Comoros",
-    "name_vi": "Comoros",
-    "officialName_vi": "Liên minh Comoros"
-  },
-  {
-    "name": "Cape Verde",
-    "officialName": "Republic of Cabo Verde",
-    "name_vi": "Cape Verde",
-    "officialName_vi": "Cộng hòa Cabo Verde"
-  },
-  {
-    "name": "Moldova",
-    "officialName": "Republic of Moldova",
-    "name_vi": "Moldova",
-    "officialName_vi": "Cộng hòa Moldova;"
-  },
-  {
-    "name": "United Arab Emirates",
-    "officialName": "United Arab Emirates",
-    "name_vi": "Các tiểu vương quốc Ả Rập thống nhất",
-    "officialName_vi": "Các tiểu vương quốc Ả Rập thống nhất"
-  },
-  {
-    "name": "Antarctica",
-    "officialName": "Antarctica",
-    "name_vi": "Antarctica",
-    "officialName_vi": "Antarctica"
-  },
-  {
-    "name": "Kosovo",
-    "officialName": "Republic of Kosovo",
-    "name_vi": "Kosovo",
-    "officialName_vi": "Cộng hòa Kosovo"
-  },
-  {
-    "name": "Togo",
-    "officialName": "Togolese Republic",
-    "name_vi": "Togo",
-    "officialName_vi": "Cộng hòa Togo"
-  },
-  {
-    "name": "Palestine",
-    "officialName": "State of Palestine",
-    "name_vi": "Palestine",
-    "officialName_vi": "Nhà nước Palestine"
-  },
-  {
-    "name": "United States",
-    "officialName": "United States of America",
-    "name_vi": "Hoa Kỳ",
-    "officialName_vi": "Hợp chủng quốc Hoa Kỳ"
-  },
-  {
-    "name": "Venezuela",
-    "officialName": "Bolivarian Republic of Venezuela",
-    "name_vi": "Venezuela",
-    "officialName_vi": "Cộng hòa Bolivar Venezuela"
-  },
-  {
-    "name": "Mayotte",
-    "officialName": "Department of Mayotte",
-    "name_vi": "Mayotte",
-    "officialName_vi": "Tỉnh Mayotte"
-  },
-  {
-    "name": "Timor-Leste",
-    "officialName": "Democratic Republic of Timor-Leste",
-    "name_vi": "Timor-Leste",
-    "officialName_vi": "Cộng hòa Dân chủ Timor-Leste"
-  },
-  {
-    "name": "Pitcairn Islands",
-    "officialName": "Pitcairn Group of Islands",
-    "name_vi": "Quần đảo Pitcairn",
-    "officialName_vi": "Nhóm đảo Pitcairn"
-  },
-  {
-    "name": "Saint Pierre and Miquelon",
-    "officialName": "Saint Pierre and Miquelon",
-    "name_vi": "Saint Pierre và Miquelon",
-    "officialName_vi": "Saint Pierre và Miquelon"
-  },
-  {
-    "name": "Solomon Islands",
-    "officialName": "Solomon Islands",
-    "name_vi": "Quần đảo Solomon",
-    "officialName_vi": "Quần đảo Solomon"
-  },
-  {
-    "name": "Ecuador",
-    "officialName": "Republic of Ecuador",
-    "name_vi": "Ecuador",
-    "officialName_vi": "Cộng hòa Ecuador"
-  },
-  {
-    "name": "Tonga",
-    "officialName": "Kingdom of Tonga",
-    "name_vi": "Tonga",
-    "officialName_vi": "Vương quốc Tonga"
-  },
-  {
-    "name": "Central African Republic",
-    "officialName": "Central African Republic",
-    "name_vi": "Cộng hòa Trung Phi",
-    "officialName_vi": "Cộng hòa Trung Phi"
-  },
-  {
-    "name": "Malta",
-    "officialName": "Republic of Malta",
-    "name_vi": "Malta",
-    "officialName_vi": "Cộng hòa Malta"
-  },
-  {
-    "name": "Greece",
-    "officialName": "Hellenic Republic",
-    "name_vi": "Hy Lạp",
-    "officialName_vi": "Cộng hòa Hellenic"
-  },
-  {
-    "name": "San Marino",
-    "officialName": "Republic of San Marino",
-    "name_vi": "San Marino",
-    "officialName_vi": "Cộng hòa San Marino"
-  },
-  {
-    "name": "Austria",
-    "officialName": "Republic of Austria",
-    "name_vi": "Áo",
-    "officialName_vi": "Cộng hòa Áo"
-  },
-  {
-    "name": "Czechia",
-    "officialName": "Czech Republic",
-    "name_vi": "Séc",
-    "officialName_vi": "Cộng hòa Séc"
-  },
-  {
-    "name": "Niue",
-    "officialName": "Niue",
-    "name_vi": "Niue",
-    "officialName_vi": "Niue"
-  },
-  {
-    "name": "Nigeria",
-    "officialName": "Federal Republic of Nigeria",
-    "name_vi": "Nigeria",
-    "officialName_vi": "Cộng hòa Liên bang Nigeria"
-  },
-  {
-    "name": "Caribbean Netherlands",
-    "officialName": "Bonaire, Sint Eustatius and Saba",
-    "name_vi": "Caribe thuộc Hà Lan",
-    "officialName_vi": "Bonaire, Sint Eustatius và Saba"
-  },
-  {
-    "name": "Qatar",
-    "officialName": "State of Qatar",
-    "name_vi": "Qatar",
-    "officialName_vi": "Nhà nước Qatar"
-  },
-  {
-    "name": "Wallis and Futuna",
-    "officialName": "Territory of the Wallis and Futuna Islands",
-    "name_vi": "Wallis và Futuna",
-    "officialName_vi": "Lãnh thổ Quần đảo Wallis và Futuna"
-  },
-  {
-    "name": "Saint Kitts and Nevis",
-    "officialName": "Federation of Saint Christopher and Nevis",
-    "name_vi": "Saint Kitts và Nevis",
-    "officialName_vi": "Liên bang Saint Christopher và Nevis"
-  },
-  {
-    "name": "Guatemala",
-    "officialName": "Republic of Guatemala",
-    "name_vi": "Guatemala",
-    "officialName_vi": "Cộng hòa Guatemala"
-  },
-  {
-    "name": "Tunisia",
-    "officialName": "Tunisian Republic",
-    "name_vi": "Tunisia",
-    "officialName_vi": "Cộng hòa Tunisia"
-  },
-  {
-    "name": "Bhutan",
-    "officialName": "Kingdom of Bhutan",
-    "name_vi": "Bhutan",
-    "officialName_vi": "Vương quốc Bhutan"
-  },
-  {
-    "name": "Macau",
-    "officialName": "Macao Special Administrative Region of the People's Republic of China",
-    "name_vi": "Ma Cao",
-    "officialName_vi": "đặc khu hành chính macao"
-  },
-  {
-    "name": "Saint Helena, Ascension and Tristan da Cunha",
-    "officialName": "Saint Helena, Ascension and Tristan da Cunha",
-    "name_vi": "Saint Helena, Ascension và Tristan da Cunha",
-    "officialName_vi": "Saint Helena, Ascension và Tristan da Cunha"
-  },
-  {
-    "name": "Samoa",
-    "officialName": "Independent State of Samoa",
-    "name_vi": "Samoa",
-    "officialName_vi": "Nhà nước Samoa độc lập"
-  },
-  {
-    "name": "Israel",
-    "officialName": "State of Israel",
-    "name_vi": "Israel",
-    "officialName_vi": "NHÀ NƯỚC ISRAEL"
-  },
-  {
-    "name": "Somalia",
-    "officialName": "Federal Republic of Somalia",
-    "name_vi": "Somalia",
-    "officialName_vi": "Cộng hòa Liên bang Somalia"
-  },
-  {
-    "name": "Tajikistan",
-    "officialName": "Republic of Tajikistan",
-    "name_vi": "Tajikistan",
-    "officialName_vi": "Cộng hòa Tajikistan;"
-  },
-  {
-    "name": "Western Sahara",
-    "officialName": "Sahrawi Arab Democratic Republic",
-    "name_vi": "Tây Sahara",
-    "officialName_vi": "Cộng hòa Dân chủ Ả Rập Sahrawi"
-  },
-  {
-    "name": "Saint Barthélemy",
-    "officialName": "Collectivity of Saint Barthélemy",
-    "name_vi": "Saint Barthélemy",
-    "officialName_vi": "Cộng đồng Saint-Barthélemy"
-  },
-  {
-    "name": "Finland",
-    "officialName": "Republic of Finland",
-    "name_vi": "Phần Lan",
-    "officialName_vi": "- Cộng hoà Phần Lan."
-  },
-  {
-    "name": "Guernsey",
-    "officialName": "Bailiwick of Guernsey",
-    "name_vi": "Guernsey",
-    "officialName_vi": "Bailiwick của Guernsey"
-  },
-  {
-    "name": "Turks and Caicos Islands",
-    "officialName": "Turks and Caicos Islands",
-    "name_vi": "Quần đảo Turks và Caicos",
-    "officialName_vi": "Quần đảo Turks và Caicos"
-  },
-  {
-    "name": "Lesotho",
-    "officialName": "Kingdom of Lesotho",
-    "name_vi": "Lesotho",
-    "officialName_vi": "Vương quốc Lesotho"
-  },
-  {
-    "name": "Russia",
-    "officialName": "Russian Federation",
-    "name_vi": "Nga",
-    "officialName_vi": "Liên bang Nga"
-  },
-  {
-    "name": "Azerbaijan",
-    "officialName": "Republic of Azerbaijan",
-    "name_vi": "Azerbaijan",
-    "officialName_vi": "Cộng hòa Azerbaijan;"
-  },
-  {
-    "name": "Ireland",
-    "officialName": "Republic of Ireland",
-    "name_vi": "Ailen",
-    "officialName_vi": "Cộng hòa Ireland"
-  },
-  {
-    "name": "Jamaica",
-    "officialName": "Jamaica",
-    "name_vi": "Jamaica",
-    "officialName_vi": "Jamaica"
-  },
-  {
-    "name": "Eswatini",
-    "officialName": "Kingdom of Eswatini",
-    "name_vi": "Eswatini",
-    "officialName_vi": "Vương quốc Swaziland"
-  },
-  {
-    "name": "Saudi Arabia",
-    "officialName": "Kingdom of Saudi Arabia",
-    "name_vi": "Ả Rập Saudi",
-    "officialName_vi": "Vương quốc Ả Rập Xê Út"
-  },
-  {
-    "name": "North Korea",
-    "officialName": "Democratic People's Republic of Korea",
-    "name_vi": "Bắc Triều Tiên",
-    "officialName_vi": "Cộng hòa Dân chủ Nhân dân Triều Tiên"
-  },
-  {
-    "name": "Gabon",
-    "officialName": "Gabonese Republic",
-    "name_vi": "Gabon",
-    "officialName_vi": "Cộng hòa Gabon"
-  },
-  {
-    "name": "Micronesia",
-    "officialName": "Federated States of Micronesia",
-    "name_vi": "Micronesia",
-    "officialName_vi": "Liên bang Micronesia"
-  },
-  {
-    "name": "Equatorial Guinea",
-    "officialName": "Republic of Equatorial Guinea",
-    "name_vi": "Guinea xích đạo",
-    "officialName_vi": "Cộng hòa Guinea Xích đạo"
-  },
-  {
-    "name": "Brazil",
-    "officialName": "Federative Republic of Brazil",
-    "name_vi": "Brazil",
-    "officialName_vi": "Cộng hòa Liên bang Brazil"
-  },
-  {
-    "name": "Greenland",
-    "officialName": "Greenland",
-    "name_vi": "Greenland",
-    "officialName_vi": "Greenland"
-  },
-  {
-    "name": "Mexico",
-    "officialName": "United Mexican States",
-    "name_vi": "Mexico",
-    "officialName_vi": "Hoa Kỳ Mexico"
-  },
-  {
-    "name": "Nauru",
-    "officialName": "Republic of Nauru",
-    "name_vi": "Nauru",
-    "officialName_vi": "Cộng hòa Nauru"
-  },
-  {
-    "name": "Cambodia",
-    "officialName": "Kingdom of Cambodia",
-    "name_vi": "Cam-pu-chia",
-    "officialName_vi": "Vương quốc Campuchia"
-  },
-  {
-    "name": "Angola",
-    "officialName": "Republic of Angola",
-    "name_vi": "Angola",
-    "officialName_vi": "Cộng hòa Angola"
-  },
-  {
-    "name": "Italy",
-    "officialName": "Italian Republic",
-    "name_vi": "Ý",
-    "officialName_vi": "Ý"
-  },
-  {
-    "name": "Iran",
-    "officialName": "Islamic Republic of Iran",
-    "name_vi": "Iran",
-    "officialName_vi": "Cộng hòa Hồi giáo Iran"
-  },
-  {
-    "name": "Aruba",
-    "officialName": "Aruba",
-    "name_vi": "Aruba",
-    "officialName_vi": "Aruba"
-  },
-  {
-    "name": "Botswana",
-    "officialName": "Republic of Botswana",
-    "name_vi": "Botswana",
-    "officialName_vi": "Cộng hòa Botswana"
-  },
-  {
-    "name": "Cocos (Keeling) Islands",
-    "officialName": "Territory of the Cocos (Keeling) Islands",
-    "name_vi": "Quần đảo Cocos (Keeling)",
-    "officialName_vi": "Lãnh thổ Quần đảo Cocos (Keeling)"
-  },
-  {
-    "name": "Egypt",
-    "officialName": "Arab Republic of Egypt",
-    "name_vi": "Ai Cập",
-    "officialName_vi": "Cộng hòa Ả Rập Ai Cập"
-  },
-  {
-    "name": "Australia",
-    "officialName": "Commonwealth of Australia",
-    "name_vi": "Australia",
-    "officialName_vi": "LIÊN BANG ÚC"
-  },
-  {
-    "name": "Vatican City",
-    "officialName": "Vatican City State",
-    "name_vi": "Vatican City",
-    "officialName_vi": "Thành Vatican"
-  },
-  {
-    "name": "Myanmar",
-    "officialName": "Republic of the Union of Myanmar",
-    "name_vi": "Myanmar",
-    "officialName_vi": "Cộng hòa Liên bang Myanmar "
-  },
-  {
-    "name": "Réunion",
-    "officialName": "Réunion Island",
-    "name_vi": "Name",
-    "officialName_vi": "Đảo Réunion"
-  },
-  {
-    "name": "Anguilla",
-    "officialName": "Anguilla",
-    "name_vi": "Anguilla",
-    "officialName_vi": "Anguilla"
-  },
-  {
-    "name": "Portugal",
-    "officialName": "Portuguese Republic",
-    "name_vi": "Bồ Đào Nha",
-    "officialName_vi": "Cộng hòa Bồ Đào Nha"
-  },
-  {
-    "name": "Liberia",
-    "officialName": "Republic of Liberia",
-    "name_vi": "Liberia",
-    "officialName_vi": "CỘNG HOÀ LIBERIA"
-  },
-  {
-    "name": "Zambia",
-    "officialName": "Republic of Zambia",
-    "name_vi": "Zambia",
-    "officialName_vi": "Cộng hòa Zambia"
-  },
-  {
-    "name": "Denmark",
-    "officialName": "Kingdom of Denmark",
-    "name_vi": "Đan Mạch",
-    "officialName_vi": "- Vương quốc Đan Mạch."
-  },
-  {
-    "name": "Syria",
-    "officialName": "Syrian Arab Republic",
-    "name_vi": "Syria",
-    "officialName_vi": "Cộng hòa Ả Rập Syria"
-  },
-  {
-    "name": "Slovakia",
-    "officialName": "Slovak Republic",
-    "name_vi": "Slovakia",
-    "officialName_vi": "Cộng hòa Slovak"
-  },
-  {
     "name": "Albania",
     "officialName": "Republic of Albania",
     "name_vi": "Albania",
-    "officialName_vi": "Cộng hòa Albania;"
-  },
-  {
-    "name": "Curaçao",
-    "officialName": "Country of Curaçao",
-    "name_vi": "Curacao",
-    "officialName_vi": "Quốc gia Curaçao"
-  },
-  {
-    "name": "São Tomé and Príncipe",
-    "officialName": "Democratic Republic of São Tomé and Príncipe",
-    "name_vi": "São Tomé và Príncipe",
-    "officialName_vi": "Cộng hòa Dân chủ São Tomé và Príncipe"
-  },
-  {
-    "name": "Bahamas",
-    "officialName": "Commonwealth of the Bahamas",
-    "name_vi": "Bahamas",
-    "officialName_vi": "Khối thịnh vượng chung Bahamas"
-  },
-  {
-    "name": "Bolivia",
-    "officialName": "Plurinational State of Bolivia",
-    "name_vi": "Bolivia",
-    "officialName_vi": "Nhà nước đa quốc gia Bolivia"
-  },
-  {
-    "name": "British Indian Ocean Territory",
-    "officialName": "British Indian Ocean Territory",
-    "name_vi": "Lãnh thổ Ấn Độ Dương thuộc Anh",
-    "officialName_vi": "Lãnh thổ Ấn Độ Dương thuộc Anh"
-  },
-  {
-    "name": "Germany",
-    "officialName": "Federal Republic of Germany",
-    "name_vi": "Đức",
-    "officialName_vi": "Đức"
-  },
-  {
-    "name": "Estonia",
-    "officialName": "Republic of Estonia",
-    "name_vi": "Estonia",
-    "officialName_vi": "Cộng hòa Estonia;"
-  },
-  {
-    "name": "Eritrea",
-    "officialName": "State of Eritrea",
-    "name_vi": "Eritrea",
-    "officialName_vi": "Bang Eritrea"
-  },
-  {
-    "name": "American Samoa",
-    "officialName": "American Samoa",
-    "name_vi": "Samoa thuộc Mỹ",
-    "officialName_vi": "Samoa thuộc Mỹ"
-  },
-  {
-    "name": "Netherlands",
-    "officialName": "Kingdom of the Netherlands",
-    "name_vi": "Hà Lan",
-    "officialName_vi": "Vương quốc Hà Lan"
-  },
-  {
-    "name": "Mali",
-    "officialName": "Republic of Mali",
-    "name_vi": "Mali",
-    "officialName_vi": "Cộng hòa Mali"
-  },
-  {
-    "name": "Kuwait",
-    "officialName": "State of Kuwait",
-    "name_vi": "Kuwait",
-    "officialName_vi": "Bang Kuwait"
-  },
-  {
-    "name": "Peru",
-    "officialName": "Republic of Peru",
-    "name_vi": "Peru",
-    "officialName_vi": "Cộng hòa Peru"
-  },
-  {
-    "name": "Libya",
-    "officialName": "State of Libya",
-    "name_vi": "Libya",
-    "officialName_vi": "Nhà nước Libya"
-  },
-  {
-    "name": "Burundi",
-    "officialName": "Republic of Burundi",
-    "name_vi": "Burundi",
-    "officialName_vi": "Cộng hòa Burundi"
-  },
-  {
-    "name": "Laos",
-    "officialName": "Lao People's Democratic Republic",
-    "name_vi": "Lào",
-    "officialName_vi": "Cộng hòa Dân chủ Nhân dân Lào"
-  },
-  {
-    "name": "Paraguay",
-    "officialName": "Republic of Paraguay",
-    "name_vi": "Paraguay",
-    "officialName_vi": "Cộng hòa Paraguay"
-  },
-  {
-    "name": "Montenegro",
-    "officialName": "Montenegro",
-    "name_vi": "Montenegro",
-    "officialName_vi": "Montenegro"
-  },
-  {
-    "name": "Hungary",
-    "officialName": "Hungary",
-    "name_vi": "Hungary",
-    "officialName_vi": "Hungary"
-  },
-  {
-    "name": "DR Congo",
-    "officialName": "Democratic Republic of the Congo",
-    "name_vi": "CHDC Congo",
-    "officialName_vi": "Cộng hòa dân chủ Công-gô"
-  },
-  {
-    "name": "South Sudan",
-    "officialName": "Republic of South Sudan",
-    "name_vi": "Nam Sudan",
-    "officialName_vi": "Cộng hòa Nam Sudan"
-  },
-  {
-    "name": "Cayman Islands",
-    "officialName": "Cayman Islands",
-    "name_vi": "Quần đảo Cayman",
-    "officialName_vi": "Quần đảo Cayman"
-  },
-  {
-    "name": "Lebanon",
-    "officialName": "Lebanese Republic",
-    "name_vi": "Li-băng",
-    "officialName_vi": "Cộng hòa Li-băng"
-  },
-  {
-    "name": "Morocco",
-    "officialName": "Kingdom of Morocco",
-    "name_vi": "Morocco",
-    "officialName_vi": "Vương quốc Ma-rốc"
-  },
-  {
-    "name": "North Macedonia",
-    "officialName": "Republic of North Macedonia",
-    "name_vi": "Bắc Macedonia",
-    "officialName_vi": "Cộng hòa Bắc Macedonia"
-  },
-  {
-    "name": "Åland Islands",
-    "officialName": "Åland Islands",
-    "name_vi": "Åland Quần đảo",
-    "officialName_vi": "Åland Quần đảo"
-  },
-  {
-    "name": "Nicaragua",
-    "officialName": "Republic of Nicaragua",
-    "name_vi": "Nicaragua",
-    "officialName_vi": "Cộng hòa Nicaragua"
-  },
-  {
-    "name": "Sri Lanka",
-    "officialName": "Democratic Socialist Republic of Sri Lanka",
-    "name_vi": "Sri Lanka",
-    "officialName_vi": "Cộng hòa xã hội chủ nghĩa dân chủ Sri Lanka"
-  },
-  {
-    "name": "Guinea",
-    "officialName": "Republic of Guinea",
-    "name_vi": "Guinea",
-    "officialName_vi": "Cộng hòa Guinea"
-  },
-  {
-    "name": "Guadeloupe",
-    "officialName": "Guadeloupe",
-    "name_vi": "Guadeloupe",
-    "officialName_vi": "Guadeloupe"
-  },
-  {
-    "name": "Heard Island and McDonald Islands",
-    "officialName": "Heard Island and McDonald Islands",
-    "name_vi": "Đảo Heard và quần đảo McDonald",
-    "officialName_vi": "Đảo Heard và quần đảo McDonald"
-  },
-  {
-    "name": "China",
-    "officialName": "People's Republic of China",
-    "name_vi": "Trung Quốc",
-    "officialName_vi": "Trung Hoa đại lục"
-  },
-  {
-    "name": "Bahrain",
-    "officialName": "Kingdom of Bahrain",
-    "name_vi": "Ba-ranh",
-    "officialName_vi": "Vương quốc Bahrain"
-  },
-  {
-    "name": "Marshall Islands",
-    "officialName": "Republic of the Marshall Islands",
-    "name_vi": "Quần đảo Marshall",
-    "officialName_vi": "Cộng hòa Đảo Marshall"
-  },
-  {
-    "name": "South Africa",
-    "officialName": "Republic of South Africa",
-    "name_vi": "Nam Phi",
-    "officialName_vi": "CỘNG HÒA NAM PHI"
-  },
-  {
-    "name": "Saint Vincent and the Grenadines",
-    "officialName": "Saint Vincent and the Grenadines",
-    "name_vi": "Saint Vincent và Grenadines",
-    "officialName_vi": "Saint Vincent và Grenadines"
-  },
-  {
-    "name": "Ukraine",
-    "officialName": "Ukraine",
-    "name_vi": "Ukraine",
-    "officialName_vi": "Ukraine"
-  },
-  {
-    "name": "Seychelles",
-    "officialName": "Republic of Seychelles",
-    "name_vi": "Seychelles",
-    "officialName_vi": "CỘNG HÒA SEYCHELLES"
-  },
-  {
-    "name": "Indonesia",
-    "officialName": "Republic of Indonesia",
-    "name_vi": "Indonesia",
-    "officialName_vi": "Cộng hoà Indonesia"
-  },
-  {
-    "name": "Dominican Republic",
-    "officialName": "Dominican Republic",
-    "name_vi": "Cộng hòa Dominica",
-    "officialName_vi": "Cộng hòa Dominica"
-  },
-  {
-    "name": "Malawi",
-    "officialName": "Republic of Malawi",
-    "name_vi": "Malawi",
-    "officialName_vi": "Cộng hòa Malawi"
-  },
-  {
-    "name": "Cameroon",
-    "officialName": "Republic of Cameroon",
-    "name_vi": "Cameroon",
-    "officialName_vi": "Cộng hòa Cameroon"
-  },
-  {
-    "name": "French Polynesia",
-    "officialName": "French Polynesia",
-    "name_vi": "Polynesia thuộc Pháp",
-    "officialName_vi": "Polynesia thuộc Pháp"
-  },
-  {
-    "name": "Kiribati",
-    "officialName": "Independent and Sovereign Republic of Kiribati",
-    "name_vi": "Kiribati",
-    "officialName_vi": "Cộng hòa Kiribati độc lập và có chủ quyền"
-  },
-  {
-    "name": "Madagascar",
-    "officialName": "Republic of Madagascar",
-    "name_vi": "Madagascar",
-    "officialName_vi": "Cộng hòa Madagascar"
-  },
-  {
-    "name": "Suriname",
-    "officialName": "Republic of Suriname",
-    "name_vi": "Suriname",
-    "officialName_vi": "Cộng hòa Suriname"
-  },
-  {
-    "name": "Fiji",
-    "officialName": "Republic of Fiji",
-    "name_vi": "Fiji",
-    "officialName_vi": "Cộng hòa Fiji"
-  },
-  {
-    "name": "Faroe Islands",
-    "officialName": "Faroe Islands",
-    "name_vi": "Quần đảo Faroe",
-    "officialName_vi": "Quần đảo Faroe"
-  },
-  {
-    "name": "Pakistan",
-    "officialName": "Islamic Republic of Pakistan",
-    "name_vi": "Pakistan",
-    "officialName_vi": "Cộng hòa Hồi giáo Pakistan"
-  },
-  {
-    "name": "Djibouti",
-    "officialName": "Republic of Djibouti",
-    "name_vi": "Djibouti",
-    "officialName_vi": "Cộng hòa Djibouti"
-  },
-  {
-    "name": "Gambia",
-    "officialName": "Republic of the Gambia",
-    "name_vi": "Gambia",
-    "officialName_vi": "Cộng hòa Gambia"
-  },
-  {
-    "name": "Mongolia",
-    "officialName": "Mongolia",
-    "name_vi": "Mông Cổ",
-    "officialName_vi": "Mông Cổ"
-  },
-  {
-    "name": "Zimbabwe",
-    "officialName": "Republic of Zimbabwe",
-    "name_vi": "Zimbabwe",
-    "officialName_vi": "Cộng hòa Zimbabwe"
-  },
-  {
-    "name": "Romania",
-    "officialName": "Romania",
-    "name_vi": "Romani",
-    "officialName_vi": "Romani"
-  },
-  {
-    "name": "Iceland",
-    "officialName": "Iceland",
-    "name_vi": "Iceland",
-    "officialName_vi": "Iceland"
-  },
-  {
-    "name": "Haiti",
-    "officialName": "Republic of Haiti",
-    "name_vi": "Haiti",
-    "officialName_vi": "Cộng hòa Haiti"
-  },
-  {
-    "name": "Costa Rica",
-    "officialName": "Republic of Costa Rica",
-    "name_vi": "Costa Rica",
-    "officialName_vi": "Cộng hòa Costa Rica"
-  },
-  {
-    "name": "Vietnam",
-    "officialName": "Socialist Republic of Vietnam",
-    "name_vi": "Việt Nam",
-    "officialName_vi": "Cộng hòa Xã hội chủ nghĩa Việt Nam"
-  },
-  {
-    "name": "Norfolk Island",
-    "officialName": "Territory of Norfolk Island",
-    "name_vi": "Đảo Norfolk",
-    "officialName_vi": "Lãnh thổ Đảo Norfolk"
-  },
-  {
-    "name": "Croatia",
-    "officialName": "Republic of Croatia",
-    "name_vi": "Croatia",
-    "officialName_vi": "Cộng hòa Croatia"
-  },
-  {
-    "name": "South Korea",
-    "officialName": "Republic of Korea",
-    "name_vi": "Hàn Quốc",
-    "officialName_vi": "Cộng hòa của Korea"
-  },
-  {
-    "name": "Canada",
-    "officialName": "Canada",
-    "name_vi": "Canada",
-    "officialName_vi": "Canada"
-  },
-  {
-    "name": "French Guiana",
-    "officialName": "Guiana",
-    "name_vi": "Guiana thuộc Pháp",
-    "officialName_vi": "guy-an"
-  },
-  {
-    "name": "Liechtenstein",
-    "officialName": "Principality of Liechtenstein",
-    "name_vi": "Liechtenstein",
-    "officialName_vi": "Công quốc Liechtenstein"
-  },
-  {
-    "name": "Puerto Rico",
-    "officialName": "Commonwealth of Puerto Rico",
-    "name_vi": "Puerto Rico",
-    "officialName_vi": "Khối thịnh vượng chung Puerto Rico"
-  },
-  {
-    "name": "Mauritius",
-    "officialName": "Republic of Mauritius",
-    "name_vi": "Mauritius",
-    "officialName_vi": "Cộng hòa Mauritius"
-  },
-  {
-    "name": "Tuvalu",
-    "officialName": "Tuvalu",
-    "name_vi": "Tuvalu",
-    "officialName_vi": "Tuvalu"
-  },
-  {
-    "name": "Saint Martin",
-    "officialName": "Saint Martin",
-    "name_vi": "Saint Martin",
-    "officialName_vi": "Saint Martin"
-  },
-  {
-    "name": "Monaco",
-    "officialName": "Principality of Monaco",
-    "name_vi": "Monaco",
-    "officialName_vi": "Thân vương quốc Monaco"
-  },
-  {
-    "name": "Papua New Guinea",
-    "officialName": "Independent State of Papua New Guinea",
-    "name_vi": "Papua New Guinea",
-    "officialName_vi": "Nhà nước độc lập Papua New Guinea"
-  },
-  {
-    "name": "South Georgia",
-    "officialName": "South Georgia and the South Sandwich Islands",
-    "name_vi": "Nam Georgia",
-    "officialName_vi": "Nam Georgia và quần đảo Nam Sandwich"
-  },
-  {
-    "name": "Kazakhstan",
-    "officialName": "Republic of Kazakhstan",
-    "name_vi": "Kazakhstan",
-    "officialName_vi": "Cộng hòa Kazakhstan;"
-  },
-  {
-    "name": "Malaysia",
-    "officialName": "Malaysia",
-    "name_vi": "Malaysia",
-    "officialName_vi": "Malaysia"
-  },
-  {
-    "name": "Uganda",
-    "officialName": "Republic of Uganda",
-    "name_vi": "Uganda",
-    "officialName_vi": "CỘNG HÒA UGANDA"
-  },
-  {
-    "name": "Grenada",
-    "officialName": "Grenada",
-    "name_vi": "Grenada",
-    "officialName_vi": "Grenada"
-  },
-  {
-    "name": "Cook Islands",
-    "officialName": "Cook Islands",
-    "name_vi": "Quần đảo Cook",
-    "officialName_vi": "Quần đảo Cook"
-  },
-  {
-    "name": "Maldives",
-    "officialName": "Republic of the Maldives",
-    "name_vi": "Maldives",
-    "officialName_vi": "Cộng hòa Maldives"
-  },
-  {
-    "name": "Singapore",
-    "officialName": "Republic of Singapore",
-    "name_vi": "Singapore",
-    "officialName_vi": "CỘNG HÒA SINGAPORE"
-  },
-  {
-    "name": "Yemen",
-    "officialName": "Republic of Yemen",
-    "name_vi": "Yemen",
-    "officialName_vi": "Cộng hòa Yemen"
-  },
-  {
-    "name": "Burkina Faso",
-    "officialName": "Burkina Faso",
-    "name_vi": "Burkina Faso",
-    "officialName_vi": "Burkina Faso"
-  },
-  {
-    "name": "United States Virgin Islands",
-    "officialName": "Virgin Islands of the United States",
-    "name_vi": "Quần đảo Virgin thuộc Hoa Kỳ",
-    "officialName_vi": "Quần đảo Virgin của Hoa Kỳ"
-  },
-  {
-    "name": "British Virgin Islands",
-    "officialName": "Virgin Islands",
-    "name_vi": "Quần đảo Virgin thuộc Anh",
-    "officialName_vi": "Quần đảo Virgin"
-  },
-  {
-    "name": "Panama",
-    "officialName": "Republic of Panama",
-    "name_vi": "Panama",
-    "officialName_vi": "Cộng hòa Panama"
-  },
-  {
-    "name": "Antigua and Barbuda",
-    "officialName": "Antigua and Barbuda",
-    "name_vi": "Antigua và Barbuda",
-    "officialName_vi": "Antigua và Barbuda"
-  },
-  {
-    "name": "Martinique",
-    "officialName": "Martinique",
-    "name_vi": "Martinique",
-    "officialName_vi": "Martinique"
-  },
-  {
-    "name": "Sweden",
-    "officialName": "Kingdom of Sweden",
-    "name_vi": "Thụy Điển",
-    "officialName_vi": "- Vương quốc Thuỵ Điển."
-  },
-  {
-    "name": "Thailand",
-    "officialName": "Kingdom of Thailand",
-    "name_vi": "Thái Lan",
-    "officialName_vi": "Vương quốc Thái Lan "
+    "officialName_vi": "Cộng hòa Albania"
   },
   {
     "name": "Algeria",
@@ -1242,214 +18,28 @@
     "officialName_vi": "Cộng hòa Dân chủ Nhân dân Algeria"
   },
   {
-    "name": "Jersey",
-    "officialName": "Bailiwick of Jersey",
-    "name_vi": "Trang phục",
-    "officialName_vi": "Địa hạt Jersey"
+    "name": "Andorra",
+    "officialName": "Principality of Andorra",
+    "name_vi": "Andorra",
+    "officialName_vi": "Thân vương quốc Andorra"
   },
   {
-    "name": "Mozambique",
-    "officialName": "Republic of Mozambique",
-    "name_vi": "Mozambique",
-    "officialName_vi": "Cộng hòa Mozambique"
+    "name": "Angola",
+    "officialName": "Republic of Angola",
+    "name_vi": "Angola",
+    "officialName_vi": "Cộng hòa Angola"
   },
   {
-    "name": "Namibia",
-    "officialName": "Republic of Namibia",
-    "name_vi": "Namibia",
-    "officialName_vi": "Cộng hòa Namibia"
+    "name": "Antigua and Barbuda",
+    "officialName": "Antigua and Barbuda",
+    "name_vi": "Antigua và Barbuda",
+    "officialName_vi": "Antigua và Barbuda"
   },
   {
-    "name": "Barbados",
-    "officialName": "Barbados",
-    "name_vi": "Barbados",
-    "officialName_vi": "Barbados"
-  },
-  {
-    "name": "Honduras",
-    "officialName": "Republic of Honduras",
-    "name_vi": "Honduras",
-    "officialName_vi": "Cộng hòa Honduras"
-  },
-  {
-    "name": "Svalbard and Jan Mayen",
-    "officialName": "Svalbard og Jan Mayen",
-    "name_vi": "Quần đảo Svalbard và Jan Mayen",
-    "officialName_vi": "Svalbard và Jan Mayen"
-  },
-  {
-    "name": "Guam",
-    "officialName": "Guam",
-    "name_vi": "Guam",
-    "officialName_vi": "Guam"
-  },
-  {
-    "name": "Sint Maarten",
-    "officialName": "Sint Maarten",
-    "name_vi": "Sint Maarten",
-    "officialName_vi": "Sint Maarten"
-  },
-  {
-    "name": "United States Minor Outlying Islands",
-    "officialName": "United States Minor Outlying Islands",
-    "name_vi": "Các tiểu đảo xa của Hoa Kỳ",
-    "officialName_vi": "Các tiểu đảo xa của Hoa Kỳ"
-  },
-  {
-    "name": "Hong Kong",
-    "officialName": "Hong Kong Special Administrative Region of the People's Republic of China",
-    "name_vi": "Hong Kong",
-    "officialName_vi": "Đặc khu hành chính hồng kong"
-  },
-  {
-    "name": "Bermuda",
-    "officialName": "Bermuda",
-    "name_vi": "Bermuda",
-    "officialName_vi": "Bermuda"
-  },
-  {
-    "name": "Belarus",
-    "officialName": "Republic of Belarus",
-    "name_vi": "Belarus",
-    "officialName_vi": "Cộng hòa Belarus;"
-  },
-  {
-    "name": "Japan",
-    "officialName": "Japan",
-    "name_vi": "Nhật Bản",
-    "officialName_vi": "Nhật Bản"
-  },
-  {
-    "name": "Bosnia and Herzegovina",
-    "officialName": "Bosnia and Herzegovina",
-    "name_vi": "Bosnia và Herzegovina",
-    "officialName_vi": "Bosnia và Herzegovina"
-  },
-  {
-    "name": "French Southern and Antarctic Lands",
-    "officialName": "Territory of the French Southern and Antarctic Lands",
-    "name_vi": "Vùng đất phía Nam và Nam Cực thuộc Pháp",
-    "officialName_vi": "Lãnh thổ của Vùng đất phía Nam và Nam Cực thuộc Pháp"
-  },
-  {
-    "name": "Gibraltar",
-    "officialName": "Gibraltar",
-    "name_vi": "Gibraltar",
-    "officialName_vi": "Gibraltar"
-  },
-  {
-    "name": "New Zealand",
-    "officialName": "New Zealand",
-    "name_vi": "New Zealand",
-    "officialName_vi": "New Zealand"
-  },
-  {
-    "name": "Kenya",
-    "officialName": "Republic of Kenya",
-    "name_vi": "Kenya",
-    "officialName_vi": "Cộng hòa Kenya"
-  },
-  {
-    "name": "Tokelau",
-    "officialName": "Tokelau",
-    "name_vi": "Tokelau",
-    "officialName_vi": "Tokelau"
-  },
-  {
-    "name": "Nepal",
-    "officialName": "Federal Democratic Republic of Nepal",
-    "name_vi": "Nepal",
-    "officialName_vi": "Cộng hòa Dân chủ Liên bang Nepal"
-  },
-  {
-    "name": "Trinidad and Tobago",
-    "officialName": "Republic of Trinidad and Tobago",
-    "name_vi": "Trinidad và Tobago",
-    "officialName_vi": "Cộng hòa Trinidad và Tobago"
-  },
-  {
-    "name": "Guyana",
-    "officialName": "Co-operative Republic of Guyana",
-    "name_vi": "Guyana",
-    "officialName_vi": "Hợp tác xã Cộng hòa Guyana"
-  },
-  {
-    "name": "India",
-    "officialName": "Republic of India",
-    "name_vi": "Ấn Độ",
-    "officialName_vi": "Ấn Độ"
-  },
-  {
-    "name": "Luxembourg",
-    "officialName": "Grand Duchy of Luxembourg",
-    "name_vi": "Luxembourg",
-    "officialName_vi": "Đại công quốc Luxembourg"
-  },
-  {
-    "name": "Taiwan",
-    "officialName": "Republic of China (Taiwan)",
-    "name_vi": "Đài Loan",
-    "officialName_vi": "Trung Hoa Dân Quốc (Đài Loan)"
-  },
-  {
-    "name": "Oman",
-    "officialName": "Sultanate of Oman",
-    "name_vi": "Oman",
-    "officialName_vi": "Vương quốc Hồi giáo Oman"
-  },
-  {
-    "name": "Norway",
-    "officialName": "Kingdom of Norway",
-    "name_vi": "Na Uy",
-    "officialName_vi": "- Vương quốc Na-uy."
-  },
-  {
-    "name": "Switzerland",
-    "officialName": "Swiss Confederation",
-    "name_vi": "Thụy Sỹ",
-    "officialName_vi": "Liên bang Thụy Sĩ"
-  },
-  {
-    "name": "Dominica",
-    "officialName": "Commonwealth of Dominica",
-    "name_vi": "Dominica",
-    "officialName_vi": "Khối thịnh vượng chung Dominica"
-  },
-  {
-    "name": "Spain",
-    "officialName": "Kingdom of Spain",
-    "name_vi": "Tây Ban Nha",
-    "officialName_vi": "Tây Ban Nha"
-  },
-  {
-    "name": "Iraq",
-    "officialName": "Republic of Iraq",
-    "name_vi": "Iraq",
-    "officialName_vi": "Cộng hòa Iraq"
-  },
-  {
-    "name": "Serbia",
-    "officialName": "Republic of Serbia",
-    "name_vi": "Serbia",
-    "officialName_vi": "Cộng hòa Serbia"
-  },
-  {
-    "name": "United Kingdom",
-    "officialName": "United Kingdom of Great Britain and Northern Ireland",
-    "name_vi": "Vương quốc Anh",
-    "officialName_vi": "Vương quốc Liên hiệp Anh và Bắc Ireland"
-  },
-  {
-    "name": "Slovenia",
-    "officialName": "Republic of Slovenia",
-    "name_vi": "Slovenia",
-    "officialName_vi": "Cộng hòa Slovenia"
-  },
-  {
-    "name": "Colombia",
-    "officialName": "Republic of Colombia",
-    "name_vi": "Colombia",
-    "officialName_vi": "Cộng hòa Colombia"
+    "name": "Argentina",
+    "officialName": "Argentine Republic",
+    "name_vi": "Argentina",
+    "officialName_vi": "Cộng hòa Argentina"
   },
   {
     "name": "Armenia",
@@ -1458,22 +48,604 @@
     "officialName_vi": "Cộng hòa Armenia"
   },
   {
-    "name": "Christmas Island",
-    "officialName": "Territory of Christmas Island",
-    "name_vi": "Đảo Christmas",
-    "officialName_vi": "Lãnh thổ Đảo Christmas"
+    "name": "Australia",
+    "officialName": "Commonwealth of Australia",
+    "name_vi": "Úc",
+    "officialName_vi": "Thịnh vượng chung Úc"
   },
   {
-    "name": "Niger",
-    "officialName": "Republic of Niger",
-    "name_vi": "Niger",
-    "officialName_vi": "Cộng hòa Niger"
+    "name": "Austria",
+    "officialName": "Republic of Austria",
+    "name_vi": "Áo",
+    "officialName_vi": "Cộng hòa Áo"
+  },
+  {
+    "name": "Azerbaijan",
+    "officialName": "Republic of Azerbaijan",
+    "name_vi": "Azerbaijan",
+    "officialName_vi": "Cộng hòa Azerbaijan"
+  },
+  {
+    "name": "Bahamas",
+    "officialName": "Commonwealth of the Bahamas",
+    "name_vi": "Bahamas",
+    "officialName_vi": "Thịnh vượng chung Bahamas"
+  },
+  {
+    "name": "Bahrain",
+    "officialName": "Kingdom of Bahrain",
+    "name_vi": "Bahrain",
+    "officialName_vi": "Vương quốc Bahrain"
+  },
+  {
+    "name": "Bangladesh",
+    "officialName": "People's Republic of Bangladesh",
+    "name_vi": "Bangladesh",
+    "officialName_vi": "Cộng hòa Nhân dân Bangladesh"
+  },
+  {
+    "name": "Barbados",
+    "officialName": "Barbados",
+    "name_vi": "Barbados",
+    "officialName_vi": "Barbados"
+  },
+  {
+    "name": "Belarus",
+    "officialName": "Republic of Belarus",
+    "name_vi": "Belarus",
+    "officialName_vi": "Cộng hòa Belarus"
+  },
+  {
+    "name": "Belgium",
+    "officialName": "Kingdom of Belgium",
+    "name_vi": "Bỉ",
+    "officialName_vi": "Vương quốc Bỉ"
+  },
+  {
+    "name": "Belize",
+    "officialName": "Belize",
+    "name_vi": "Belize",
+    "officialName_vi": "Belize"
+  },
+  {
+    "name": "Benin",
+    "officialName": "Republic of Benin",
+    "name_vi": "Benin",
+    "officialName_vi": "Cộng hòa Benin"
+  },
+  {
+    "name": "Bhutan",
+    "officialName": "Kingdom of Bhutan",
+    "name_vi": "Bhutan",
+    "officialName_vi": "Vương quốc Bhutan"
+  },
+  {
+    "name": "Bolivia",
+    "officialName": "Plurinational State of Bolivia",
+    "name_vi": "Bolivia",
+    "officialName_vi": "Nhà nước Đa dân tộc Bolivia"
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "officialName": "Bosnia and Herzegovina",
+    "name_vi": "Bosnia và Herzegovina",
+    "officialName_vi": "Bosnia và Herzegovina"
+  },
+  {
+    "name": "Botswana",
+    "officialName": "Republic of Botswana",
+    "name_vi": "Botswana",
+    "officialName_vi": "Cộng hòa Botswana"
+  },
+  {
+    "name": "Brazil",
+    "officialName": "Federative Republic of Brazil",
+    "name_vi": "Brazil",
+    "officialName_vi": "Cộng hòa Liên bang Brazil"
   },
   {
     "name": "Brunei",
     "officialName": "Nation of Brunei, Abode of Peace",
     "name_vi": "Brunei",
-    "officialName_vi": "Quốc gia Brunei, Nơi ở của Hòa bình"
+    "officialName_vi": "Nhà nước Brunei Darussalam"
+  },
+  {
+    "name": "Bulgaria",
+    "officialName": "Republic of Bulgaria",
+    "name_vi": "Bulgaria",
+    "officialName_vi": "Cộng hòa Bulgaria"
+  },
+  {
+    "name": "Burkina Faso",
+    "officialName": "Burkina Faso",
+    "name_vi": "Burkina Faso",
+    "officialName_vi": "Burkina Faso"
+  },
+  {
+    "name": "Burundi",
+    "officialName": "Republic of Burundi",
+    "name_vi": "Burundi",
+    "officialName_vi": "Cộng hòa Burundi"
+  },
+  {
+    "name": "Cabo Verde",
+    "officialName": "Republic of Cabo Verde",
+    "name_vi": "Cabo Verde",
+    "officialName_vi": "Cộng hòa Cabo Verde"
+  },
+  {
+    "name": "Cambodia",
+    "officialName": "Kingdom of Cambodia",
+    "name_vi": "Campuchia",
+    "officialName_vi": "Vương quốc Campuchia"
+  },
+  {
+    "name": "Cameroon",
+    "officialName": "Republic of Cameroon",
+    "name_vi": "Cameroon",
+    "officialName_vi": "Cộng hòa Cameroon"
+  },
+  {
+    "name": "Canada",
+    "officialName": "Canada",
+    "name_vi": "Canada",
+    "officialName_vi": "Canada"
+  },
+  {
+    "name": "Central African Republic",
+    "officialName": "Central African Republic",
+    "name_vi": "Cộng hòa Trung Phi",
+    "officialName_vi": "Cộng hòa Trung Phi"
+  },
+  {
+    "name": "Chad",
+    "officialName": "Republic of Chad",
+    "name_vi": "Chad",
+    "officialName_vi": "Cộng hòa Chad"
+  },
+  {
+    "name": "Chile",
+    "officialName": "Republic of Chile",
+    "name_vi": "Chile",
+    "officialName_vi": "Cộng hòa Chile"
+  },
+  {
+    "name": "China",
+    "officialName": "People's Republic of China",
+    "name_vi": "Trung Quốc",
+    "officialName_vi": "Cộng hòa Nhân dân Trung Hoa"
+  },
+  {
+    "name": "Colombia",
+    "officialName": "Republic of Colombia",
+    "name_vi": "Colombia",
+    "officialName_vi": "Cộng hòa Colombia"
+  },
+  {
+    "name": "Comoros",
+    "officialName": "Union of the Comoros",
+    "name_vi": "Comoros",
+    "officialName_vi": "Liên bang Comoros"
+  },
+  {
+    "name": "Congo",
+    "officialName": "Republic of the Congo",
+    "name_vi": "Congo",
+    "officialName_vi": "Cộng hòa Congo"
+  },
+  {
+    "name": "DR Congo",
+    "officialName": "Democratic Republic of the Congo",
+    "name_vi": "CHDC Congo",
+    "officialName_vi": "Cộng hòa Dân chủ Congo"
+  },
+  {
+    "name": "Costa Rica",
+    "officialName": "Republic of Costa Rica",
+    "name_vi": "Costa Rica",
+    "officialName_vi": "Cộng hòa Costa Rica"
+  },
+  {
+    "name": "Croatia",
+    "officialName": "Republic of Croatia",
+    "name_vi": "Croatia",
+    "officialName_vi": "Cộng hòa Croatia"
+  },
+  {
+    "name": "Cuba",
+    "officialName": "Republic of Cuba",
+    "name_vi": "Cuba",
+    "officialName_vi": "Cộng hòa Cuba"
+  },
+  {
+    "name": "Cyprus",
+    "officialName": "Republic of Cyprus",
+    "name_vi": "Síp",
+    "officialName_vi": "Cộng hòa Síp"
+  },
+  {
+    "name": "Czechia",
+    "officialName": "Czech Republic",
+    "name_vi": "Séc",
+    "officialName_vi": "Cộng hòa Séc"
+  },
+  {
+    "name": "Denmark",
+    "officialName": "Kingdom of Denmark",
+    "name_vi": "Đan Mạch",
+    "officialName_vi": "Vương quốc Đan Mạch"
+  },
+  {
+    "name": "Djibouti",
+    "officialName": "Republic of Djibouti",
+    "name_vi": "Djibouti",
+    "officialName_vi": "Cộng hòa Djibouti"
+  },
+  {
+    "name": "Dominica",
+    "officialName": "Commonwealth of Dominica",
+    "name_vi": "Dominica",
+    "officialName_vi": "Thịnh vượng chung Dominica"
+  },
+  {
+    "name": "Dominican Republic",
+    "officialName": "Dominican Republic",
+    "name_vi": "Cộng hòa Dominica",
+    "officialName_vi": "Cộng hòa Dominica"
+  },
+  {
+    "name": "East Timor",
+    "officialName": "Democratic Republic of Timor-Leste",
+    "name_vi": "Đông Timor",
+    "officialName_vi": "Cộng hòa Dân chủ Đông Timor"
+  },
+  {
+    "name": "Ecuador",
+    "officialName": "Republic of Ecuador",
+    "name_vi": "Ecuador",
+    "officialName_vi": "Cộng hòa Ecuador"
+  },
+  {
+    "name": "Egypt",
+    "officialName": "Arab Republic of Egypt",
+    "name_vi": "Ai Cập",
+    "officialName_vi": "Cộng hòa Ả Rập Ai Cập"
+  },
+  {
+    "name": "El Salvador",
+    "officialName": "Republic of El Salvador",
+    "name_vi": "El Salvador",
+    "officialName_vi": "Cộng hòa El Salvador"
+  },
+  {
+    "name": "Equatorial Guinea",
+    "officialName": "Republic of Equatorial Guinea",
+    "name_vi": "Xích đạo Guinea",
+    "officialName_vi": "Cộng hòa Xích đạo Guinea"
+  },
+  {
+    "name": "Eritrea",
+    "officialName": "State of Eritrea",
+    "name_vi": "Eritrea",
+    "officialName_vi": "Nhà nước Eritrea"
+  },
+  {
+    "name": "Estonia",
+    "officialName": "Republic of Estonia",
+    "name_vi": "Estonia",
+    "officialName_vi": "Cộng hòa Estonia"
+  },
+  {
+    "name": "Eswatini",
+    "officialName": "Kingdom of Eswatini",
+    "name_vi": "Eswatini",
+    "officialName_vi": "Vương quốc Eswatini"
+  },
+  {
+    "name": "Ethiopia",
+    "officialName": "Federal Democratic Republic of Ethiopia",
+    "name_vi": "Ethiopia",
+    "officialName_vi": "Cộng hòa Dân chủ Liên bang Ethiopia"
+  },
+  {
+    "name": "Fiji",
+    "officialName": "Republic of Fiji",
+    "name_vi": "Fiji",
+    "officialName_vi": "Cộng hòa Fiji"
+  },
+  {
+    "name": "Finland",
+    "officialName": "Republic of Finland",
+    "name_vi": "Phần Lan",
+    "officialName_vi": "Cộng hòa Phần Lan"
+  },
+  {
+    "name": "France",
+    "officialName": "French Republic",
+    "name_vi": "Pháp",
+    "officialName_vi": "Cộng hòa Pháp"
+  },
+  {
+    "name": "Gabon",
+    "officialName": "Gabonese Republic",
+    "name_vi": "Gabon",
+    "officialName_vi": "Cộng hòa Gabon"
+  },
+  {
+    "name": "Gambia",
+    "officialName": "Republic of the Gambia",
+    "name_vi": "Gambia",
+    "officialName_vi": "Cộng hòa Gambia"
+  },
+  {
+    "name": "Georgia",
+    "officialName": "Georgia",
+    "name_vi": "Gruzia",
+    "officialName_vi": "Cộng hòa Gruzia"
+  },
+  {
+    "name": "Germany",
+    "officialName": "Federal Republic of Germany",
+    "name_vi": "Đức",
+    "officialName_vi": "Cộng hòa Liên bang Đức"
+  },
+  {
+    "name": "Ghana",
+    "officialName": "Republic of Ghana",
+    "name_vi": "Ghana",
+    "officialName_vi": "Cộng hòa Ghana"
+  },
+  {
+    "name": "Greece",
+    "officialName": "Hellenic Republic",
+    "name_vi": "Hy Lạp",
+    "officialName_vi": "Cộng hòa Hy Lạp"
+  },
+  {
+    "name": "Grenada",
+    "officialName": "Grenada",
+    "name_vi": "Grenada",
+    "officialName_vi": "Grenada"
+  },
+  {
+    "name": "Guatemala",
+    "officialName": "Republic of Guatemala",
+    "name_vi": "Guatemala",
+    "officialName_vi": "Cộng hòa Guatemala"
+  },
+  {
+    "name": "Guinea",
+    "officialName": "Republic of Guinea",
+    "name_vi": "Guinea",
+    "officialName_vi": "Cộng hòa Guinea"
+  },
+  {
+    "name": "Guinea-Bissau",
+    "officialName": "Republic of Guinea-Bissau",
+    "name_vi": "Guinea-Bissau",
+    "officialName_vi": "Cộng hòa Guinea-Bissau"
+  },
+  {
+    "name": "Guyana",
+    "officialName": "Co-operative Republic of Guyana",
+    "name_vi": "Guyana",
+    "officialName_vi": "Cộng hòa Hợp tác Guyana"
+  },
+  {
+    "name": "Haiti",
+    "officialName": "Republic of Haiti",
+    "name_vi": "Haiti",
+    "officialName_vi": "Cộng hòa Haiti"
+  },
+  {
+    "name": "Honduras",
+    "officialName": "Republic of Honduras",
+    "name_vi": "Honduras",
+    "officialName_vi": "Cộng hòa Honduras"
+  },
+  {
+    "name": "Hungary",
+    "officialName": "Hungary",
+    "name_vi": "Hungary",
+    "officialName_vi": "Hungary"
+  },
+  {
+    "name": "Iceland",
+    "officialName": "Iceland",
+    "name_vi": "Iceland",
+    "officialName_vi": "Băng Đảo"
+  },
+  {
+    "name": "India",
+    "officialName": "Republic of India",
+    "name_vi": "Ấn Độ",
+    "officialName_vi": "Cộng hòa Ấn Độ"
+  },
+  {
+    "name": "Indonesia",
+    "officialName": "Republic of Indonesia",
+    "name_vi": "Indonesia",
+    "officialName_vi": "Cộng hòa Indonesia"
+  },
+  {
+    "name": "Iran",
+    "officialName": "Islamic Republic of Iran",
+    "name_vi": "Iran",
+    "officialName_vi": "Cộng hòa Hồi giáo Iran"
+  },
+  {
+    "name": "Iraq",
+    "officialName": "Republic of Iraq",
+    "name_vi": "Iraq",
+    "officialName_vi": "Cộng hòa Iraq"
+  },
+  {
+    "name": "Ireland",
+    "officialName": "Republic of Ireland",
+    "name_vi": "Ireland",
+    "officialName_vi": "Cộng hòa Ireland"
+  },
+  {
+    "name": "Israel",
+    "officialName": "State of Israel",
+    "name_vi": "Israel",
+    "officialName_vi": "Nhà nước Israel"
+  },
+  {
+    "name": "Italy",
+    "officialName": "Italian Republic",
+    "name_vi": "Ý",
+    "officialName_vi": "Cộng hòa Ý"
+  },
+  {
+    "name": "Ivory Coast",
+    "officialName": "Republic of Côte d'Ivoire",
+    "name_vi": "Bờ Biển Ngà",
+    "officialName_vi": "Cộng hòa Bờ Biển Ngà"
+  },
+  {
+    "name": "Jamaica",
+    "officialName": "Jamaica",
+    "name_vi": "Jamaica",
+    "officialName_vi": "Jamaica"
+  },
+  {
+    "name": "Japan",
+    "officialName": "Japan",
+    "name_vi": "Nhật Bản",
+    "officialName_vi": "Nhật Bản"
+  },
+  {
+    "name": "Jordan",
+    "officialName": "Hashemite Kingdom of Jordan",
+    "name_vi": "Jordan",
+    "officialName_vi": "Vương quốc Hashemite Jordan"
+  },
+  {
+    "name": "Kazakhstan",
+    "officialName": "Republic of Kazakhstan",
+    "name_vi": "Kazakhstan",
+    "officialName_vi": "Cộng hòa Kazakhstan"
+  },
+  {
+    "name": "Kenya",
+    "officialName": "Republic of Kenya",
+    "name_vi": "Kenya",
+    "officialName_vi": "Cộng hòa Kenya"
+  },
+  {
+    "name": "Kiribati",
+    "officialName": "Independent and Sovereign Republic of Kiribati",
+    "name_vi": "Kiribati",
+    "officialName_vi": "Cộng hòa Kiribati"
+  },
+  {
+    "name": "Kuwait",
+    "officialName": "State of Kuwait",
+    "name_vi": "Kuwait",
+    "officialName_vi": "Nhà nước Kuwait"
+  },
+  {
+    "name": "Kyrgyzstan",
+    "officialName": "Kyrgyz Republic",
+    "name_vi": "Kyrgyzstan",
+    "officialName_vi": "Cộng hòa Kyrgyzstan"
+  },
+  {
+    "name": "Laos",
+    "officialName": "Lao People's Democratic Republic",
+    "name_vi": "Lào",
+    "officialName_vi": "Cộng hòa Dân chủ Nhân dân Lào"
+  },
+  {
+    "name": "Latvia",
+    "officialName": "Republic of Latvia",
+    "name_vi": "Latvia",
+    "officialName_vi": "Cộng hòa Latvia"
+  },
+  {
+    "name": "Lebanon",
+    "officialName": "Lebanese Republic",
+    "name_vi": "Lebanon",
+    "officialName_vi": "Cộng hòa Lebanon"
+  },
+  {
+    "name": "Lesotho",
+    "officialName": "Kingdom of Lesotho",
+    "name_vi": "Lesotho",
+    "officialName_vi": "Vương quốc Lesotho"
+  },
+  {
+    "name": "Liberia",
+    "officialName": "Republic of Liberia",
+    "name_vi": "Liberia",
+    "officialName_vi": "Cộng hòa Liberia"
+  },
+  {
+    "name": "Libya",
+    "officialName": "State of Libya",
+    "name_vi": "Libya",
+    "officialName_vi": "Nhà nước Libya"
+  },
+  {
+    "name": "Liechtenstein",
+    "officialName": "Principality of Liechtenstein",
+    "name_vi": "Liechtenstein",
+    "officialName_vi": "Thân vương quốc Liechtenstein"
+  },
+  {
+    "name": "Lithuania",
+    "officialName": "Republic of Lithuania",
+    "name_vi": "Lithuania",
+    "officialName_vi": "Cộng hòa Lithuania"
+  },
+  {
+    "name": "Luxembourg",
+    "officialName": "Grand Duchy of Luxembourg",
+    "name_vi": "Luxembourg",
+    "officialName_vi": "Đại Công quốc Luxembourg"
+  },
+  {
+    "name": "Madagascar",
+    "officialName": "Republic of Madagascar",
+    "name_vi": "Madagascar",
+    "officialName_vi": "Cộng hòa Madagascar"
+  },
+  {
+    "name": "Malawi",
+    "officialName": "Republic of Malawi",
+    "name_vi": "Malawi",
+    "officialName_vi": "Cộng hòa Malawi"
+  },
+  {
+    "name": "Malaysia",
+    "officialName": "Malaysia",
+    "name_vi": "Malaysia",
+    "officialName_vi": "Liên bang Malaysia"
+  },
+  {
+    "name": "Maldives",
+    "officialName": "Republic of the Maldives",
+    "name_vi": "Maldives",
+    "officialName_vi": "Cộng hòa Maldives"
+  },
+  {
+    "name": "Mali",
+    "officialName": "Republic of Mali",
+    "name_vi": "Mali",
+    "officialName_vi": "Cộng hòa Mali"
+  },
+  {
+    "name": "Malta",
+    "officialName": "Republic of Malta",
+    "name_vi": "Malta",
+    "officialName_vi": "Cộng hòa Malta"
+  },
+  {
+    "name": "Marshall Islands",
+    "officialName": "Republic of the Marshall Islands",
+    "name_vi": "Quần đảo Marshall",
+    "officialName_vi": "Cộng hòa Quần đảo Marshall"
   },
   {
     "name": "Mauritania",
@@ -1482,21 +654,525 @@
     "officialName_vi": "Cộng hòa Hồi giáo Mauritania"
   },
   {
-    "name": "Turkey",
-    "officialName": "Republic of Turkey",
-    "name_vi": "Thổ Nhĩ Kì",
-    "officialName_vi": "Cộng hòa Thổ Nhĩ Kỳ"
+    "name": "Mauritius",
+    "officialName": "Republic of Mauritius",
+    "name_vi": "Mauritius",
+    "officialName_vi": "Cộng hòa Mauritius"
+  },
+  {
+    "name": "Mexico",
+    "officialName": "United Mexican States",
+    "name_vi": "Mexico",
+    "officialName_vi": "Hợp chúng quốc Mexico"
+  },
+  {
+    "name": "Micronesia",
+    "officialName": "Federated States of Micronesia",
+    "name_vi": "Micronesia",
+    "officialName_vi": "Liên bang Micronesia"
+  },
+  {
+    "name": "Moldova",
+    "officialName": "Republic of Moldova",
+    "name_vi": "Moldova",
+    "officialName_vi": "Cộng hòa Moldova"
+  },
+  {
+    "name": "Monaco",
+    "officialName": "Principality of Monaco",
+    "name_vi": "Monaco",
+    "officialName_vi": "Thân vương quốc Monaco"
+  },
+  {
+    "name": "Mongolia",
+    "officialName": "Mongolia",
+    "name_vi": "Mông Cổ",
+    "officialName_vi": "Mông Cổ"
+  },
+  {
+    "name": "Montenegro",
+    "officialName": "Montenegro",
+    "name_vi": "Montenegro",
+    "officialName_vi": "Montenegro"
+  },
+  {
+    "name": "Morocco",
+    "officialName": "Kingdom of Morocco",
+    "name_vi": "Ma-rốc",
+    "officialName_vi": "Vương quốc Ma-rốc"
+  },
+  {
+    "name": "Mozambique",
+    "officialName": "Republic of Mozambique",
+    "name_vi": "Mozambique",
+    "officialName_vi": "Cộng hòa Mozambique"
+  },
+  {
+    "name": "Myanmar",
+    "officialName": "Republic of the Union of Myanmar",
+    "name_vi": "Myanmar",
+    "officialName_vi": "Cộng hòa Liên bang Myanmar"
+  },
+  {
+    "name": "Namibia",
+    "officialName": "Republic of Namibia",
+    "name_vi": "Namibia",
+    "officialName_vi": "Cộng hòa Namibia"
+  },
+  {
+    "name": "Nauru",
+    "officialName": "Republic of Nauru",
+    "name_vi": "Nauru",
+    "officialName_vi": "Cộng hòa Nauru"
+  },
+  {
+    "name": "Nepal",
+    "officialName": "Federal Democratic Republic of Nepal",
+    "name_vi": "Nepal",
+    "officialName_vi": "Cộng hòa Dân chủ Liên bang Nepal"
+  },
+  {
+    "name": "Netherlands",
+    "officialName": "Kingdom of the Netherlands",
+    "name_vi": "Hà Lan",
+    "officialName_vi": "Vương quốc Hà Lan"
+  },
+  {
+    "name": "New Zealand",
+    "officialName": "New Zealand",
+    "name_vi": "New Zealand",
+    "officialName_vi": "New Zealand"
+  },
+  {
+    "name": "Nicaragua",
+    "officialName": "Republic of Nicaragua",
+    "name_vi": "Nicaragua",
+    "officialName_vi": "Cộng hòa Nicaragua"
+  },
+  {
+    "name": "Niger",
+    "officialName": "Republic of Niger",
+    "name_vi": "Niger",
+    "officialName_vi": "Cộng hòa Niger"
+  },
+  {
+    "name": "Nigeria",
+    "officialName": "Federal Republic of Nigeria",
+    "name_vi": "Nigeria",
+    "officialName_vi": "Cộng hòa Liên bang Nigeria"
+  },
+  {
+    "name": "North Korea",
+    "officialName": "Democratic People's Republic of Korea",
+    "name_vi": "Triều Tiên",
+    "officialName_vi": "Cộng hòa Dân chủ Nhân dân Triều Tiên"
+  },
+  {
+    "name": "North Macedonia",
+    "officialName": "Republic of North Macedonia",
+    "name_vi": "Bắc Macedonia",
+    "officialName_vi": "Cộng hòa Bắc Macedonia"
+  },
+  {
+    "name": "Norway",
+    "officialName": "Kingdom of Norway",
+    "name_vi": "Na Uy",
+    "officialName_vi": "Vương quốc Na Uy"
+  },
+  {
+    "name": "Oman",
+    "officialName": "Sultanate of Oman",
+    "name_vi": "Oman",
+    "officialName_vi": "Vương quốc Oman"
+  },
+  {
+    "name": "Pakistan",
+    "officialName": "Islamic Republic of Pakistan",
+    "name_vi": "Pakistan",
+    "officialName_vi": "Cộng hòa Hồi giáo Pakistan"
+  },
+  {
+    "name": "Palau",
+    "officialName": "Republic of Palau",
+    "name_vi": "Palau",
+    "officialName_vi": "Cộng hòa Palau"
+  },
+  {
+    "name": "Palestine",
+    "officialName": "State of Palestine",
+    "name_vi": "Palestine",
+    "officialName_vi": "Nhà nước Palestine"
+  },
+  {
+    "name": "Panama",
+    "officialName": "Republic of Panama",
+    "name_vi": "Panama",
+    "officialName_vi": "Cộng hòa Panama"
+  },
+  {
+    "name": "Papua New Guinea",
+    "officialName": "Independent State of Papua New Guinea",
+    "name_vi": "Papua New Guinea",
+    "officialName_vi": "Nhà nước Độc lập Papua New Guinea"
+  },
+  {
+    "name": "Paraguay",
+    "officialName": "Republic of Paraguay",
+    "name_vi": "Paraguay",
+    "officialName_vi": "Cộng hòa Paraguay"
+  },
+  {
+    "name": "Peru",
+    "officialName": "Republic of Peru",
+    "name_vi": "Peru",
+    "officialName_vi": "Cộng hòa Peru"
+  },
+  {
+    "name": "Philippines",
+    "officialName": "Republic of the Philippines",
+    "name_vi": "Philippines",
+    "officialName_vi": "Cộng hòa Philippines"
   },
   {
     "name": "Poland",
     "officialName": "Republic of Poland",
     "name_vi": "Ba Lan",
-    "officialName_vi": "CỘNG HOÀ BA LAN"
+    "officialName_vi": "Cộng hòa Ba Lan"
   },
   {
-    "name": "Bouvet Island",
-    "officialName": "Bouvet Island",
-    "name_vi": "Đảo Bouvet",
-    "officialName_vi": "Đảo Bouvet"
+    "name": "Portugal",
+    "officialName": "Portuguese Republic",
+    "name_vi": "Bồ Đào Nha",
+    "officialName_vi": "Cộng hòa Bồ Đào Nha"
+  },
+  {
+    "name": "Qatar",
+    "officialName": "State of Qatar",
+    "name_vi": "Qatar",
+    "officialName_vi": "Nhà nước Qatar"
+  },
+  {
+    "name": "Romania",
+    "officialName": "Romania",
+    "name_vi": "Romania",
+    "officialName_vi": "Romania"
+  },
+  {
+    "name": "Russia",
+    "officialName": "Russian Federation",
+    "name_vi": "Nga",
+    "officialName_vi": "Liên bang Nga"
+  },
+  {
+    "name": "Rwanda",
+    "officialName": "Republic of Rwanda",
+    "name_vi": "Rwanda",
+    "officialName_vi": "Cộng hòa Rwanda"
+  },
+  {
+    "name": "Saint Kitts and Nevis",
+    "officialName": "Federation of Saint Christopher and Nevis",
+    "name_vi": "Saint Kitts và Nevis",
+    "officialName_vi": "Liên bang Saint Kitts và Nevis"
+  },
+  {
+    "name": "Saint Lucia",
+    "officialName": "Saint Lucia",
+    "name_vi": "Saint Lucia",
+    "officialName_vi": "Saint Lucia"
+  },
+  {
+    "name": "Saint Vincent and the Grenadines",
+    "officialName": "Saint Vincent and the Grenadines",
+    "name_vi": "Saint Vincent và Grenadines",
+    "officialName_vi": "Saint Vincent và Grenadines"
+  },
+  {
+    "name": "Samoa",
+    "officialName": "Independent State of Samoa",
+    "name_vi": "Samoa",
+    "officialName_vi": "Nhà nước Độc lập Samoa"
+  },
+  {
+    "name": "San Marino",
+    "officialName": "Republic of San Marino",
+    "name_vi": "San Marino",
+    "officialName_vi": "Cộng hòa San Marino"
+  },
+  {
+    "name": "Sao Tome and Principe",
+    "officialName": "Democratic Republic of São Tomé and Príncipe",
+    "name_vi": "São Tomé và Príncipe",
+    "officialName_vi": "Cộng hòa Dân chủ São Tomé và Príncipe"
+  },
+  {
+    "name": "Saudi Arabia",
+    "officialName": "Kingdom of Saudi Arabia",
+    "name_vi": "Ả Rập Xê Út",
+    "officialName_vi": "Vương quốc Ả Rập Xê Út"
+  },
+  {
+    "name": "Senegal",
+    "officialName": "Republic of Senegal",
+    "name_vi": "Senegal",
+    "officialName_vi": "Cộng hòa Senegal"
+  },
+  {
+    "name": "Serbia",
+    "officialName": "Republic of Serbia",
+    "name_vi": "Serbia",
+    "officialName_vi": "Cộng hòa Serbia"
+  },
+  {
+    "name": "Seychelles",
+    "officialName": "Republic of Seychelles",
+    "name_vi": "Seychelles",
+    "officialName_vi": "Cộng hòa Seychelles"
+  },
+  {
+    "name": "Sierra Leone",
+    "officialName": "Republic of Sierra Leone",
+    "name_vi": "Sierra Leone",
+    "officialName_vi": "Cộng hòa Sierra Leone"
+  },
+  {
+    "name": "Singapore",
+    "officialName": "Republic of Singapore",
+    "name_vi": "Singapore",
+    "officialName_vi": "Cộng hòa Singapore"
+  },
+  {
+    "name": "Slovakia",
+    "officialName": "Slovak Republic",
+    "name_vi": "Slovakia",
+    "officialName_vi": "Cộng hòa Slovakia"
+  },
+  {
+    "name": "Slovenia",
+    "officialName": "Republic of Slovenia",
+    "name_vi": "Slovenia",
+    "officialName_vi": "Cộng hòa Slovenia"
+  },
+  {
+    "name": "Solomon Islands",
+    "officialName": "Solomon Islands",
+    "name_vi": "Quần đảo Solomon",
+    "officialName_vi": "Quần đảo Solomon"
+  },
+  {
+    "name": "Somalia",
+    "officialName": "Federal Republic of Somalia",
+    "name_vi": "Somalia",
+    "officialName_vi": "Cộng hòa Liên bang Somalia"
+  },
+  {
+    "name": "South Africa",
+    "officialName": "Republic of South Africa",
+    "name_vi": "Nam Phi",
+    "officialName_vi": "Cộng hòa Nam Phi"
+  },
+  {
+    "name": "South Korea",
+    "officialName": "Republic of Korea",
+    "name_vi": "Hàn Quốc",
+    "officialName_vi": "Đại Hàn Dân Quốc"
+  },
+  {
+    "name": "South Sudan",
+    "officialName": "Republic of South Sudan",
+    "name_vi": "Nam Sudan",
+    "officialName_vi": "Cộng hòa Nam Sudan"
+  },
+  {
+    "name": "Spain",
+    "officialName": "Kingdom of Spain",
+    "name_vi": "Tây Ban Nha",
+    "officialName_vi": "Vương quốc Tây Ban Nha"
+  },
+  {
+    "name": "Sri Lanka",
+    "officialName": "Democratic Socialist Republic of Sri Lanka",
+    "name_vi": "Sri Lanka",
+    "officialName_vi": "Cộng hòa Xã hội chủ nghĩa Dân chủ Sri Lanka"
+  },
+  {
+    "name": "Sudan",
+    "officialName": "Republic of the Sudan",
+    "name_vi": "Sudan",
+    "officialName_vi": "Cộng hòa Sudan"
+  },
+  {
+    "name": "Suriname",
+    "officialName": "Republic of Suriname",
+    "name_vi": "Suriname",
+    "officialName_vi": "Cộng hòa Suriname"
+  },
+  {
+    "name": "Sweden",
+    "officialName": "Kingdom of Sweden",
+    "name_vi": "Thụy Điển",
+    "officialName_vi": "Vương quốc Thụy Điển"
+  },
+  {
+    "name": "Switzerland",
+    "officialName": "Swiss Confederation",
+    "name_vi": "Thụy Sĩ",
+    "officialName_vi": "Liên bang Thụy Sĩ"
+  },
+  {
+    "name": "Syria",
+    "officialName": "Syrian Arab Republic",
+    "name_vi": "Syria",
+    "officialName_vi": "Cộng hòa Ả Rập Syria"
+  },
+  {
+    "name": "Taiwan",
+    "officialName": "Republic of China (Taiwan)",
+    "name_vi": "Đài Loan",
+    "officialName_vi": "Trung Hoa Dân Quốc"
+  },
+  {
+    "name": "Tajikistan",
+    "officialName": "Republic of Tajikistan",
+    "name_vi": "Tajikistan",
+    "officialName_vi": "Cộng hòa Tajikistan"
+  },
+  {
+    "name": "Tanzania",
+    "officialName": "United Republic of Tanzania",
+    "name_vi": "Tanzania",
+    "officialName_vi": "Cộng hòa Thống nhất Tanzania"
+  },
+  {
+    "name": "Thailand",
+    "officialName": "Kingdom of Thailand",
+    "name_vi": "Thái Lan",
+    "officialName_vi": "Vương quốc Thái Lan"
+  },
+  {
+    "name": "Togo",
+    "officialName": "Togolese Republic",
+    "name_vi": "Togo",
+    "officialName_vi": "Cộng hòa Togo"
+  },
+  {
+    "name": "Tonga",
+    "officialName": "Kingdom of Tonga",
+    "name_vi": "Tonga",
+    "officialName_vi": "Vương quốc Tonga"
+  },
+  {
+    "name": "Trinidad and Tobago",
+    "officialName": "Republic of Trinidad and Tobago",
+    "name_vi": "Trinidad và Tobago",
+    "officialName_vi": "Cộng hòa Trinidad và Tobago"
+  },
+  {
+    "name": "Tunisia",
+    "officialName": "Republic of Tunisia",
+    "name_vi": "Tunisia",
+    "officialName_vi": "Cộng hòa Tunisia"
+  },
+  {
+    "name": "Turkey",
+    "officialName": "Republic of Turkey",
+    "name_vi": "Thổ Nhĩ Kỳ",
+    "officialName_vi": "Cộng hòa Thổ Nhĩ Kỳ"
+  },
+  {
+    "name": "Turkmenistan",
+    "officialName": "Turkmenistan",
+    "name_vi": "Turkmenistan",
+    "officialName_vi": "Turkmenistan"
+  },
+  {
+    "name": "Tuvalu",
+    "officialName": "Tuvalu",
+    "name_vi": "Tuvalu",
+    "officialName_vi": "Tuvalu"
+  },
+  {
+    "name": "Uganda",
+    "officialName": "Republic of Uganda",
+    "name_vi": "Uganda",
+    "officialName_vi": "Cộng hòa Uganda"
+  },
+  {
+    "name": "Ukraine",
+    "officialName": "Ukraine",
+    "name_vi": "Ukraine",
+    "officialName_vi": "Ukraine"
+  },
+  {
+    "name": "United Arab Emirates",
+    "officialName": "United Arab Emirates",
+    "name_vi": "Các Tiểu vương quốc Ả Rập Thống nhất",
+    "officialName_vi": "Các Tiểu vương quốc Ả Rập Thống nhất"
+  },
+  {
+    "name": "United Kingdom",
+    "officialName": "United Kingdom of Great Britain and Northern Ireland",
+    "name_vi": "Vương quốc Anh",
+    "officialName_vi": "Vương quốc Liên hiệp Anh và Bắc Ireland"
+  },
+  {
+    "name": "United States",
+    "officialName": "United States of America",
+    "name_vi": "Mỹ",
+    "officialName_vi": "Hợp chủng quốc Hoa Kỳ"
+  },
+  {
+    "name": "Uruguay",
+    "officialName": "Oriental Republic of Uruguay",
+    "name_vi": "Uruguay",
+    "officialName_vi": "Cộng hòa Đông phương Uruguay"
+  },
+  {
+    "name": "Uzbekistan",
+    "officialName": "Republic of Uzbekistan",
+    "name_vi": "Uzbekistan",
+    "officialName_vi": "Cộng hòa Uzbekistan"
+  },
+  {
+    "name": "Vanuatu",
+    "officialName": "Republic of Vanuatu",
+    "name_vi": "Vanuatu",
+    "officialName_vi": "Cộng hòa Vanuatu"
+  },
+  {
+    "name": "Vatican City",
+    "officialName": "Vatican City State",
+    "name_vi": "Vatican",
+    "officialName_vi": "Thành quốc Vatican"
+  },
+  {
+    "name": "Venezuela",
+    "officialName": "Bolivarian Republic of Venezuela",
+    "name_vi": "Venezuela",
+    "officialName_vi": "Cộng hòa Bolivariana Venezuela"
+  },
+  {
+    "name": "Vietnam",
+    "officialName": "Socialist Republic of Vietnam",
+    "name_vi": "Việt Nam",
+    "officialName_vi": "Cộng hòa Xã hội chủ nghĩa Việt Nam"
+  },
+  {
+    "name": "Yemen",
+    "officialName": "Republic of Yemen",
+    "name_vi": "Yemen",
+    "officialName_vi": "Cộng hòa Yemen"
+  },
+  {
+    "name": "Zambia",
+    "officialName": "Republic of Zambia",
+    "name_vi": "Zambia",
+    "officialName_vi": "Cộng hòa Zambia"
+  },
+  {
+    "name": "Zimbabwe",
+    "officialName": "Republic of Zimbabwe",
+    "name_vi": "Zimbabwe",
+    "officialName_vi": "Cộng hòa Zimbabwe"
   }
 ]

@@ -36,7 +36,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 		countries
 	} = props;
 	const { t } = useTranslation();
-
+	const currentLang = localStorage.getItem('lang');
 	const mapRef = useRef();
 	const [hoverInfo, setHoverInfo] = useState(null);
 
@@ -198,7 +198,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 					className='font-sans'>
 					<div>
 						<h3 className='font-bold text-gray-800'>
-							{getTranslatedName(hoverInfo.name)}
+							{currentLang === 'vi' ? getTranslatedName(hoverInfo.name) : hoverInfo.name}
 						</h3>
 						{/* Đã sửa 'population' */}
 						<p className='text-sm text-gray-600'>

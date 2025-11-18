@@ -35,7 +35,6 @@ const regionColors = {
 	Africa: '#F4A261',
 	Americas: '#2A9D8F',
 	Oceania: '#A8DADC',
-	Antarctica: '#10b981',
 	Default: '#F1FAEE',
 };
 
