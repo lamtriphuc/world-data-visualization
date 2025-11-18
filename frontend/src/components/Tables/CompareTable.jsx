@@ -81,7 +81,7 @@ const CompareTable = ({ countries }) => {
 										: field.key === 'officialName'
 										? getTranslatedOfficialName(getValue(c, 'officialName'))
 										: field.key === 'population'
-										? getValue(c, field.key).value
+										? getValue(c, field.key).value.toLocaleString()
 										: getValue(c, field.key)?.toLocaleString?.() ||
 										  getValue(c, field.key)}
 								</td>
