@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import mongoose, { connect } from 'mongoose';
 import Country from '../models/Country.js';
 import Region from '../models/Region.js';
-import Gdp from '../models/Gdp.js'
 
 dotenv.config();
 

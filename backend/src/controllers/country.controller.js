@@ -83,7 +83,8 @@ export const getAllCountryNames = async (req, res, next) => {
 
 export const getTop10Area = async (req, res, next) => {
 	try {
-		const data = await getTop10AreaService();
+		const { region } = req.query
+		const data = await getTop10AreaService(region);
 		return successResponse(res, data, 200, 'Top 10 area');
 	} catch (error) {
 		return errorResponse(res, error.message, 500);
@@ -92,7 +93,8 @@ export const getTop10Area = async (req, res, next) => {
 
 export const getTop10Population = async (req, res, next) => {
 	try {
-		const data = await getTop10PopulationService();
+		const { region } = req.query
+		const data = await getTop10PopulationService(region);
 		return successResponse(res, data, 200, 'Top 10 population');
 	} catch (error) {
 		return errorResponse(res, error.message, 500);
@@ -103,6 +105,16 @@ export const getGlobalStats = async (req, res, next) => {
 	try {
 		const data = await getGlobalStatsService();
 		return successResponse(res, data, 200, 'Global stats fetched');
+	} catch (error) {
+		return errorResponse(res, error.message, 500);
+	}
+};
+
+export const getDataChart = async (req, res, next) => {
+	try {
+		const { region } = req.query;
+		const data = await getDataChart(region);
+		return successResponse(res, data, 200, 'Data for chart');
 	} catch (error) {
 		return errorResponse(res, error.message, 500);
 	}

@@ -27,7 +27,7 @@
     "Asia": "Châu Á",
     "Europe": "Châu Âu",
     "Oceania": "Châu Đại Dương",
-    "Antarctica": "Châu Nam Cực"
+    "Antarctic": "Châu Nam Cực"
   },
   "subregion": {
     "Southern Asia": "Nam Á",
@@ -92,5 +92,15 @@
   "login_description": "Đăng nhập vào tài khoản của bạn",
   "welcome": "Chào mừng",
   "login_failed": "Đăng nhập thất bại",
-  "back": "Quay lại"
+  "back": "Quay lại",
+  "text_most_populous": "Quốc gia đông dân nhất",
+  "text_largest_area": "Quốc gia có diện tích lớn nhất",
+  "total_country_continent": "Tổng số quốc gia",
+  "total_area_continent": "Tổng diện tích",
+  "total_population_continent": "Tổng dân số",
+  "top10_area_continent": "Top 10 Quốc gia theo diện tích",
+  "top10_population_continent": "Top 10 Quốc gia theo dân số",
+  "distribution_area": "Phân bố theo diện tích",
+  "distribution_population": "Phân bố dân số",
+  "value": "Giá trị"
 }
