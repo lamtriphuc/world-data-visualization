@@ -18,6 +18,7 @@ import CountryCardContinent from '../components/Cards/CountryCardContient';
 import { useNavigate } from 'react-router-dom';
 import { BiGlobe } from 'react-icons/bi';
 import { getTranslatedName } from '../ultils';
+import Loading from '../components/Layout/Loading';
 
 // --- MOCK DATA ---
 // const populationData = [
@@ -58,6 +59,7 @@ const Continent = () => {
 	const [topPopulation, setTopPopulaiton] = useState([]);
 	const [topArea, setTopArea] = useState([]);
 	const [mode, setMode] = useState('population');
+	const [loading, setLoading] = useState(true);
 
 	const regions = [
 		{ label: t('main_region.Asia'), value: 'Asia' },
@@ -79,6 +81,8 @@ const Continent = () => {
 				setCountries(res.data);
 			} catch (err) {
 				console.error(err);
+			} finally {
+				setLoading(false);
 			}
 		};
 
@@ -135,6 +139,8 @@ const Continent = () => {
 	}, [region]);
 
 	const chartData = mode === 'population' ? topPopulation : topArea;
+
+	if (loading) return <Loading />;
 
 	return (
 		<div>
