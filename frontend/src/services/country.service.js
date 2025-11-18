@@ -16,6 +16,32 @@ export const getAllCountries = async ({
 	return response.data.data;
 };
 
+export const getAllCountriesContinent = async ({
+	region = "Asia",
+	limit = 150,
+	sortBy = "name",
+	sortOrder = 1
+}) => {
+	const url = `${import.meta.env.VITE_BACKEND_URL}/api/countries?region=${region}&limit=${limit}&sortBy=${sortBy}&sortOrder=${Number(sortOrder)}`;
+	const response = await axios.get(url);
+	return response.data.data;
+};
+
+export const getMax = async (region) => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/region/max?region=${region}`
+	);
+	return response.data.data;
+};
+
+export const getStats = async (region) => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/region/stats?region=${region}`
+	);
+	return response.data.data;
+};
+
+
 export const getCountryDetails = async (code) => {
 	const response = await axios.get(
 		`${import.meta.env.VITE_BACKEND_URL}/api/countries/${code}`
@@ -30,16 +56,18 @@ export const getAllCountryNames = async () => {
 	return response.data.data;
 };
 
-export const getTop10Area = async () => {
+export const getTop10Area = async (region = '') => {
 	const response = await axios.get(
-		`${import.meta.env.VITE_BACKEND_URL}/api/countries/top-10-area`
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/top-10-area`,
+		{ params: { region } }
 	);
 	return response.data.data;
 };
 
-export const getTop10Population = async () => {
+export const getTop10Population = async (region = '') => {
 	const response = await axios.get(
-		`${import.meta.env.VITE_BACKEND_URL}/api/countries/top-10-population`
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/top-10-population`,
+		{ params: { region } }
 	);
 	return response.data.data;
 };

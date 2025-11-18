@@ -27,7 +27,8 @@
     "Asia": "Asia",
     "Europe": "Europe",
     "Oceania": "Oceania",
-    "Antarctica": "Antarctica"
+    "Antarctica": "Antarctica",
+    "Antarctic": "Antarctic"
   },
   "subregion": {
     "Southern Asia": "Southern Asia",
@@ -92,5 +93,15 @@
   "login_description": "Log in to your account",
   "welcome": "Welcome",
   "login_failed": "Login failed",
-  "back": "Back"
+  "back": "Back",
+  "text_most_populous": "Most populous country",
+  "text_largest_area": "The country with the largest area",
+  "total_country_continent": "Total countries",
+  "total_area_continent": "Total area",
+  "total_population_continent": "Total population",
+  "top10_area_continent": "Top 10 Countries by Area",
+  "top10_population_continent": "Top 10 Countries by Population",
+  "distribution_area": "Area distribution",
+  "distribution_population": "Population distribution",
+  "value": "Value"
 }

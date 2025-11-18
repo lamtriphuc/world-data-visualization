@@ -92,21 +92,21 @@ export const getAllCountryNamesService = async () => {
 	return res;
 };
 
-export const getTop10PopulationService = async () => {
-	const countries = await Country.find({})
+export const getTop10PopulationService = async (region) => {
+	const filter = region ? { region: region } : {};
+	const countries = await Country.find(filter)
 		.sort({ 'population.value': -1 })
 		.limit(10);
 
-	// Định dạng kết quả trả về
 	return countries.map((c) => formatCountryDetail(c));
 };
 
-export const getTop10AreaService = async () => {
-	const countries = await Country.find({})
+export const getTop10AreaService = async (region) => {
+	const filter = region ? { region: region } : {};
+	const countries = await Country.find(filter)
 		.sort({ 'area': -1 })
 		.limit(10);
 
-	// Định dạng kết quả trả về
 	return countries.map((c) => formatCountryDetail(c));
 };
 
@@ -150,3 +150,50 @@ export const getGlobalStatsService = async () => {
 		totalRegions: stats[0].totalRegions
 	};
 };
+
+export const getMaxArea = async () => {
+	const country = await Country.find()
+		.sort({ 'area': -1 })
+		.lean();
+
+	return formatCountryBasic(country);
+};
+
+export const getMaxPopulation = async () => {
+	const country = await Country.find()
+		.sort({ 'population': -1 })
+		.lean();
+
+	return formatCountryBasic(country);
+};
+
+export const getDataChartService = async (region) => {
+	if (!region) throw new Error('Region not found');
+
+	const populationList = await Country.find({ region })
+		.sort({ 'population.value': -1 })
+		.limit(10)
+		.select({ 'name.common': 1, 'population.value': 1, _id: 0 })
+		.lean();
+
+	const mappedPopulation = populationList.map(c => ({
+		name: c.name.common,
+		value: c.population?.value || 0
+	}));
+
+	const areaList = await Country.find({ region })
+		.sort({ area: -1 })
+		.limit(10)
+		.select({ 'name.common': 1, area: 1, _id: 0 })
+		.lean();
+
+	const mappedArea = areaList.map(c => ({
+		name: c.name.common,
+		value: c.area || 0
+	}));
+
+	return {
+		populationList: mappedPopulation,
+		areaList: mappedArea
+	}
+}

@@ -11,7 +11,7 @@ const StatCard = ({
 }) => {
 	return (
 		<div onClick={onClick}>
-			<div className='p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'>
+			<div className={`p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl ${onClick ? "cursor-pointer" : "cursor-default"}`}>
 				<div className='flex flex-wrap items-center justify-between'>
 					<div>
 						<p className='text-gray-600 dark:text-gray-300 mb-2'>{title}</p>
