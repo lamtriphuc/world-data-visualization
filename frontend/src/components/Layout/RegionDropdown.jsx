@@ -30,7 +30,6 @@ const groupedSubregions = {
 		'Micronesia',
 		'Polynesia',
 	],
-	Antarctic: ['Antarctic'],
 };
 
 const FilterRegionSubregion = () => {
