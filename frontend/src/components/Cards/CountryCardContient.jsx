@@ -1,16 +1,15 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next';
 import translated from '../../scripts/countries_translated.json';
 
 const getTranslatedName = (name) => {
-    const found = translated.find((c) => c.name === name);
-    return found?.name_vi || name;
+	const found = translated.find((c) => c.name === name);
+	return found?.name_vi || name;
 };
 
 const CountryCardContient = ({ country, index, onClick }) => {
-    const { id, name, population, flag } = country;
-    const { t } = useTranslation();
-    const currentLang = localStorage.getItem('lang');
+	const { name, population, flag } = country;
+	const { t } = useTranslation();
+	const currentLang = localStorage.getItem('lang');
 
     return (
         <div
@@ -33,4 +32,4 @@ const CountryCardContient = ({ country, index, onClick }) => {
     )
 }
 
-export default CountryCardContient
+export default CountryCardContient;

@@ -103,5 +103,6 @@
   "top10_population_continent": "Top 10 Countries by Population",
   "distribution_area": "Area distribution",
   "distribution_population": "Population distribution",
-  "value": "Value"
+  "value": "Value",
+  "all_countries": "All Countries"
 }

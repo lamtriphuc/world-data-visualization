@@ -27,6 +27,7 @@
     "Asia": "Châu Á",
     "Europe": "Châu Âu",
     "Oceania": "Châu Đại Dương",
+    "Antarctica": "Châu Nam Cực",
     "Antarctic": "Châu Nam Cực"
   },
   "subregion": {
@@ -102,5 +103,6 @@
   "top10_population_continent": "Top 10 Quốc gia theo dân số",
   "distribution_area": "Phân bố theo diện tích",
   "distribution_population": "Phân bố dân số",
-  "value": "Giá trị"
+  "value": "Giá trị",
+  "all_countries": "Tất cả quốc gia"
 }
