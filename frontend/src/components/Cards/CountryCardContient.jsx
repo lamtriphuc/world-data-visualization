@@ -15,7 +15,7 @@ const CountryCardContient = ({ country, index, onClick }) => {
     return (
         <div
             onClick={onClick}
-            className="flex items-center gap-2 p-4 bg-white rounded-lg shadow-md w-full sm:w-[300px] cursor-pointer">
+            className="flex items-center gap-2 p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-lg shadow-md w-full sm:w-[300px] cursor-pointer">
             <div className="text-sm text-gray-500">#{index + 1}</div>
             <div className="w-14 min-w-12 h-12">
                 <img src={flag} className="w-full h-full object-cover rounded" />
