@@ -104,5 +104,8 @@
   "distribution_area": "Phân bố theo diện tích",
   "distribution_population": "Phân bố dân số",
   "value": "Giá trị",
-  "all_countries": "Tất cả quốc gia"
+  "all_countries": "Tất cả quốc gia",
+  "population_area_chart": "Biểu đồ dân số / diện tích",
+  "gdp_per_capita": "GDP trên đầu người",
+  "all": "Tất cả"
 }

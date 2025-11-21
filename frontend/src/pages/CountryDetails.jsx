@@ -15,8 +15,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Loading from '../components/Layout/Loading';
 import translated from '../scripts/countries_translated.json';
-import { FaRegHeart } from 'react-icons/fa';
-import { addFavorite, getFavoriteCodes, removeFavorite } from '../services/auth.service';
+import {
+	addFavorite,
+	getFavoriteCodes,
+	removeFavorite,
+} from '../services/auth.service';
+import PopulationAreaChart from '../components/Charts/PopulationAreaChart';
+import GDPChart from '../components/Charts/GDPChart';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
@@ -49,6 +54,7 @@ const CountryDetails = () => {
 			try {
 				const response = await getCountryDetails(code);
 				setCountryDetails(response);
+				window.scrollTo(0, 0);
 			} catch (error) {
 				console.error(error);
 			} finally {
@@ -72,10 +78,10 @@ const CountryDetails = () => {
 		try {
 			if (newState) {
 				await addFavorite(countryCode);
-				setFavorites(prev => [...prev, countryCode]);
+				setFavorites((prev) => [...prev, countryCode]);
 			} else {
 				await removeFavorite(countryCode);
-				setFavorites(prev => prev.filter(c => c !== countryCode));
+				setFavorites((prev) => prev.filter((c) => c !== countryCode));
 			}
 		} catch (error) {
 			console.log('Favorite err: ', error);
@@ -83,7 +89,6 @@ const CountryDetails = () => {
 	};
 
 	const isFavorite = favorites.includes(countryDetails?.cca3);
-	console.log(isFavorite)
 
 	if (loading) return <Loading />;
 
@@ -94,12 +99,11 @@ const CountryDetails = () => {
 				<div className='relative h-48 py-30 flex items-center justify-center dark:bg-gray-800 bg-gray-300'>
 					<button
 						onClick={() => toggleFavorite(countryDetails?.cca3, !isFavorite)}
-						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition'
-					>
+						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition'>
 						{isFavorite ? (
-							<IoIosHeart className="text-red-500 text-xl" />
+							<IoIosHeart className='text-red-500 text-xl' />
 						) : (
-							<IoIosHeart className="text-gray-700 text-xl" />
+							<IoIosHeart className='text-gray-700 text-xl' />
 						)}
 					</button>
 					<img
@@ -175,7 +179,7 @@ const CountryDetails = () => {
 								</span>
 								<span>
 									{countryDetails.gdp.length
-										? countryDetails.gdp.at(-1).value.toLocaleString()
+										? countryDetails.gdp.at(-1).value.toLocaleString() + ' $'
 										: 'N/A'}
 								</span>
 							</div>
@@ -281,6 +285,28 @@ const CountryDetails = () => {
 							</span>
 						))}
 					</div>
+				</div>
+			</div>
+
+			<div className='grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'>
+				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
+					<h2 className='font-bold text-xl mb-4'>
+						{t('population_area_chart')}
+					</h2>
+					<PopulationAreaChart
+						population={countryDetails?.population?.value}
+						area={countryDetails?.area}
+					/>
+				</div>
+
+				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
+					<h2 className='font-bold text-xl mb-4'>
+						{t('gdp_per_capita')} (năm)
+					</h2>
+					<GDPChart
+						gdp={countryDetails?.gdp?.at(-1)?.value}
+						population={countryDetails?.population?.value}
+					/>
 				</div>
 			</div>
 

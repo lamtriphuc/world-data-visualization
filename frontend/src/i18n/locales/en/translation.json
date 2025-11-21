@@ -104,5 +104,8 @@
   "distribution_area": "Area distribution",
   "distribution_population": "Population distribution",
   "value": "Value",
-  "all_countries": "All Countries"
+  "all_countries": "All Countries",
+  "population_area_chart": "Population / Area Chart",
+  "gdp_per_capita": "GDP per capita",
+  "all": "All"
 }

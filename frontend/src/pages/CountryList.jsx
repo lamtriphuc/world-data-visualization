@@ -17,7 +17,6 @@ import SortOptions from '../components/Layout/SortOptions';
 
 const CountryList = () => {
 	const [countries, setCountries] = useState([]);
-	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState();
 	const [loading, setLoading] = useState(true);
 
@@ -28,10 +27,13 @@ const CountryList = () => {
 	const [suggestions, setSuggestions] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
 
-	const [searchParams] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 	const { t } = useTranslation();
 	const [favorites, setFavorites] = useState([]);
 	const currentLang = localStorage.getItem('lang');
+
+	// Get page from URL or default to 1
+	const page = parseInt(searchParams.get('page')) || 1;
 
 	const regionParam = searchParams.get('region')
 		? `&region=${searchParams.get('region')}`
@@ -149,6 +151,13 @@ const CountryList = () => {
 		return found?.name_vi || name;
 	};
 
+	// Function to update page in URL
+	const updatePage = (newPage) => {
+		const params = new URLSearchParams(searchParams);
+		params.set('page', newPage.toString());
+		setSearchParams(params);
+	};
+
 	if (loading) return <Loading />;
 
 	const handleToggleFavorite = async (countryCode, newState) => {
@@ -243,14 +252,14 @@ const CountryList = () => {
 			</div>
 			<div className='flex justify-center gap-2 mt-15 flex-wrap'>
 				<button
-					onClick={() => setPage(1)}
+					onClick={() => updatePage(1)}
 					disabled={page === 1}
 					className='px-3 py-1 rounded-lg bg-transparent text-gray-800 dark:text-gray-200 disabled:opacity-50'>
 					{'<<'}
 				</button>
 				{page >= 2 && (
 					<button
-						onClick={() => setPage(page - 1)}
+						onClick={() => updatePage(page - 1)}
 						className='px-3 py-1 rounded-lg bg-transparent text-gray-800 dark:text-gray-200'>
 						{page - 1}
 					</button>
@@ -261,7 +270,7 @@ const CountryList = () => {
 				</button>
 				{page + 1 < totalPages && (
 					<button
-						onClick={() => setPage(page + 1)}
+						onClick={() => updatePage(page + 1)}
 						className='px-3 py-1 rounded-lg bg-transparent text-gray-800 dark:text-gray-200'>
 						{page + 1}
 					</button>
@@ -273,13 +282,13 @@ const CountryList = () => {
 				)}
 				{page < totalPages && (
 					<button
-						onClick={() => setPage(totalPages)}
+						onClick={() => updatePage(totalPages)}
 						className='px-3 py-1 rounded-lg bg-transparent text-gray-800 dark:text-gray-200'>
 						{totalPages}
 					</button>
 				)}
 				<button
-					onClick={() => setPage(totalPages)}
+					onClick={() => updatePage(totalPages)}
 					disabled={page === totalPages}
 					className='px-3 py-1 rounded-lg bg-transparent text-gray-800 dark:text-gray-200 disabled:opacity-50'>
 					{'>>'}
