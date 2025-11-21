@@ -40,6 +40,11 @@ const FilterRegionSubregion = () => {
 	const handleFilterChange = (e) => {
 		const value = e.target.value;
 
+		if (value === 'all') {
+			setSearchParams('');
+			return;
+		}
+
 		if (Object.keys(groupedSubregions).includes(value)) {
 			searchParams.set('region', value);
 			searchParams.delete('subregion');
@@ -68,9 +73,10 @@ const FilterRegionSubregion = () => {
 				className='appearance-none w-74 px-6 py-3 rounded-md border dark:border-gray-600 
 					bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 
 					focus:outline-none cursor-pointer pr-10'>
-				<option value='' disabled hidden>
+				<option value='' disabled hidden selected>
 					{t('filter_region')}
 				</option>
+				<option value='all'>{t('all')}</option>
 
 				{Object.entries(groupedSubregions).map(([region, subs]) => (
 					<>

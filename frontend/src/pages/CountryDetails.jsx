@@ -7,7 +7,7 @@ import {
 	FiGlobe,
 } from 'react-icons/fi';
 import { LuFlagTriangleRight } from 'react-icons/lu';
-import { IoMdTrendingUp } from 'react-icons/io';
+import { IoIosHeart, IoMdTrendingUp } from 'react-icons/io';
 import MiniMap from '../components/Map/MiniMap';
 import { useEffect, useState } from 'react';
 import { getCountryDetails } from '../services/country.service';
@@ -15,20 +15,45 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Loading from '../components/Layout/Loading';
 import translated from '../scripts/countries_translated.json';
+import {
+	addFavorite,
+	getFavoriteCodes,
+	removeFavorite,
+} from '../services/auth.service';
+import PopulationAreaChart from '../components/Charts/PopulationAreaChart';
+import GDPChart from '../components/Charts/GDPChart';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [favorites, setFavorites] = useState([]);
 	const { code } = useParams();
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		const fetchFavorites = async () => {
+			const token = localStorage.getItem('token');
+			if (!token) return;
+
+			try {
+				const data = await getFavoriteCodes();
+				setFavorites(data);
+			} catch (error) {
+				console.log('Get favorite fail: ', error);
+			}
+		};
+
+		fetchFavorites();
+	}, []);
+
+	useEffect(() => {
 		const fetchCountryDetails = async () => {
 			try {
 				const response = await getCountryDetails(code);
 				setCountryDetails(response);
+				window.scrollTo(0, 0);
 			} catch (error) {
 				console.error(error);
 			} finally {
@@ -37,19 +62,6 @@ const CountryDetails = () => {
 		};
 		fetchCountryDetails();
 	}, [code]);
-
-	// useEffect(() => {
-	// 	const fetchLatestGdp = async () => {
-	// 		try {
-	// 			const data = await getLatestGdp(code);
-	// 			setGdp(data.value.toLocaleString());
-	// 			setYear(data.year);
-	// 		} catch (error) {
-	// 			console.error(error);
-	// 		}
-	// 	};
-	// 	fetchLatestGdp();
-	// }, [code]);
 
 	const getTranslatedName = (name) => {
 		const found = translated.find((c) => c.name === name);
@@ -61,6 +73,22 @@ const CountryDetails = () => {
 		return found?.officialName_vi || officialName;
 	};
 
+	const toggleFavorite = async (countryCode, newState) => {
+		try {
+			if (newState) {
+				await addFavorite(countryCode);
+				setFavorites((prev) => [...prev, countryCode]);
+			} else {
+				await removeFavorite(countryCode);
+				setFavorites((prev) => prev.filter((c) => c !== countryCode));
+			}
+		} catch (error) {
+			console.log('Favorite err: ', error);
+		}
+	};
+
+	const isFavorite = favorites.includes(countryDetails?.cca3);
+
 	if (loading) return <Loading />;
 
 	return (
@@ -68,6 +96,15 @@ const CountryDetails = () => {
 			{/* Flag, name */}
 			<div className='rounded-lg overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
 				<div className='relative h-48 py-30 flex items-center justify-center dark:bg-gray-800 bg-gray-300'>
+					<button
+						onClick={() => toggleFavorite(countryDetails?.cca3, !isFavorite)}
+						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition'>
+						{isFavorite ? (
+							<IoIosHeart className='text-red-500 text-xl' />
+						) : (
+							<IoIosHeart className='text-gray-700 text-xl' />
+						)}
+					</button>
 					<img
 						className='h-24 sm:h-32 md:h-40 border-4 border-white rounded shadow-2xl object-contain'
 						src={countryDetails.flag}
@@ -141,7 +178,7 @@ const CountryDetails = () => {
 								</span>
 								<span>
 									{countryDetails.gdp.length
-										? countryDetails.gdp.at(-1).value.toLocaleString()
+										? countryDetails.gdp.at(-1).value.toLocaleString() + ' $'
 										: 'N/A'}
 								</span>
 							</div>
@@ -248,6 +285,28 @@ const CountryDetails = () => {
 							</span>
 						))}
 					</div>
+				</div>
+			</div>
+
+			<div className='grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'>
+				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
+					<h2 className='font-bold text-xl mb-4'>
+						{t('population_area_chart')}
+					</h2>
+					<PopulationAreaChart
+						population={countryDetails?.population?.value}
+						area={countryDetails?.area}
+					/>
+				</div>
+
+				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
+					<h2 className='font-bold text-xl mb-4'>
+						{t('gdp_per_capita')} (năm)
+					</h2>
+					<GDPChart
+						gdp={countryDetails?.gdp?.at(-1)?.value}
+						population={countryDetails?.population?.value}
+					/>
 				</div>
 			</div>
 
