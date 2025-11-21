@@ -8,12 +8,12 @@ const GDPChart = ({ gdp, population }) => {
 	const data = [
 		{
 			name: t('gdp_per_capita'),
-			value: Math.round(gdpPerCapita),
+			[t('value')]: Math.round(gdpPerCapita),
 		},
 	];
 
 	const handleValue = (value) => {
-		return value.toLocaleString() + '$';
+		return value.toLocaleString() + '$ / ' + t('year');
 	};
 
 	return (
@@ -36,7 +36,7 @@ const GDPChart = ({ gdp, population }) => {
 					itemStyle={{ color: 'black' }}
 					labelStyle={{ color: 'black' }}
 				/>
-				<Bar dataKey='value' fill='#8884d8' />
+				<Bar dataKey={t('value')} fill='#8884d8' />
 			</BarChart>
 		</div>
 	);
