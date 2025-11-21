@@ -11,7 +11,7 @@ const BASE_URL = 'https://restcountries.com/v3.1/all';
 const FIELD_GROUPS = [
     'name,cca2,cca3,region,subregion,capital',
     'cca3,population,area,latlng,timezones,borders',
-    'cca3,currencies,languages,flags,maps,coatOfArms'
+    'cca3,currencies,languages,flags,maps,independent'
 ];
 
 
@@ -53,11 +53,6 @@ async function transformAndUpsert(countryRaw) {
 async function fetchCountries() {
     console.log('Fetching data from rest coutries api...');
 
-    // for (const group of FIELD_GROUPS) {
-    //     const { data } = await axios.get(`${BASE_URL}?fields=${group}`);
-    //     results.push(data);
-    // }
-
     const requests = FIELD_GROUPS.map(group =>
         axios.get(`${BASE_URL}?fields=${group}`)
     );
@@ -72,7 +67,10 @@ async function fetchCountries() {
         return acc;
     }, {})
 
-    return Object.values(merged);
+    const allCountries = Object.values(merged);
+    const validCountries = allCountries.filter(c => c.independent === true);
+
+    return validCountries;
 }
 
 async function updateAllPopulations() {
@@ -280,7 +278,6 @@ async function runScript() {
 
 
         console.log('save success');
-        mongoose.disconnect();
     } catch (error) {
         console.log(error.message);
     }

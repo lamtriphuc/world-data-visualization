@@ -20,7 +20,11 @@ const RegionFilter = ({ regions, selectedRegion, onFilterChange }) => {
 									: 'bg-gray-100 text-gray-700 hover:bg-gray-200'
 							}
             `}>
-						{region === 'All' ? 'All' : t(`main_region.${region}`)}
+						{region === 'All'
+							? 'All'
+							: region === 'Antarctica'
+							? t(`main_region.Antarctic`)
+							: t(`main_region.${region}`)}
 					</button>
 				);
 			})}

@@ -48,6 +48,7 @@ const CountryDetails = () => {
 		fetchFavorites();
 	}, []);
 
+
 	useEffect(() => {
 		const fetchCountryDetails = async () => {
 			try {
@@ -225,10 +226,9 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${
-											countryDetails.region === 'Antarctic'
-												? 'Antarctica'
-												: countryDetails.region
+										`main_region.${countryDetails.region === 'Antarctic'
+											? 'Antarctica'
+											: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&
