@@ -48,7 +48,6 @@ const CountryDetails = () => {
 		fetchFavorites();
 	}, []);
 
-
 	useEffect(() => {
 		const fetchCountryDetails = async () => {
 			try {
@@ -179,7 +178,7 @@ const CountryDetails = () => {
 								</span>
 								<span>
 									{countryDetails.gdp.length
-										? countryDetails.gdp.at(-1).value.toLocaleString() + ' $'
+										? countryDetails.gdp.at(-1).value.toLocaleString() + '$'
 										: 'N/A'}
 								</span>
 							</div>
@@ -226,9 +225,10 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${countryDetails.region === 'Antarctic'
-											? 'Antarctica'
-											: countryDetails.region
+										`main_region.${
+											countryDetails.region === 'Antarctic'
+												? 'Antarctica'
+												: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&
@@ -301,7 +301,7 @@ const CountryDetails = () => {
 
 				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
 					<h2 className='font-bold text-xl mb-4'>
-						{t('gdp_per_capita')} (năm)
+						{t('gdp_per_capita')} ({t('year')})
 					</h2>
 					<GDPChart
 						gdp={countryDetails?.gdp?.at(-1)?.value}
