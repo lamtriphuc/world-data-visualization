@@ -194,7 +194,7 @@ const CountryDetails = () => {
 							<IoLanguage className='w-4 h-4 sm:w-5 sm:h-5  text-pink-500' />
 							<div className='flex flex-col'>
 								<span>{t('language')}</span>
-								<span>{countryDetails.languages}</span>
+								<span>{countryDetails.languages.join(', ')}</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
@@ -225,10 +225,9 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${
-											countryDetails.region === 'Antarctic'
-												? 'Antarctica'
-												: countryDetails.region
+										`main_region.${countryDetails.region === 'Antarctic'
+											? 'Antarctica'
+											: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&

@@ -7,19 +7,11 @@ const regionSchema = new mongoose.Schema({
         unique: true,
         index: true
     },
-    type: {
-        type: String,
-        enum: ['region', 'subregion'],
-        required: true
-    },
-    parentRegion: {
-        type: String,
-        default: null
-    },
-    totalPopulation: Number,
-    totalArea: Number,
-    averagePopulationDensity: Number,
-    countryCount: Number,
+    totalPopulation: { type: Number, default: 0 },
+    totalArea: { type: Number, default: 0 },
+    populationDensity: { type: Number, default: 0 },
+    independentCountryCount: { type: Number, default: 0 },
+    dependentTerritoryCount: { type: Number, default: 0 },
     lastAggregatedAt: {
         type: Date,
         default: Date.now

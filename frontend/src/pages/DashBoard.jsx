@@ -12,19 +12,21 @@ import {
 	getGlobalStats,
 	getTop10Area,
 	getTop10Population,
+	getTopLanguages,
 } from '../services/country.service';
 import Loading from '../components/Layout/Loading';
 import CountrySearch from '../components/Layout/CountrySearch';
 import InteractiveMap from '../components/Map/InteractiveMap';
 import RegionFilter from '../components/Layout/RegionFilter';
 import { useNavigate } from 'react-router-dom';
+import TopLanguagesTable from '../components/Tables/TopLanguagesTable';
 
 const regionViewStates = {
 	All: { center: [0, 20], zoom: 1 },
-	Asia: { center: [90, 30], zoom: 2.5 },
-	Europe: { center: [15, 50], zoom: 3 },
-	Africa: { center: [20, 0], zoom: 2.5 },
-	Americas: { center: [-90, 20], zoom: 2 },
+	Asia: { center: [90, 30], zoom: 2 },
+	Europe: { center: [15, 50], zoom: 1.7 },
+	Africa: { center: [20, 0], zoom: 2 },
+	Americas: { center: [-90, 20], zoom: 1.5 },
 	Oceania: { center: [135, -20], zoom: 3 },
 	Antarctica: { center: [0, -85], zoom: 2 },
 };
@@ -35,6 +37,7 @@ const regionColors = {
 	Africa: '#F4A261',
 	Americas: '#2A9D8F',
 	Oceania: '#A8DADC',
+	Antarctica: '#B0BEC5',
 	Default: '#F1FAEE',
 };
 
@@ -54,6 +57,7 @@ const Dashboard = () => {
 	const [topPopulation, setTopPopulaiton] = useState([]);
 	const [topArea, setTopArea] = useState([]);
 	const [stats, setStats] = useState();
+	const [topLanguages, setTopLanguages] = useState([]);
 
 	useEffect(() => {
 		// Tải geojson cho hình dạng bản đồ
@@ -100,6 +104,15 @@ const Dashboard = () => {
 			}
 		};
 
+		const fetchTopLanguages = async () => {
+			try {
+				const res = await getTopLanguages();
+				setTopLanguages(res.raw);
+			} catch (error) {
+				console.log('fetch top 10 area ', error);
+			}
+		};
+
 		const fetchStats = async () => {
 			try {
 				const res = await getGlobalStats();
@@ -109,6 +122,7 @@ const Dashboard = () => {
 			}
 		};
 
+		fetchTopLanguages();
 		fetchStats();
 		fetchTop10Area();
 		fetchTop10Population();
@@ -168,7 +182,6 @@ const Dashboard = () => {
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-				{/* Total Countries Card */}
 				<StatCard
 					onClick={() => navigate('/countries')}
 					title={t('total_countries')}
@@ -179,7 +192,6 @@ const Dashboard = () => {
 					iconColor={'text-blue-600'}
 				/>
 
-				{/* Total Population Card */}
 				<StatCard
 					title={t('total_population')}
 					value={stats.totalPopulation}
@@ -189,7 +201,6 @@ const Dashboard = () => {
 					iconColor={'text-green-600'}
 				/>
 
-				{/* Continents Card */}
 				<StatCard
 					onClick={() => navigate('/continent')}
 					title={t('continents')}
@@ -202,7 +213,6 @@ const Dashboard = () => {
 			</div>
 
 			<div className='relative w-full h-[400px] mt-4'>
-				{/* === Thanh Header chứa Tìm kiếm và Lọc === */}
 				<div className='absolute top-0 left-0 right-0 z-2 p-4 flex flex-col md:flex-row gap-4'>
 					<CountrySearch
 						countries={allCountryNames}
@@ -216,7 +226,7 @@ const Dashboard = () => {
 				</div>
 
 				{/* Map */}
-				<div className='w-full h-full'>
+				<div className='w-full h-[450px]'>
 					<InteractiveMap
 						ref={mapRef}
 						geoData={geoData}
@@ -229,23 +239,18 @@ const Dashboard = () => {
 				</div>
 			</div>
 
-			{/* Charts and Tables */}
-			<div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
+			<div className='mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6'>
 				{/* Continent Chart */}
 				<ContinentChart chartData={continentData} />
-
-				<div>
-					{/* Bảng TopCountriesTable */}
-					<TopCountriesTable
-						// Dữ liệu và loại (type) vẫn được truyền động
-						countries={topListType === 'population' ? topPopulation : topArea}
-						type={topListType}
-						// Truyền state và hàm handler xuống cho ComboBox nội bộ
-						topListType={topListType}
-						onTopListTypeChange={setTopListType}
-					/>
-				</div>
+				<TopLanguagesTable languages={topLanguages} />
 			</div>
+			<TopCountriesTable
+				countries={topListType === 'population' ? topPopulation : topArea}
+				type={topListType}
+				// Truyền state và hàm handler xuống cho ComboBox nội bộ
+				topListType={topListType}
+				onTopListTypeChange={setTopListType}
+			/>
 		</>
 	);
 };

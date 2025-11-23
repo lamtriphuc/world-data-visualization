@@ -175,7 +175,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 				latitude: 20,
 				zoom: 2,
 			}}
-			style={{ width: '100%', height: '100%' }}
+			style={{ width: '100%', height: '450px' }}
 			mapStyle='mapbox://styles/mapbox/navigation-day-v1'
 			onMouseMove={onHover}
 			onClick={onClick}
