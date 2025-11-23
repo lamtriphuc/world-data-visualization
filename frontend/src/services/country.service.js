@@ -81,8 +81,10 @@ export const getGlobalStats = async () => {
 };
 
 export const getTopLanguages = async (region) => {
+	const params = {};
+	if (region) params.region = region;
 	const response = await axios.get(
-		`${import.meta.env.VITE_BACKEND_URL}/api/countries/language?region=${region}`
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/language`, { params }
 	);
 	return response.data.data;
 };

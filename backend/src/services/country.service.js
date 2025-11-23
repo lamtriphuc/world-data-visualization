@@ -164,7 +164,7 @@ export const getDataChartService = async (region) => {
 	}
 }
 
-export const getLanguageDistributionService = async (region = null) => {
+export const getLanguageDistributionService = async (region) => {
 	try {
 		// 1. Tạo đk (Match Stage)
 		const matchStage = {
