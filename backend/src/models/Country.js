@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const nameSchema = new mongoose.Schema({
     common: String,
     official: String,
-    nativeName: mongoose.Schema.Types.Mixed // {eng: {official, common}, ...}
+    // nativeName: mongoose.Schema.Types.Mixed // {eng: {official, common}, ...}
 }, { _id: false });
 
 const latlngSchema = new mongoose.Schema({
@@ -29,20 +29,22 @@ const populationSchema = new mongoose.Schema(
 );
 
 const countrySchema = new mongoose.Schema({
-    cca2: { type: String, index: true },        // ISO 3166-1 alpha-2
-    cca3: { type: String, index: true, unique: true }, // alpha-3
+    cca2: { type: String, index: true },
+    cca3: { type: String, index: true, unique: true },
     cioc: String,
     name: nameSchema,
     capital: [String],
-    region: { type: String, index: true },      // e.g., "Asia"
-    subregion: { type: String, index: true },   // e.g., "South-Eastern Asia"
+    region: { type: String, index: true },
+    subregion: { type: String, index: true },
+    independent: { type: Boolean, index: true, default: false },
+    unMember: { type: Boolean, index: true, default: false },
     population: populationSchema,
-    area: { type: Number, default: 0 },         // km2
-    latlng: latlngSchema, // [lat, lng]
+    area: { type: Number, default: 0 },
+    latlng: latlngSchema,
     timezones: [String],
-    borders: [String], // list of cca3 border countries
-    currencies: mongoose.Schema.Types.Mixed, // {USD: {name, symbol}, ...}
-    languages: mongoose.Schema.Types.Mixed,  // {eng: "English", fra: "French"}
+    borders: [String],
+    currencies: mongoose.Schema.Types.Mixed,
+    languages: mongoose.Schema.Types.Mixed,
     gdp: [gdpYearSchema],
     flags: {
         png: String,
@@ -52,8 +54,6 @@ const countrySchema = new mongoose.Schema({
         googleMaps: String,
         openStreetMaps: String
     },
-    coatOfArms: mongoose.Schema.Types.Mixed,
-    // Computed fields:
     populationDensity: { type: Number, default: null, index: true },
 }, { timestamps: true });
 

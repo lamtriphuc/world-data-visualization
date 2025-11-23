@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose, { connect } from 'mongoose';
 import Country from '../models/Country.js';
 import Region from '../models/Region.js';
+import { STANDARD_195_CCA3 } from '../constants/countryList.js'
 
 dotenv.config();
 
@@ -11,9 +12,32 @@ const BASE_URL = 'https://restcountries.com/v3.1/all';
 const FIELD_GROUPS = [
     'name,cca2,cca3,region,subregion,capital',
     'cca3,population,area,latlng,timezones,borders',
-    'cca3,currencies,languages,flags,maps,independent'
+    'cca3,currencies,languages,flags,maps,independent,unMember'
 ];
 
+// Danh sách 195 quốc gia chuẩn (193 UN Members + Vatican + Palestine)
+// const STANDARD_195_CCA3 = [
+//     "AFG", "ALB", "DZA", "AND", "AGO", "ATG", "ARG", "ARM", "AUS", "AUT",
+//     "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BTN",
+//     "BOL", "BIH", "BWA", "BRA", "BRN", "BGR", "BFA", "BDI", "CPV", "KHM",
+//     "CMR", "CAN", "CAF", "TCD", "CHL", "CHN", "COL", "COM", "COG", "CRI",
+//     "CIV", "HRV", "CUB", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "COD",
+//     "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "SWZ", "ETH", "FJI", "FIN",
+//     "FRA", "GAB", "GMB", "GEO", "DEU", "GHA", "GRC", "GRD", "GTM", "GIN",
+//     "GNB", "GUY", "HTI", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN",
+//     "IRQ", "IRL", "ISR", "ITA", "JAM", "JPN", "JOR", "KAZ", "KEN", "KIR",
+//     "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU",
+//     "LUX", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MRT", "MUS",
+//     "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MAR", "MOZ", "MMR", "NAM",
+//     "NRU", "NPL", "NLD", "NZL", "NIC", "NER", "NGA", "PRK", "MKD", "NOR",
+//     "OMN", "PAK", "PLW", "PAN", "PNG", "PRY", "PER", "PHL", "POL", "PRT",
+//     "QAT", "ROU", "RUS", "RWA", "KNA", "LCA", "WSM", "SMR", "STP", "SAU",
+//     "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF",
+//     "KOR", "SSD", "ESP", "LKA", "VCT", "PSE", "SDN", "SUR", "SWE", "CHE",
+//     "SYR", "TJK", "TZA", "THA", "TLS", "TGO", "TON", "TTO", "TUN", "TUR",
+//     "TKM", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "URY", "UZB", "VUT",
+//     "VEN", "VNM", "YEM", "ZMB", "ZWE"
+// ];
 
 async function transformAndUpsert(countryRaw) {
     const cca3 = countryRaw.cca3;
@@ -22,6 +46,8 @@ async function transformAndUpsert(countryRaw) {
     const area = countryRaw.area || 0;
     const rawLatLng = countryRaw.latlng || [];
 
+    const isStandardCountry = STANDARD_195_CCA3.includes(cca3);
+
     const doc = {
         cca3,
         cca2: countryRaw.cca2,
@@ -29,11 +55,12 @@ async function transformAndUpsert(countryRaw) {
         name: {
             common: countryRaw.name?.common,
             official: countryRaw.name?.official,
-            nativeName: countryRaw.name?.nativeName
         },
         capital: countryRaw.capital || [],
         region: countryRaw.region || 'Unknown',
         subregion: countryRaw.subregion || null,
+        independent: isStandardCountry,
+        unMember: countryRaw.unMember,
         area,
         latlng: (rawLatLng.length === 2) ? { lat: rawLatLng[0], lng: rawLatLng[1] } : undefined,
         timezones: countryRaw.timezones || [],
@@ -68,9 +95,9 @@ async function fetchCountries() {
     }, {})
 
     const allCountries = Object.values(merged);
-    const validCountries = allCountries.filter(c => c.independent === true);
+    // const validCountries = allCountries.filter(c => c.independent === true);
 
-    return validCountries;
+    return allCountries;
 }
 
 async function updateAllPopulations() {
@@ -137,15 +164,34 @@ async function updateAllPopulations() {
 }
 
 async function aggregateRegionsAndSubregions() {
-    // ----- Tổng hợp theo region -----
     const regions = await Country.aggregate([
         {
             $group: {
                 _id: '$region',
                 totalPopulation: { $sum: '$population.value' },
                 totalArea: { $sum: '$area' },
-                averagePopulationDensity: { $avg: '$populationDensity' },
-                countryCount: { $sum: 1 }
+                independentCountryCount: {
+                    $sum: {
+                        $cond: [{ $in: ['$cca3', STANDARD_195_CCA3] }, 1, 0]
+                    }
+                },
+
+                dependentTerritoryCount: {
+                    $sum: {
+                        $cond: [{ $in: ['$cca3', STANDARD_195_CCA3] }, 0, 1]
+                    }
+                }
+            }
+        },
+        {
+            $addFields: {
+                populationDensity: {
+                    $cond: [
+                        { $gt: ['$totalArea', 0] },
+                        { $divide: ['$totalPopulation', '$totalArea'] },
+                        0
+                    ]
+                }
             }
         }
     ]);
@@ -153,55 +199,21 @@ async function aggregateRegionsAndSubregions() {
     for (const r of regions) {
         if (!r._id) continue;
         await Region.findOneAndUpdate(
-            { name: r._id, type: 'region' },
+            { name: r._id },
             {
                 name: r._id,
-                type: 'region',
                 totalPopulation: r.totalPopulation,
                 totalArea: r.totalArea,
-                averagePopulationDensity: r.averagePopulationDensity,
-                countryCount: r.countryCount,
+                populationDensity: parseFloat(r.populationDensity.toFixed(2)),
+                independentCountryCount: r.independentCountryCount,
+                dependentTerritoryCount: r.dependentTerritoryCount,
                 lastAggregatedAt: new Date()
             },
             { upsert: true, new: true }
         );
     }
 
-    console.log(`Đã tổng hợp ${regions.length} regions.`);
-
-    // ----- Tổng hợp theo subregion -----
-    const subregions = await Country.aggregate([
-        {
-            $group: {
-                _id: { region: '$region', subregion: '$subregion' },
-                totalPopulation: { $sum: '$population.value' },
-                totalArea: { $sum: '$area' },
-                averagePopulationDensity: { $avg: '$populationDensity' },
-                countryCount: { $sum: 1 }
-            }
-        }
-    ]);
-
-    for (const s of subregions) {
-        if (!s._id.subregion) continue; // skip nếu subregion null
-
-        await Region.findOneAndUpdate(
-            { name: s._id.subregion, type: 'subregion' },
-            {
-                name: s._id.subregion,
-                type: 'subregion',
-                parentRegion: s._id.region || null,
-                totalPopulation: s.totalPopulation,
-                totalArea: s.totalArea,
-                averagePopulationDensity: s.averagePopulationDensity,
-                countryCount: s.countryCount,
-                lastAggregatedAt: new Date()
-            },
-            { upsert: true, new: true }
-        );
-    }
-
-    console.log(`Đã tổng hợp ${subregions.length} subregions.`);
+    console.log(`Đã tổng hợp ${regions.length} regions theo chuẩn 195 nước.`);
 }
 
 async function fetchGdpDataForALl() {

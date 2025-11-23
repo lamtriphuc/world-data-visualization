@@ -6,17 +6,19 @@ import {
 	getAllCountryNamesService,
 	getTop10AreaService,
 	getTop10PopulationService,
-	getGlobalStatsService,
+	getLanguageDistributionService,
 } from '../services/country.service.js';
+import { getGlobalStatsService } from '../services/region.service.js';
 import { successResponse, errorResponse } from '../utils/response.js';
 
 export const getAllCountries = async (req, res, next) => {
 	try {
-		const { region, subregion, search, page, limit, sortBy, sortOrder } =
+		const { region, subregion, search, page, limit, sortBy, sortOrder, independent } =
 			req.query;
 		const data = await getAllCountriesService({
 			region,
 			subregion,
+			independent,
 			search,
 			page,
 			limit,
@@ -115,6 +117,16 @@ export const getDataChart = async (req, res, next) => {
 		const { region } = req.query;
 		const data = await getDataChart(region);
 		return successResponse(res, data, 200, 'Data for chart');
+	} catch (error) {
+		return errorResponse(res, error.message, 500);
+	}
+};
+
+export const getLanguageDistribution = async (req, res, next) => {
+	try {
+		const { region } = req.query;
+		const data = await getLanguageDistributionService(region);
+		return successResponse(res, data, 200, 'Language data');
 	} catch (error) {
 		return errorResponse(res, error.message, 500);
 	}

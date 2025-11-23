@@ -13,39 +13,15 @@ import {
 	getStats,
 	getTop10Area,
 	getTop10Population,
+	getTopLanguages,
 } from '../services/country.service';
 import CountryCardContinent from '../components/Cards/CountryCardContient';
 import { useNavigate } from 'react-router-dom';
 import { BiGlobe } from 'react-icons/bi';
 import { getTranslatedName } from '../ultils';
 import Loading from '../components/Layout/Loading';
-
-// --- MOCK DATA ---
-// const populationData = [
-//     { name: "Russia", value: 146000000 },
-//     { name: "Germany", value: 83000000 },
-//     { name: "UK", value: 67000000 },
-//     { name: "France", value: 65000000 },
-//     { name: "Italy", value: 60000000 },
-//     { name: "Spain", value: 47000000 },
-//     { name: "Ukraine", value: 41000000 },
-//     { name: "Poland", value: 38000000 },
-//     { name: "Netherlands", value: 17000000 },
-//     { name: "Belgium", value: 11000000 },
-// ];
-
-// const areaData = [
-//     { name: "Russia", value: 17098242 },
-//     { name: "Germany", value: 357022 },
-//     { name: "UK", value: 243610 },
-//     { name: "France", value: 640679 },
-//     { name: "Italy", value: 301340 },
-//     { name: "Spain", value: 505990 },
-//     { name: "Ukraine", value: 603628 },
-//     { name: "Poland", value: 312679 },
-//     { name: "Netherlands", value: 41543 },
-//     { name: "Belgium", value: 30528 },
-// ];
+import TopLanguagesTable from '../components/Tables/TopLanguagesTable';
+import LanguageBarChart from '../components/Charts/LanguageBarChart';
 
 const Continent = () => {
 	const { t } = useTranslation();
@@ -58,6 +34,9 @@ const Continent = () => {
 	const [maxPopulation, setMaxPopulation] = useState();
 	const [topPopulation, setTopPopulaiton] = useState([]);
 	const [topArea, setTopArea] = useState([]);
+	const [topLanguages, setTopLanguages] = useState([]);
+	const [languageChartData, setLanguageChartData] = useState([]);
+	const [territory, setTerritory] = useState([]);
 	const [mode, setMode] = useState('population');
 	const [loading, setLoading] = useState(true);
 
@@ -86,6 +65,22 @@ const Continent = () => {
 			}
 		};
 
+		const fetchTerritory = async () => {
+			try {
+				const res = await getAllCountriesContinent({
+					region: region,
+					independent: false,
+					sortOrder: 1,
+					limit: 150,
+				});
+				setTerritory(res.data);
+			} catch (err) {
+				console.error(err);
+			} finally {
+				setLoading(false);
+			}
+		};
+
 		const fetchMax = async () => {
 			try {
 				const res = await getMax(region);
@@ -104,6 +99,29 @@ const Continent = () => {
 				console.error(err);
 			}
 		};
+
+		const fetchTopLanguages = async () => {
+			try {
+				const res = await getTopLanguages(region);
+
+				if (res && res.chartData) {
+					const { labels, data } = res.chartData;
+
+					// Map 2 mảng (labels, data) thành 1 mảng object [{name, value}] cho Recharts
+					const formattedData = labels.map((label, index) => ({
+						name: label,       // VD: "Arabic"
+						value: data[index] // VD: 13
+					}));
+
+					setLanguageChartData(formattedData);
+				}
+
+				setTopLanguages(res.raw);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
 		const fetchTop10Area = async () => {
 			try {
 				const res = await getTop10Area(region);
@@ -132,11 +150,15 @@ const Continent = () => {
 
 		fetchTop10Area();
 		fetchTop10Population();
+		fetchTopLanguages();
 
 		fetchMax();
 		fetchCountries();
+		fetchTerritory();
 		fetchStats();
 	}, [region]);
+
+	console.log(languageChartData)
 
 	const chartData = mode === 'population' ? topPopulation : topArea;
 
@@ -281,12 +303,30 @@ const Continent = () => {
 					</div>
 				</div>
 			</div>
+			<div className='mt-10  gap-6'>
+				<LanguageBarChart data={languageChartData} />
+			</div>
 			<div className='py-6 w-full'>
 				<h2 className='text-xl font-bold mb-4'>
 					{t('all_countries')} ({countries.length})
 				</h2>
 				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8'>
 					{countries.map((country, index) => (
+						<CountryCardContinent
+							key={index}
+							country={country}
+							index={index}
+							onClick={() => navigate(`/country/${country.cca3}`)}
+						/>
+					))}
+				</div>
+			</div>
+			<div className='py-6 w-full'>
+				<h2 className='text-xl font-bold mb-4'>
+					{t('all_territory')} ({territory.length})
+				</h2>
+				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8'>
+					{territory.map((country, index) => (
 						<CountryCardContinent
 							key={index}
 							country={country}

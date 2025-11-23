@@ -19,10 +19,11 @@ export const getAllCountries = async ({
 export const getAllCountriesContinent = async ({
 	region = "Asia",
 	limit = 150,
+	independent = true,
 	sortBy = "name",
 	sortOrder = 1
 }) => {
-	const url = `${import.meta.env.VITE_BACKEND_URL}/api/countries?region=${region}&limit=${limit}&sortBy=${sortBy}&sortOrder=${Number(sortOrder)}`;
+	const url = `${import.meta.env.VITE_BACKEND_URL}/api/countries?region=${region}&independent=${independent}&limit=${limit}&sortBy=${sortBy}&sortOrder=${Number(sortOrder)}`;
 	const response = await axios.get(url);
 	return response.data.data;
 };
@@ -75,6 +76,13 @@ export const getTop10Population = async (region = '') => {
 export const getGlobalStats = async () => {
 	const response = await axios.get(
 		`${import.meta.env.VITE_BACKEND_URL}/api/countries/stats`
+	);
+	return response.data.data;
+};
+
+export const getTopLanguages = async (region) => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/language?region=${region}`
 	);
 	return response.data.data;
 };

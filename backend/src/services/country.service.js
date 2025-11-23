@@ -1,3 +1,4 @@
+import { STANDARD_195_CCA3 } from '../constants/countryList.js';
 import Country from '../models/Country.js';
 import {
 	formatCountryBasic,
@@ -9,6 +10,7 @@ export const getAllCountriesService = async ({
 	region,
 	subregion,
 	search,
+	independent = true,
 	page = 1,
 	limit = 25,
 	sortBy = 'name',
@@ -18,6 +20,7 @@ export const getAllCountriesService = async ({
 
 	if (region) query.region = region;
 	if (subregion) query.subregion = subregion;
+	query.independent = independent;
 	if (search) {
 		query.$or = [
 			{ 'name.common': { $regex: search, $options: 'i' } },
@@ -38,7 +41,11 @@ export const getAllCountriesService = async ({
 	}
 
 	const [countries, total] = await Promise.all([
-		Country.find(query).sort(sortCriteria).skip(skip).limit(Number(limit)),
+		Country.find(query)
+			.sort(sortCriteria)
+			.skip(skip)
+			.limit(Number(limit))
+			.lean(),
 		Country.countDocuments(query),
 	]);
 
@@ -56,7 +63,7 @@ export const getAllCountriesService = async ({
 export const getCountryByCodeService = async (code) => {
 	const country = await Country.findOne({
 		$or: [{ cca3: code.toUpperCase() }, { cca2: code.toUpperCase() }],
-	});
+	}).lean();
 
 	return formatCountryDetail(country);
 };
@@ -86,7 +93,9 @@ export const getGdpOf10YearService = async (cca3) => {
 };
 
 export const getAllCountryNamesService = async () => {
-	const countries = await Country.find();
+	const countries = await Country.find({ independent: true })
+		.select('name cca2 cca3 latlng')
+		.lean();
 	const res = countries.map((c) => formatCountryName(c));
 
 	return res;
@@ -110,49 +119,8 @@ export const getTop10AreaService = async (region) => {
 	return countries.map((c) => formatCountryDetail(c));
 };
 
-export const getGlobalStatsService = async () => {
-	// 1. Lấy tổng số quốc gia
-	const totalCountries = await Country.countDocuments({});
-
-	// 2. Dùng Aggregation để tính tổng dân số và đếm số region
-	const stats = await Country.aggregate([
-		{
-			// Nhóm TẤT CẢ document lại làm 1 (_id: null)
-			$group: {
-				_id: null,
-				// Tính tổng của trường 'population.value'
-				totalPopulation: { $sum: '$population.value' },
-				// Thêm các 'region' duy nhất vào một mảng
-				regionSet: { $addToSet: '$region' }
-			}
-		},
-		{
-			// Định dạng lại output
-			$project: {
-				_id: 0,
-				totalPopulation: 1, // Giữ lại tổng dân số
-				totalRegions: { $size: '$regionSet' } // Đếm số phần tử trong mảng regionSet
-			}
-		}
-	]);
-
-	if (stats.length === 0) {
-		return {
-			totalCountries: 0,
-			totalPopulation: 0,
-			totalRegions: 0
-		};
-	}
-
-	return {
-		totalCountries,
-		totalPopulation: stats[0].totalPopulation,
-		totalRegions: stats[0].totalRegions
-	};
-};
-
 export const getMaxArea = async () => {
-	const country = await Country.find()
+	const country = await Country.findOne({ independent: true })
 		.sort({ 'area': -1 })
 		.lean();
 
@@ -160,7 +128,7 @@ export const getMaxArea = async () => {
 };
 
 export const getMaxPopulation = async () => {
-	const country = await Country.find()
+	const country = await Country.findOne({ independent: true })
 		.sort({ 'population': -1 })
 		.lean();
 
@@ -170,30 +138,80 @@ export const getMaxPopulation = async () => {
 export const getDataChartService = async (region) => {
 	if (!region) throw new Error('Region not found');
 
-	const populationList = await Country.find({ region })
-		.sort({ 'population.value': -1 })
-		.limit(10)
-		.select({ 'name.common': 1, 'population.value': 1, _id: 0 })
-		.lean();
+	const [populationList, areaList] = await Promise.all([
+		Country.find({ region, independent: true })
+			.sort({ 'population.value': -1 })
+			.limit(10)
+			.select({ 'name.common': 1, 'population.value': 1, _id: 0 })
+			.lean(),
 
-	const mappedPopulation = populationList.map(c => ({
-		name: c.name.common,
-		value: c.population?.value || 0
-	}));
-
-	const areaList = await Country.find({ region })
-		.sort({ area: -1 })
-		.limit(10)
-		.select({ 'name.common': 1, area: 1, _id: 0 })
-		.lean();
-
-	const mappedArea = areaList.map(c => ({
-		name: c.name.common,
-		value: c.area || 0
-	}));
+		Country.find({ region, independent: true })
+			.sort({ area: -1 })
+			.limit(10)
+			.select({ 'name.common': 1, area: 1, _id: 0 })
+			.lean()
+	]);
 
 	return {
-		populationList: mappedPopulation,
-		areaList: mappedArea
+		populationList: populationList.map(c => ({
+			name: c.name.common,
+			value: c.population?.value || 0
+		})),
+		areaList: areaList.map(c => ({
+			name: c.name.common,
+			value: c.area || 0
+		}))
 	}
 }
+
+export const getLanguageDistributionService = async (region = null) => {
+	try {
+		// 1. Tạo đk (Match Stage)
+		const matchStage = {
+			cca3: { $in: STANDARD_195_CCA3 },
+			languages: { $exists: true, $ne: null } // bỏ qua null
+		};
+
+		if (region) {
+			matchStage.region = region;
+		}
+
+		const stats = await Country.aggregate([
+			{ $match: matchStage },
+
+			//  Object { key: value } -> [{k: key, v: value}]
+			// VD: { eng: "English" } -> [{ k: "eng", v: "English" }]
+			{
+				$project: {
+					languageArray: { $objectToArray: "$languages" }
+				}
+			},
+
+			// Tách mảng ra từng dòng document riêng biệt
+			{ $unwind: "$languageArray" },
+
+			// Gom nhóm theo TÊN ngôn ngữ (value)
+			{
+				$group: {
+					_id: "$languageArray.v", // Group theo "English", "Vietnamese"...
+					count: { $sum: 1 } // đếm
+				}
+			},
+
+			{ $sort: { count: -1, _id: 1 } },
+
+			{ $limit: 10 }
+		]);
+
+		return {
+			chartData: {
+				labels: stats.map(item => item._id),
+				data: stats.map(item => item.count)
+			},
+			raw: stats // data thô tư trên
+		};
+
+	} catch (error) {
+		throw new Error(`Error aggregate language: ${error.message}`);
+	}
+};
