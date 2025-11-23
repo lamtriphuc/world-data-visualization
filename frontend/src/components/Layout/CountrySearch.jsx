@@ -18,15 +18,15 @@ const CountrySearch = ({ countries, onSelect }) => {
 
 	const searchableCountries = useMemo(() => {
 		return countries.map((c) => {
-			const found = translated.find((t) =>
-				t.name.toLowerCase() === c.name.toLowerCase()
+			const found = translated.find(
+				(t) => t.name.toLowerCase() === c.name.toLowerCase()
 			);
 
 			return {
 				...c,
 				name_en: c.name,
 				name_vi: found?.name_vi || c.name, // fallback tiếng Anh nếu thiếu
-				searchString: `${c.name} ${found?.name_vi || ''}`.toLowerCase()
+				searchString: `${c.name} ${found?.name_vi || ''}`.toLowerCase(),
 			};
 		});
 	}, [countries]);
@@ -43,7 +43,9 @@ const CountrySearch = ({ countries, onSelect }) => {
 	useEffect(() => {
 		if (selectedCountry) {
 			// Nếu đang chọn 1 nước, hiển thị tên theo ngôn ngữ hiện tại
-			const newName = isVietnamese ? selectedCountry.name_vi : selectedCountry.name_en;
+			const newName = isVietnamese
+				? selectedCountry.name_vi
+				: selectedCountry.name_en;
 			if (query !== newName) {
 				setQuery(newName);
 			}
@@ -81,7 +83,7 @@ const CountrySearch = ({ countries, onSelect }) => {
 		<div className='relative w-full md:w-72' ref={inputRef}>
 			<input
 				type='text'
-				className='w-full rounded-md border border-gray-300 bg-white dark:bg-gray-800 py-2 pl-3 pr-10 text-gray-900 shadow-md focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm text-gray-900 dark:text-gray-300'
+				className='w-full rounded-md border border-gray-600 bg-white dark:bg-gray-800 py-3 px-6 pr-10 shadow-md focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm text-gray-900 dark:text-white'
 				placeholder={t('search_placeholder')}
 				value={query}
 				onChange={handleInputChange} // Dùng hàm handler mới
@@ -91,19 +93,20 @@ const CountrySearch = ({ countries, onSelect }) => {
 				<ul className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 sm:text-sm dark:bg-gray-800'>
 					{filteredCountries.map((country) => {
 						// Logic hiển thị tên
-						const displayName = isVietnamese ? country.name_vi : country.name_en;
+						const displayName = isVietnamese
+							? country.name_vi
+							: country.name_en;
 						const subName = isVietnamese ? country.name_en : country.name_vi;
 
 						return (
 							<li
 								key={country.cca3}
 								className='cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white dark:text-gray-300 dark:hover:text-white group'
-								onClick={() => handleSelect(country)}
-							>
-								<div className="flex flex-col">
-									<span className="font-medium">{displayName}</span>
+								onClick={() => handleSelect(country)}>
+								<div className='flex flex-col'>
+									<span className='font-medium'>{displayName}</span>
 									{subName !== displayName && (
-										<span className="text-xs text-gray-500 group-hover:text-gray-200">
+										<span className='text-xs text-gray-500 group-hover:text-gray-200'>
 											{subName}
 										</span>
 									)}

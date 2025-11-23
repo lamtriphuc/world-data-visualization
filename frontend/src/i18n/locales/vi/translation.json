@@ -106,11 +106,13 @@
   "value": "Giá trị",
   "all_countries": "Tất cả quốc gia",
   "population_area_chart": "Biểu đồ dân số / diện tích",
-  "gdp_per_capita": "GDP trên đầu người",
+  "gdp_per_capita": "GDP bình quân đầu người",
   "all": "Tất cả",
   "year": "Năm",
   "top_10_languages": "Top 10 ngôn ngữ phổ biến nhất",
   "countries_use": "Số quốc gia sử dụng",
   "all_territory": "Vùng lãnh thổ / Khu vực khác",
-  "top10_languages_continent": "Top 10 ngôn ngữ được sử dụng nhiều nhất"
+  "top10_languages_continent": "Top 10 ngôn ngữ được sử dụng nhiều nhất",
+  "population_density": "Mật độ dân số",
+  "default": "Mặc định"
 }
