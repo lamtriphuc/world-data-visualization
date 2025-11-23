@@ -40,6 +40,7 @@ const SortOptions = () => {
 				<option value='' disabled hidden>
 					{t('sort_by')}
 				</option>
+				<option value=''>{t('default')}</option>
 				<option value='population_1'>{t('population_ascending')}</option>
 				<option value='population_-1'>{t('population_descending')}</option>
 				<option value='area_1'>{t('area_ascending')}</option>

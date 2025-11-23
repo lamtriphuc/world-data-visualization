@@ -6,6 +6,8 @@ import {
 	FiClock,
 	FiGlobe,
 } from 'react-icons/fi';
+import { GrMoney } from 'react-icons/gr';
+import { FaMapPin } from 'react-icons/fa6';
 import { LuFlagTriangleRight } from 'react-icons/lu';
 import { IoIosHeart, IoMdTrendingUp } from 'react-icons/io';
 import MiniMap from '../components/Map/MiniMap';
@@ -20,8 +22,6 @@ import {
 	getFavoriteCodes,
 	removeFavorite,
 } from '../services/auth.service';
-import PopulationAreaChart from '../components/Charts/PopulationAreaChart';
-import GDPChart from '../components/Charts/GDPChart';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
@@ -31,6 +31,11 @@ const CountryDetails = () => {
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
 	const navigate = useNavigate();
+
+	const population_density =
+		countryDetails?.population?.value / countryDetails?.area;
+	const gdp_per_capita =
+		countryDetails?.gdp?.at(-1)?.value / countryDetails?.population?.value;
 
 	useEffect(() => {
 		const fetchFavorites = async () => {
@@ -167,19 +172,30 @@ const CountryDetails = () => {
 							</div>
 						</div>
 						<div className='flex gap-2'>
-							<IoMdTrendingUp className='w-4 h-4 sm:w-5 sm:h-5  text-purple-500' />
+							<FiGlobe className='w-4 h-4 sm:w-5 sm:h-5  text-cyan-500' />
+							<div className='flex flex-col'>
+								<span>{t('region')}</span>
+								<span>
+									{t(
+										`main_region.${
+											countryDetails.region === 'Antarctic'
+												? 'Antarctica'
+												: countryDetails.region
+										}`
+									)}
+									{countryDetails.subregion &&
+										` - ${t(`subregion.${countryDetails.subregion}`)}`}
+								</span>
+							</div>
+						</div>
+						<div className='flex gap-2'>
+							<FaMapPin className='w-4 h-4 sm:w-5 sm:h-5  text-violet-500' />
 							<div className='flex flex-col'>
 								<span>
-									GDP (
-									{countryDetails.gdp?.length
-										? countryDetails.gdp.at(-1)?.year
-										: ''}
-									)
+									{t('population_density')} ({countryDetails.population?.year})
 								</span>
 								<span>
-									{countryDetails.gdp.length
-										? countryDetails.gdp.at(-1).value.toLocaleString() + '$'
-										: 'N/A'}
+									{population_density.toFixed(0)} {t('people')} / km²
 								</span>
 							</div>
 						</div>
@@ -205,7 +221,7 @@ const CountryDetails = () => {
 							</div>
 						</div>
 						<div className='flex gap-2'>
-							<FiClock className='w-4 h-4 sm:w-5 sm:h-5  text-indigo-500' />
+							<FiClock className='w-4 h-4 sm:w-5 sm:h-5 text-indigo-500' />
 							<div className='flex flex-col'>
 								<span>{t('timezone')}</span>
 								<div className='flex flex-wrap gap-x-2'>
@@ -220,18 +236,35 @@ const CountryDetails = () => {
 							</div>
 						</div>
 						<div className='flex gap-2'>
-							<FiGlobe className='w-4 h-4 sm:w-5 sm:h-5  text-cyan-500' />
+							<IoMdTrendingUp className='w-4 h-4 sm:w-5 sm:h-5 text-purple-500' />
 							<div className='flex flex-col'>
-								<span>{t('region')}</span>
 								<span>
-									{t(
-										`main_region.${countryDetails.region === 'Antarctic'
-											? 'Antarctica'
-											: countryDetails.region
-										}`
-									)}
-									{countryDetails.subregion &&
-										` - ${t(`subregion.${countryDetails.subregion}`)}`}
+									GDP (
+									{countryDetails.gdp?.length
+										? countryDetails.gdp.at(-1)?.year
+										: ''}
+									)
+								</span>
+								<span>
+									{countryDetails.gdp.length
+										? countryDetails.gdp.at(-1).value.toLocaleString() + ' $'
+										: 'N/A'}
+								</span>
+							</div>
+						</div>
+
+						<div className='flex gap-2'>
+							<GrMoney className='w-4 h-4 sm:w-5 sm:h-5 text-teal-500' />
+							<div className='flex flex-col'>
+								<span>
+									{t('gdp_per_capita')} (
+									{countryDetails.gdp?.length
+										? countryDetails.gdp.at(-1)?.year
+										: ''}
+									)
+								</span>
+								<span>
+									{gdp_per_capita.toFixed(0)} $ / {t('year')}
 								</span>
 							</div>
 						</div>
@@ -284,28 +317,6 @@ const CountryDetails = () => {
 							</span>
 						))}
 					</div>
-				</div>
-			</div>
-
-			<div className='grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'>
-				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
-					<h2 className='font-bold text-xl mb-4'>
-						{t('population_area_chart')}
-					</h2>
-					<PopulationAreaChart
-						population={countryDetails?.population?.value}
-						area={countryDetails?.area}
-					/>
-				</div>
-
-				<div className='flex flex-col bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
-					<h2 className='font-bold text-xl mb-4'>
-						{t('gdp_per_capita')} ({t('year')})
-					</h2>
-					<GDPChart
-						gdp={countryDetails?.gdp?.at(-1)?.value}
-						population={countryDetails?.population?.value}
-					/>
 				</div>
 			</div>
 

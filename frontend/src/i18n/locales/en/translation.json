@@ -112,5 +112,7 @@
   "top_10_languages": "Top 10 most popular languages",
   "countries_use": "Number of countries using",
   "all_territory": "Territory",
-  "top10_languages_continent": "Top 10 most used languages"
+  "top10_languages_continent": "Top 10 most used languages",
+  "population_density": "Population density",
+  "default": "Default"
 }
