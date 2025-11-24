@@ -129,7 +129,10 @@ const CountryDetails = () => {
 							: countryDetails.officialName}
 					</p>
 					<div className='flex items-center justify-center gap-2'>
-						<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
+						<span
+							onClick={() => navigate(`/continent/${countryDetails.region}`)}
+							className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl cursor-pointer'
+						>
 							{t(`main_region.${countryDetails.region}`)}
 						</span>
 						{countryDetails.subregion && (
@@ -177,10 +180,9 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${
-											countryDetails.region === 'Antarctic'
-												? 'Antarctica'
-												: countryDetails.region
+										`main_region.${countryDetails.region === 'Antarctic'
+											? 'Antarctica'
+											: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&

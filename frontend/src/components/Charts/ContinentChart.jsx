@@ -27,8 +27,7 @@ const ContinentChart = ({ chartData }) => {
 				<div className='bg-white p-3 rounded-lg shadow-lg border border-gray-200'>
 					<p className='text-gray-900'>
 						{t(
-							`main_region.${
-								chartData.name === 'Antarctic' ? 'Antarctica' : chartData.name
+							`main_region.${chartData.name === 'Antarctic' ? 'Antarctica' : chartData.name
 							}`
 						)}
 					</p>
@@ -51,6 +50,7 @@ const ContinentChart = ({ chartData }) => {
 			<ResponsiveContainer width='100%' height={300}>
 				<PieChart>
 					<Pie
+						isAnimationActive={false}
 						data={chartData}
 						dataKey='value'
 						nameKey='name'
@@ -80,8 +80,7 @@ const ContinentChart = ({ chartData }) => {
 						<div className='flex-1'>
 							<p className='text-gray-700 dark:text-gray-300 text-sm'>
 								{t(
-									`main_region.${
-										item.name === 'Antarctic' ? 'Antarctica' : item.name
+									`main_region.${item.name === 'Antarctic' ? 'Antarctica' : item.name
 									}`
 								)}
 							</p>

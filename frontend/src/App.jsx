@@ -50,7 +50,7 @@ const App = () => {
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/favorite' element={<Favorite />} />
-					<Route path='/continent' element={<Continent />} />
+					<Route path='/continent/:region' element={<Continent />} />
 
 				</Route>
 			</Routes>
