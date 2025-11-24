@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import translated from '../../scripts/countries_translated.json';
+import { translateCapital } from '../../scripts/capital_names_vi';
 
 const CompareTable = ({ countries }) => {
 	const { t } = useTranslation();
@@ -77,9 +78,17 @@ const CompareTable = ({ countries }) => {
 												defaultValue: '-',
 										  })
 										: field.key === 'name'
-										? getTranslatedName(getValue(c, 'name'))
+										? currentLang === 'vi'
+											? getTranslatedName(getValue(c, 'name'))
+											: getValue(c, 'name')
 										: field.key === 'officialName'
-										? getTranslatedOfficialName(getValue(c, 'officialName'))
+										? currentLang === 'vi'
+											? getTranslatedOfficialName(getValue(c, 'officialName'))
+											: getValue(c, 'officialName')
+										: field.key === 'capital'
+										? currentLang === 'vi'
+											? translateCapital(getValue(c, 'capital'))
+											: getValue(c, 'capital')
 										: field.key === 'population'
 										? getValue(c, field.key).value.toLocaleString()
 										: getValue(c, field.key)?.toLocaleString?.() ||

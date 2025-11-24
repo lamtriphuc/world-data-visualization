@@ -112,8 +112,8 @@ const Continent = () => {
 
 					// Map 2 mảng (labels, data) thành 1 mảng object [{name, value}] cho Recharts
 					const formattedData = labels.map((label, index) => ({
-						name: label,       // VD: "Arabic"
-						value: data[index] // VD: 13
+						name: label, // VD: "Arabic"
+						value: data[index], // VD: 13
 					}));
 
 					setLanguageChartData(formattedData);
@@ -179,7 +179,7 @@ const Continent = () => {
 					label={regions.find((r) => r.value === curRegion)?.label}
 					items={regions.map((r) => ({
 						label: r.label,
-						onClick: () => setRegion(r.value),
+						onClick: () => navigate(`/continent/${r.value}`),
 					}))}
 				/>
 			</div>
@@ -247,8 +247,7 @@ const Continent = () => {
 					<div className='grid grid-cols-2 gap-6'>
 						<div
 							onClick={() => navigate(`/country/${maxPopulation.cca3}`)}
-							className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'
-						>
+							className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'>
 							<p className='text-gray-700 dark:text-gray-300 mb-2'>
 								{t('text_most_populous')}
 							</p>
@@ -282,8 +281,7 @@ const Continent = () => {
 						</div>
 						<div
 							onClick={() => navigate(`/country/${maxArea.cca3}`)}
-							className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'
-						>
+							className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'>
 							<p className='text-gray-700 dark:text-gray-300 mb-2'>
 								{t('text_largest_area')}
 							</p>

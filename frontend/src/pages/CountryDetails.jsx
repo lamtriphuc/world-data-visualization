@@ -131,8 +131,7 @@ const CountryDetails = () => {
 					<div className='flex items-center justify-center gap-2'>
 						<span
 							onClick={() => navigate(`/continent/${countryDetails.region}`)}
-							className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl cursor-pointer'
-						>
+							className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl cursor-pointer'>
 							{t(`main_region.${countryDetails.region}`)}
 						</span>
 						{countryDetails.subregion && (
@@ -180,9 +179,10 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${countryDetails.region === 'Antarctic'
-											? 'Antarctica'
-											: countryDetails.region
+										`main_region.${
+											countryDetails.region === 'Antarctic'
+												? 'Antarctica'
+												: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&
@@ -223,7 +223,7 @@ const CountryDetails = () => {
 							</div>
 						</div>
 						<div className='flex gap-2'>
-							<FiClock className='w-4 h-4 sm:w-5 sm:h-5 text-indigo-500' />
+							<FiClock className='w-10 h-10 sm:w-10 sm:h-10 text-indigo-500' />
 							<div className='flex flex-col'>
 								<span>{t('timezone')}</span>
 								<div className='flex flex-wrap gap-x-2'>

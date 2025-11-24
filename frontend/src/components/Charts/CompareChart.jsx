@@ -91,7 +91,7 @@ const CompareChart = ({ countries }) => {
 						<Tooltip
 							labelClassName='text-gray-800'
 							formatter={(v) => v.toLocaleString()}
-							labelFormatter={(label) => `Quốc gia: ${label}`}
+							labelFormatter={(label) => `${t('country')}: ${label}`}
 						/>
 						<Legend />
 
