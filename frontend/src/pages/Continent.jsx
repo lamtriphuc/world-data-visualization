@@ -16,7 +16,7 @@ import {
 	getTopLanguages,
 } from '../services/country.service';
 import CountryCardContinent from '../components/Cards/CountryCardContient';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BiGlobe } from 'react-icons/bi';
 import { getTranslatedName } from '../ultils';
 import Loading from '../components/Layout/Loading';
@@ -27,7 +27,7 @@ const Continent = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const currentLang = localStorage.getItem('lang');
-	const [region, setRegion] = useState('Asia');
+	// const [region, setRegion] = useState('Asia');
 	const [countries, setCountries] = useState([]);
 	const [stats, setStats] = useState();
 	const [maxArea, setMaxArea] = useState();
@@ -39,6 +39,9 @@ const Continent = () => {
 	const [territory, setTerritory] = useState([]);
 	const [mode, setMode] = useState('population');
 	const [loading, setLoading] = useState(true);
+
+	const { region } = useParams();
+	const curRegion = region || 'Asia';
 
 	const regions = [
 		{ label: t('main_region.Asia'), value: 'Asia' },
@@ -53,7 +56,7 @@ const Continent = () => {
 		const fetchCountries = async () => {
 			try {
 				const res = await getAllCountriesContinent({
-					region: region,
+					region: curRegion,
 					sortOrder: 1,
 					limit: 150,
 				});
@@ -68,7 +71,7 @@ const Continent = () => {
 		const fetchTerritory = async () => {
 			try {
 				const res = await getAllCountriesContinent({
-					region: region,
+					region: curRegion,
 					independent: false,
 					sortOrder: 1,
 					limit: 150,
@@ -83,7 +86,7 @@ const Continent = () => {
 
 		const fetchMax = async () => {
 			try {
-				const res = await getMax(region);
+				const res = await getMax(curRegion);
 				setMaxArea(res.maxArea);
 				setMaxPopulation(res.maxPopulation);
 			} catch (err) {
@@ -93,7 +96,7 @@ const Continent = () => {
 
 		const fetchStats = async () => {
 			try {
-				const res = await getStats(region);
+				const res = await getStats(curRegion);
 				setStats(res);
 			} catch (err) {
 				console.error(err);
@@ -102,7 +105,7 @@ const Continent = () => {
 
 		const fetchTopLanguages = async () => {
 			try {
-				const res = await getTopLanguages(region);
+				const res = await getTopLanguages(curRegion);
 
 				if (res && res.chartData) {
 					const { labels, data } = res.chartData;
@@ -124,7 +127,7 @@ const Continent = () => {
 
 		const fetchTop10Area = async () => {
 			try {
-				const res = await getTop10Area(region);
+				const res = await getTop10Area(curRegion);
 				const data = res.map((c) => ({
 					name: c.name,
 					value: c.area,
@@ -137,7 +140,7 @@ const Continent = () => {
 
 		const fetchTop10Population = async () => {
 			try {
-				const res = await getTop10Population(region);
+				const res = await getTop10Population(curRegion);
 				const data = res.map((c) => ({
 					name: c.name,
 					value: c.population.value,
@@ -156,9 +159,7 @@ const Continent = () => {
 		fetchCountries();
 		fetchTerritory();
 		fetchStats();
-	}, [region]);
-
-	console.log(languageChartData)
+	}, [curRegion]);
 
 	const chartData = mode === 'population' ? topPopulation : topArea;
 
@@ -175,7 +176,7 @@ const Continent = () => {
 				</button>
 
 				<Dropdown
-					label={regions.find((r) => r.value === region)?.label}
+					label={regions.find((r) => r.value === curRegion)?.label}
 					items={regions.map((r) => ({
 						label: r.label,
 						onClick: () => setRegion(r.value),
@@ -208,104 +209,121 @@ const Continent = () => {
 					iconColor={'text-purple-600'}
 				/>
 			</div>
-			<div>
-				<div className='py-6 space-y-4'>
-					<div className='flex justify-end'>
-						<Dropdown
-							label={mode === 'population' ? t('population') : t('area')}
-							items={[
-								{
-									label: t('population'),
-									onClick: () => setMode('population'),
-								},
-								{ label: t('area'), onClick: () => setMode('area') },
-							]}
-						/>
+
+			{curRegion !== 'Antarctic' && (
+				<>
+					{/* Chart */}
+					<div>
+						<div className='py-6 space-y-4'>
+							<div className='flex justify-end'>
+								<Dropdown
+									label={mode === 'population' ? t('population') : t('area')}
+									items={[
+										{
+											label: t('population'),
+											onClick: () => setMode('population'),
+										},
+										{ label: t('area'), onClick: () => setMode('area') },
+									]}
+								/>
+							</div>
+
+							<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+								<BarChartComponent data={chartData} type={mode} />
+								<PieChartComponent
+									data={chartData}
+									type={mode}
+									total={
+										mode === 'population'
+											? stats?.totalPopulation
+											: stats?.totalArea
+									}
+								/>
+							</div>
+						</div>
 					</div>
 
-					<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-						<BarChartComponent data={chartData} type={mode} />
-						<PieChartComponent
-							data={chartData}
-							type={mode}
-							total={
-								mode === 'population'
-									? stats?.totalPopulation
-									: stats?.totalArea
-							}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className='grid grid-cols-2 gap-6'>
-				<div className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'>
-					<p className='text-gray-700 dark:text-gray-300 mb-2'>
-						{t('text_most_populous')}
-					</p>
-					<div className='flex'>
-						<div className='w-25 text-7xl flex items-center justify-center mr-10'>
-							{maxPopulation?.cca2}
+					{/* Area */}
+					<div className='grid grid-cols-2 gap-6'>
+						<div
+							onClick={() => navigate(`/country/${maxPopulation.cca3}`)}
+							className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'
+						>
+							<p className='text-gray-700 dark:text-gray-300 mb-2'>
+								{t('text_most_populous')}
+							</p>
+							<div className='flex'>
+								<div className='w-25 text-7xl flex items-center justify-center mr-10'>
+									{maxPopulation?.cca2}
+								</div>
+								<div className='flex flex-col'>
+									<p className='text-gray-900 dark:text-white text-2xl font-medium'>
+										{currentLang === 'vi'
+											? getTranslatedName(maxPopulation?.name)
+											: maxPopulation?.name}
+									</p>
+									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
+										{' '}
+										{t('population')}: {maxPopulation?.population.value}{' '}
+									</p>
+									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
+										{' '}
+										{t('area')}: {maxPopulation?.area}{' '}
+									</p>
+									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
+										{' '}
+										{t('capital')}: {maxPopulation?.capital[0]}{' '}
+									</p>
+								</div>
+								<div className='w-35 p-3 rounded-lg ml-auto'>
+									<img src={maxPopulation?.flag} alt={maxPopulation?.cca2} />
+								</div>
+							</div>
 						</div>
-						<div className='flex flex-col'>
-							<p className='text-gray-900 dark:text-white text-2xl font-medium'>
-								{currentLang === 'vi'
-									? getTranslatedName(maxPopulation?.name)
-									: maxPopulation?.name}
+						<div
+							onClick={() => navigate(`/country/${maxArea.cca3}`)}
+							className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'
+						>
+							<p className='text-gray-700 dark:text-gray-300 mb-2'>
+								{t('text_largest_area')}
 							</p>
-							<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
-								{' '}
-								{t('population')}: {maxPopulation?.population.value}{' '}
-							</p>
-							<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
-								{' '}
-								{t('area')}: {maxPopulation?.area}{' '}
-							</p>
-							<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
-								{' '}
-								{t('capital')}: {maxPopulation?.capital[0]}{' '}
-							</p>
-						</div>
-						<div className='w-35 p-3 rounded-lg ml-auto'>
-							<img src={maxPopulation?.flag} alt={maxPopulation?.cca2} />
-						</div>
-					</div>
-				</div>
-				<div className='px-6 py-4 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-xl cursor-pointer'>
-					<p className='text-gray-700 dark:text-gray-300 mb-2'>
-						{t('text_largest_area')}
-					</p>
-					<div className='flex'>
-						<div className='w-25 text-7xl flex items-center justify-center mr-10'>
-							{maxArea?.cca2}
-						</div>
-						<div className='flex flex-col'>
-							<p className='text-gray-900 dark:text-white text-2xl font-medium'>
-								{currentLang === 'vi'
-									? getTranslatedName(maxArea?.name)
-									: maxArea?.name}
-							</p>
-							<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
-								{' '}
-								{t('population')}: {maxArea?.population.value}{' '}
-							</p>
-							<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
-								{' '}
-								{t('area')}: {maxArea?.area}{' '}
-							</p>
-							<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
-								{' '}
-								{t('capital')}: {maxArea?.capital[0]}{' '}
-							</p>
-						</div>
-						<div className='w-35 p-3 rounded-lg ml-auto'>
-							<img src={maxArea?.flag} alt={maxArea?.cca2} />
+							<div className='flex'>
+								<div className='w-25 text-7xl flex items-center justify-center mr-10'>
+									{maxArea?.cca2}
+								</div>
+								<div className='flex flex-col'>
+									<p className='text-gray-900 dark:text-white text-2xl font-medium'>
+										{currentLang === 'vi'
+											? getTranslatedName(maxArea?.name)
+											: maxArea?.name}
+									</p>
+									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
+										{' '}
+										{t('population')}: {maxArea?.population.value}{' '}
+									</p>
+									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
+										{' '}
+										{t('area')}: {maxArea?.area}{' '}
+									</p>
+									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
+										{' '}
+										{t('capital')}: {maxArea?.capital[0]}{' '}
+									</p>
+								</div>
+								<div className='w-35 p-3 rounded-lg ml-auto'>
+									<img src={maxArea?.flag} alt={maxArea?.cca2} />
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div className='mt-10  gap-6'>
-				<LanguageBarChart data={languageChartData} />
-			</div>
+
+					{/* Language */}
+					<div className='mt-10  gap-6'>
+						<LanguageBarChart data={languageChartData} />
+					</div>
+				</>
+			)}
+
 			<div className='py-6 w-full'>
 				<h2 className='text-xl font-bold mb-4'>
 					{t('all_countries')} ({countries.length})

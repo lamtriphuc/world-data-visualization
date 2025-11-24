@@ -94,7 +94,7 @@ export const getGdpOf10YearService = async (cca3) => {
 
 export const getAllCountryNamesService = async () => {
 	const countries = await Country.find({ independent: true })
-		.select('name cca2 cca3 latlng')
+		.select('name cca2 cca3 latlng flags')
 		.lean();
 	const res = countries.map((c) => formatCountryName(c));
 
@@ -102,7 +102,10 @@ export const getAllCountryNamesService = async () => {
 };
 
 export const getTop10PopulationService = async (region) => {
-	const filter = region ? { region: region } : {};
+	const filter = { independent: true };
+	if (region) {
+		filter.region = region;
+	}
 	const countries = await Country.find(filter)
 		.sort({ 'population.value': -1 })
 		.limit(10);
@@ -111,7 +114,10 @@ export const getTop10PopulationService = async (region) => {
 };
 
 export const getTop10AreaService = async (region) => {
-	const filter = region ? { region: region } : {};
+	const filter = { independent: true };
+	if (region) {
+		filter.region = region;
+	}
 	const countries = await Country.find(filter)
 		.sort({ 'area': -1 })
 		.limit(10);
