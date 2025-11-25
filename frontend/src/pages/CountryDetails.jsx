@@ -22,6 +22,7 @@ import {
 	getFavoriteCodes,
 	removeFavorite,
 } from '../services/auth.service';
+import { translateCapital } from '../scripts/capital_names_vi';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
@@ -152,7 +153,11 @@ const CountryDetails = () => {
 							<IoLocationOutline className='w-4 h-4 sm:w-5 sm:h-5  text-blue-500' />
 							<div className='flex flex-col'>
 								<span>{t('capital')}</span>
-								<span>{countryDetails.capital}</span>
+								<span>
+									{currentLang === 'vi'
+										? translateCapital(countryDetails.capital)
+										: countryDetails.capital}
+								</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>
