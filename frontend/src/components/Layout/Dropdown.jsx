@@ -34,7 +34,7 @@ const Dropdown = ({ label = 'Menu', items = [] }) => {
 									item.onClick && item.onClick();
 									setOpen(false);
 								}}
-								className='px-4 py-2 cursor-pointer hover:bg-gray-100 transition'>
+								className='px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition'>
 								{item.label}
 							</li>
 						))}
