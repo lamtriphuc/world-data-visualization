@@ -22,6 +22,7 @@ import { getTranslatedName } from '../ultils';
 import Loading from '../components/Layout/Loading';
 import TopLanguagesTable from '../components/Tables/TopLanguagesTable';
 import LanguageBarChart from '../components/Charts/LanguageBarChart';
+import { translateCapital } from '../scripts/capital_names_vi';
 
 const Continent = () => {
 	const { t } = useTranslation();
@@ -263,11 +264,12 @@ const Continent = () => {
 									</p>
 									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
 										{' '}
-										{t('population')}: {maxPopulation?.population.value}{' '}
+										{t('population')}:{' '}
+										{maxPopulation?.population.value.toLocaleString()}{' '}
 									</p>
 									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
 										{' '}
-										{t('area')}: {maxPopulation?.area}{' '}
+										{t('area')}: {maxPopulation?.area.toLocaleString()}{' '}
 									</p>
 									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
 										{' '}
@@ -297,15 +299,16 @@ const Continent = () => {
 									</p>
 									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
 										{' '}
-										{t('population')}: {maxArea?.population.value}{' '}
+										{t('population')}:{' '}
+										{maxArea?.population.value.toLocaleString()}{' '}
 									</p>
 									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
 										{' '}
-										{t('area')}: {maxArea?.area}{' '}
+										{t('area')}: {maxArea?.area.toLocaleString()}{' '}
 									</p>
 									<p className='text-gray-700 dark:text-gray-400 text-sm mt-1'>
 										{' '}
-										{t('capital')}: {maxArea?.capital[0]}{' '}
+										{t('capital')}: {translateCapital(maxArea?.capital[0])}{' '}
 									</p>
 								</div>
 								<div className='w-35 p-3 rounded-lg ml-auto'>

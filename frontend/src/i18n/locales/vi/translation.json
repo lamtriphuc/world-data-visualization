@@ -114,5 +114,17 @@
   "all_territory": "Vùng lãnh thổ / Khu vực khác",
   "top10_languages_continent": "Top 10 ngôn ngữ được sử dụng nhiều nhất",
   "population_density": "Mật độ dân số",
-  "default": "Mặc định"
+  "default": "Mặc định",
+  "top_languages": {
+    "English": "Tiếng Anh",
+    "French": "Tiếng Pháp",
+    "Arabic": "Tiếng Ả Rập",
+    "Spanish": "Tiếng Tây Ban Nha",
+    "Portuguese": "Tiếng Bồ Đào Nha",
+    "Russian": "Tiếng Nga",
+    "German": "Tiếng Đức",
+    "Italian": "Tiếng Ý",
+    "Swahili": "Tiếng Swahili",
+    "Tswana": "Tiếng Tswana"
+  }
 }

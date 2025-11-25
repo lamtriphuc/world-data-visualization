@@ -114,5 +114,17 @@
   "all_territory": "Territory",
   "top10_languages_continent": "Top 10 most used languages",
   "population_density": "Population density",
-  "default": "Default"
+  "default": "Default",
+  "top_languages": {
+    "English": "English",
+    "French": "French",
+    "Arabic": "Arabic",
+    "Spanish": "Spanish",
+    "Portuguese": "Portuguese",
+    "Russian": "Russian",
+    "German": "German",
+    "Italian": "Italian",
+    "Swahili": "Swahili",
+    "Tswana": "Tswana"
+  }
 }

@@ -223,7 +223,7 @@ const CountryDetails = () => {
 							</div>
 						</div>
 						<div className='flex gap-2'>
-							<FiClock className='w-10 h-10 sm:w-10 sm:h-10 text-indigo-500' />
+							<FiClock className='w-4 h-4 sm:w-5 sm:h-5 text-indigo-500' />
 							<div className='flex flex-col'>
 								<span>{t('timezone')}</span>
 								<div className='flex flex-wrap gap-x-2'>
