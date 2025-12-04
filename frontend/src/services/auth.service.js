@@ -9,21 +9,21 @@ export const googleLogin = async (token) => {
 };
 
 export const getFavoriteCodes = async () => {
-    const response = await apiClient.get(`/api/auth/favorites-code`)
+    const response = await apiClient.get(`/api/user/favorites-code`)
     return response.data.data;
 };
 
 export const getFavoriteCountries = async () => {
-    const response = await apiClient.get(`/api/auth/favorites`)
+    const response = await apiClient.get(`/api/user/favorites`)
     return response.data.data;
 };
 
 export const addFavorite = async (code) => {
-    const response = await apiClient.post(`/api/auth/favorites/${code}`)
+    const response = await apiClient.post(`/api/user/favorites/${code}`)
     return response.data.data;
 };
 
 export const removeFavorite = async (code) => {
-    const response = await apiClient.delete(`/api/auth/favorites/${code}`)
+    const response = await apiClient.delete(`/api/user/favorites/${code}`)
     return response.data.data;
 };

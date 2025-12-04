@@ -1,13 +1,9 @@
 import express from 'express';
-import { addFavoriteCountry, getFavoriteCodes, getFavoriteCountries, googleLogin, removeFavoriteCountry } from '../controllers/auth.controller.js';
-import { verifyToken } from '../middlewares/auth.middleware.js';
+import { googleLogin, refreshToken } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
 router.post('/google-login', googleLogin);
-router.get('/favorites', verifyToken, getFavoriteCountries);
-router.get('/favorites-code', verifyToken, getFavoriteCodes);
-router.post('/favorites/:countryCode', verifyToken, addFavoriteCountry);
-router.delete('/favorites/:countryCode', verifyToken, removeFavoriteCountry);
+router.post('/refresh-token', refreshToken);
 
 export default router;

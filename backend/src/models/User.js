@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true },
     avatar: String,
     googleId: String,
+    refreshToken: String,
     favoriteCountries: [{
         type: String,
         index: true
