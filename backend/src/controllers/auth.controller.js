@@ -10,7 +10,8 @@ export const googleLogin = async (req, res) => {
         res.cookie("refreshToken", result.refreshToken, {
             httpOnly: true,
             secure: false,       // bật khi deploy HTTPS
-            sameSite: "lax",
+            sameSite: "none",
+            path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000  // 7 ngày
         });
         return successResponse(res, { user: result.user, accessToken: result.accessToken }, 200, 'Login success');
@@ -30,6 +31,7 @@ export const refreshToken = async (req, res) => {
             httpOnly: true,
             secure: false,       // bật khi deploy HTTPS
             sameSite: "lax",
+            path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000  // 7 ngày
         });
         return successResponse(res, { accessToken: result.accessToken }, 200, 'Get refresh token success');

@@ -25,11 +25,7 @@ apiClient.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                const res = await axios.post(
-                    `${import.meta.env.VITE_BACKEND_URL}/api/auth/refresh-token`,
-                    {},
-                    { withCredentials: true }
-                );
+                const res = await apiClient.post("/api/auth/refresh-token");
 
                 const newAccessToken = res.data.data.accessToken;
                 localStorage.setItem("token", newAccessToken);

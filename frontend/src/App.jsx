@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Loading from './components/Layout/Loading';
 import Favorite from './pages/Favorite';
 import Continent from './pages/Continent';
+import TravelTracker from './pages/TravelTracker';
 
 const App = () => {
 	const CountryList = lazy(() => import('./pages/CountryList'));
@@ -50,8 +51,8 @@ const App = () => {
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/favorite' element={<Favorite />} />
+					<Route path='/travel-tracker' element={<TravelTracker />} />
 					<Route path='/continent/:region' element={<Continent />} />
-
 				</Route>
 			</Routes>
 		</BrowserRouter>

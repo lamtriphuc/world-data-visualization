@@ -62,7 +62,8 @@ const TopCountriesTable = ({
 				<select
 					value={topListType}
 					onChange={(e) => onTopListTypeChange(e.target.value)}
-					className='block w-auto text-base rounded-md border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'>
+					style={{ fontSize: '16px' }}
+					className='py-2 block w-auto font-bold rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'>
 					<option value='population'>{t('top_10_population')}</option>
 					<option value='area'>{t('top_10_area')}</option>
 				</select>
