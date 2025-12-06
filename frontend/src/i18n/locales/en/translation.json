@@ -157,5 +157,12 @@
     "Marshallese": "Marshallese",
     "Māori": "Māori",
     "Nauru": "Nauru"
-  }
+  },
+	"smart_search_placeholder": "Ask anything about countries...",
+	"sample_queries": "Try these queries",
+	"search_error": "Search failed. Please try again.",
+	"found": "Found",
+	"show_all": "Show all countries",
+	"no_results": "No countries found matching your query",
+	"clear": "Clear"
 }
