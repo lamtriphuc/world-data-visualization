@@ -3,6 +3,7 @@ import { FiMapPin } from 'react-icons/fi';
 import { GoTrophy } from 'react-icons/go';
 import { LuUsers } from 'react-icons/lu';
 import translated from '../../scripts/countries_translated.json';
+import { useNavigate } from 'react-router-dom';
 
 const TopCountriesTable = ({
 	countries,
@@ -12,6 +13,7 @@ const TopCountriesTable = ({
 }) => {
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
+	const navigate = useNavigate();
 
 	const formatNumber = (num) => {
 		return new Intl.NumberFormat('vi-VN').format(num);
@@ -60,7 +62,8 @@ const TopCountriesTable = ({
 				<select
 					value={topListType}
 					onChange={(e) => onTopListTypeChange(e.target.value)}
-					className='block w-auto text-base rounded-md border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'>
+					style={{ fontSize: '16px' }}
+					className='py-2 block w-auto font-bold rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'>
 					<option value='population'>{t('top_10_population')}</option>
 					<option value='area'>{t('top_10_area')}</option>
 				</select>
@@ -82,7 +85,8 @@ const TopCountriesTable = ({
 						{countries.map((country, index) => (
 							<tr
 								key={country.cca3}
-								className='border-t border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'>
+								onClick={() => navigate(`/country/${country.cca3}`)}
+								className='border-t border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer'>
 								<td className='py-2'>
 									<div
 										className={`flex items-center justify-center gap-1 w-10 h-10 rounded-lg ${getRankColor(
@@ -114,10 +118,9 @@ const TopCountriesTable = ({
 								<td>
 									<span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-blue-100 text-blue-800'>
 										{t(
-											`main_region.${
-												country.region === 'Antarctic'
-													? 'Antarctica'
-													: country.region
+											`main_region.${country.region === 'Antarctic'
+												? 'Antarctica'
+												: country.region
 											}`
 										)}
 									</span>

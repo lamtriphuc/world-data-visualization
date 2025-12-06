@@ -100,51 +100,67 @@ async function fetchCountries() {
     return allCountries;
 }
 
-async function updateAllPopulations() {
+async function updateAllCountryStats() {
     try {
         const defaultYear = 2018;
         const year = process.env.LATEST_YEAR || 2024;
 
-        const url = `https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=${year}&per_page=500`;
-        const { data } = await axios.get(url);
+        const popURL = `https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=${year}&per_page=500`;
+        const { data: popData } = await axios.get(popURL);
 
-        if (!Array.isArray(data) || !Array.isArray(data[1])) return;
+        // if (!Array.isArray(data) || !Array.isArray(data[1])) return;
 
-        const records = data[1].filter(r => r.value !== null && r.countryiso3code);
-
-        console.log(`Fetched population records from World Bank (${year})`);
+        const popRecords = Array.isArray(popData) && Array.isArray(popData[1])
+            ? popData[1].filter(r => r.value !== null && r.countryiso3code)
+            : [];
 
         // Tạo map { CCA3: populationValue }
         const wbPopulationMap = Object.fromEntries(
-            records.map(r => [r.countryiso3code, r.value || 0])
+            popRecords.map(r => [r.countryiso3code, r.value || 0])
         );
+        console.log(`Fetched population records from World Bank (${year})`);
 
-        // Lấy danh sách { cca3: area } từ DB trước (để tính mật độ nhanh hơn)
+
+        // 2. Fetch area data
+        const areaURL = `https://api.worldbank.org/v2/country/all/indicator/AG.SRF.TOTL.K2?format=json&date=2020&per_page=500`;
+        const { data: areaData } = await axios.get(areaURL);
+
+        const areaRecords = Array.isArray(areaData) && Array.isArray(areaData[1])
+            ? areaData[1].filter(r => r.value !== null && r.countryiso3code)
+            : [];
+
+        const wbAreaMap = Object.fromEntries(
+            areaRecords.map(r => [r.countryiso3code, r.value])
+        );
+        console.log(`Fetched Area (${areaRecords.length} records)`);
+
+
+        // Lấy countries tư db
         const countries = await Country.find({}, { cca3: 1, area: 1, population: 1 }).lean();
 
-        // Chuẩn bị bulk operations
+        // bulk update
         const ops = countries.map(c => {
             const cca3 = c.cca3;
-            const wbValue = wbPopulationMap[cca3];
-            const hasValidWB = wbValue && wbValue > 0;
 
-            // Dân số hiện có từ REST Countries
-            const restPopulationValue = c.population?.value || 0;
+            // WB pop
+            const wbPop = wbPopulationMap[cca3];
+            const popValue = wbPop && wbPop > 0 ? wbPop : (c.population?.value || 0);
+            const popYear = wbPop ? Number(year) : defaultYear;
 
-            // Chọn dân số cuối cùng (ưu tiên WB)
-            const finalPopulation = hasValidWB ? wbValue : restPopulationValue;
-            const finalYear = hasValidWB ? Number(year) : defaultYear;
+            // WB area
+            const wbArea = wbAreaMap[cca3];
+            const areaValue = wbArea && wbArea > 0 ? wbArea : (c.area || 0);
 
-            const area = c.area || 0;
-            const populationDensity = area > 0 ? finalPopulation / area : null;
+            const density = areaValue > 0 ? popValue / areaValue : null;
 
             return {
                 updateOne: {
                     filter: { cca3 },
                     update: {
                         $set: {
-                            population: { year: finalYear, value: finalPopulation },
-                            populationDensity,
+                            population: { year: popYear, value: popValue },
+                            area: areaValue,
+                            populationDensity: density,
                             updatedAt: new Date()
                         }
                     }
@@ -282,7 +298,7 @@ async function runScript() {
             await Promise.all(batch.map(c => transformAndUpsert(c)));
         }
 
-        await updateAllPopulations();
+        await updateAllCountryStats();
 
         await aggregateRegionsAndSubregions();
 

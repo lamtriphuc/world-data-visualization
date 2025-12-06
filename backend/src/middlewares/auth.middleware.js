@@ -12,10 +12,15 @@ export const verifyToken = (req, res, next) => {
         }
 
         // Giải mã token
-        jwt.verify(token, process.env.GOOGLE_CLIENT_SECRET, (err, decoded) => {
+        jwt.verify(token, process.env.JWT_ACCESS_SECRET, (err, decoded) => {
             if (err) {
                 if (err) console.log(err);
-                return errorResponse(res, 'Invalid or expired token', 403);
+
+                if (err.name === "TokenExpiredError") {
+                    return errorResponse(res, "Token expired", 401);
+                }
+
+                return errorResponse(res, "Invalid token", 403);
             }
 
             // Gắn thông tin user vào request để controller dùng

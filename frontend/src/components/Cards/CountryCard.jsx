@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import { IoIosHeart } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { translateCapital } from '../../scripts/capital_names_vi';
 
 const CountryCard = ({
 	flag,
@@ -15,6 +16,7 @@ const CountryCard = ({
 }) => {
 	const [imageSrc, setImageSrc] = useState(null);
 	const imgRef = useRef();
+	const currentLang = localStorage.getItem('lang');
 
 	useEffect(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -99,7 +101,7 @@ const CountryCard = ({
 						{t(`main_region.${region === 'Antarctic' ? 'Antarctica' : region}`)}
 					</p>
 					<p>
-						{t('capital')}: {capital}
+						{t('capital')}: {currentLang === 'vi' ? translateCapital(capital) : capital}
 					</p>
 				</div>
 			</Link>

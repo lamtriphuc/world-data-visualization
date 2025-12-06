@@ -103,13 +103,23 @@ const CountrySearch = ({ countries, onSelect }) => {
 								key={country.cca3}
 								className='cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white dark:text-gray-300 dark:hover:text-white group'
 								onClick={() => handleSelect(country)}>
-								<div className='flex flex-col'>
-									<span className='font-medium'>{displayName}</span>
-									{subName !== displayName && (
-										<span className='text-xs text-gray-500 group-hover:text-gray-200'>
-											{subName}
-										</span>
-									)}
+								<div className='flex items-center gap-2'>
+									{/* Flag nhỏ */}
+									<img
+										src={country.flag}
+										alt={displayName}
+										className='w-5 object-cover'
+									/>
+
+									{/* Tên */}
+									<div className='flex flex-col'>
+										<span className='font-medium'>{displayName}</span>
+										{subName !== displayName && (
+											<span className='text-xs text-gray-500 group-hover:text-gray-200'>
+												{subName}
+											</span>
+										)}
+									</div>
 								</div>
 							</li>
 						);

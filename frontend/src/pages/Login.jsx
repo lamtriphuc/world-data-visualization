@@ -14,6 +14,8 @@ const Login = () => {
 			setError('');
 			const response = await googleLogin(credentialResponse.credential);
 
+			console.log(response)
+
 			localStorage.setItem('token', response.accessToken);
 			localStorage.setItem('name', response.user.name);
 			localStorage.setItem('avatar', response.user.avatar);

@@ -59,5 +59,6 @@ export const formatCountryName = (country) => {
 		cca3: country.cca3,
 		name: country?.name?.common,
 		latlng: country?.latlng,
+		flag: country.flags.svg || country.flags.png || '',
 	};
 };

@@ -202,7 +202,7 @@ const Dashboard = () => {
 				/>
 
 				<StatCard
-					onClick={() => navigate('/continent')}
+					onClick={() => navigate(`/continent/Asia`)}
 					title={t('continents')}
 					value={stats.totalRegions}
 					subtitle={t('continent')}

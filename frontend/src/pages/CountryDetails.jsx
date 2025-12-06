@@ -22,6 +22,7 @@ import {
 	getFavoriteCodes,
 	removeFavorite,
 } from '../services/auth.service';
+import { translateCapital } from '../scripts/capital_names_vi';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
@@ -129,7 +130,9 @@ const CountryDetails = () => {
 							: countryDetails.officialName}
 					</p>
 					<div className='flex items-center justify-center gap-2'>
-						<span className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl'>
+						<span
+							onClick={() => navigate(`/continent/${countryDetails.region}`)}
+							className='px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded-2xl cursor-pointer'>
 							{t(`main_region.${countryDetails.region}`)}
 						</span>
 						{countryDetails.subregion && (
@@ -150,7 +153,11 @@ const CountryDetails = () => {
 							<IoLocationOutline className='w-4 h-4 sm:w-5 sm:h-5  text-blue-500' />
 							<div className='flex flex-col'>
 								<span>{t('capital')}</span>
-								<span>{countryDetails.capital}</span>
+								<span>
+									{currentLang === 'vi'
+										? translateCapital(countryDetails.capital)
+										: countryDetails.capital}
+								</span>
 							</div>
 						</div>
 						<div className='flex gap-2'>

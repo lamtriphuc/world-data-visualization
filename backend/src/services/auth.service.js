@@ -1,80 +1,70 @@
 import { OAuth2Client } from "google-auth-library";
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
-import { generateToken } from "../utils/generateToken.js";
+import { generateAccessToken, generateRefreshToken } from "../utils/generateToken.js";
 import { getCountriesByListService } from './country.service.js'
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-export const googleLoginService = async (token) => {
+export const googleLoginService = async (idToken) => {
     const ticket = await client.verifyIdToken({
-        idToken: token,
+        idToken: idToken,
         audience: process.env.GOOGLE_CLIENT_ID
     })
     const payload = ticket.getPayload();
-    const { sub, name, email, picture } = payload;
+    const {
+        sub: googleId,
+        name,
+        email,
+        picture,
+        email_verified
+    } = payload;
 
-    // tìm or tạo user
-    let user = await User.findOne({ email });
-    if (!user) {
-        user = await User.create({
-            googleId: sub,
-            name,
-            email,
-            avatar: picture,
-        })
+    if (!email_verified) {
+        throw new Error("Email is not verified by Google");
     }
 
-    const accessToken = generateToken(user._id);
+    // 2. Upsert user (avoid race condition)
+    const user = await User.findOneAndUpdate(
+        { email },
+        {
+            $set: {
+                googleId,
+                name: name || "",
+                avatar: picture || ""
+            }
+        },
+        { new: true, upsert: true }
+    );
 
-    return { user, accessToken };
-}
+    // 3. Generate tokens
+    const accessToken = generateAccessToken(user._id);
+    const refreshToken = generateRefreshToken(user._id);
 
-export const addFavoriteCountryService = async (userId, countryCode) => {
-    const user = await User.findById(userId);
-    if (!user)
-        throw new Error('User not found');
-
-    countryCode = countryCode.toUpperCase();
-
-    // Tránh trùng
-    if (!user.favoriteCountries.includes(countryCode)) {
-        user.favoriteCountries.push(countryCode);
-        await user.save();
-    }
-
-    return user.favoriteCountries;
-}
-
-export const removeFavoriteCountryService = async (userId, countryCode) => {
-    const user = await User.findById(userId);
-    if (!user)
-        throw new Error('User not found');
-
-    countryCode = countryCode.toUpperCase();
-
-    user.favoriteCountries = user.favoriteCountries.filter(c => c !== countryCode);
+    // Lưu refresh token vào DB
+    user.refreshToken = refreshToken;
     await user.save();
 
-    return user.favoriteCountries;
+
+    return {
+        user,
+        accessToken,
+        refreshToken
+    };
 }
 
-export const getFavoriteCodeService = async (userId) => {
-    const user = await User.findById(userId);
-    if (!user)
-        throw new Error('User not found');
+export const refreshTokenService = async (token) => {
+    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
 
-    return user.favoriteCountries;
-}
+    const user = await User.findById(decoded.userId);
+    if (!user || user.refreshToken !== token)
+        throw new Error('Invalid refresh token');
 
-export const getFavoriteCountriesService = async (userId) => {
-    const user = await User.findById(userId);
-    if (!user)
-        throw new Error('User not found');
+    const newAccessToken = generateAccessToken(user._id);
+    const newRefreshToken = generateRefreshToken(user._id);
 
-    const favoriteCodes = user.favoriteCountries; // list
+    user.refreshToken = newRefreshToken;
+    await user.save();
 
-    const favoriteCountries = getCountriesByListService(favoriteCodes);
-
-    return favoriteCountries;
-}
+    return { accessToken: newAccessToken, refreshToken: newRefreshToken };
+};
