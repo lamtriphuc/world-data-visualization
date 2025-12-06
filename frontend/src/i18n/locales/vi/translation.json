@@ -114,5 +114,12 @@
   "all_territory": "Vùng lãnh thổ / Khu vực khác",
   "top10_languages_continent": "Top 10 ngôn ngữ được sử dụng nhiều nhất",
   "population_density": "Mật độ dân số",
-  "default": "Mặc định"
+  "default": "Mặc định",
+  "smart_search_placeholder": "Hỏi bất cứ điều gì về quốc gia...",
+  "sample_queries": "Thử các câu hỏi mẫu",
+  "search_error": "Tìm kiếm thất bại. Vui lòng thử lại.",
+  "found": "Tìm thấy",
+  "show_all": "Hiển thị tất cả quốc gia",
+  "no_results": "Không tìm thấy quốc gia phù hợp với câu hỏi",
+  "clear": "Xóa"
 }
