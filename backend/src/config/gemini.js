@@ -94,6 +94,82 @@ Response: {"countryCodes":["MNG","KAZ","UZB","TKM","KGZ","TJK","AFG","NPL","BTN"
 }
 
 /**
+ * Predict GDP for next 5 years using AI analysis
+ * @param {string} countryName - Country name
+ * @param {Array} gdpHistory - Historical GDP data [{year, value}, ...]
+ * @returns {Object} - { predictions: [{year, value}, ...], analysis: string }
+ */
+export async function predictGDP(countryName, gdpHistory) {
+	const systemPrompt = `You are an economist AI. Given historical GDP data for a country, predict the GDP for the next 5 years.
+
+Use economic analysis considering:
+- Historical growth trends
+- Regional economic conditions
+- Global economic outlook
+- Country-specific factors
+
+IMPORTANT RULES:
+1. Return ONLY valid JSON, no markdown, no code blocks
+2. Predictions should be realistic based on historical trends
+3. Values should be in the same unit as input (usually current USD)
+4. Provide brief analysis explaining your predictions
+
+Response format:
+{
+  "predictions": [
+    {"year": 2024, "value": 123456789},
+    {"year": 2025, "value": 134567890},
+    {"year": 2026, "value": 145678901},
+    {"year": 2027, "value": 156789012},
+    {"year": 2028, "value": 167890123}
+  ],
+  "analysis": "Brief explanation of the prediction methodology and key factors"
+}`;
+
+	const userPrompt = `Country: ${countryName}
+Historical GDP data (in current USD):
+${gdpHistory.map((g) => `${g.year}: $${g.value.toLocaleString()}`).join('\n')}
+
+Please predict GDP for the next 5 years after the last data point.`;
+
+	try {
+		const response = await ai.models.generateContent({
+			model: 'gemini-2.0-flash',
+			contents: userPrompt,
+			config: {
+				systemInstruction: systemPrompt,
+			},
+		});
+
+		const text = response.text.trim();
+
+		// Clean up response
+		let cleanJson = text;
+		if (text.startsWith('```')) {
+			cleanJson = text
+				.replace(/```json?\n?/g, '')
+				.replace(/```/g, '')
+				.trim();
+		}
+
+		const parsed = JSON.parse(cleanJson);
+		return {
+			success: true,
+			predictions: parsed.predictions || [],
+			analysis: parsed.analysis || '',
+		};
+	} catch (error) {
+		console.error('Gemini GDP prediction error:', error);
+		return {
+			success: false,
+			error: error.message,
+			predictions: [],
+			analysis: 'Could not generate prediction',
+		};
+	}
+}
+
+/**
  * General purpose AI content generation
  */
 async function main(prompt) {

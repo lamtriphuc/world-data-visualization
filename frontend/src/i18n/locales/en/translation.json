@@ -164,5 +164,12 @@
 	"found": "Found",
 	"show_all": "Show all countries",
 	"no_results": "No countries found matching your query",
-	"clear": "Clear"
+	"clear": "Clear",
+	"gdp_prediction": "AI GDP Prediction",
+	"predict_5_years": "Predict next 5 years",
+	"prediction": "Prediction",
+	"historical_gdp": "Historical GDP",
+	"predicted_gdp": "Predicted GDP",
+	"prediction_start": "Prediction",
+	"hide_prediction": "Hide prediction"
 }

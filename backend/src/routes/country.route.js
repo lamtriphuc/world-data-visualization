@@ -10,6 +10,7 @@ import {
 	getGlobalStats,
 	getLanguageDistribution,
 } from '../controllers/country.controller.js';
+import { predictGDP } from '../controllers/gdpPrediction.controller.js';
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.get('/language', getLanguageDistribution);
 router.get('/:code', getCountryDetail);
 router.get('/gdp/:code', getLatestGdp);
 router.get('/gdp/:code/10-year', getGdpOf10Year);
+router.get('/:code/gdp-prediction', predictGDP);
 
 export default router;

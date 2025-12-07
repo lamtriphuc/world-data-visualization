@@ -164,5 +164,12 @@
     "Marshallese": "Tiếng Marshallese",
     "Māori": "Tiếng Māori",
     "Nauru": "Tiếng Nauru"
-  }
+  },
+  "gdp_prediction": "Dự đoán GDP bằng AI",
+  "predict_5_years": "Dự đoán 5 năm tới",
+  "prediction": "Dự đoán",
+  "historical_gdp": "GDP lịch sử",
+  "predicted_gdp": "GDP dự đoán",
+  "prediction_start": "Dự đoán",
+  "hide_prediction": "Ẩn dự đoán"
 }
