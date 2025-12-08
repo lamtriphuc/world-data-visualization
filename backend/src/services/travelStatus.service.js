@@ -1,10 +1,10 @@
 import UserCountryStatus from "../models/UserCountryStatus.js";
 
 export const upsertTravelStatusService = async (userId, data) => {
-    const { countryCode, status, note, startDate, endDate } = data;
+    const { cca3, status, note, startDate, endDate } = data;
 
     const result = await UserCountryStatus.findOneAndUpdate(
-        { userId, countryCode },
+        { userId, cca3 },
         {
             $set: { status, note, startDate, endDate },
         },
@@ -22,10 +22,10 @@ export const getAllTravelStatusService = async (userId) => {
     return await UserCountryStatus.find({ userId }).lean();
 };
 
-export const getTravelStatusService = async (userId, countryCode) => {
-    return await UserCountryStatus.findOne({ userId, countryCode }).lean();
+export const getTravelStatusService = async (userId, cca3) => {
+    return await UserCountryStatus.findOne({ userId, cca3 }).lean();
 };
 
-export const deleteTravelStatusService = async (userId, countryCode) => {
-    return await UserCountryStatus.findOneAndDelete({ userId, countryCode });
+export const deleteTravelStatusService = async (userId, cca3) => {
+    return await UserCountryStatus.findOneAndDelete({ userId, cca3 });
 };

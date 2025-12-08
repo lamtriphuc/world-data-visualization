@@ -7,8 +7,7 @@ const userCountryStatusSchema = new mongoose.Schema({
         index: true
     },
 
-    // Country code (CCA3)
-    countryCode: {
+    cca3: {
         type: String,
         required: true,
         index: true
@@ -25,7 +24,6 @@ const userCountryStatusSchema = new mongoose.Schema({
     endDate: { type: Date, default: null },
 }, { timestamps: true });
 
-// mỗi user chỉ có 1 trạng thái / quốc gia
-userCountryStatusSchema.index({ userId: 1, countryCode: 1 }, { unique: true });
+userCountryStatusSchema.index({ userId: 1, cca3: 1 }, { unique: true });
 
 export default mongoose.model('UserCountryStatus', userCountryStatusSchema);

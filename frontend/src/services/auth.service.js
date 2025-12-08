@@ -30,3 +30,13 @@ export const getTravelTracker = async () => {
     const response = await apiClient.get(`/api/user/travel`)
     return response.data.data;
 };
+
+export const postTravelTracker = async (data) => {
+    const response = await apiClient.post(`/api/user/travel`, data)
+    return response.data.data;
+};
+
+export const deleteTravelTracker = async (cca3) => {
+    const response = await apiClient.delete(`/api/user/travel/${cca3}`)
+    return response.data.data;
+};
