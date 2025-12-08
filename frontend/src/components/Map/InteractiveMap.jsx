@@ -33,7 +33,8 @@ const InteractiveMap = forwardRef((props, ref) => {
 		regionFilter,
 		selectedCountryCode,
 		onCountryClick,
-		countries
+		countries,
+		onTravel = false,
 	} = props;
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
@@ -110,6 +111,28 @@ const InteractiveMap = forwardRef((props, ref) => {
 		};
 	}, [regionFilter, selectedCountryCode, regionColors]);
 
+	const travelLayerStyle = useMemo(() => {
+		if (!onTravel || !regionColors) return null;
+
+		const matchExpression = ["match", ["get", "iso_a3"]];
+
+		Object.entries(regionColors).forEach(([code, color]) => {
+			matchExpression.push(code, color);
+		});
+
+		matchExpression.push("#e5e7eb"); // default xám
+
+		return {
+			id: "travel-fill",
+			type: "fill",
+			paint: {
+				"fill-color": matchExpression,
+				"fill-opacity": 0.7,
+			},
+		};
+	}, [regionColors, onTravel]);
+
+
 	const populationMap = useMemo(() => {
 		if (!countries) return;
 
@@ -161,10 +184,12 @@ const InteractiveMap = forwardRef((props, ref) => {
 			const countryCode = feature.properties.iso_a3;
 			if (countryCode && onCountryClick) {
 				// Gọi hàm prop từ cha
+
 				onCountryClick(countryCode);
 			}
 		}
 	};
+
 
 	return (
 		<Map
@@ -179,10 +204,10 @@ const InteractiveMap = forwardRef((props, ref) => {
 			mapStyle='mapbox://styles/mapbox/navigation-day-v1'
 			onMouseMove={onHover}
 			onClick={onClick}
-			interactiveLayerIds={['countries-fill']}>
+			interactiveLayerIds={[onTravel ? 'travel-fill' : 'countries-fill']}>
 			{geoData && (
 				<Source type='geojson' data={geoData}>
-					<Layer {...fillLayerStyle} />
+					<Layer {...onTravel ? travelLayerStyle : fillLayerStyle} />
 					<Layer {...borderLayerStyle} />
 				</Source>
 			)}

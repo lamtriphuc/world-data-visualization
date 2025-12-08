@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/", verifyToken, upsertTravelStatus);
 router.get("/", verifyToken, getAllTravelStatus);
-router.get("/:countryCode", verifyToken, getTravelStatus);
-router.delete("/:countryCode", verifyToken, deleteTravelStatus);
+router.get("/:cca3", verifyToken, getTravelStatus);
+router.delete("/:cca3", verifyToken, deleteTravelStatus);
 
 export default router;

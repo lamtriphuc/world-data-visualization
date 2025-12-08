@@ -38,9 +38,9 @@ export const getAllTravelStatus = async (req, res) => {
 export const getTravelStatus = async (req, res) => {
     try {
         const userId = req.user.userId;
-        const { countryCode } = req.params;
+        const { cca3 } = req.params;
 
-        const result = await getTravelStatusService(userId, countryCode);
+        const result = await getTravelStatusService(userId, cca3);
 
         return successResponse(res, result, 200, "Travel status detail");
     } catch (err) {
@@ -52,9 +52,9 @@ export const getTravelStatus = async (req, res) => {
 export const deleteTravelStatus = async (req, res) => {
     try {
         const userId = req.user.userId;
-        const { countryCode } = req.params;
+        const { cca3 } = req.params;
 
-        const result = await deleteTravelStatusService(userId, countryCode);
+        const result = await deleteTravelStatusService(userId, cca3);
 
         return successResponse(res, result, 200, "Travel status removed");
     } catch (err) {
