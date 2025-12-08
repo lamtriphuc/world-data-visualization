@@ -7,12 +7,13 @@ import { successResponse, errorResponse } from '../utils/response.js';
 export const predictGDP = async (req, res) => {
 	try {
 		const { code } = req.params;
+		const { lang } = req.query; // Get language from query params
 
 		if (!code) {
 			return errorResponse(res, 'Country code is required', 400);
 		}
 
-		const result = await getGDPPrediction(code.toUpperCase());
+		const result = await getGDPPrediction(code.toUpperCase(), lang || 'en');
 
 		if (!result.success) {
 			return errorResponse(res, result.error || 'Prediction failed', 400);

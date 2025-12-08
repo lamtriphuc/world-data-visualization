@@ -1,0 +1,152 @@
+{
+  "biển đẹp, chi phí rẻ, visa dễ_vi": {
+    "data": {
+      "success": true,
+      "recommendations": [
+        {
+          "countryCode": "THA",
+          "countryName": "Thái Lan",
+          "matchScore": 98,
+          "reasons": [
+            "Sở hữu nhiều bãi biển và đảo đẹp đẳng cấp thế giới (Phuket, Krabi, Koh Phi Phi, Koh Samui).",
+            "Chi phí du lịch rất phải chăng cho chỗ ở, ăn uống và đi lại.",
+            "Chính sách miễn thị thực cho nhiều quốc gia, hoặc cấp thị thực tại cửa khẩu/thị thực điện tử dễ dàng."
+          ],
+          "tips": "Thời điểm tốt nhất để ghé thăm là từ tháng 11 đến tháng 2 khi thời tiết mát mẻ và khô ráo. Hãy thử các món ăn đường phố địa phương tuyệt vời và sử dụng ứng dụng Grab để di chuyển thuận tiện.",
+          "flag": "https://flagcdn.com/th.svg",
+          "population": {
+            "year": 2024,
+            "value": 71668011
+          },
+          "region": "Asia"
+        },
+        {
+          "countryCode": "VNM",
+          "countryName": "Việt Nam",
+          "matchScore": 97,
+          "reasons": [
+            "Có đường bờ biển dài với nhiều bãi biển đẹp như Đà Nẵng, Nha Trang, Phú Quốc, Mũi Né.",
+            "Chi phí sinh hoạt và du lịch rất rẻ, phù hợp với mọi ngân sách.",
+            "Miễn thị thực cho nhiều quốc gia và cung cấp dịch vụ thị thực điện tử (e-visa) nhanh chóng, tiện lợi cho các quốc tịch còn lại."
+          ],
+          "tips": "Thời gian lý tưởng để khám phá biển Việt Nam là từ tháng 4 đến tháng 9 ở miền Trung và miền Nam. Đừng bỏ lỡ ẩm thực phong phú và đa dạng của Việt Nam.",
+          "flag": "https://flagcdn.com/vn.svg",
+          "population": {
+            "year": 2024,
+            "value": 100987686
+          },
+          "region": "Asia"
+        },
+        {
+          "countryCode": "PHL",
+          "countryName": "Philippines",
+          "matchScore": 96,
+          "reasons": [
+            "Nổi tiếng với các bãi biển và phong cảnh đảo tuyệt đẹp như Boracay, Palawan (El Nido, Coron) và Siargao.",
+            "Chi phí du lịch tương đối thấp, mang lại giá trị tốt cho trải nghiệm.",
+            "Miễn thị thực cho công dân của nhiều quốc gia, quá trình nhập cảnh thường đơn giản."
+          ],
+          "tips": "Mùa khô từ tháng 12 đến tháng 5 là thời điểm tốt nhất để ghé thăm. Hãy chuẩn bị cho việc di chuyển giữa các đảo bằng máy bay nội địa hoặc phà và đặt trước vé.",
+          "flag": "https://flagcdn.com/ph.svg",
+          "population": {
+            "year": 2024,
+            "value": 115843670
+          },
+          "region": "Asia"
+        },
+        {
+          "countryCode": "IDN",
+          "countryName": "Indonesia",
+          "matchScore": 95,
+          "reasons": [
+            "Thiên đường biển đảo với Bali, Lombok, Gili Islands và các đảo Nusa nổi tiếng thế giới.",
+            "Chi phí khá phải chăng, đặc biệt khi tránh các khu du lịch cao cấp và khám phá các khu vực ít được biết đến hơn.",
+            "Miễn thị thực cho nhiều quốc gia hoặc cấp thị thực khi đến (VOA) dễ dàng tại sân bay."
+          ],
+          "tips": "Thời điểm tốt nhất để ghé thăm là từ tháng 5 đến tháng 9 khi thời tiết khô ráo. Thuê xe máy là cách tuyệt vời để khám phá (nếu bạn có kinh nghiệm lái xe).",
+          "flag": "https://flagcdn.com/id.svg",
+          "population": {
+            "year": 2024,
+            "value": 283487931
+          },
+          "region": "Asia"
+        }
+      ],
+      "explanation": "Dựa trên sở thích của bạn về các điểm đến có 'biển đẹp', 'chi phí rẻ' và 'visa dễ', tôi đề xuất các quốc gia ở Đông Nam Á. Khu vực này nổi tiếng với những bãi biển tuyệt vời, chi phí du lịch hợp lý và chính sách thị thực thuận lợi cho du khách quốc tế. Mỗi quốc gia được chọn đều có những nét độc đáo riêng về văn hóa, ẩm thực và cảnh quan, đảm bảo mang lại trải nghiệm đáng nhớ cho bạn."
+    },
+    "timestamp": 1765214571749
+  },
+  "ẩm thực ngon, văn hóa phong phú_vi": {
+    "data": {
+      "success": true,
+      "recommendations": [
+        {
+          "countryCode": "VNM",
+          "countryName": "Việt Nam",
+          "matchScore": 95,
+          "reasons": [
+            "Ẩm thực Việt Nam đa dạng, tinh tế và nổi tiếng toàn cầu (Phở, Bún chả, Bánh mì).",
+            "Văn hóa lịch sử lâu đời, phong phú với nhiều di sản thế giới (Hội An, Huế), các làng nghề truyền thống và sự đa dạng của 54 dân tộc."
+          ],
+          "tips": "Hãy dành thời gian khám phá ẩm thực đường phố tại các thành phố lớn và ghé thăm các chợ truyền thống để trải nghiệm văn hóa địa phương.",
+          "flag": "https://flagcdn.com/vn.svg",
+          "population": {
+            "year": 2024,
+            "value": 100987686
+          },
+          "region": "Asia"
+        },
+        {
+          "countryCode": "THA",
+          "countryName": "Thái Lan",
+          "matchScore": 93,
+          "reasons": [
+            "Ẩm thực Thái Lan nổi tiếng với sự kết hợp hài hòa của 5 vị (cay, chua, mặn, ngọt, đắng) trong các món ăn như Pad Thái, Tom Yum, Cà ri xanh.",
+            "Văn hóa Phật giáo đặc sắc với hàng ngàn ngôi đền chùa tráng lệ, các lễ hội truyền thống rực rỡ và những điệu múa cổ truyền độc đáo."
+          ],
+          "tips": "Thử các món ăn tại chợ đêm và nhớ ăn mặc lịch sự, kín đáo khi tham quan các ngôi chùa.",
+          "flag": "https://flagcdn.com/th.svg",
+          "population": {
+            "year": 2024,
+            "value": 71668011
+          },
+          "region": "Asia"
+        },
+        {
+          "countryCode": "JPN",
+          "countryName": "Nhật Bản",
+          "matchScore": 94,
+          "reasons": [
+            "Ẩm thực Nhật Bản được cả thế giới ngưỡng mộ bởi sự tinh tế, nghệ thuật và hương vị độc đáo (Sushi, Ramen, Tempura, Sashimi).",
+            "Văn hóa độc đáo, hòa quyện giữa truyền thống cổ xưa (võ sĩ đạo, trà đạo, geisha) và sự phát triển hiện đại, thể hiện qua kiến trúc, nghệ thuật và lối sống."
+          ],
+          "tips": "Đặt chỗ trước ở các nhà hàng nổi tiếng, đặc biệt là ở những thành phố lớn. Tìm hiểu về nghi thức và phép lịch sự cơ bản của Nhật Bản để có trải nghiệm tốt hơn.",
+          "flag": "https://flagcdn.com/jp.svg",
+          "population": {
+            "year": 2024,
+            "value": 123975371
+          },
+          "region": "Asia"
+        },
+        {
+          "countryCode": "ITA",
+          "countryName": "Ý",
+          "matchScore": 92,
+          "reasons": [
+            "Ẩm thực Ý vang danh thế giới với những món ăn kinh điển như Pizza, Pasta, Gelato, Tiramisu cùng nhiều món ăn vùng miền đặc trưng.",
+            "Văn hóa và lịch sử vô cùng phong phú, từ Đế chế La Mã hùng mạnh, thời kỳ Phục Hưng rực rỡ đến các di sản kiến trúc, nghệ thuật độc đáo được UNESCO công nhận."
+          ],
+          "tips": "Tham gia một tour ẩm thực địa phương để khám phá các món ăn truyền thống và đừng ngần ngại thử rượu vang của các vùng miền.",
+          "flag": "https://flagcdn.com/it.svg",
+          "population": {
+            "year": 2024,
+            "value": 58986023
+          },
+          "region": "Europe"
+        }
+      ],
+      "explanation": "Dựa trên sở thích của bạn về 'ẩm thực ngon' và 'văn hóa phong phú', chúng tôi đã chọn ra những quốc gia này vì chúng đều nổi tiếng toàn cầu về cả hai khía cạnh. Mỗi quốc gia mang đến một bản sắc ẩm thực và văn hóa riêng biệt, hứa hẹn một hành trình khám phá đầy hấp dẫn và đáng nhớ."
+    },
+    "timestamp": 1765216645600
+  }
+}

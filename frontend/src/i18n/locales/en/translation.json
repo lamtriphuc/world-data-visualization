@@ -186,5 +186,31 @@
 	"historical_gdp": "Historical GDP",
 	"predicted_gdp": "Predicted GDP",
 	"prediction_start": "Prediction",
-	"hide_prediction": "Hide prediction"
+	"hide_prediction": "Hide prediction",
+
+	"ai_assistant": "AI Assistant",
+	"chat_welcome": "Ask me anything about countries!",
+	"chat_examples": "Try: \"Which country has the highest population?\" or \"Tell me about Japan\"",
+	"chat_placeholder": "Ask about any country...",
+	"chat_error": "Sorry, something went wrong. Please try again.",
+
+	"travel_advisor": "AI Travel Advisor",
+	"travel_advisor_desc": "Tell us your preferences, we'll find your dream destination",
+	"travel_placeholder": "Describe your ideal travel destination... (e.g., \"Beach vacation, budget-friendly, good food\")",
+	"get_recommendations": "Get Recommendations",
+
+	"data_insights": "AI Data Insights",
+	"data_insights_desc": "Analyze trends and patterns in country data",
+	"general": "General",
+	"analyze": "Analyze",
+	"summary": "Summary",
+	"trends": "Trends",
+	"insights": "Key Insights",
+	"recommendations": "Recommendations",
+
+	"ai_compare": "AI Country Comparison",
+	"select_countries_compare": "Select at least 2 countries to compare with AI",
+	"compare_with_ai": "Compare with AI",
+	"recommendation": "Recommendation",
+	"compare_again": "Compare again"
 }

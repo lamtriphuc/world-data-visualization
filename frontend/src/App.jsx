@@ -10,31 +10,12 @@ import Loading from './components/Layout/Loading';
 import Favorite from './pages/Favorite';
 import Continent from './pages/Continent';
 import TravelTracker from './pages/TravelTracker';
+import { AIChatWidget } from './components/AI';
 
 const App = () => {
 	const CountryList = lazy(() => import('./pages/CountryList'));
 
 	return (
-		// <BrowserRouter>
-		// 	<Routes>
-		// 		<Route path='/' element={<AppLayout />}>
-		// 			<Route
-		// 				index
-		// 				element={
-		// 					<Suspense fallback={<Loading />}>
-		// 						<CountryList />
-		// 					</Suspense>
-		// 				}
-		// 			/>
-		// 			<Route path='/' element={<DashBoard />} />
-		// 			<Route path='/country/:code' element={<CountryDetails />} />
-		// 			<Route path='/comparison' element={<Comparison />} />
-		// 			<Route path='/login' element={<Login />} />
-		// 			<Route path='/favorite' element={<Favorite />} />
-		// 		</Route>
-		// 	</Routes>
-		// </BrowserRouter>
-
 		<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<AppLayout />}>
@@ -55,6 +36,8 @@ const App = () => {
 					<Route path='/continent/:region' element={<Continent />} />
 				</Route>
 			</Routes>
+			{/* AI Chat Widget - Floating on all pages */}
+			<AIChatWidget />
 		</BrowserRouter>
 	);
 };

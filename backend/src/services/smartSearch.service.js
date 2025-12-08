@@ -1,16 +1,55 @@
 import Country from '../models/Country.js';
 import { parseSmartQuery } from '../config/gemini.js';
 import { formatCountryBasic } from '../utils/countryFormatter.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// In-memory cache for smart search results
-// Key: normalized query string, Value: { data, timestamp }
-const searchCache = new Map();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Cache TTL: 1 hour (in milliseconds)
-const CACHE_TTL = 24 * 60 * 60 * 1000;
+// File-based cache for persistence across restarts
+const CACHE_FILE = path.join(__dirname, '../../cache/smart-search.json');
+const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+const MAX_CACHE_SIZE = 200;
 
-// Max cache size to prevent memory issues
-const MAX_CACHE_SIZE = 100;
+/**
+ * Load cache from file
+ */
+const loadCache = () => {
+	try {
+		if (fs.existsSync(CACHE_FILE)) {
+			const data = fs.readFileSync(CACHE_FILE, 'utf8');
+			return JSON.parse(data);
+		}
+	} catch (error) {
+		console.log(
+			'[SmartSearch Cache] Could not load cache file, starting fresh'
+		);
+	}
+	return {};
+};
+
+/**
+ * Save cache to file
+ */
+const saveCache = (cache) => {
+	try {
+		const dir = path.dirname(CACHE_FILE);
+		if (!fs.existsSync(dir)) {
+			fs.mkdirSync(dir, { recursive: true });
+		}
+		fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
+	} catch (error) {
+		console.error(
+			'[SmartSearch Cache] Could not save cache file:',
+			error.message
+		);
+	}
+};
+
+// In-memory cache (loaded from file on startup)
+let searchCache = loadCache();
 
 /**
  * Normalize query for cache key (lowercase, trim, remove extra spaces)
@@ -27,7 +66,7 @@ const isCacheValid = (timestamp) => {
 };
 
 /**
- * Smart search service - uses AI knowledge to find countries with caching
+ * Smart search service - uses AI knowledge to find countries with persistent caching
  * AI returns list of country codes, we fetch those from database
  * @param {string} query - User's natural language query
  * @returns {Object} - { countries: [], interpretation: string, total: number }
@@ -36,8 +75,8 @@ export const smartSearchService = async (query) => {
 	const cacheKey = normalizeQuery(query);
 
 	// Check cache first
-	if (searchCache.has(cacheKey)) {
-		const cached = searchCache.get(cacheKey);
+	if (searchCache[cacheKey]) {
+		const cached = searchCache[cacheKey];
 		if (isCacheValid(cached.timestamp)) {
 			console.log(`[SmartSearch Cache] HIT for "${cacheKey}"`);
 			return {
@@ -46,7 +85,8 @@ export const smartSearchService = async (query) => {
 			};
 		} else {
 			// Cache expired, remove it
-			searchCache.delete(cacheKey);
+			delete searchCache[cacheKey];
+			saveCache(searchCache);
 			console.log(`[SmartSearch Cache] EXPIRED for "${cacheKey}"`);
 		}
 	}
@@ -107,18 +147,23 @@ export const smartSearchService = async (query) => {
 			appliedLimit: formattedCountries.length,
 		};
 
-		// Store in cache (with size limit)
-		if (searchCache.size >= MAX_CACHE_SIZE) {
-			// Remove oldest entry
-			const firstKey = searchCache.keys().next().value;
-			searchCache.delete(firstKey);
+		// Enforce max cache size
+		const keys = Object.keys(searchCache);
+		if (keys.length >= MAX_CACHE_SIZE) {
+			// Remove oldest entries
+			const sortedKeys = keys.sort(
+				(a, b) => searchCache[a].timestamp - searchCache[b].timestamp
+			);
+			delete searchCache[sortedKeys[0]];
 			console.log(`[SmartSearch Cache] EVICTED oldest entry`);
 		}
 
-		searchCache.set(cacheKey, {
+		// Store in cache (both memory and file)
+		searchCache[cacheKey] = {
 			data: result,
 			timestamp: Date.now(),
-		});
+		};
+		saveCache(searchCache);
 		console.log(`[SmartSearch Cache] STORED for "${cacheKey}"`);
 
 		return result;
@@ -138,7 +183,8 @@ export const smartSearchService = async (query) => {
  * Clear smart search cache
  */
 export const clearSearchCache = () => {
-	searchCache.clear();
+	searchCache = {};
+	saveCache(searchCache);
 	console.log('[SmartSearch Cache] CLEARED');
 };
 
@@ -147,8 +193,8 @@ export const clearSearchCache = () => {
  */
 export const getSearchCacheStats = () => {
 	return {
-		size: searchCache.size,
+		size: Object.keys(searchCache).length,
 		maxSize: MAX_CACHE_SIZE,
-		ttlMinutes: CACHE_TTL / 60000,
+		ttlHours: CACHE_TTL / 3600000,
 	};
 };

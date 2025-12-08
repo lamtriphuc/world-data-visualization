@@ -15,17 +15,20 @@ import { HiSparkles } from 'react-icons/hi2';
 import { getGDPPrediction } from '../../services/gdpPrediction.service';
 
 const GDPPredictionChart = ({ countryCode }) => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const [data, setData] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [showPrediction, setShowPrediction] = useState(false);
 
+	// Get current language
+	const currentLang = i18n.language?.startsWith('vi') ? 'vi' : 'en';
+
 	const fetchPrediction = async () => {
 		setLoading(true);
 		setError(null);
 		try {
-			const result = await getGDPPrediction(countryCode);
+			const result = await getGDPPrediction(countryCode, currentLang);
 
 			// Combine historical and prediction data
 			const chartData = [

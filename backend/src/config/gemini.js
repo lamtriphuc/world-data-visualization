@@ -58,7 +58,7 @@ Response: {"countryCodes":["MNG","KAZ","UZB","TKM","KGZ","TJK","AFG","NPL","BTN"
 
 	try {
 		const response = await ai.models.generateContent({
-			model: 'gemini-2.0-flash',
+			model: 'gemini-2.5-flash',
 			contents: userQuery,
 			config: {
 				systemInstruction: systemPrompt,
@@ -97,9 +97,15 @@ Response: {"countryCodes":["MNG","KAZ","UZB","TKM","KGZ","TJK","AFG","NPL","BTN"
  * Predict GDP for next 5 years using AI analysis
  * @param {string} countryName - Country name
  * @param {Array} gdpHistory - Historical GDP data [{year, value}, ...]
+ * @param {string} language - Response language ('en' or 'vi')
  * @returns {Object} - { predictions: [{year, value}, ...], analysis: string }
  */
-export async function predictGDP(countryName, gdpHistory) {
+export async function predictGDP(countryName, gdpHistory, language = 'en') {
+	const langInstruction =
+		language === 'vi'
+			? 'IMPORTANT: Write the analysis in Vietnamese (Tiếng Việt).'
+			: 'Write the analysis in English.';
+
 	const systemPrompt = `You are an economist AI. Given historical GDP data for a country, predict the GDP for the next 5 years.
 
 Use economic analysis considering:
@@ -113,6 +119,7 @@ IMPORTANT RULES:
 2. Predictions should be realistic based on historical trends
 3. Values should be in the same unit as input (usually current USD)
 4. Provide brief analysis explaining your predictions
+5. ${langInstruction}
 
 Response format:
 {
@@ -134,7 +141,7 @@ Please predict GDP for the next 5 years after the last data point.`;
 
 	try {
 		const response = await ai.models.generateContent({
-			model: 'gemini-2.0-flash',
+			model: 'gemini-2.5-flash',
 			contents: userPrompt,
 			config: {
 				systemInstruction: systemPrompt,
@@ -165,6 +172,267 @@ Please predict GDP for the next 5 years after the last data point.`;
 			error: error.message,
 			predictions: [],
 			analysis: 'Could not generate prediction',
+		};
+	}
+}
+
+/**
+ * AI Country Comparison - Compare two or more countries
+ * @param {Array} countries - Array of country data objects
+ * @param {string} language - Response language ('en' or 'vi')
+ * @returns {Object} - { comparison, highlights, recommendation }
+ */
+export async function compareCountries(countries, language = 'en') {
+	const langInstruction =
+		language === 'vi'
+			? 'Respond entirely in Vietnamese (Tiếng Việt).'
+			: 'Respond in English.';
+
+	const systemPrompt = `You are an expert analyst comparing countries. Provide insightful comparisons.
+
+${langInstruction}
+
+IMPORTANT RULES:
+1. Return ONLY valid JSON, no markdown, no code blocks
+2. Compare key aspects: economy, population, geography, culture, quality of life
+3. Highlight unique strengths and weaknesses
+4. Be objective and data-driven
+
+Response format:
+{
+  "comparison": "Detailed comparison text",
+  "highlights": [
+    {"country": "USA", "strength": "Largest economy", "weakness": "High healthcare costs"},
+    {"country": "VNM", "strength": "Fast-growing economy", "weakness": "Lower GDP per capita"}
+  ],
+  "recommendation": "Summary recommendation based on different criteria (tourism, business, living, etc.)"
+}`;
+
+	const countriesInfo = countries
+		.map(
+			(c) => `
+${
+	c.name
+}: Population: ${c.population?.toLocaleString()}, Area: ${c.area?.toLocaleString()} km², GDP: $${c.gdp?.toLocaleString()}, Region: ${
+				c.region
+			}, Capital: ${c.capital}
+	`
+		)
+		.join('\n');
+
+	const userPrompt = `Compare these countries:\n${countriesInfo}`;
+
+	try {
+		const response = await ai.models.generateContent({
+			model: 'gemini-2.5-flash',
+			contents: userPrompt,
+			config: { systemInstruction: systemPrompt },
+		});
+
+		const text = response.text.trim();
+		let cleanJson = text.startsWith('```')
+			? text
+					.replace(/```json?\n?/g, '')
+					.replace(/```/g, '')
+					.trim()
+			: text;
+
+		const parsed = JSON.parse(cleanJson);
+		return { success: true, ...parsed };
+	} catch (error) {
+		console.error('AI Compare error:', error);
+		return { success: false, error: error.message };
+	}
+}
+
+/**
+ * AI Travel Advisor - Recommend countries based on preferences
+ * @param {string} preferences - User's travel preferences
+ * @param {string} language - Response language
+ * @returns {Object} - { recommendations, explanation }
+ */
+export async function travelAdvisor(preferences, language = 'en') {
+	const langInstruction =
+		language === 'vi'
+			? 'Respond entirely in Vietnamese (Tiếng Việt).'
+			: 'Respond in English.';
+
+	const systemPrompt = `You are an expert travel advisor. Recommend countries based on user preferences.
+
+${langInstruction}
+
+Consider: budget, visa requirements, climate, safety, attractions, culture, food, language barriers.
+
+IMPORTANT RULES:
+1. Return ONLY valid JSON, no markdown, no code blocks
+2. Recommend 3-5 countries with ISO 3166-1 alpha-3 codes
+3. Explain why each country matches the preferences
+4. Include practical tips
+
+Response format:
+{
+  "recommendations": [
+    {
+      "countryCode": "THA",
+      "countryName": "Thailand",
+      "matchScore": 95,
+      "reasons": ["Affordable", "Beautiful beaches", "Rich culture"],
+      "tips": "Best time to visit: November-February"
+    }
+  ],
+  "explanation": "Based on your preferences for beach destinations with low budget..."
+}`;
+
+	try {
+		const response = await ai.models.generateContent({
+			model: 'gemini-2.5-flash',
+			contents: preferences,
+			config: { systemInstruction: systemPrompt },
+		});
+
+		const text = response.text.trim();
+		let cleanJson = text.startsWith('```')
+			? text
+					.replace(/```json?\n?/g, '')
+					.replace(/```/g, '')
+					.trim()
+			: text;
+
+		const parsed = JSON.parse(cleanJson);
+		return { success: true, ...parsed };
+	} catch (error) {
+		console.error('AI Travel Advisor error:', error);
+		return { success: false, error: error.message };
+	}
+}
+
+/**
+ * AI Data Insights - Analyze trends and patterns from country data
+ * @param {Object} data - Data to analyze (countries, gdp trends, etc.)
+ * @param {string} question - What to analyze
+ * @param {string} language - Response language
+ * @returns {Object} - { insights, trends, summary }
+ */
+export async function analyzeDataInsights(data, question, language = 'en') {
+	const langInstruction =
+		language === 'vi'
+			? 'Respond entirely in Vietnamese (Tiếng Việt).'
+			: 'Respond in English.';
+
+	const systemPrompt = `You are a data analyst expert. Analyze the provided country data and identify insights.
+
+${langInstruction}
+
+IMPORTANT RULES:
+1. Return ONLY valid JSON, no markdown, no code blocks
+2. Identify key trends and patterns
+3. Provide actionable insights
+4. Use the actual data provided, don't make up numbers
+
+Response format:
+{
+  "insights": [
+    "Insight 1 with specific data points",
+    "Insight 2 with comparison"
+  ],
+  "trends": [
+    {"name": "GDP Growth", "direction": "up", "description": "Average 5% growth"},
+    {"name": "Population", "direction": "stable", "description": "Slow growth"}
+  ],
+  "summary": "Executive summary of the analysis",
+  "recommendations": ["Recommendation 1", "Recommendation 2"]
+}`;
+
+	const dataStr = JSON.stringify(data, null, 2);
+	const userPrompt = `Question: ${question}\n\nData:\n${dataStr}`;
+
+	try {
+		const response = await ai.models.generateContent({
+			model: 'gemini-2.5-flash',
+			contents: userPrompt,
+			config: { systemInstruction: systemPrompt },
+		});
+
+		const text = response.text.trim();
+		let cleanJson = text.startsWith('```')
+			? text
+					.replace(/```json?\n?/g, '')
+					.replace(/```/g, '')
+					.trim()
+			: text;
+
+		const parsed = JSON.parse(cleanJson);
+		return { success: true, ...parsed };
+	} catch (error) {
+		console.error('AI Data Insights error:', error);
+		return { success: false, error: error.message };
+	}
+}
+
+/**
+ * AI Chatbot - Answer any question about countries
+ * @param {string} question - User's question
+ * @param {Array} history - Chat history for context
+ * @param {string} language - Response language
+ * @returns {Object} - { answer, relatedCountries }
+ */
+export async function chat(question, history = [], language = 'en') {
+	const langInstruction =
+		language === 'vi'
+			? 'Respond entirely in Vietnamese (Tiếng Việt).'
+			: 'Respond in English.';
+
+	const systemPrompt = `You are a helpful assistant specializing in world geography, countries, economics, and travel.
+
+${langInstruction}
+
+IMPORTANT RULES:
+1. Return ONLY valid JSON, no markdown, no code blocks
+2. Answer questions about countries accurately
+3. If relevant, mention specific countries with their ISO codes
+4. Be conversational and helpful
+5. If you don't know something, say so honestly
+
+Response format:
+{
+  "answer": "Your detailed answer here",
+  "relatedCountries": ["USA", "GBR"],
+  "sources": "Based on general knowledge about world geography",
+  "followUpQuestions": ["Would you like to know more about X?", "Should I compare Y?"]
+}`;
+
+	const historyText =
+		history.length > 0
+			? `Previous conversation:\n${history
+					.map((h) => `${h.role}: ${h.content}`)
+					.join('\n')}\n\n`
+			: '';
+
+	const userPrompt = `${historyText}User question: ${question}`;
+
+	try {
+		const response = await ai.models.generateContent({
+			model: 'gemini-2.5-flash',
+			contents: userPrompt,
+			config: { systemInstruction: systemPrompt },
+		});
+
+		const text = response.text.trim();
+		let cleanJson = text.startsWith('```')
+			? text
+					.replace(/```json?\n?/g, '')
+					.replace(/```/g, '')
+					.trim()
+			: text;
+
+		const parsed = JSON.parse(cleanJson);
+		return { success: true, ...parsed };
+	} catch (error) {
+		console.error('AI Chat error:', error);
+		return {
+			success: false,
+			error: error.message,
+			answer: 'Sorry, I could not process your question.',
 		};
 	}
 }
