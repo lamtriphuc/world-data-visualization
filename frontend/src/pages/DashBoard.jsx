@@ -41,7 +41,6 @@ const regionColors = {
 	Default: '#F1FAEE',
 };
 
-
 const Dashboard = () => {
 	const { t } = useTranslation();
 	const [countries, setCountries] = useState([]);

@@ -179,5 +179,38 @@
     "Marshallese": "Tiếng Marshallese",
     "Māori": "Tiếng Māori",
     "Nauru": "Tiếng Nauru"
-  }
+  },
+  "gdp_prediction": "Dự đoán GDP bằng AI",
+  "predict_5_years": "Dự đoán 5 năm tới",
+  "prediction": "Dự đoán",
+  "historical_gdp": "GDP lịch sử",
+  "predicted_gdp": "GDP dự đoán",
+  "prediction_start": "Dự đoán",
+  "hide_prediction": "Ẩn dự đoán",
+
+  "ai_assistant": "Trợ lý AI",
+  "chat_welcome": "Hỏi tôi bất cứ điều gì về các quốc gia!",
+  "chat_examples": "Thử: \"Quốc gia nào có dân số cao nhất?\" hoặc \"Kể về Nhật Bản\"",
+  "chat_placeholder": "Hỏi về bất kỳ quốc gia nào...",
+  "chat_error": "Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại.",
+
+  "travel_advisor": "Tư vấn Du lịch AI",
+  "travel_advisor_desc": "Cho chúng tôi biết sở thích của bạn, chúng tôi sẽ tìm điểm đến mơ ước",
+  "travel_placeholder": "Mô tả điểm đến lý tưởng của bạn... (ví dụ: \"Du lịch biển, giá rẻ, đồ ăn ngon\")",
+  "get_recommendations": "Nhận gợi ý",
+
+  "data_insights": "Phân tích Dữ liệu AI",
+  "data_insights_desc": "Phân tích xu hướng và mẫu trong dữ liệu quốc gia",
+  "general": "Tổng quan",
+  "analyze": "Phân tích",
+  "summary": "Tóm tắt",
+  "trends": "Xu hướng",
+  "insights": "Nhận định chính",
+  "recommendations": "Đề xuất",
+
+  "ai_compare": "So sánh Quốc gia bằng AI",
+  "select_countries_compare": "Chọn ít nhất 2 quốc gia để so sánh với AI",
+  "compare_with_ai": "So sánh với AI",
+  "recommendation": "Khuyến nghị",
+  "compare_again": "So sánh lại"
 }
