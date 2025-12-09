@@ -1,4 +1,8 @@
-import { aiTravelService, aiChatService } from '../services/ai.service.js';
+import {
+	aiTravelService,
+	aiChatService,
+	aiCompareService,
+} from '../services/ai.service.js';
 import { successResponse, errorResponse } from '../utils/response.js';
 
 /**
@@ -53,6 +57,38 @@ export const chat = async (req, res) => {
 		return successResponse(res, result, 200, 'Response generated');
 	} catch (error) {
 		console.error('Chat controller error:', error);
+		return errorResponse(res, 'Internal server error', 500);
+	}
+};
+
+/**
+ * AI Compare Controller
+ */
+export const compare = async (req, res) => {
+	try {
+		const { countries, lang } = req.body;
+
+		if (!countries || !Array.isArray(countries) || countries.length < 2) {
+			return errorResponse(
+				res,
+				'Please provide at least 2 countries to compare',
+				400
+			);
+		}
+
+		const result = await aiCompareService(countries, lang || 'en');
+
+		if (!result.success) {
+			return errorResponse(
+				res,
+				result.error || 'Could not generate comparison',
+				400
+			);
+		}
+
+		return successResponse(res, result, 200, 'Comparison generated');
+	} catch (error) {
+		console.error('Compare controller error:', error);
 		return errorResponse(res, 'Internal server error', 500);
 	}
 };

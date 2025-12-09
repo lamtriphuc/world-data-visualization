@@ -7,6 +7,7 @@ import {
 	getAllCountries,
 	getCountryDetails,
 } from '../services/country.service';
+import { aiCompareCountries } from '../services/ai.service';
 import translated from '../scripts/countries_translated.json';
 
 const Comparison = () => {
@@ -17,6 +18,28 @@ const Comparison = () => {
 	const [isTableOpen, setIsTableOpen] = useState(false);
 	const maxCountries = 3;
 	const currentLang = localStorage.getItem('lang');
+
+	const [isAiLoading, setIsAiLoading] = useState(false);
+	const [aiAnalysis, setAiAnalysis] = useState('');
+
+	const handleAiCompare = async () => {
+		if (selectedCountries.length < 2) return;
+
+		try {
+			setIsAiLoading(true);
+			setAiAnalysis('');
+			const codes = selectedCountries.filter(Boolean);
+			const result = await aiCompareCountries(codes, currentLang || 'en');
+
+			if (result.success) {
+				setAiAnalysis(result.analysis);
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setIsAiLoading(false);
+		}
+	};
 
 	useEffect(() => {
 		const fetchCountries = async () => {
@@ -132,6 +155,37 @@ const Comparison = () => {
 							</p>
 							<CompareTable countries={compareCountries} />
 						</div>
+
+						{/* AI Analysis */}
+						<div className='bg-white dark:bg-gray-800 p-6 mt-4 rounded-xl shadow-md'>
+							<div className='flex items-center justify-between mb-4'>
+								<p className='text-xl font-bold text-gray-800 dark:text-gray-300'>
+									{t('ai_analysis')}
+								</p>
+								<button
+									onClick={handleAiCompare}
+									disabled={isAiLoading}
+									className='flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition disabled:opacity-50'>
+									{isAiLoading ? (
+										<span className='animate-pulse'>{t('analyzing')}...</span>
+									) : (
+										<>
+											<span className='mr-2'>✨</span>
+											{t('analyze_with_ai')}
+										</>
+									)}
+								</button>
+							</div>
+
+							{aiAnalysis && (
+								<div className='prose dark:prose-invert max-w-none bg-gray-50 dark:bg-gray-700/50 p-6 rounded-lg'>
+									<p className='whitespace-pre-line text-gray-700 dark:text-gray-300 leading-relaxed'>
+										{aiAnalysis}
+									</p>
+								</div>
+							)}
+						</div>
+
 						{/* Compare Chart */}
 						<div className='bg-white dark:bg-gray-800 p-6 mt-4 rounded-xl shadow-md items-start'>
 							<p className='text-center text-xl font-bold text-gray-800 dark:text-gray-300 mb-4'>

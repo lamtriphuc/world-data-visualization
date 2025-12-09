@@ -212,5 +212,10 @@
 	"select_countries_compare": "Select at least 2 countries to compare with AI",
 	"compare_with_ai": "Compare with AI",
 	"recommendation": "Recommendation",
-	"compare_again": "Compare again"
+	"compare_again": "Compare again",
+	"gdp": "GDP",
+	"average_income": "Average Income",
+	"ai_analysis": "AI Analysis",
+	"analyze_with_ai": "Analyze with AI",
+	"analyzing": "Analyzing"
 }
