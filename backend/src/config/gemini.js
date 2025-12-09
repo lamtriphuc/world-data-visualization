@@ -62,6 +62,7 @@ Response: {"countryCodes":["MNG","KAZ","UZB","TKM","KGZ","TJK","AFG","NPL","BTN"
 			contents: userQuery,
 			config: {
 				systemInstruction: systemPrompt,
+				responseMimeType: 'application/json',
 			},
 		});
 
@@ -145,6 +146,7 @@ Please predict GDP for the next 5 years after the last data point.`;
 			contents: userPrompt,
 			config: {
 				systemInstruction: systemPrompt,
+				responseMimeType: 'application/json',
 			},
 		});
 
@@ -218,7 +220,10 @@ Response format:
 		const response = await ai.models.generateContent({
 			model: 'gemini-2.5-flash',
 			contents: preferences,
-			config: { systemInstruction: systemPrompt },
+			config: {
+				systemInstruction: systemPrompt,
+				responseMimeType: 'application/json',
+			},
 		});
 
 		const text = response.text.trim();
@@ -282,7 +287,10 @@ Response format:
 		const response = await ai.models.generateContent({
 			model: 'gemini-2.5-flash',
 			contents: userPrompt,
-			config: { systemInstruction: systemPrompt },
+			config: {
+				systemInstruction: systemPrompt,
+				responseMimeType: 'application/json',
+			},
 		});
 
 		const text = response.text.trim();
@@ -314,6 +322,69 @@ async function main(prompt) {
 		contents: prompt,
 	});
 	return response.text;
+}
+
+/**
+ * AI Compare Countries
+ * @param {Array} countriesData - List of country data objects
+ * @param {string} language - Response language
+ * @returns {Object} - { analysis: string }
+ */
+export async function compareCountries(countriesData, language = 'en') {
+	const langInstruction =
+		language === 'vi'
+			? 'Respond entirely in Vietnamese (Tiếng Việt).'
+			: 'Respond in English.';
+
+	const systemPrompt = `You are an expert economic and geopolitical analyst. Compare the provided countries based on their data.
+
+${langInstruction}
+
+IMPORTANT RULES:
+1. Return ONLY valid JSON, no markdown, no code blocks
+2. Provide a 2-3 paragraph analysis comparing the countries
+3. Focus on key differences in GDP, Population, Area, and Development
+4. Be objective and professional
+
+Response format:
+{
+  "analysis": "Your detailed comparison text here..."
+}`;
+
+	const userPrompt = `Compare the following countries:\n${JSON.stringify(
+		countriesData,
+		null,
+		2
+	)}`;
+
+	try {
+		const response = await ai.models.generateContent({
+			model: 'gemini-2.5-flash',
+			contents: userPrompt,
+			config: {
+				systemInstruction: systemPrompt,
+				responseMimeType: 'application/json',
+			},
+		});
+
+		const text = response.text.trim();
+		let cleanJson = text.startsWith('```')
+			? text
+					.replace(/```json?\n?/g, '')
+					.replace(/```/g, '')
+					.trim()
+			: text;
+
+		const parsed = JSON.parse(cleanJson);
+		return { success: true, ...parsed };
+	} catch (error) {
+		console.error('AI Compare error:', error);
+		return {
+			success: false,
+			error: error.message,
+			analysis: 'Could not generate comparison.',
+		};
+	}
 }
 
 export default main;

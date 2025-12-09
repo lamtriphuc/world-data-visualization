@@ -212,5 +212,10 @@
   "select_countries_compare": "Chọn ít nhất 2 quốc gia để so sánh với AI",
   "compare_with_ai": "So sánh với AI",
   "recommendation": "Khuyến nghị",
-  "compare_again": "So sánh lại"
+  "compare_again": "So sánh lại",
+  "gdp": "GDP",
+  "average_income": "Thu nhập bình quân",
+  "ai_analysis": "Phân tích AI",
+  "analyze_with_ai": "Phân tích với AI",
+  "analyzing": "Đang phân tích"
 }
