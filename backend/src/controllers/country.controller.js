@@ -7,6 +7,7 @@ import {
 	getTop10AreaService,
 	getTop10PopulationService,
 	getLanguageDistributionService,
+	getCountriesByListService,
 } from '../services/country.service.js';
 import { getGlobalStatsService } from '../services/region.service.js';
 import { successResponse, errorResponse } from '../utils/response.js';
@@ -98,6 +99,16 @@ export const getTop10Population = async (req, res, next) => {
 		const { region } = req.query
 		const data = await getTop10PopulationService(region);
 		return successResponse(res, data, 200, 'Top 10 population');
+	} catch (error) {
+		return errorResponse(res, error.message, 500);
+	}
+};
+
+export const getCountriesByList = async (req, res, next) => {
+	try {
+		const { cca3s } = req.body
+		const data = await getCountriesByListService(cca3s);
+		return successResponse(res, data, 200, 'List border');
 	} catch (error) {
 		return errorResponse(res, error.message, 500);
 	}

@@ -42,6 +42,13 @@ export const getStats = async (region) => {
 	return response.data.data;
 };
 
+export const getBorder = async (cca3s) => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries`, cca3s
+	);
+	return response.data.data;
+};
+
 
 export const getCountryDetails = async (code) => {
 	const response = await axios.get(

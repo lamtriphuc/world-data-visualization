@@ -9,6 +9,7 @@ import {
 	getTop10Population,
 	getGlobalStats,
 	getLanguageDistribution,
+	getCountriesByList,
 } from '../controllers/country.controller.js';
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.get('/top-10-area', getTop10Area);
 router.get('/top-10-population', getTop10Population);
 router.get('/stats', getGlobalStats);
 router.get('/language', getLanguageDistribution);
+router.get('/border', getCountriesByList);
 
 router.get('/:code', getCountryDetail);
 router.get('/gdp/:code', getLatestGdp);
