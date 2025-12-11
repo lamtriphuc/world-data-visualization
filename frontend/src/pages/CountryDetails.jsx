@@ -23,6 +23,7 @@ import {
 	removeFavorite,
 } from '../services/auth.service';
 import { translateCapital } from '../scripts/capital_names_vi';
+import GDPPredictionChart from '../components/Charts/GDPPredictionChart';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
@@ -277,6 +278,13 @@ const CountryDetails = () => {
 					</div>
 				</div>
 			</div>
+
+			{/* GDP Prediction */}
+			{countryDetails.gdp?.length >= 3 && (
+				<div className='bg-gray-200 dark:bg-gray-700 p-6 sm:p-8 rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
+					<GDPPredictionChart countryCode={countryDetails.cca3} />
+				</div>
+			)}
 
 			{/* ISO code */}
 			<div className='grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'>

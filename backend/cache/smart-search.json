@@ -1,0 +1,593 @@
+{
+  "các quốc gia xã hội chủ nghĩa": {
+    "data": {
+      "success": true,
+      "countries": [
+        {
+          "cca2": "CN",
+          "cca3": "CHN",
+          "name": "China",
+          "area": 9706961,
+          "population": {
+            "year": 2024,
+            "value": 1408975000
+          },
+          "region": "Asia",
+          "capital": [
+            "Beijing"
+          ],
+          "flag": "https://flagcdn.com/cn.svg"
+        },
+        {
+          "cca2": "VN",
+          "cca3": "VNM",
+          "name": "Vietnam",
+          "area": 331212,
+          "population": {
+            "year": 2024,
+            "value": 100987686
+          },
+          "region": "Asia",
+          "capital": [
+            "Hanoi"
+          ],
+          "flag": "https://flagcdn.com/vn.svg"
+        },
+        {
+          "cca2": "CU",
+          "cca3": "CUB",
+          "name": "Cuba",
+          "area": 109884,
+          "population": {
+            "year": 2024,
+            "value": 10979783
+          },
+          "region": "Americas",
+          "capital": [
+            "Havana"
+          ],
+          "flag": "https://flagcdn.com/cu.svg"
+        },
+        {
+          "cca2": "LA",
+          "cca3": "LAO",
+          "name": "Laos",
+          "area": 236800,
+          "population": {
+            "year": 2024,
+            "value": 7769819
+          },
+          "region": "Asia",
+          "capital": [
+            "Vientiane"
+          ],
+          "flag": "https://flagcdn.com/la.svg"
+        },
+        {
+          "cca2": "KP",
+          "cca3": "PRK",
+          "name": "North Korea",
+          "area": 120538,
+          "population": {
+            "year": 2024,
+            "value": 26498823
+          },
+          "region": "Asia",
+          "capital": [
+            "Pyongyang"
+          ],
+          "flag": "https://flagcdn.com/kp.svg"
+        }
+      ],
+      "interpretation": "Các quốc gia có chính phủ xã hội chủ nghĩa/cộng sản",
+      "total": 5,
+      "requestedCodes": 5,
+      "appliedLimit": 5
+    },
+    "timestamp": 1765212313730
+  },
+  "các quốc gia g7": {
+    "data": {
+      "success": true,
+      "countries": [
+        {
+          "cca2": "CA",
+          "cca3": "CAN",
+          "name": "Canada",
+          "area": 9984670,
+          "population": {
+            "year": 2024,
+            "value": 41288599
+          },
+          "region": "Americas",
+          "capital": [
+            "Ottawa"
+          ],
+          "flag": "https://flagcdn.com/ca.svg"
+        },
+        {
+          "cca2": "FR",
+          "cca3": "FRA",
+          "name": "France",
+          "area": 543908,
+          "population": {
+            "year": 2024,
+            "value": 68516699
+          },
+          "region": "Europe",
+          "capital": [
+            "Paris"
+          ],
+          "flag": "https://flagcdn.com/fr.svg"
+        },
+        {
+          "cca2": "DE",
+          "cca3": "DEU",
+          "name": "Germany",
+          "area": 357114,
+          "population": {
+            "year": 2024,
+            "value": 83510950
+          },
+          "region": "Europe",
+          "capital": [
+            "Berlin"
+          ],
+          "flag": "https://flagcdn.com/de.svg"
+        },
+        {
+          "cca2": "IT",
+          "cca3": "ITA",
+          "name": "Italy",
+          "area": 301336,
+          "population": {
+            "year": 2024,
+            "value": 58986023
+          },
+          "region": "Europe",
+          "capital": [
+            "Rome"
+          ],
+          "flag": "https://flagcdn.com/it.svg"
+        },
+        {
+          "cca2": "JP",
+          "cca3": "JPN",
+          "name": "Japan",
+          "area": 377930,
+          "population": {
+            "year": 2024,
+            "value": 123975371
+          },
+          "region": "Asia",
+          "capital": [
+            "Tokyo"
+          ],
+          "flag": "https://flagcdn.com/jp.svg"
+        },
+        {
+          "cca2": "GB",
+          "cca3": "GBR",
+          "name": "United Kingdom",
+          "area": 244376,
+          "population": {
+            "year": 2024,
+            "value": 69226000
+          },
+          "region": "Europe",
+          "capital": [
+            "London"
+          ],
+          "flag": "https://flagcdn.com/gb.svg"
+        },
+        {
+          "cca2": "US",
+          "cca3": "USA",
+          "name": "United States",
+          "area": 9525067,
+          "population": {
+            "year": 2024,
+            "value": 340110988
+          },
+          "region": "Americas",
+          "capital": [
+            "Washington, D.C."
+          ],
+          "flag": "https://flagcdn.com/us.svg"
+        }
+      ],
+      "interpretation": "Group of Seven (G7) major advanced economies",
+      "total": 7,
+      "requestedCodes": 7,
+      "appliedLimit": 7
+    },
+    "timestamp": 1765212334754
+  },
+  "các quốc gia giàu nhất": {
+    "data": {
+      "success": true,
+      "countries": [
+        {
+          "cca2": "LU",
+          "cca3": "LUX",
+          "name": "Luxembourg",
+          "area": 2586,
+          "population": {
+            "year": 2024,
+            "value": 677717
+          },
+          "region": "Europe",
+          "capital": [
+            "Luxembourg"
+          ],
+          "flag": "https://flagcdn.com/lu.svg"
+        },
+        {
+          "cca2": "IE",
+          "cca3": "IRL",
+          "name": "Ireland",
+          "area": 70273,
+          "population": {
+            "year": 2024,
+            "value": 5380257
+          },
+          "region": "Europe",
+          "capital": [
+            "Dublin"
+          ],
+          "flag": "https://flagcdn.com/ie.svg"
+        },
+        {
+          "cca2": "CH",
+          "cca3": "CHE",
+          "name": "Switzerland",
+          "area": 41284,
+          "population": {
+            "year": 2024,
+            "value": 9034102
+          },
+          "region": "Europe",
+          "capital": [
+            "Bern"
+          ],
+          "flag": "https://flagcdn.com/ch.svg"
+        },
+        {
+          "cca2": "NO",
+          "cca3": "NOR",
+          "name": "Norway",
+          "area": 386224,
+          "population": {
+            "year": 2024,
+            "value": 5572272
+          },
+          "region": "Europe",
+          "capital": [
+            "Oslo"
+          ],
+          "flag": "https://flagcdn.com/no.svg"
+        },
+        {
+          "cca2": "QA",
+          "cca3": "QAT",
+          "name": "Qatar",
+          "area": 11586,
+          "population": {
+            "year": 2024,
+            "value": 2857822
+          },
+          "region": "Asia",
+          "capital": [
+            "Doha"
+          ],
+          "flag": "https://flagcdn.com/qa.svg"
+        },
+        {
+          "cca2": "SG",
+          "cca3": "SGP",
+          "name": "Singapore",
+          "area": 710,
+          "population": {
+            "year": 2024,
+            "value": 6036860
+          },
+          "region": "Asia",
+          "capital": [
+            "Singapore"
+          ],
+          "flag": "https://flagcdn.com/sg.svg"
+        },
+        {
+          "cca2": "BN",
+          "cca3": "BRN",
+          "name": "Brunei",
+          "area": 5765,
+          "population": {
+            "year": 2024,
+            "value": 462721
+          },
+          "region": "Asia",
+          "capital": [
+            "Bandar Seri Begawan"
+          ],
+          "flag": "https://flagcdn.com/bn.svg"
+        },
+        {
+          "cca2": "AE",
+          "cca3": "ARE",
+          "name": "United Arab Emirates",
+          "area": 83600,
+          "population": {
+            "year": 2024,
+            "value": 10876981
+          },
+          "region": "Asia",
+          "capital": [
+            "Abu Dhabi"
+          ],
+          "flag": "https://flagcdn.com/ae.svg"
+        },
+        {
+          "cca2": "US",
+          "cca3": "USA",
+          "name": "United States",
+          "area": 9525067,
+          "population": {
+            "year": 2024,
+            "value": 340110988
+          },
+          "region": "Americas",
+          "capital": [
+            "Washington, D.C."
+          ],
+          "flag": "https://flagcdn.com/us.svg"
+        },
+        {
+          "cca2": "DK",
+          "cca3": "DNK",
+          "name": "Denmark",
+          "area": 43094,
+          "population": {
+            "year": 2024,
+            "value": 5976992
+          },
+          "region": "Europe",
+          "capital": [
+            "Copenhagen"
+          ],
+          "flag": "https://flagcdn.com/dk.svg"
+        },
+        {
+          "cca2": "NL",
+          "cca3": "NLD",
+          "name": "Netherlands",
+          "area": 41865,
+          "population": {
+            "year": 2024,
+            "value": 17994237
+          },
+          "region": "Europe",
+          "capital": [
+            "Amsterdam"
+          ],
+          "flag": "https://flagcdn.com/nl.svg"
+        },
+        {
+          "cca2": "IS",
+          "cca3": "ISL",
+          "name": "Iceland",
+          "area": 103000,
+          "population": {
+            "year": 2024,
+            "value": 404610
+          },
+          "region": "Europe",
+          "capital": [
+            "Reykjavik"
+          ],
+          "flag": "https://flagcdn.com/is.svg"
+        },
+        {
+          "cca2": "AT",
+          "cca3": "AUT",
+          "name": "Austria",
+          "area": 83871,
+          "population": {
+            "year": 2024,
+            "value": 9178482
+          },
+          "region": "Europe",
+          "capital": [
+            "Vienna"
+          ],
+          "flag": "https://flagcdn.com/at.svg"
+        },
+        {
+          "cca2": "SE",
+          "cca3": "SWE",
+          "name": "Sweden",
+          "area": 450295,
+          "population": {
+            "year": 2024,
+            "value": 10569709
+          },
+          "region": "Europe",
+          "capital": [
+            "Stockholm"
+          ],
+          "flag": "https://flagcdn.com/se.svg"
+        },
+        {
+          "cca2": "AU",
+          "cca3": "AUS",
+          "name": "Australia",
+          "area": 7692024,
+          "population": {
+            "year": 2024,
+            "value": 27204809
+          },
+          "region": "Oceania",
+          "capital": [
+            "Canberra"
+          ],
+          "flag": "https://flagcdn.com/au.svg"
+        },
+        {
+          "cca2": "DE",
+          "cca3": "DEU",
+          "name": "Germany",
+          "area": 357114,
+          "population": {
+            "year": 2024,
+            "value": 83510950
+          },
+          "region": "Europe",
+          "capital": [
+            "Berlin"
+          ],
+          "flag": "https://flagcdn.com/de.svg"
+        },
+        {
+          "cca2": "BE",
+          "cca3": "BEL",
+          "name": "Belgium",
+          "area": 30528,
+          "population": {
+            "year": 2024,
+            "value": 11876844
+          },
+          "region": "Europe",
+          "capital": [
+            "Brussels"
+          ],
+          "flag": "https://flagcdn.com/be.svg"
+        },
+        {
+          "cca2": "CA",
+          "cca3": "CAN",
+          "name": "Canada",
+          "area": 9984670,
+          "population": {
+            "year": 2024,
+            "value": 41288599
+          },
+          "region": "Americas",
+          "capital": [
+            "Ottawa"
+          ],
+          "flag": "https://flagcdn.com/ca.svg"
+        },
+        {
+          "cca2": "FI",
+          "cca3": "FIN",
+          "name": "Finland",
+          "area": 338455,
+          "population": {
+            "year": 2024,
+            "value": 5637214
+          },
+          "region": "Europe",
+          "capital": [
+            "Helsinki"
+          ],
+          "flag": "https://flagcdn.com/fi.svg"
+        },
+        {
+          "cca2": "HK",
+          "cca3": "HKG",
+          "name": "Hong Kong",
+          "area": 1104,
+          "population": {
+            "year": 2024,
+            "value": 7524100
+          },
+          "region": "Asia",
+          "capital": [
+            "City of Victoria"
+          ],
+          "flag": "https://flagcdn.com/hk.svg"
+        },
+        {
+          "cca2": "JP",
+          "cca3": "JPN",
+          "name": "Japan",
+          "area": 377930,
+          "population": {
+            "year": 2024,
+            "value": 123975371
+          },
+          "region": "Asia",
+          "capital": [
+            "Tokyo"
+          ],
+          "flag": "https://flagcdn.com/jp.svg"
+        },
+        {
+          "cca2": "KR",
+          "cca3": "KOR",
+          "name": "South Korea",
+          "area": 100210,
+          "population": {
+            "year": 2024,
+            "value": 51751065
+          },
+          "region": "Asia",
+          "capital": [
+            "Seoul"
+          ],
+          "flag": "https://flagcdn.com/kr.svg"
+        },
+        {
+          "cca2": "FR",
+          "cca3": "FRA",
+          "name": "France",
+          "area": 543908,
+          "population": {
+            "year": 2024,
+            "value": 68516699
+          },
+          "region": "Europe",
+          "capital": [
+            "Paris"
+          ],
+          "flag": "https://flagcdn.com/fr.svg"
+        },
+        {
+          "cca2": "GB",
+          "cca3": "GBR",
+          "name": "United Kingdom",
+          "area": 244376,
+          "population": {
+            "year": 2024,
+            "value": 69226000
+          },
+          "region": "Europe",
+          "capital": [
+            "London"
+          ],
+          "flag": "https://flagcdn.com/gb.svg"
+        },
+        {
+          "cca2": "NZ",
+          "cca3": "NZL",
+          "name": "New Zealand",
+          "area": 268838,
+          "population": {
+            "year": 2024,
+            "value": 5338500
+          },
+          "region": "Oceania",
+          "capital": [
+            "Wellington"
+          ],
+          "flag": "https://flagcdn.com/nz.svg"
+        }
+      ],
+      "interpretation": "Các quốc gia có GDP bình quân đầu người cao nhất (theo xếp hạng tổng quát)",
+      "total": 25,
+      "requestedCodes": 25,
+      "appliedLimit": 25
+    },
+    "timestamp": 1765212889163
+  }
+}

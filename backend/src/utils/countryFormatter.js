@@ -49,6 +49,7 @@ export const formatCountryDetail = (country) => {
 		flag: country.flags.svg || country.flags.png || '',
 		timezones: country.timezones,
 		maps: country.maps,
+		populationDensity: country.populationDensity,
 	};
 };
 
