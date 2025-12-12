@@ -65,7 +65,23 @@ export const getCountryByCodeService = async (code) => {
 		$or: [{ cca3: code.toUpperCase() }, { cca2: code.toUpperCase() }],
 	}).lean();
 
-	return formatCountryDetail(country);
+	if (!country) return null;
+
+	if (!country.borders || country.borders.length === 0) {
+		return formatCountryDetail({ ...country, borders: [] });
+	}
+
+	const borderCountries = await Country.find(
+		{ cca3: { $in: country.borders } },
+		{ name: 1, cca3: 1 }
+	).lean();
+
+	const borderNames = borderCountries.map((c) => c.name?.common);
+
+	return formatCountryDetail({
+		...country,
+		borders: borderNames,
+	});
 };
 
 export const getCountriesByListService = async (listCode) => {

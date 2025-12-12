@@ -185,10 +185,9 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${
-											countryDetails.region === 'Antarctic'
-												? 'Antarctica'
-												: countryDetails.region
+										`main_region.${countryDetails.region === 'Antarctic'
+											? 'Antarctica'
+											: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&
@@ -294,7 +293,7 @@ const CountryDetails = () => {
 						<IoFlagOutline />
 						<h1>{t('iso_codes')}</h1>
 					</div>
-					<div className='mt-10 flex gap-20'>
+					<div className='mt-4 flex gap-20'>
 						<div className='flex flex-col space-y-2'>
 							<p className='text-gray-800/70 dark:text-gray-50/70'>
 								ISO 3166-1 Alpha-2
@@ -322,13 +321,13 @@ const CountryDetails = () => {
 						<LuFlagTriangleRight />
 						<h1>{t('borders')}</h1>
 					</div>
-					<div className='mt-10 flex flex-wrap gap-2'>
+					<div className='mt-4 flex flex-wrap gap-2'>
 						{countryDetails.borders?.map((border) => (
 							<span
 								key={border}
 								className='px-2 py-1 bg-gray-300 dark:bg-gray-800 rounded-lg cursor-pointer'
 								onClick={() => navigate(`/country/${border}`)}>
-								{border}
+								{getTranslatedName(border)}
 							</span>
 						))}
 					</div>

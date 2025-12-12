@@ -180,8 +180,9 @@ const Continent = () => {
 					label={regions.find((r) => r.value === curRegion)?.label}
 					items={regions.map((r) => ({
 						label: r.label,
-						onClick: () => navigate(`/continent/${r.value}`),
+						value: r.value
 					}))}
+					onSelect={(value) => navigate(`/continent/${value}`)}
 				/>
 			</div>
 			<div className='my-4 grid grid-cols-1 md:grid-cols-3 gap-6'>
@@ -220,12 +221,10 @@ const Continent = () => {
 								<Dropdown
 									label={mode === 'population' ? t('population') : t('area')}
 									items={[
-										{
-											label: t('population'),
-											onClick: () => setMode('population'),
-										},
-										{ label: t('area'), onClick: () => setMode('area') },
+										{ label: t('population'), value: 'population' },
+										{ label: t('area'), value: 'area' },
 									]}
+									onSelect={(value) => setMode(value)}
 								/>
 							</div>
 

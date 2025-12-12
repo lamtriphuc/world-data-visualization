@@ -13,6 +13,7 @@ export const formatCountryBasic = (country) => {
 		region: country.region,
 		capital: country.capital,
 		flag: country.flags?.svg || country.flags?.png || '',
+		density: country.populationDensity
 	};
 };
 

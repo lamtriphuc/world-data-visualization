@@ -217,5 +217,78 @@
       "analysis": "Các dự đoán GDP của Canada cho 5 năm tới dựa trên phân tích kết hợp giữa xu hướng tăng trưởng lịch sử, điều kiện kinh tế khu vực, triển vọng toàn cầu và các yếu tố đặc thù của quốc gia. \n\n**Xu hướng lịch sử:** Sau giai đoạn phục hồi mạnh mẽ sau đại dịch vào năm 2021 và 2022, tăng trưởng GDP của Canada đã chậm lại đáng kể vào năm 2023 (thậm chí giảm nhẹ tính theo USD hiện hành) và dự kiến sẽ tăng trưởng vừa phải vào năm 2024. Điều này cho thấy sự bình thường hóa sau giai đoạn tăng trưởng bùng nổ do lạm phát và phục hồi. Tốc độ tăng trưởng trung bình dài hạn (tính bằng USD hiện hành) trước các cú sốc lớn thường nằm trong khoảng 3-5%.\n\n**Triển vọng kinh tế toàn cầu và khu vực:** Nền kinh tế toàn cầu dự kiến sẽ tăng trưởng khiêm tốn trong những năm tới, với lạm phát vẫn là một mối lo ngại và lãi suất duy trì ở mức cao ở nhiều nền kinh tế lớn. Hoa Kỳ, đối tác thương mại lớn nhất của Canada, dự kiến sẽ tiếp tục tăng trưởng vừa phải nhưng phải đối mặt với rủi ro lạm phát và lãi suất. Sự ổn định của giá cả hàng hóa toàn cầu, đặc biệt là dầu mỏ, cũng sẽ tác động đáng kể đến nền kinh tế phụ thuộc vào tài nguyên của Canada.\n\n**Các yếu tố đặc thù của quốc gia:**\n*   **Tài nguyên thiên nhiên:** Canada là nhà xuất khẩu năng lượng và tài nguyên quan trọng; giá cả hàng hóa toàn cầu có ảnh hưởng lớn.\n*   **Chính sách tiền tệ:** Ngân hàng Canada có thể sẽ duy trì lãi suất ở mức cao hơn trong thời gian dài hơn để kiểm soát lạm phát, điều này có thể làm chậm tăng trưởng kinh tế.\n*   **Thị trường nhà ở và nợ hộ gia đình:** Lãi suất cao tiềm ẩn rủi ro cho thị trường nhà ở và mức nợ cao của các hộ gia đình.\n*   **Nhập cư:** Mức độ nhập cư cao tiếp tục là động lực tăng trưởng dân số và nguồn cung lao động, hỗ trợ tiềm năng tăng trưởng dài hạn.\n\nDựa trên các yếu tố này, dự báo tăng trưởng GDP của Canada sẽ ổn định trở lại sau giai đoạn phục hồi mạnh mẽ sau đại dịch, đạt tốc độ vừa phải. Các dự đoán cho thấy tốc độ tăng trưởng dần dần, phản ánh sự phục hồi kinh tế toàn cầu, sự ổn định của chính sách tiền tệ và những lợi thế cơ bản của Canada, mặc dù có những thách thức từ lạm phát và lãi suất cao. Tốc độ tăng trưởng dự kiến sẽ bắt đầu ở mức thận trọng hơn vào năm 2025 và tăng nhẹ trong các năm tiếp theo khi các điều kiện kinh tế vĩ mô ổn định hơn."
     },
     "timestamp": 1765216185492
+  },
+  "ALB_en": {
+    "data": {
+      "success": true,
+      "countryName": "Albania",
+      "countryCode": "ALB",
+      "historicalData": [
+        {
+          "year": 2015,
+          "value": 11470171826.9575
+        },
+        {
+          "year": 2016,
+          "value": 11988668784.6628
+        },
+        {
+          "year": 2017,
+          "value": 13258268435.6048
+        },
+        {
+          "year": 2018,
+          "value": 15379508329.7568
+        },
+        {
+          "year": 2019,
+          "value": 15585111614.0376
+        },
+        {
+          "year": 2020,
+          "value": 15241455556.3737
+        },
+        {
+          "year": 2021,
+          "value": 18032009220.4405
+        },
+        {
+          "year": 2022,
+          "value": 19017244116.7203
+        },
+        {
+          "year": 2023,
+          "value": 23547180412.3404
+        },
+        {
+          "year": 2024,
+          "value": 27177735527.5667
+        }
+      ],
+      "predictions": [
+        {
+          "year": 2025,
+          "value": 29900009080
+        },
+        {
+          "year": 2026,
+          "value": 32447509862
+        },
+        {
+          "year": 2027,
+          "value": 34871073606
+        },
+        {
+          "year": 2028,
+          "value": 37137793681
+        },
+        {
+          "year": 2029,
+          "value": 39366061291
+        }
+      ],
+      "analysis": "Albania has demonstrated strong economic growth in recent years, particularly in 2023 and 2024, driven by a robust post-pandemic recovery, flourishing tourism, and increased foreign direct investments. The historical data shows a compounded annual growth rate of approximately 10% over the last decade in current USD.\n\nOur predictions for the next five years reflect a continuation of this positive trend, albeit with a gradual moderation from the exceptionally high rates seen recently. We project nominal GDP growth rates of approximately 10% in 2025, tapering to around 6% by 2029. This trajectory considers:\n\n1.  **Historical Growth Trends**: The recent momentum is expected to carry forward, leveraging ongoing structural reforms and development projects.\n2.  **Country-Specific Factors**: Albania's strong tourism sector, remittances, and aspirations for EU integration are key growth drivers. Public investments and private consumption are also expected to contribute.\n3.  **Regional and Global Economic Outlook**: While domestic factors are strong, the predictions also account for potential global economic headwinds, such as lingering inflation, higher interest rates, and geopolitical uncertainties, which might temper growth over the medium term. The tapering of growth rates reflects a normalization from the rapid post-pandemic expansion and a more sustainable long-term trajectory.\n\nThese predictions are in current USD and include both real economic expansion and an assumed level of inflation."
+    },
+    "timestamp": 1765465565418
   }
 }

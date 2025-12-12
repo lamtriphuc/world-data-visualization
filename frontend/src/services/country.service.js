@@ -42,7 +42,6 @@ export const getStats = async (region) => {
 	return response.data.data;
 };
 
-
 export const getCountryDetails = async (code) => {
 	const response = await axios.get(
 		`${import.meta.env.VITE_BACKEND_URL}/api/countries/${code}`
