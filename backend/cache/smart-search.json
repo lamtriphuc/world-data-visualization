@@ -589,5 +589,870 @@
       "appliedLimit": 25
     },
     "timestamp": 1765212889163
+  },
+  "socialist countries": {
+    "data": {
+      "success": true,
+      "countries": [
+        {
+          "cca2": "CN",
+          "cca3": "CHN",
+          "name": "China",
+          "area": 9562910,
+          "population": {
+            "year": 2024,
+            "value": 1408975000
+          },
+          "region": "Asia",
+          "capital": [
+            "Beijing"
+          ],
+          "flag": "https://flagcdn.com/cn.svg"
+        },
+        {
+          "cca2": "VN",
+          "cca3": "VNM",
+          "name": "Vietnam",
+          "area": 331340,
+          "population": {
+            "year": 2024,
+            "value": 100987686
+          },
+          "region": "Asia",
+          "capital": [
+            "Hanoi"
+          ],
+          "flag": "https://flagcdn.com/vn.svg"
+        },
+        {
+          "cca2": "CU",
+          "cca3": "CUB",
+          "name": "Cuba",
+          "area": 109880,
+          "population": {
+            "year": 2024,
+            "value": 10979783
+          },
+          "region": "Americas",
+          "capital": [
+            "Havana"
+          ],
+          "flag": "https://flagcdn.com/cu.svg"
+        },
+        {
+          "cca2": "LA",
+          "cca3": "LAO",
+          "name": "Laos",
+          "area": 236800,
+          "population": {
+            "year": 2024,
+            "value": 7769819
+          },
+          "region": "Asia",
+          "capital": [
+            "Vientiane"
+          ],
+          "flag": "https://flagcdn.com/la.svg"
+        },
+        {
+          "cca2": "KP",
+          "cca3": "PRK",
+          "name": "North Korea",
+          "area": 120540,
+          "population": {
+            "year": 2024,
+            "value": 26498823
+          },
+          "region": "Asia",
+          "capital": [
+            "Pyongyang"
+          ],
+          "flag": "https://flagcdn.com/kp.svg"
+        }
+      ],
+      "interpretation": "Countries with socialist/communist governments",
+      "total": 5,
+      "requestedCodes": 5,
+      "appliedLimit": 5
+    },
+    "timestamp": 1765465441623
+  },
+  "nước nói tiếng anh": {
+    "data": {
+      "success": true,
+      "countries": [
+        {
+          "cca2": "US",
+          "cca3": "USA",
+          "name": "United States",
+          "area": 9831510,
+          "population": {
+            "year": 2024,
+            "value": 340110988
+          },
+          "region": "Americas",
+          "capital": [
+            "Washington, D.C."
+          ],
+          "flag": "https://flagcdn.com/us.svg"
+        },
+        {
+          "cca2": "GB",
+          "cca3": "GBR",
+          "name": "United Kingdom",
+          "area": 243610,
+          "population": {
+            "year": 2024,
+            "value": 69226000
+          },
+          "region": "Europe",
+          "capital": [
+            "London"
+          ],
+          "flag": "https://flagcdn.com/gb.svg"
+        },
+        {
+          "cca2": "CA",
+          "cca3": "CAN",
+          "name": "Canada",
+          "area": 15640500,
+          "population": {
+            "year": 2024,
+            "value": 41288599
+          },
+          "region": "Americas",
+          "capital": [
+            "Ottawa"
+          ],
+          "flag": "https://flagcdn.com/ca.svg"
+        },
+        {
+          "cca2": "AU",
+          "cca3": "AUS",
+          "name": "Australia",
+          "area": 7741220,
+          "population": {
+            "year": 2024,
+            "value": 27204809
+          },
+          "region": "Oceania",
+          "capital": [
+            "Canberra"
+          ],
+          "flag": "https://flagcdn.com/au.svg"
+        },
+        {
+          "cca2": "NZ",
+          "cca3": "NZL",
+          "name": "New Zealand",
+          "area": 267710,
+          "population": {
+            "year": 2024,
+            "value": 5338500
+          },
+          "region": "Oceania",
+          "capital": [
+            "Wellington"
+          ],
+          "flag": "https://flagcdn.com/nz.svg"
+        },
+        {
+          "cca2": "IE",
+          "cca3": "IRL",
+          "name": "Ireland",
+          "area": 70280,
+          "population": {
+            "year": 2024,
+            "value": 5380257
+          },
+          "region": "Europe",
+          "capital": [
+            "Dublin"
+          ],
+          "flag": "https://flagcdn.com/ie.svg"
+        },
+        {
+          "cca2": "IN",
+          "cca3": "IND",
+          "name": "India",
+          "area": 3287260,
+          "population": {
+            "year": 2024,
+            "value": 1450935791
+          },
+          "region": "Asia",
+          "capital": [
+            "New Delhi"
+          ],
+          "flag": "https://flagcdn.com/in.svg"
+        },
+        {
+          "cca2": "PK",
+          "cca3": "PAK",
+          "name": "Pakistan",
+          "area": 796100,
+          "population": {
+            "year": 2024,
+            "value": 251269164
+          },
+          "region": "Asia",
+          "capital": [
+            "Islamabad"
+          ],
+          "flag": "https://flagcdn.com/pk.svg"
+        },
+        {
+          "cca2": "PH",
+          "cca3": "PHL",
+          "name": "Philippines",
+          "area": 300000,
+          "population": {
+            "year": 2024,
+            "value": 115843670
+          },
+          "region": "Asia",
+          "capital": [
+            "Manila"
+          ],
+          "flag": "https://flagcdn.com/ph.svg"
+        },
+        {
+          "cca2": "SG",
+          "cca3": "SGP",
+          "name": "Singapore",
+          "area": 728,
+          "population": {
+            "year": 2024,
+            "value": 6036860
+          },
+          "region": "Asia",
+          "capital": [
+            "Singapore"
+          ],
+          "flag": "https://flagcdn.com/sg.svg"
+        },
+        {
+          "cca2": "ZA",
+          "cca3": "ZAF",
+          "name": "South Africa",
+          "area": 1219090,
+          "population": {
+            "year": 2024,
+            "value": 64007187
+          },
+          "region": "Africa",
+          "capital": [
+            "Pretoria",
+            "Bloemfontein",
+            "Cape Town"
+          ],
+          "flag": "https://flagcdn.com/za.svg"
+        },
+        {
+          "cca2": "NG",
+          "cca3": "NGA",
+          "name": "Nigeria",
+          "area": 923770,
+          "population": {
+            "year": 2024,
+            "value": 232679478
+          },
+          "region": "Africa",
+          "capital": [
+            "Abuja"
+          ],
+          "flag": "https://flagcdn.com/ng.svg"
+        },
+        {
+          "cca2": "KE",
+          "cca3": "KEN",
+          "name": "Kenya",
+          "area": 591969,
+          "population": {
+            "year": 2024,
+            "value": 56432944
+          },
+          "region": "Africa",
+          "capital": [
+            "Nairobi"
+          ],
+          "flag": "https://flagcdn.com/ke.svg"
+        },
+        {
+          "cca2": "UG",
+          "cca3": "UGA",
+          "name": "Uganda",
+          "area": 241550,
+          "population": {
+            "year": 2024,
+            "value": 50015092
+          },
+          "region": "Africa",
+          "capital": [
+            "Kampala"
+          ],
+          "flag": "https://flagcdn.com/ug.svg"
+        },
+        {
+          "cca2": "GH",
+          "cca3": "GHA",
+          "name": "Ghana",
+          "area": 238533,
+          "population": {
+            "year": 2024,
+            "value": 34427414
+          },
+          "region": "Africa",
+          "capital": [
+            "Accra"
+          ],
+          "flag": "https://flagcdn.com/gh.svg"
+        },
+        {
+          "cca2": "ZM",
+          "cca3": "ZMB",
+          "name": "Zambia",
+          "area": 752610,
+          "population": {
+            "year": 2024,
+            "value": 21314956
+          },
+          "region": "Africa",
+          "capital": [
+            "Lusaka"
+          ],
+          "flag": "https://flagcdn.com/zm.svg"
+        },
+        {
+          "cca2": "BW",
+          "cca3": "BWA",
+          "name": "Botswana",
+          "area": 581730,
+          "population": {
+            "year": 2024,
+            "value": 2521139
+          },
+          "region": "Africa",
+          "capital": [
+            "Gaborone"
+          ],
+          "flag": "https://flagcdn.com/bw.svg"
+        },
+        {
+          "cca2": "JM",
+          "cca3": "JAM",
+          "name": "Jamaica",
+          "area": 10990,
+          "population": {
+            "year": 2024,
+            "value": 2839175
+          },
+          "region": "Americas",
+          "capital": [
+            "Kingston"
+          ],
+          "flag": "https://flagcdn.com/jm.svg"
+        },
+        {
+          "cca2": "BS",
+          "cca3": "BHS",
+          "name": "Bahamas",
+          "area": 13880,
+          "population": {
+            "year": 2024,
+            "value": 401283
+          },
+          "region": "Americas",
+          "capital": [
+            "Nassau"
+          ],
+          "flag": "https://flagcdn.com/bs.svg"
+        },
+        {
+          "cca2": "MT",
+          "cca3": "MLT",
+          "name": "Malta",
+          "area": 320,
+          "population": {
+            "year": 2024,
+            "value": 574346
+          },
+          "region": "Europe",
+          "capital": [
+            "Valletta"
+          ],
+          "flag": "https://flagcdn.com/mt.svg"
+        },
+        {
+          "cca2": "FJ",
+          "cca3": "FJI",
+          "name": "Fiji",
+          "area": 18270,
+          "population": {
+            "year": 2024,
+            "value": 928784
+          },
+          "region": "Oceania",
+          "capital": [
+            "Suva"
+          ],
+          "flag": "https://flagcdn.com/fj.svg"
+        },
+        {
+          "cca2": "MY",
+          "cca3": "MYS",
+          "name": "Malaysia",
+          "area": 330241,
+          "population": {
+            "year": 2024,
+            "value": 35557673
+          },
+          "region": "Asia",
+          "capital": [
+            "Kuala Lumpur"
+          ],
+          "flag": "https://flagcdn.com/my.svg"
+        },
+        {
+          "cca2": "RW",
+          "cca3": "RWA",
+          "name": "Rwanda",
+          "area": 26340,
+          "population": {
+            "year": 2024,
+            "value": 14256567
+          },
+          "region": "Africa",
+          "capital": [
+            "Kigali"
+          ],
+          "flag": "https://flagcdn.com/rw.svg"
+        }
+      ],
+      "interpretation": "Countries where English is an official language or widely spoken as a primary language",
+      "total": 23,
+      "requestedCodes": 23,
+      "appliedLimit": 23
+    },
+    "timestamp": 1765465713344
+  },
+  "countries speak english": {
+    "data": {
+      "success": true,
+      "countries": [
+        {
+          "cca2": "US",
+          "cca3": "USA",
+          "name": "United States",
+          "area": 9831510,
+          "population": {
+            "year": 2024,
+            "value": 340110988
+          },
+          "region": "Americas",
+          "capital": [
+            "Washington, D.C."
+          ],
+          "flag": "https://flagcdn.com/us.svg"
+        },
+        {
+          "cca2": "GB",
+          "cca3": "GBR",
+          "name": "United Kingdom",
+          "area": 243610,
+          "population": {
+            "year": 2024,
+            "value": 69226000
+          },
+          "region": "Europe",
+          "capital": [
+            "London"
+          ],
+          "flag": "https://flagcdn.com/gb.svg"
+        },
+        {
+          "cca2": "CA",
+          "cca3": "CAN",
+          "name": "Canada",
+          "area": 15640500,
+          "population": {
+            "year": 2024,
+            "value": 41288599
+          },
+          "region": "Americas",
+          "capital": [
+            "Ottawa"
+          ],
+          "flag": "https://flagcdn.com/ca.svg"
+        },
+        {
+          "cca2": "AU",
+          "cca3": "AUS",
+          "name": "Australia",
+          "area": 7741220,
+          "population": {
+            "year": 2024,
+            "value": 27204809
+          },
+          "region": "Oceania",
+          "capital": [
+            "Canberra"
+          ],
+          "flag": "https://flagcdn.com/au.svg"
+        },
+        {
+          "cca2": "NZ",
+          "cca3": "NZL",
+          "name": "New Zealand",
+          "area": 267710,
+          "population": {
+            "year": 2024,
+            "value": 5338500
+          },
+          "region": "Oceania",
+          "capital": [
+            "Wellington"
+          ],
+          "flag": "https://flagcdn.com/nz.svg"
+        },
+        {
+          "cca2": "IE",
+          "cca3": "IRL",
+          "name": "Ireland",
+          "area": 70280,
+          "population": {
+            "year": 2024,
+            "value": 5380257
+          },
+          "region": "Europe",
+          "capital": [
+            "Dublin"
+          ],
+          "flag": "https://flagcdn.com/ie.svg"
+        },
+        {
+          "cca2": "IN",
+          "cca3": "IND",
+          "name": "India",
+          "area": 3287260,
+          "population": {
+            "year": 2024,
+            "value": 1450935791
+          },
+          "region": "Asia",
+          "capital": [
+            "New Delhi"
+          ],
+          "flag": "https://flagcdn.com/in.svg"
+        },
+        {
+          "cca2": "PK",
+          "cca3": "PAK",
+          "name": "Pakistan",
+          "area": 796100,
+          "population": {
+            "year": 2024,
+            "value": 251269164
+          },
+          "region": "Asia",
+          "capital": [
+            "Islamabad"
+          ],
+          "flag": "https://flagcdn.com/pk.svg"
+        },
+        {
+          "cca2": "NG",
+          "cca3": "NGA",
+          "name": "Nigeria",
+          "area": 923770,
+          "population": {
+            "year": 2024,
+            "value": 232679478
+          },
+          "region": "Africa",
+          "capital": [
+            "Abuja"
+          ],
+          "flag": "https://flagcdn.com/ng.svg"
+        },
+        {
+          "cca2": "PH",
+          "cca3": "PHL",
+          "name": "Philippines",
+          "area": 300000,
+          "population": {
+            "year": 2024,
+            "value": 115843670
+          },
+          "region": "Asia",
+          "capital": [
+            "Manila"
+          ],
+          "flag": "https://flagcdn.com/ph.svg"
+        },
+        {
+          "cca2": "ZA",
+          "cca3": "ZAF",
+          "name": "South Africa",
+          "area": 1219090,
+          "population": {
+            "year": 2024,
+            "value": 64007187
+          },
+          "region": "Africa",
+          "capital": [
+            "Pretoria",
+            "Bloemfontein",
+            "Cape Town"
+          ],
+          "flag": "https://flagcdn.com/za.svg"
+        },
+        {
+          "cca2": "KE",
+          "cca3": "KEN",
+          "name": "Kenya",
+          "area": 591969,
+          "population": {
+            "year": 2024,
+            "value": 56432944
+          },
+          "region": "Africa",
+          "capital": [
+            "Nairobi"
+          ],
+          "flag": "https://flagcdn.com/ke.svg"
+        },
+        {
+          "cca2": "UG",
+          "cca3": "UGA",
+          "name": "Uganda",
+          "area": 241550,
+          "population": {
+            "year": 2024,
+            "value": 50015092
+          },
+          "region": "Africa",
+          "capital": [
+            "Kampala"
+          ],
+          "flag": "https://flagcdn.com/ug.svg"
+        },
+        {
+          "cca2": "TZ",
+          "cca3": "TZA",
+          "name": "Tanzania",
+          "area": 947300,
+          "population": {
+            "year": 2024,
+            "value": 68560157
+          },
+          "region": "Africa",
+          "capital": [
+            "Dodoma"
+          ],
+          "flag": "https://flagcdn.com/tz.svg"
+        },
+        {
+          "cca2": "GH",
+          "cca3": "GHA",
+          "name": "Ghana",
+          "area": 238533,
+          "population": {
+            "year": 2024,
+            "value": 34427414
+          },
+          "region": "Africa",
+          "capital": [
+            "Accra"
+          ],
+          "flag": "https://flagcdn.com/gh.svg"
+        },
+        {
+          "cca2": "SG",
+          "cca3": "SGP",
+          "name": "Singapore",
+          "area": 728,
+          "population": {
+            "year": 2024,
+            "value": 6036860
+          },
+          "region": "Asia",
+          "capital": [
+            "Singapore"
+          ],
+          "flag": "https://flagcdn.com/sg.svg"
+        },
+        {
+          "cca2": "MY",
+          "cca3": "MYS",
+          "name": "Malaysia",
+          "area": 330241,
+          "population": {
+            "year": 2024,
+            "value": 35557673
+          },
+          "region": "Asia",
+          "capital": [
+            "Kuala Lumpur"
+          ],
+          "flag": "https://flagcdn.com/my.svg"
+        },
+        {
+          "cca2": "JM",
+          "cca3": "JAM",
+          "name": "Jamaica",
+          "area": 10990,
+          "population": {
+            "year": 2024,
+            "value": 2839175
+          },
+          "region": "Americas",
+          "capital": [
+            "Kingston"
+          ],
+          "flag": "https://flagcdn.com/jm.svg"
+        },
+        {
+          "cca2": "BS",
+          "cca3": "BHS",
+          "name": "Bahamas",
+          "area": 13880,
+          "population": {
+            "year": 2024,
+            "value": 401283
+          },
+          "region": "Americas",
+          "capital": [
+            "Nassau"
+          ],
+          "flag": "https://flagcdn.com/bs.svg"
+        },
+        {
+          "cca2": "BZ",
+          "cca3": "BLZ",
+          "name": "Belize",
+          "area": 22970,
+          "population": {
+            "year": 2024,
+            "value": 417072
+          },
+          "region": "Americas",
+          "capital": [
+            "Belmopan"
+          ],
+          "flag": "https://flagcdn.com/bz.svg"
+        },
+        {
+          "cca2": "GY",
+          "cca3": "GUY",
+          "name": "Guyana",
+          "area": 214970,
+          "population": {
+            "year": 2024,
+            "value": 831087
+          },
+          "region": "Americas",
+          "capital": [
+            "Georgetown"
+          ],
+          "flag": "https://flagcdn.com/gy.svg"
+        },
+        {
+          "cca2": "LR",
+          "cca3": "LBR",
+          "name": "Liberia",
+          "area": 111370,
+          "population": {
+            "year": 2024,
+            "value": 5612817
+          },
+          "region": "Africa",
+          "capital": [
+            "Monrovia"
+          ],
+          "flag": "https://flagcdn.com/lr.svg"
+        },
+        {
+          "cca2": "SL",
+          "cca3": "SLE",
+          "name": "Sierra Leone",
+          "area": 72300,
+          "population": {
+            "year": 2024,
+            "value": 8642022
+          },
+          "region": "Africa",
+          "capital": [
+            "Freetown"
+          ],
+          "flag": "https://flagcdn.com/sl.svg"
+        },
+        {
+          "cca2": "MT",
+          "cca3": "MLT",
+          "name": "Malta",
+          "area": 320,
+          "population": {
+            "year": 2024,
+            "value": 574346
+          },
+          "region": "Europe",
+          "capital": [
+            "Valletta"
+          ],
+          "flag": "https://flagcdn.com/mt.svg"
+        },
+        {
+          "cca2": "CY",
+          "cca3": "CYP",
+          "name": "Cyprus",
+          "area": 9250,
+          "population": {
+            "year": 2024,
+            "value": 1358282
+          },
+          "region": "Europe",
+          "capital": [
+            "Nicosia"
+          ],
+          "flag": "https://flagcdn.com/cy.svg"
+        },
+        {
+          "cca2": "RW",
+          "cca3": "RWA",
+          "name": "Rwanda",
+          "area": 26340,
+          "population": {
+            "year": 2024,
+            "value": 14256567
+          },
+          "region": "Africa",
+          "capital": [
+            "Kigali"
+          ],
+          "flag": "https://flagcdn.com/rw.svg"
+        },
+        {
+          "cca2": "CM",
+          "cca3": "CMR",
+          "name": "Cameroon",
+          "area": 475440,
+          "population": {
+            "year": 2024,
+            "value": 29123744
+          },
+          "region": "Africa",
+          "capital": [
+            "Yaoundé"
+          ],
+          "flag": "https://flagcdn.com/cm.svg"
+        }
+      ],
+      "interpretation": "Countries where English is a primary or official language, or widely spoken due to historical ties.",
+      "total": 27,
+      "requestedCodes": 27,
+      "appliedLimit": 27
+    },
+    "timestamp": 1765465762572
   }
 }

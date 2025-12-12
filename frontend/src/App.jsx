@@ -11,6 +11,7 @@ import Favorite from './pages/Favorite';
 import Continent from './pages/Continent';
 import TravelTracker from './pages/TravelTracker';
 import { AIChatWidget } from './components/AI';
+import Analytic from './pages/Analytic';
 
 const App = () => {
 	const CountryList = lazy(() => import('./pages/CountryList'));
@@ -32,6 +33,7 @@ const App = () => {
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/favorite' element={<Favorite />} />
+					<Route path='/analytic' element={<Analytic />} />
 					<Route path='/travel-tracker' element={<TravelTracker />} />
 					<Route path='/continent/:region' element={<Continent />} />
 				</Route>

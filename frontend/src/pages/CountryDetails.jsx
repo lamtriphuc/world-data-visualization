@@ -12,7 +12,7 @@ import { LuFlagTriangleRight } from 'react-icons/lu';
 import { IoIosHeart, IoMdTrendingUp } from 'react-icons/io';
 import MiniMap from '../components/Map/MiniMap';
 import { useEffect, useState } from 'react';
-import { getBorder, getCountryDetails } from '../services/country.service';
+import { getCountryDetails } from '../services/country.service';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Loading from '../components/Layout/Loading';
