@@ -6,6 +6,7 @@ import recommendationRoutes from './recommendation.route.js';
 import userRoutes from './user.route.js';
 import smartSearchRoutes from './smartSearch.route.js';
 import aiRoutes from './ai.route.js';
+import mlRoutes from './ml.route.js';
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/search', smartSearchRoutes);
 router.use('/recommendations', recommendationRoutes);
 router.use('/user', userRoutes);
 router.use('/ai', aiRoutes);
+router.use('/ml', mlRoutes);
 
 export default router;

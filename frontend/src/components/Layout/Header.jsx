@@ -7,6 +7,7 @@ import { LuGitCompare } from 'react-icons/lu';
 import { HiSparkles } from 'react-icons/hi2';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
+import { FiBarChart2 } from 'react-icons/fi';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from '../UserMenu';
 import { smartSearch } from '../../services/smartSearch.service';
@@ -182,6 +183,13 @@ const Header = () => {
 					className='flex px-2 py-1 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 items-center gap-2 text-sm'>
 					<LuGitCompare />
 					<span className='hidden sm:inline'>{t('comparison')}</span>
+				</Link>
+				<Link
+					to='/ml-analysis'
+					className='flex px-2 py-1 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 items-center gap-2 text-sm'
+					title='ML Analysis'>
+					<FiBarChart2 />
+					<span className='hidden sm:inline'>ML</span>
 				</Link>
 				<LanguageSwitcher />
 				<ThemeToggle />
