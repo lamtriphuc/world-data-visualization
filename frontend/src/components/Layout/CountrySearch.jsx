@@ -80,10 +80,10 @@ const CountrySearch = ({ countries, onSelect }) => {
 	}, []);
 
 	return (
-		<div className='relative w-full md:w-72' ref={inputRef}>
+		<div className='relative w-full' ref={inputRef}>
 			<input
 				type='text'
-				className='w-full rounded-md border border-gray-600 bg-white dark:bg-gray-800 py-3 px-6 pr-10 shadow-md focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm text-gray-900 dark:text-white'
+				className='w-full rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 py-2.5 px-4 pr-10 shadow-md focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm text-gray-900 dark:text-white'
 				placeholder={t('search_placeholder')}
 				value={query}
 				onChange={handleInputChange} // Dùng hàm handler mới

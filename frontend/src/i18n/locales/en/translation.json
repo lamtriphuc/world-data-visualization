@@ -217,5 +217,9 @@
 	"average_income": "Average Income",
 	"ai_analysis": "AI Analysis",
 	"analyze_with_ai": "Analyze with AI",
-	"analyzing": "Analyzing"
+	"analyzing": "Analyzing",
+	"global_rankings": "Global Rankings & Statistics",
+	"rankings_description": "Explore top countries and languages through statistical data.",
+  "top_borders": "Top 10 Countries with Most Borders",
+  "borders_count": "Number of Borders"
 }

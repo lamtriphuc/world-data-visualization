@@ -3,23 +3,18 @@ import { FiMap } from 'react-icons/fi';
 import { LuUsers } from 'react-icons/lu';
 import StatCard from '../components/Cards/StatCard';
 import ContinentChart from '../components/Charts/ContinentChart';
-import TopCountriesTable from '../components/Tables/TopCountriesTable';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import {
 	getAllCountries,
 	getAllCountryNames,
 	getGlobalStats,
-	getTop10Area,
-	getTop10Population,
-	getTopLanguages,
 } from '../services/country.service';
 import Loading from '../components/Layout/Loading';
 import CountrySearch from '../components/Layout/CountrySearch';
 import InteractiveMap from '../components/Map/InteractiveMap';
 import RegionFilter from '../components/Layout/RegionFilter';
 import { useNavigate } from 'react-router-dom';
-import TopLanguagesTable from '../components/Tables/TopLanguagesTable';
 
 const regionViewStates = {
 	All: { center: [0, 20], zoom: 1 },
@@ -53,11 +48,7 @@ const Dashboard = () => {
 	const [allCountryNames, setAllCountryNames] = useState([]);
 	const [regionFilter, setRegionFilter] = useState('All');
 	const [selectedCountryCode, setSelectedCountryCode] = useState(null);
-	const [topListType, setTopListType] = useState('population');
-	const [topPopulation, setTopPopulaiton] = useState([]);
-	const [topArea, setTopArea] = useState([]);
 	const [stats, setStats] = useState();
-	const [topLanguages, setTopLanguages] = useState([]);
 
 	useEffect(() => {
 		// Tải geojson cho hình dạng bản đồ
@@ -86,33 +77,6 @@ const Dashboard = () => {
 			}
 		};
 
-		const fetchTop10Area = async () => {
-			try {
-				const res = await getTop10Area();
-				setTopArea(res);
-			} catch (error) {
-				console.log('fetch top 10 area ', error);
-			}
-		};
-
-		const fetchTop10Population = async () => {
-			try {
-				const res = await getTop10Population();
-				setTopPopulaiton(res);
-			} catch (error) {
-				console.log('fetch top 10 populaiton ', error);
-			}
-		};
-
-		const fetchTopLanguages = async () => {
-			try {
-				const res = await getTopLanguages();
-				setTopLanguages(res.raw);
-			} catch (error) {
-				console.log('fetch top 10 area ', error);
-			}
-		};
-
 		const fetchStats = async () => {
 			try {
 				const res = await getGlobalStats();
@@ -122,14 +86,12 @@ const Dashboard = () => {
 			}
 		};
 
-		fetchTopLanguages();
 		fetchStats();
-		fetchTop10Area();
-		fetchTop10Population();
 		fetchCountries();
 		fetchAllCountryNames();
 	}, []);
 
+	// Calculate Continent Data for Chart
 	const continentMap = {};
 	countries.forEach((country) => {
 		const region = country.region || 'Unknown';
@@ -137,11 +99,12 @@ const Dashboard = () => {
 		continentMap[region]++;
 	});
 
-	// Biểu đồ
 	const continentData = Object.entries(continentMap).map(([name, value]) => ({
 		name,
 		value,
-		percentage: ((value / stats.totalCountries) * 100).toFixed(1),
+		percentage: stats?.totalCountries
+			? ((value / stats.totalCountries) * 100).toFixed(1)
+			: 0,
 	}));
 
 	// Khi chọn từ thanh Search
@@ -185,7 +148,7 @@ const Dashboard = () => {
 				<StatCard
 					onClick={() => navigate('/countries')}
 					title={t('total_countries')}
-					value={stats.totalCountries}
+					value={stats?.totalCountries || 0}
 					subtitle={t('countries')}
 					icon={BiGlobe}
 					bgColor={'bg-blue-100'}
@@ -194,7 +157,7 @@ const Dashboard = () => {
 
 				<StatCard
 					title={t('total_population')}
-					value={stats.totalPopulation}
+					value={stats?.totalPopulation || 0}
 					subtitle={t('people')}
 					icon={LuUsers}
 					bgColor={'bg-green-100'}
@@ -204,7 +167,7 @@ const Dashboard = () => {
 				<StatCard
 					onClick={() => navigate(`/continent/Asia`)}
 					title={t('continents')}
-					value={stats.totalRegions}
+					value={stats?.totalRegions || 0}
 					subtitle={t('continent')}
 					icon={FiMap}
 					bgColor={'bg-purple-100'}
@@ -212,45 +175,53 @@ const Dashboard = () => {
 				/>
 			</div>
 
-			<div className='relative w-full h-[400px] mt-4'>
-				<div className='absolute top-0 left-0 right-0 z-2 p-4 flex flex-col md:flex-row gap-4'>
-					<CountrySearch
-						countries={allCountryNames}
-						onSelect={handleSearchSelect}
-					/>
-					<RegionFilter
-						regions={Object.keys(regionColors).filter((r) => r !== 'Default')}
-						selectedRegion={regionFilter}
-						onFilterChange={handleRegionChange}
-					/>
+			{/* Layout: Map (2/3) + Chart (1/3) */}
+			<div className='mt-8 flex flex-col lg:flex-row gap-6 h-auto lg:h-[550px]'>
+				{/* Map Section */}
+				<div className='lg:flex-[2] relative w-full h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col'>
+					{/* Search & Filter Bar Overlay - Absolute */}
+					<div className='absolute top-4 left-4 right-4 z-[999] flex flex-col md:flex-row items-start md:items-center gap-3 pointer-events-none'>
+						<div className='pointer-events-auto w-full md:w-72 shadow-xl'>
+							<CountrySearch
+								countries={allCountryNames}
+								onSelect={handleSearchSelect}
+							/>
+						</div>
+						<div className='pointer-events-auto w-full md:w-auto overflow-x-auto no-scrollbar shadow-xl rounded-md'>
+							<RegionFilter
+								regions={Object.keys(regionColors).filter(
+									(r) => r !== 'Default'
+								)}
+								selectedRegion={regionFilter}
+								onFilterChange={handleRegionChange}
+							/>
+						</div>
+					</div>
+
+					{/* Map */}
+					<div className='flex-1 w-full h-full relative z-0'>
+						<InteractiveMap
+							ref={mapRef}
+							geoData={geoData}
+							regionColors={regionColors}
+							regionFilter={regionFilter}
+							selectedCountryCode={selectedCountryCode}
+							onCountryClick={handleCountryClick}
+							countries={countries}
+						/>
+					</div>
 				</div>
 
-				{/* Map */}
-				<div className='w-full h-[450px]'>
-					<InteractiveMap
-						ref={mapRef}
-						geoData={geoData}
-						regionColors={regionColors}
-						regionFilter={regionFilter}
-						selectedCountryCode={selectedCountryCode}
-						onCountryClick={handleCountryClick}
-						countries={countries}
-					/>
+				{/* Sidebar Section: Continent Chart */}
+				<div className='lg:flex-1 h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col'>
+					<h2 className='text-xl font-bold text-gray-900 dark:text-white mb-2 shrink-0'>
+						{t('country_distribution') || 'Phân bố theo châu lục'}
+					</h2>
+					<div className='flex-1 h-0 min-h-0 w-full'>
+						<ContinentChart chartData={continentData} />
+					</div>
 				</div>
 			</div>
-
-			<div className='mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6'>
-				{/* Continent Chart */}
-				<ContinentChart chartData={continentData} />
-				<TopLanguagesTable languages={topLanguages} />
-			</div>
-			<TopCountriesTable
-				countries={topListType === 'population' ? topPopulation : topArea}
-				type={topListType}
-				// Truyền state và hàm handler xuống cho ComboBox nội bộ
-				topListType={topListType}
-				onTopListTypeChange={setTopListType}
-			/>
 		</>
 	);
 };
