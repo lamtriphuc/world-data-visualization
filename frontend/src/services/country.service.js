@@ -10,20 +10,25 @@ export const getAllCountries = async ({
 	sortOrder = '',
 }) => {
 	const response = await axios.get(
-		`${import.meta.env.VITE_BACKEND_URL
+		`${
+			import.meta.env.VITE_BACKEND_URL
 		}/api/countries?page=${page}${region}${subregion}${search}&limit=${limit}${sortBy}${sortOrder}`
 	);
 	return response.data.data;
 };
 
 export const getAllCountriesContinent = async ({
-	region = "Asia",
+	region = 'Asia',
 	limit = 150,
 	independent = true,
-	sortBy = "name",
-	sortOrder = 1
+	sortBy = 'name',
+	sortOrder = 1,
 }) => {
-	const url = `${import.meta.env.VITE_BACKEND_URL}/api/countries?region=${region}&independent=${independent}&limit=${limit}&sortBy=${sortBy}&sortOrder=${Number(sortOrder)}`;
+	const url = `${
+		import.meta.env.VITE_BACKEND_URL
+	}/api/countries?region=${region}&independent=${independent}&limit=${limit}&sortBy=${sortBy}&sortOrder=${Number(
+		sortOrder
+	)}`;
 	const response = await axios.get(url);
 	return response.data.data;
 };
@@ -83,7 +88,15 @@ export const getTopLanguages = async (region) => {
 	const params = {};
 	if (region) params.region = region;
 	const response = await axios.get(
-		`${import.meta.env.VITE_BACKEND_URL}/api/countries/language`, { params }
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/language`,
+		{ params }
+	);
+	return response.data.data;
+};
+
+export const getTop10Borders = async () => {
+	const response = await axios.get(
+		`${import.meta.env.VITE_BACKEND_URL}/api/countries/top-10-borders`
 	);
 	return response.data.data;
 };

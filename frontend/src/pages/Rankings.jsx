@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next'; // Assuming i18n is used
-import ContinentChart from '../components/Charts/ContinentChart';
+import { useTranslation } from 'react-i18next';
 import TopCountriesTable from '../components/Tables/TopCountriesTable';
 import TopLanguagesTable from '../components/Tables/TopLanguagesTable';
 import TopBordersTable from '../components/Tables/TopBordersTable';
 import {
-	getAllCountries,
-	getGlobalStats,
 	getTop10Area,
 	getTop10Population,
 	getTopLanguages,
+	getTop10Borders,
 } from '../services/country.service';
 import Loading from '../components/Layout/Loading';
 
@@ -18,8 +16,6 @@ const Rankings = () => {
 	const [loading, setLoading] = useState(true);
 
 	// Data states
-	const [countries, setCountries] = useState([]);
-	const [stats, setStats] = useState({ totalCountries: 0 }); // Default init
 	const [topPopulation, setTopPopulation] = useState([]);
 	const [topArea, setTopArea] = useState([]);
 	const [topLanguages, setTopLanguages] = useState([]);
@@ -30,37 +26,18 @@ const Rankings = () => {
 		const fetchData = async () => {
 			try {
 				setLoading(true);
-				const [
-					allCountriesRes,
-					globalStatsRes,
-					topAreaRes,
-					topPopRes,
-					topLangRes,
-					networkRes, // Fetch network data
-				] = await Promise.all([
-					getAllCountries({ limit: 0 }),
-					getGlobalStats(),
-					getTop10Area(),
-					getTop10Population(),
-					getTopLanguages(),
-					fetch('http://localhost:3001/api/ml/network-analysis').then((r) =>
-						r.json()
-					),
-				]);
+				const [topAreaRes, topPopRes, topLangRes, topBordersRes] =
+					await Promise.all([
+						getTop10Area(),
+						getTop10Population(),
+						getTopLanguages(),
+						getTop10Borders(),
+					]);
 
-				setCountries(allCountriesRes.data || []);
-				setStats(globalStatsRes);
-				setTopArea(topAreaRes);
-				setTopPopulation(topPopRes);
-				setTopLanguages(topLangRes.raw);
-
-				if (
-					networkRes.success &&
-					networkRes.data &&
-					networkRes.data.top_countries_by_borders
-				) {
-					setTopBorders(networkRes.data.top_countries_by_borders.slice(0, 10));
-				}
+				setTopArea(topAreaRes || []);
+				setTopPopulation(topPopRes || []);
+				setTopLanguages(topLangRes?.raw || []);
+				setTopBorders(topBordersRes || []);
 			} catch (error) {
 				console.error('Error fetching ranking data:', error);
 			} finally {

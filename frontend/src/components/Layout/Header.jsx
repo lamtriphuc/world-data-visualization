@@ -6,7 +6,6 @@ import { MdOutlineTravelExplore } from 'react-icons/md';
 import { LuGitCompare } from 'react-icons/lu';
 import { HiSparkles } from 'react-icons/hi2';
 import { IoClose } from 'react-icons/io5';
-import { FiBarChart2 } from 'react-icons/fi';
 import { FaMagnifyingGlass, FaTrophy } from 'react-icons/fa6';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from '../UserMenu';
@@ -185,18 +184,11 @@ const Header = () => {
 					<span className='hidden sm:inline'>{t('comparison')}</span>
 				</Link>
 				<Link
-					to='/ml-analysis'
-					className='flex px-2 py-1 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 items-center gap-2 text-sm'
-					title='ML Analysis'>
-					<FiBarChart2 />
-					<span className='hidden sm:inline'>ML</span>
-				</Link>
-				<Link
 					to='/rankings'
 					className='flex px-2 py-1 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 items-center gap-2 text-sm'
 					title='Rankings'>
 					<FaTrophy />
-					<span className='hidden sm:inline'>Xếp hạng</span>
+					<span className='hidden sm:inline'>{t('rankings')}</span>
 				</Link>
 				<LanguageSwitcher />
 				<ThemeToggle />

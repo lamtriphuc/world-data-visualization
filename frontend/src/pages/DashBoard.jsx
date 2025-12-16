@@ -3,6 +3,7 @@ import { FiMap } from 'react-icons/fi';
 import { LuUsers } from 'react-icons/lu';
 import StatCard from '../components/Cards/StatCard';
 import ContinentChart from '../components/Charts/ContinentChart';
+import BubbleScatterChart from '../components/Charts/BubbleScatterChart';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -178,7 +179,7 @@ const Dashboard = () => {
 			{/* Layout: Map (2/3) + Chart (1/3) */}
 			<div className='mt-8 flex flex-col lg:flex-row gap-6 h-auto lg:h-[550px]'>
 				{/* Map Section */}
-				<div className='lg:flex-[2] relative w-full h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col'>
+				<div className='lg:flex-[2] relative w-full h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col'>
 					{/* Search & Filter Bar Overlay - Absolute */}
 					<div className='absolute top-4 left-4 right-4 z-[999] flex flex-col md:flex-row items-start md:items-center gap-3 pointer-events-none'>
 						<div className='pointer-events-auto w-full md:w-72 shadow-xl'>
@@ -213,7 +214,7 @@ const Dashboard = () => {
 				</div>
 
 				{/* Sidebar Section: Continent Chart */}
-				<div className='lg:flex-1 h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col'>
+				<div className='lg:flex-1 h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 flex flex-col'>
 					<h2 className='text-xl font-bold text-gray-900 dark:text-white mb-2 shrink-0'>
 						{t('country_distribution') || 'Phân bố theo châu lục'}
 					</h2>
@@ -221,6 +222,16 @@ const Dashboard = () => {
 						<ContinentChart chartData={continentData} />
 					</div>
 				</div>
+			</div>
+
+			{/* Bubble Scatter Chart */}
+			<div className='mt-8'>
+				<BubbleScatterChart
+					countries={countries}
+					regionColors={regionColors}
+					selectedRegion='All'
+					isCompactMode={false}
+				/>
 			</div>
 		</>
 	);

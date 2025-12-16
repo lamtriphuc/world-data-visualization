@@ -7,6 +7,7 @@ import {
 	getAllCountryNames,
 	getTop10Area,
 	getTop10Population,
+	getTop10Borders,
 	getGlobalStats,
 	getLanguageDistribution,
 	getCountriesByList,
@@ -19,6 +20,7 @@ router.get('/', getAllCountries);
 router.get('/list-name', getAllCountryNames);
 router.get('/top-10-area', getTop10Area);
 router.get('/top-10-population', getTop10Population);
+router.get('/top-10-borders', getTop10Borders);
 router.get('/stats', getGlobalStats);
 router.get('/language', getLanguageDistribution);
 router.get('/border', getCountriesByList);

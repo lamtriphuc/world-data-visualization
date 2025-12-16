@@ -134,16 +134,32 @@ export const getTop10AreaService = async (region) => {
 	if (region) {
 		filter.region = region;
 	}
-	const countries = await Country.find(filter)
-		.sort({ 'area': -1 })
-		.limit(10);
+	const countries = await Country.find(filter).sort({ area: -1 }).limit(10);
 
 	return countries.map((c) => formatCountryDetail(c));
 };
 
+export const getTop10BordersService = async () => {
+	const countries = await Country.aggregate([
+		{ $match: { independent: true, borders: { $exists: true, $ne: [] } } },
+		{
+			$project: {
+				name: '$name.common',
+				cca3: 1,
+				flag: '$flags.svg',
+				num_borders: { $size: '$borders' },
+			},
+		},
+		{ $sort: { num_borders: -1 } },
+		{ $limit: 10 },
+	]);
+
+	return countries;
+};
+
 export const getMaxArea = async () => {
 	const country = await Country.findOne({ independent: true })
-		.sort({ 'area': -1 })
+		.sort({ area: -1 })
 		.lean();
 
 	return formatCountryBasic(country);
@@ -151,7 +167,7 @@ export const getMaxArea = async () => {
 
 export const getMaxPopulation = async () => {
 	const country = await Country.findOne({ independent: true })
-		.sort({ 'population': -1 })
+		.sort({ population: -1 })
 		.lean();
 
 	return formatCountryBasic(country);
@@ -171,27 +187,27 @@ export const getDataChartService = async (region) => {
 			.sort({ area: -1 })
 			.limit(10)
 			.select({ 'name.common': 1, area: 1, _id: 0 })
-			.lean()
+			.lean(),
 	]);
 
 	return {
-		populationList: populationList.map(c => ({
+		populationList: populationList.map((c) => ({
 			name: c.name.common,
-			value: c.population?.value || 0
+			value: c.population?.value || 0,
 		})),
-		areaList: areaList.map(c => ({
+		areaList: areaList.map((c) => ({
 			name: c.name.common,
-			value: c.area || 0
-		}))
-	}
-}
+			value: c.area || 0,
+		})),
+	};
+};
 
 export const getLanguageDistributionService = async (region) => {
 	try {
 		// 1. Tạo đk (Match Stage)
 		const matchStage = {
 			cca3: { $in: STANDARD_195_CCA3 },
-			languages: { $exists: true, $ne: null } // bỏ qua null
+			languages: { $exists: true, $ne: null }, // bỏ qua null
 		};
 
 		if (region) {
@@ -205,34 +221,33 @@ export const getLanguageDistributionService = async (region) => {
 			// VD: { eng: "English" } -> [{ k: "eng", v: "English" }]
 			{
 				$project: {
-					languageArray: { $objectToArray: "$languages" }
-				}
+					languageArray: { $objectToArray: '$languages' },
+				},
 			},
 
 			// Tách mảng ra từng dòng document riêng biệt
-			{ $unwind: "$languageArray" },
+			{ $unwind: '$languageArray' },
 
 			// Gom nhóm theo TÊN ngôn ngữ (value)
 			{
 				$group: {
-					_id: "$languageArray.v", // Group theo "English", "Vietnamese"...
-					count: { $sum: 1 } // đếm
-				}
+					_id: '$languageArray.v', // Group theo "English", "Vietnamese"...
+					count: { $sum: 1 }, // đếm
+				},
 			},
 
 			{ $sort: { count: -1, _id: 1 } },
 
-			{ $limit: 10 }
+			{ $limit: 10 },
 		]);
 
 		return {
 			chartData: {
-				labels: stats.map(item => item._id),
-				data: stats.map(item => item.count)
+				labels: stats.map((item) => item._id),
+				data: stats.map((item) => item.count),
 			},
-			raw: stats // data thô tư trên
+			raw: stats, // data thô tư trên
 		};
-
 	} catch (error) {
 		throw new Error(`Error aggregate language: ${error.message}`);
 	}

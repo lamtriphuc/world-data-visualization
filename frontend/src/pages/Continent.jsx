@@ -7,6 +7,7 @@ import { LuChartArea, LuUsers } from 'react-icons/lu';
 import StatCard from '../components/Cards/StatCard';
 import BarChartComponent from '../components/Charts/BarChart';
 import PieChartComponent from '../components/Charts/PieChart';
+import BubbleScatterChart from '../components/Charts/BubbleScatterChart';
 import {
 	getAllCountriesContinent,
 	getMax,
@@ -43,6 +44,16 @@ const Continent = () => {
 
 	const { region } = useParams();
 	const curRegion = region || 'Asia';
+
+	const regionColors = {
+		Asia: '#E63946',
+		Europe: '#457B9D',
+		Africa: '#F4A261',
+		Americas: '#2A9D8F',
+		Oceania: '#A8DADC',
+		Antarctica: '#B0BEC5',
+		Default: '#F1FAEE',
+	};
 
 	const regions = [
 		{ label: t('main_region.Asia'), value: 'Asia' },
@@ -180,7 +191,7 @@ const Continent = () => {
 					label={regions.find((r) => r.value === curRegion)?.label}
 					items={regions.map((r) => ({
 						label: r.label,
-						value: r.value
+						value: r.value,
 					}))}
 					onSelect={(value) => navigate(`/continent/${value}`)}
 				/>
@@ -320,6 +331,16 @@ const Continent = () => {
 					{/* Language */}
 					<div className='mt-10  gap-6'>
 						<LanguageBarChart data={languageChartData} />
+					</div>
+
+					{/* Bubble Scatter Chart */}
+					<div className='mt-10'>
+						<BubbleScatterChart
+							countries={countries}
+							regionColors={regionColors}
+							selectedRegion={curRegion}
+							isCompactMode={false}
+						/>
 					</div>
 				</>
 			)}

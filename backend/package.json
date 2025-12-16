@@ -18,10 +18,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "ml:train": "python src/scripts/train_models.py",
-    "ml:retrain": "python src/scripts/train_models.py retrain",
-    "ml:server": "python src/scripts/ml_server.py"
+    "dev": "nodemon src/index.js"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
