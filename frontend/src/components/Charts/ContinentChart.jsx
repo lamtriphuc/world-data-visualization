@@ -27,7 +27,8 @@ const ContinentChart = ({ chartData }) => {
 				<div className='bg-white p-3 rounded-lg shadow-lg border border-gray-200'>
 					<p className='text-gray-900'>
 						{t(
-							`main_region.${chartData.name === 'Antarctic' ? 'Antarctica' : chartData.name
+							`main_region.${
+								chartData.name === 'Antarctic' ? 'Antarctica' : chartData.name
 							}`
 						)}
 					</p>
@@ -43,49 +44,51 @@ const ContinentChart = ({ chartData }) => {
 	};
 
 	return (
-		<div className='mt-6 p-6 bg-white dark:bg-gray-800 shadow-lg rounded-xl'>
-			<h2 className='text-gray-900 dark:text-gray-300 mb-4'>
-				{t('country_distribution')}
-			</h2>
-			<ResponsiveContainer width='100%' height={300}>
-				<PieChart>
-					<Pie
-						isAnimationActive={false}
-						data={chartData}
-						dataKey='value'
-						nameKey='name'
-						cx='50%'
-						cy='50%'
-						fill='#8884d8'
-						label={({ name, percentage }) =>
-							`${t(
-								`main_region.${name === 'Antarctic' ? 'Antarctica' : name}`
-							)} (${percentage}%)`
-						}
-						labelLine={false}>
-						{chartData.map((entry, index) => (
-							<Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
-						))}
-					</Pie>
-					<Tooltip content={<CustomTooltip />} />
-				</PieChart>
-			</ResponsiveContainer>
-			<div className='mt-10 grid grid-cols-2 gap-3'>
+		<div className='w-full h-full flex flex-col'>
+			<div className='flex-1 min-h-[250px]'>
+				<ResponsiveContainer width='100%' height='100%'>
+					<PieChart>
+						<Pie
+							isAnimationActive={true}
+							data={chartData}
+							dataKey='value'
+							nameKey='name'
+							cx='50%'
+							cy='50%'
+							outerRadius='80%'
+							fill='#8884d8'
+							label={({ name, percentage }) =>
+								`${t(
+									`main_region.${name === 'Antarctic' ? 'Antarctica' : name}`
+								)} (${percentage}%)`
+							}
+							labelLine={true}>
+							{chartData.map((entry, index) => (
+								<Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
+							))}
+						</Pie>
+						<Tooltip content={<CustomTooltip />} />
+					</PieChart>
+				</ResponsiveContainer>
+			</div>
+
+			<div className='mt-4 grid grid-cols-2 gap-x-4 gap-y-2'>
 				{chartData.map((item) => (
 					<div key={item.name} className='flex items-center gap-2'>
 						<div
-							className='w-4 h-4 rounded'
+							className='w-3 h-3 rounded-full'
 							style={{ backgroundColor: COLORS[item.name] }}
 						/>
-						<div className='flex-1'>
-							<p className='text-gray-700 dark:text-gray-300 text-sm'>
+						<div className='flex-1 overflow-hidden'>
+							<p className='text-gray-700 dark:text-gray-300 text-sm truncate font-medium'>
 								{t(
-									`main_region.${item.name === 'Antarctic' ? 'Antarctica' : item.name
+									`main_region.${
+										item.name === 'Antarctic' ? 'Antarctica' : item.name
 									}`
 								)}
 							</p>
 							<p className='text-gray-500 dark:text-gray-400 text-xs'>
-								{item.value} {t('countries')} ({item.percentage}%)
+								{item.value} {t('countries')}
 							</p>
 						</div>
 					</div>

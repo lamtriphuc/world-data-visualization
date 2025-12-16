@@ -114,37 +114,36 @@ const InteractiveMap = forwardRef((props, ref) => {
 	const travelLayerStyle = useMemo(() => {
 		if (!onTravel || !regionColors) return null;
 
-		const matchExpression = ["match", ["get", "iso_a3"]];
+		const matchExpression = ['match', ['get', 'iso_a3']];
 
 		Object.entries(regionColors).forEach(([code, color]) => {
 			matchExpression.push(code, color);
 		});
 
-		matchExpression.push("#e5e7eb"); // default xám
+		matchExpression.push('#e5e7eb'); // default xám
 
 		return {
-			id: "travel-fill",
-			type: "fill",
+			id: 'travel-fill',
+			type: 'fill',
 			paint: {
-				"fill-color": matchExpression,
-				"fill-opacity": 0.7,
+				'fill-color': matchExpression,
+				'fill-opacity': 0.7,
 			},
 		};
 	}, [regionColors, onTravel]);
-
 
 	const populationMap = useMemo(() => {
 		if (!countries) return;
 
 		const map = {};
-		countries.forEach(c => {
+		countries.forEach((c) => {
 			map[c.cca3] = {
 				population: c.population.value,
-				area: c.area
-			}
-		})
+				area: c.area,
+			};
+		});
 		return map;
-	}, [countries])
+	}, [countries]);
 
 	// Xử lý khi rê chuột (Hover)
 	const onHover = (event) => {
@@ -190,7 +189,6 @@ const InteractiveMap = forwardRef((props, ref) => {
 		}
 	};
 
-
 	return (
 		<Map
 			ref={mapRef}
@@ -200,14 +198,14 @@ const InteractiveMap = forwardRef((props, ref) => {
 				latitude: 20,
 				zoom: 2,
 			}}
-			style={{ width: '100%', height: '450px' }}
+			style={{ width: '100%', height: '100%' }}
 			mapStyle='mapbox://styles/mapbox/navigation-day-v1'
 			onMouseMove={onHover}
 			onClick={onClick}
 			interactiveLayerIds={[onTravel ? 'travel-fill' : 'countries-fill']}>
 			{geoData && (
 				<Source type='geojson' data={geoData}>
-					<Layer {...onTravel ? travelLayerStyle : fillLayerStyle} />
+					<Layer {...(onTravel ? travelLayerStyle : fillLayerStyle)} />
 					<Layer {...borderLayerStyle} />
 				</Source>
 			)}
@@ -223,7 +221,9 @@ const InteractiveMap = forwardRef((props, ref) => {
 					className='font-sans'>
 					<div>
 						<h3 className='font-bold text-gray-800'>
-							{currentLang === 'vi' ? getTranslatedName(hoverInfo.name) : hoverInfo.name}
+							{currentLang === 'vi'
+								? getTranslatedName(hoverInfo.name)
+								: hoverInfo.name}
 						</h3>
 						{/* Đã sửa 'population' */}
 						<p className='text-sm text-gray-600'>

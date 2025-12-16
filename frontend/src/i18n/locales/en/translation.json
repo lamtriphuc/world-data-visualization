@@ -217,5 +217,15 @@
 	"average_income": "Average Income",
 	"ai_analysis": "AI Analysis",
 	"analyze_with_ai": "Analyze with AI",
-	"analyzing": "Analyzing"
+	"analyzing": "Analyzing",
+	"global_rankings": "Global Rankings & Statistics",
+	"rankings_description": "Explore top countries and languages through statistical data.",
+  "top_borders": "Top 10 Countries with Most Borders",
+  "borders_count": "Number of Borders",
+  "bubble_chart_title": "Population vs Area Scatter Plot",
+  "bubble_chart_description": "Bubble size represents population density. Color represents region.",
+  "bubble_chart_note": "X-axis and Y-axis use logarithmic scale. Bubble size represents population density (population/area).",
+  "density": "Density",
+  "no_data": "No data available",
+  "rankings": "Rankings"
 }

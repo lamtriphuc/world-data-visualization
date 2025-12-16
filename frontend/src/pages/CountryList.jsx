@@ -14,6 +14,8 @@ import {
 } from '../services/auth.service';
 import translated from '../scripts/countries_translated.json';
 import { HiSparkles } from 'react-icons/hi2';
+import { SlMagnifier } from 'react-icons/sl';
+import { useDebounce } from '../hooks/useDebounce';
 
 const CountryList = () => {
 	const { t } = useTranslation();
@@ -26,6 +28,12 @@ const CountryList = () => {
 	const [totalPages, setTotalPages] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [favorites, setFavorites] = useState([]);
+	const [searchTerm, setSearchTerm] = useState('');
+	const [suggestions, setSuggestions] = useState([]);
+	const [showSuggestions, setShowSuggestions] = useState(false);
+	const [appliedSearch, setAppliedSearch] = useState('');
+
+	const debouncedSuggest = useDebounce(searchTerm, 300);
 
 	// Smart Search from header navigation
 	const [smartSearchResults, setSmartSearchResults] = useState(null);
@@ -53,6 +61,7 @@ const CountryList = () => {
 	const sortOrderParam = searchParams.get('sortOrder')
 		? `&sortOrder=${searchParams.get('sortOrder')}`
 		: '';
+	const searchParam = appliedSearch ? `&search=${appliedSearch}` : '';
 
 	// Handle smart search results from header navigation
 	useEffect(() => {
@@ -120,6 +129,7 @@ const CountryList = () => {
 					page,
 					region: regionParam,
 					subregion: subregionParam,
+					search: searchParam,
 					sortBy: sortByParam,
 					sortOrder: sortOrderParam,
 				});
@@ -142,7 +152,52 @@ const CountryList = () => {
 		sortByParam,
 		sortOrderParam,
 		smartSearchResults,
+		searchParam,
 	]);
+
+	useEffect(() => {
+		if (!debouncedSuggest) {
+			setSuggestions([]);
+			setShowSuggestions(false);
+			return;
+		}
+
+		const fetchSuggestions = async () => {
+			try {
+				const res = await getAllCountries({
+					page: 1,
+					search: `&search=${debouncedSuggest}`,
+				});
+
+				const list = res.data.slice(0, 7);
+				setSuggestions(list);
+
+				const exactMatch =
+					list.length === 1 &&
+					list[0].name.toLowerCase() === debouncedSuggest.toLowerCase();
+
+				setShowSuggestions(!exactMatch);
+			} catch (err) {
+				console.error('Suggestion error:', err);
+			}
+		};
+
+		fetchSuggestions();
+	}, [debouncedSuggest]);
+
+	useEffect(() => {
+		const handleOutside = () => setShowSuggestions(false);
+		window.addEventListener('click', handleOutside);
+		return () => window.removeEventListener('click', handleOutside);
+	}, []);
+
+	useEffect(() => {
+		if (searchTerm.trim() === '') {
+			setAppliedSearch('');
+			setSuggestions([]);
+			setShowSuggestions(false);
+		}
+	}, [searchTerm]);
 
 	// Helper functions
 	const getTranslatedName = (name) => {
@@ -212,11 +267,54 @@ const CountryList = () => {
 
 			{/* Search and Filters */}
 			<div className='flex flex-col items-start justify-between gap-4 w-full md:flex-row md:items-center pb-8'>
-				<div className='relative w-full md:max-w-[419px]'>
-					<CountrySearch
-						countries={allCountries}
-						onSelect={handleCountrySelect}
-					/>
+				<div
+					className='relative w-full md:max-w-[419px]'
+					onClick={(e) => e.stopPropagation()}>
+					<div className='flex items-center gap-3 rounded-sm px-5 py-4 bg-white dark:bg-gray-800 shadow'>
+						<SlMagnifier className='text-gray-400' />
+						<input
+							type='text'
+							placeholder={t('search_placeholder')}
+							value={searchTerm}
+							onChange={(e) => setSearchTerm(e.target.value)}
+							onFocus={() => {
+								if (
+									suggestions.length !== 1 ||
+									searchTerm.trim().toLowerCase() !==
+										suggestions[0]?.name.toLowerCase()
+								) {
+									setShowSuggestions(true);
+								}
+							}}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter') {
+									setAppliedSearch(searchTerm);
+									setShowSuggestions(false);
+								}
+							}}
+							className='w-full bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 
+                                focus:outline-none'
+						/>
+					</div>
+
+					{showSuggestions && suggestions.length > 0 && (
+						<ul className='absolute left-0 right-0 mt-1 bg-white dark:bg-gray-800 shadow-lg rounded-md border z-20'>
+							{suggestions.map((item) => (
+								<li
+									key={item.cca3}
+									onClick={() => {
+										setSearchTerm(item.name);
+										setAppliedSearch(item.name);
+										setShowSuggestions(false);
+									}}
+									className='px-4 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700'>
+									{currentLang === 'vi'
+										? getTranslatedName(item.name)
+										: item.name}
+								</li>
+							))}
+						</ul>
+					)}
 				</div>
 				<div className='flex gap-4'>
 					<SortOptions />

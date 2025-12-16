@@ -6,6 +6,7 @@ import {
 	getAllCountryNamesService,
 	getTop10AreaService,
 	getTop10PopulationService,
+	getTop10BordersService,
 	getLanguageDistributionService,
 	getCountriesByListService,
 } from '../services/country.service.js';
@@ -14,8 +15,16 @@ import { successResponse, errorResponse } from '../utils/response.js';
 
 export const getAllCountries = async (req, res, next) => {
 	try {
-		const { region, subregion, search, page, limit, sortBy, sortOrder, independent } =
-			req.query;
+		const {
+			region,
+			subregion,
+			search,
+			page,
+			limit,
+			sortBy,
+			sortOrder,
+			independent,
+		} = req.query;
 		const data = await getAllCountriesService({
 			region,
 			subregion,
@@ -86,7 +95,7 @@ export const getAllCountryNames = async (req, res, next) => {
 
 export const getTop10Area = async (req, res, next) => {
 	try {
-		const { region } = req.query
+		const { region } = req.query;
 		const data = await getTop10AreaService(region);
 		return successResponse(res, data, 200, 'Top 10 area');
 	} catch (error) {
@@ -96,7 +105,7 @@ export const getTop10Area = async (req, res, next) => {
 
 export const getTop10Population = async (req, res, next) => {
 	try {
-		const { region } = req.query
+		const { region } = req.query;
 		const data = await getTop10PopulationService(region);
 		return successResponse(res, data, 200, 'Top 10 population');
 	} catch (error) {
@@ -106,7 +115,7 @@ export const getTop10Population = async (req, res, next) => {
 
 export const getCountriesByList = async (req, res, next) => {
 	try {
-		const { cca3s } = req.body
+		const { cca3s } = req.body;
 		const data = await getCountriesByListService(cca3s);
 		return successResponse(res, data, 200, 'List border');
 	} catch (error) {
@@ -138,6 +147,15 @@ export const getLanguageDistribution = async (req, res, next) => {
 		const { region } = req.query;
 		const data = await getLanguageDistributionService(region);
 		return successResponse(res, data, 200, 'Language data');
+	} catch (error) {
+		return errorResponse(res, error.message, 500);
+	}
+};
+
+export const getTop10Borders = async (req, res, next) => {
+	try {
+		const data = await getTop10BordersService();
+		return successResponse(res, data, 200, 'Top 10 borders');
 	} catch (error) {
 		return errorResponse(res, error.message, 500);
 	}

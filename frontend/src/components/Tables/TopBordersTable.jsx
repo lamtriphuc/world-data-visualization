@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { LuLanguages } from 'react-icons/lu';
+import { FaBorderAll } from 'react-icons/fa';
+import { getTranslatedName } from '../../ultils';
 
-const TopLanguagesTable = ({ languages = [] }) => {
+const TopBordersTable = ({ countries = [] }) => {
 	const { t } = useTranslation();
-
-	const formatNumber = (num) => {
-		return new Intl.NumberFormat('vi-VN').format(num);
-	};
 
 	const getRankColor = (rank) => {
 		if (rank === 1) return 'bg-yellow-100 text-yellow-700';
@@ -25,9 +22,9 @@ const TopLanguagesTable = ({ languages = [] }) => {
 	return (
 		<div className='h-full bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-6 border border-gray-100 dark:border-gray-700'>
 			<div className='flex items-center gap-2 mb-4'>
-				<LuLanguages className='w-5 h-5 text-purple-600' />
+				<FaBorderAll className='w-5 h-5 text-indigo-600' />
 				<h2 className='text-lg font-semibold text-gray-900 dark:text-gray-200'>
-					{t('top_10_languages')}
+					{t('top_borders') || 'Quốc gia có nhiều biên giới nhất'}
 				</h2>
 			</div>
 
@@ -36,15 +33,17 @@ const TopLanguagesTable = ({ languages = [] }) => {
 					<thead className='text-sm'>
 						<tr>
 							<th className='w-16 pb-2'>{t('ranking')}</th>
-							<th className='w-60 pb-2'>{t('language')}</th>
-							<th className='w-40 pb-2 text-right'>{t('countries_use')}</th>
+							<th className='w-60 pb-2'>{t('country')}</th>
+							<th className='w-40 pb-2 text-right'>
+								{t('borders_count') || 'Số lượng biên giới'}
+							</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						{languages.map((item, index) => (
+						{countries.map((item, index) => (
 							<tr
-								key={item._id}
+								key={index}
 								className='border-t border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'>
 								<td className='py-2'>
 									<div
@@ -58,16 +57,18 @@ const TopLanguagesTable = ({ languages = [] }) => {
 
 								<td>
 									<p className='text-gray-900 dark:text-gray-300 font-medium'>
-										{t(`top_languages.${item._id}`, item._id)}
+										{localStorage.getItem('lang') === 'vi'
+											? getTranslatedName(item.name)
+											: item.name}
 									</p>
 								</td>
 
 								<td className='text-right'>
-									<p className='text-gray-900 dark:text-gray-300'>
-										{formatNumber(item.count)}
+									<p className='text-gray-900 dark:text-gray-300 font-bold'>
+										{item.num_borders}
 									</p>
 									<p className='text-gray-500 dark:text-gray-400 text-xs'>
-										{t('countries')}
+										{t('borders')}
 									</p>
 								</td>
 							</tr>
@@ -79,4 +80,4 @@ const TopLanguagesTable = ({ languages = [] }) => {
 	);
 };
 
-export default TopLanguagesTable;
+export default TopBordersTable;

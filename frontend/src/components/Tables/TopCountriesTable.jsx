@@ -52,7 +52,7 @@ const TopCountriesTable = ({
 	};
 
 	return (
-		<div className='mt-6 p-6 bg-white dark:bg-gray-800 shadow-lg rounded-xl'>
+		<div className='h-full bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-6 border border-gray-100 dark:border-gray-700'>
 			<div className='flex items-center gap-2 mb-4'>
 				{type === 'population' ? (
 					<LuUsers className='w-5 h-5 text-blue-600' />
@@ -63,7 +63,7 @@ const TopCountriesTable = ({
 					value={topListType}
 					onChange={(e) => onTopListTypeChange(e.target.value)}
 					style={{ fontSize: '16px' }}
-					className='py-2 block w-auto font-bold rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'>
+					className='py-2 block w-auto font-bold rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'>
 					<option value='population'>{t('top_10_population')}</option>
 					<option value='area'>{t('top_10_area')}</option>
 				</select>
@@ -118,9 +118,10 @@ const TopCountriesTable = ({
 								<td>
 									<span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-blue-100 text-blue-800'>
 										{t(
-											`main_region.${country.region === 'Antarctic'
-												? 'Antarctica'
-												: country.region
+											`main_region.${
+												country.region === 'Antarctic'
+													? 'Antarctica'
+													: country.region
 											}`
 										)}
 									</span>

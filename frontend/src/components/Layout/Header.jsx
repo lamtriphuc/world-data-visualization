@@ -5,8 +5,8 @@ import ThemeToggle from './ThemeToggle';
 import { MdOutlineTravelExplore } from 'react-icons/md';
 import { LuGitCompare } from 'react-icons/lu';
 import { HiSparkles } from 'react-icons/hi2';
-import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
+import { FaMagnifyingGlass, FaTrophy } from 'react-icons/fa6';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from '../UserMenu';
 import { smartSearch } from '../../services/smartSearch.service';
@@ -182,6 +182,13 @@ const Header = () => {
 					className='flex px-2 py-1 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 items-center gap-2 text-sm'>
 					<LuGitCompare />
 					<span className='hidden sm:inline'>{t('comparison')}</span>
+				</Link>
+				<Link
+					to='/rankings'
+					className='flex px-2 py-1 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 items-center gap-2 text-sm'
+					title='Rankings'>
+					<FaTrophy />
+					<span className='hidden sm:inline'>{t('rankings')}</span>
 				</Link>
 				<LanguageSwitcher />
 				<ThemeToggle />

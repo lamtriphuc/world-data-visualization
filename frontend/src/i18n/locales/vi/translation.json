@@ -217,5 +217,15 @@
   "average_income": "Thu nhập bình quân",
   "ai_analysis": "Phân tích AI",
   "analyze_with_ai": "Phân tích với AI",
-  "analyzing": "Đang phân tích"
+  "analyzing": "Đang phân tích",
+  "global_rankings": "Bảng Xếp Hạng & Thống Kê",
+  "rankings_description": "Khám phá các quốc gia và ngôn ngữ hàng đầu thế giới qua các số liệu thống kê.",
+  "top_borders": "Top 10 Quốc gia nhiều biên giới nhất",
+  "borders_count": "Số lượng biên giới",
+  "bubble_chart_title": "Biểu đồ Dân số và Diện tích",
+  "bubble_chart_description": "Kích thước bong bóng thể hiện mật độ dân số. Màu sắc thể hiện châu lục.",
+  "bubble_chart_note": "Trục X và trục Y sử dụng thang logarit. Kích thước bong bóng thể hiện mật độ dân số (dân số/diện tích).",
+  "density": "Mật độ",
+  "no_data": "Không có dữ liệu",
+  "rankings": "Xếp hạng"
 }

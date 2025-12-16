@@ -12,6 +12,7 @@ import Continent from './pages/Continent';
 import TravelTracker from './pages/TravelTracker';
 import { AIChatWidget } from './components/AI';
 import Analytic from './pages/Analytic';
+import Rankings from './pages/Rankings';
 
 const App = () => {
 	const CountryList = lazy(() => import('./pages/CountryList'));
@@ -36,6 +37,7 @@ const App = () => {
 					<Route path='/analytic' element={<Analytic />} />
 					<Route path='/travel-tracker' element={<TravelTracker />} />
 					<Route path='/continent/:region' element={<Continent />} />
+					<Route path='/rankings' element={<Rankings />} />
 				</Route>
 			</Routes>
 			{/* AI Chat Widget - Floating on all pages */}
