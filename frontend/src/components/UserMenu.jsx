@@ -90,14 +90,14 @@ const UserMenu = () => {
 					<p className='text-center text-sm font-medium mb-2 text-gray-700 dark:text-gray-200'>
 						{user.name}
 					</p>
-					<button
+					{/* <button
 						onClick={() => {
 							navigate('/favorite')
 							setOpen(false)
 						}}
 						className='cursor-pointer w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md transition'>
 						{t('favorites')}
-					</button>
+					</button> */}
 					<button
 						onClick={() => {
 							navigate('/travel-tracker')

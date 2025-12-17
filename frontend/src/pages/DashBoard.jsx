@@ -181,13 +181,7 @@ const Dashboard = () => {
 				{/* Map Section */}
 				<div className='lg:flex-[2] relative w-full h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col'>
 					{/* Search & Filter Bar Overlay - Absolute */}
-					<div className='absolute top-4 left-4 right-4 z-[999] flex flex-col md:flex-row items-start md:items-center gap-3 pointer-events-none'>
-						<div className='pointer-events-auto w-full md:w-72 shadow-xl'>
-							<CountrySearch
-								countries={allCountryNames}
-								onSelect={handleSearchSelect}
-							/>
-						</div>
+					<div className='absolute top-4 left-4 right-4 z-[999] flex flex-col  gap-3 pointer-events-none'>
 						<div className='pointer-events-auto w-full md:w-auto overflow-x-auto no-scrollbar shadow-xl rounded-md'>
 							<RegionFilter
 								regions={Object.keys(regionColors).filter(
@@ -195,6 +189,12 @@ const Dashboard = () => {
 								)}
 								selectedRegion={regionFilter}
 								onFilterChange={handleRegionChange}
+							/>
+						</div>
+						<div className='pointer-events-auto w-full md:w-72 shadow-xl'>
+							<CountrySearch
+								countries={allCountryNames}
+								onSelect={handleSearchSelect}
 							/>
 						</div>
 					</div>

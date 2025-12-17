@@ -1,12 +1,15 @@
 import UserCountryStatus from "../models/UserCountryStatus.js";
+import Country from '../models/Country.js';
 
 export const upsertTravelStatusService = async (userId, data) => {
     const { cca3, status, note, startDate, endDate } = data;
 
+    const country = await Country.findOne({ cca3 }).select('name');
+
     const result = await UserCountryStatus.findOneAndUpdate(
         { userId, cca3 },
         {
-            $set: { status, note, startDate, endDate },
+            $set: { status, note, startDate, endDate, name: country.name?.common },
         },
         {
             upsert: true,

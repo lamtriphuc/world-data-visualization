@@ -76,11 +76,14 @@ export const getCountryByCodeService = async (code) => {
 		{ name: 1, cca3: 1 }
 	).lean();
 
-	const borderNames = borderCountries.map((c) => c.name?.common);
+	const borders = borderCountries.map((c) => ({
+		cca3: c.cca3,
+		name: c.name?.common,
+	}));
 
 	return formatCountryDetail({
 		...country,
-		borders: borderNames,
+		borders
 	});
 };
 
