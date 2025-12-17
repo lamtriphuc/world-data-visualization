@@ -276,6 +276,12 @@ const CountryDetails = () => {
 						<h1>{t('borders')}</h1>
 					</div>
 					<div className='mt-4 flex flex-wrap gap-2'>
+						{(!countryDetails.borders || countryDetails.borders.length === 0) && (
+							<span
+								className=' dark:bg-gray-800 cursor-pointer'>
+								{t('no_border')}
+							</span>
+						)}
 						{countryDetails.borders?.map((border) => (
 							<span
 								key={border.cca3}

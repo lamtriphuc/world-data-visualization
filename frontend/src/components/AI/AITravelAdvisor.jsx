@@ -21,17 +21,17 @@ const AITravelAdvisor = ({ onCountryClick }) => {
 	const exampleQueries =
 		currentLang === 'vi'
 			? [
-					'Biển đẹp, chi phí rẻ, visa dễ',
-					'Du lịch châu Âu mùa đông, nhiều tuyết',
-					'Thiên nhiên hoang sơ, ít khách du lịch',
-					'Ẩm thực ngon, văn hóa phong phú',
-			  ]
+				'Biển đẹp, chi phí rẻ, visa dễ',
+				'Du lịch châu Âu mùa đông, nhiều tuyết',
+				'Thiên nhiên hoang sơ, ít khách du lịch',
+				'Ẩm thực ngon, văn hóa phong phú',
+			]
 			: [
-					'Beach vacation, low budget, easy visa',
-					'Winter in Europe with snow',
-					'Wild nature, off the beaten path',
-					'Great food and rich culture',
-			  ];
+				'Beach vacation, low budget, easy visa',
+				'Winter in Europe with snow',
+				'Wild nature, off the beaten path',
+				'Great food and rich culture',
+			];
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

@@ -15,30 +15,6 @@ const FIELD_GROUPS = [
     'cca3,currencies,languages,flags,maps,independent,unMember'
 ];
 
-// Danh sách 195 quốc gia chuẩn (193 UN Members + Vatican + Palestine)
-// const STANDARD_195_CCA3 = [
-//     "AFG", "ALB", "DZA", "AND", "AGO", "ATG", "ARG", "ARM", "AUS", "AUT",
-//     "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BTN",
-//     "BOL", "BIH", "BWA", "BRA", "BRN", "BGR", "BFA", "BDI", "CPV", "KHM",
-//     "CMR", "CAN", "CAF", "TCD", "CHL", "CHN", "COL", "COM", "COG", "CRI",
-//     "CIV", "HRV", "CUB", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "COD",
-//     "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "SWZ", "ETH", "FJI", "FIN",
-//     "FRA", "GAB", "GMB", "GEO", "DEU", "GHA", "GRC", "GRD", "GTM", "GIN",
-//     "GNB", "GUY", "HTI", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN",
-//     "IRQ", "IRL", "ISR", "ITA", "JAM", "JPN", "JOR", "KAZ", "KEN", "KIR",
-//     "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU",
-//     "LUX", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MRT", "MUS",
-//     "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MAR", "MOZ", "MMR", "NAM",
-//     "NRU", "NPL", "NLD", "NZL", "NIC", "NER", "NGA", "PRK", "MKD", "NOR",
-//     "OMN", "PAK", "PLW", "PAN", "PNG", "PRY", "PER", "PHL", "POL", "PRT",
-//     "QAT", "ROU", "RUS", "RWA", "KNA", "LCA", "WSM", "SMR", "STP", "SAU",
-//     "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF",
-//     "KOR", "SSD", "ESP", "LKA", "VCT", "PSE", "SDN", "SUR", "SWE", "CHE",
-//     "SYR", "TJK", "TZA", "THA", "TLS", "TGO", "TON", "TTO", "TUN", "TUR",
-//     "TKM", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "URY", "UZB", "VUT",
-//     "VEN", "VNM", "YEM", "ZMB", "ZWE"
-// ];
-
 async function transformAndUpsert(countryRaw) {
     const cca3 = countryRaw.cca3;
     if (!cca3) return;
@@ -68,6 +44,7 @@ async function transformAndUpsert(countryRaw) {
         currencies: countryRaw.currencies || {},
         languages: countryRaw.languages || {},
         population: { year: 2018, value: countryRaw.population },
+        populationDensity: countryRaw.population / countryRaw.area || 0,
         flags: countryRaw.flags || {},
         maps: countryRaw.maps || {},
         coatOfArms: countryRaw.coatOfArms || {},
@@ -100,84 +77,84 @@ async function fetchCountries() {
     return allCountries;
 }
 
-async function updateAllCountryStats() {
-    try {
-        const defaultYear = 2018;
-        const year = process.env.LATEST_YEAR || 2024;
+// async function updateAllCountryStats() {
+//     try {
+//         const defaultYear = 2018;
+//         const year = process.env.LATEST_YEAR || 2024;
 
-        const popURL = `https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=${year}&per_page=500`;
-        const { data: popData } = await axios.get(popURL);
+//         const popURL = `https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=${year}&per_page=500`;
+//         const { data: popData } = await axios.get(popURL);
 
-        // if (!Array.isArray(data) || !Array.isArray(data[1])) return;
+//         // if (!Array.isArray(data) || !Array.isArray(data[1])) return;
 
-        const popRecords = Array.isArray(popData) && Array.isArray(popData[1])
-            ? popData[1].filter(r => r.value !== null && r.countryiso3code)
-            : [];
+//         const popRecords = Array.isArray(popData) && Array.isArray(popData[1])
+//             ? popData[1].filter(r => r.value !== null && r.countryiso3code)
+//             : [];
 
-        // Tạo map { CCA3: populationValue }
-        const wbPopulationMap = Object.fromEntries(
-            popRecords.map(r => [r.countryiso3code, r.value || 0])
-        );
-        console.log(`Fetched population records from World Bank (${year})`);
-
-
-        // 2. Fetch area data
-        const areaURL = `https://api.worldbank.org/v2/country/all/indicator/AG.SRF.TOTL.K2?format=json&date=2020&per_page=500`;
-        const { data: areaData } = await axios.get(areaURL);
-
-        const areaRecords = Array.isArray(areaData) && Array.isArray(areaData[1])
-            ? areaData[1].filter(r => r.value !== null && r.countryiso3code)
-            : [];
-
-        const wbAreaMap = Object.fromEntries(
-            areaRecords.map(r => [r.countryiso3code, r.value])
-        );
-        console.log(`Fetched Area (${areaRecords.length} records)`);
+//         // Tạo map { CCA3: populationValue }
+//         const wbPopulationMap = Object.fromEntries(
+//             popRecords.map(r => [r.countryiso3code, r.value || 0])
+//         );
+//         console.log(`Fetched population records from World Bank (${year})`);
 
 
-        // Lấy countries tư db
-        const countries = await Country.find({}, { cca3: 1, area: 1, population: 1 }).lean();
+//         // 2. Fetch area data
+//         const areaURL = `https://api.worldbank.org/v2/country/all/indicator/AG.SRF.TOTL.K2?format=json&date=2020&per_page=500`;
+//         const { data: areaData } = await axios.get(areaURL);
 
-        // bulk update
-        const ops = countries.map(c => {
-            const cca3 = c.cca3;
+//         const areaRecords = Array.isArray(areaData) && Array.isArray(areaData[1])
+//             ? areaData[1].filter(r => r.value !== null && r.countryiso3code)
+//             : [];
 
-            // WB pop
-            const wbPop = wbPopulationMap[cca3];
-            const popValue = wbPop && wbPop > 0 ? wbPop : (c.population?.value || 0);
-            const popYear = wbPop ? Number(year) : defaultYear;
+//         const wbAreaMap = Object.fromEntries(
+//             areaRecords.map(r => [r.countryiso3code, r.value])
+//         );
+//         console.log(`Fetched Area (${areaRecords.length} records)`);
 
-            // WB area
-            const wbArea = wbAreaMap[cca3];
-            const areaValue = wbArea && wbArea > 0 ? wbArea : (c.area || 0);
 
-            const density = areaValue > 0 ? popValue / areaValue : null;
+//         // Lấy countries tư db
+//         const countries = await Country.find({}, { cca3: 1, area: 1, population: 1 }).lean();
 
-            return {
-                updateOne: {
-                    filter: { cca3 },
-                    update: {
-                        $set: {
-                            population: { year: popYear, value: popValue },
-                            area: areaValue,
-                            populationDensity: density,
-                            updatedAt: new Date()
-                        }
-                    }
-                }
-            };
-        });
+//         // bulk update
+//         const ops = countries.map(c => {
+//             const cca3 = c.cca3;
 
-        if (ops.length > 0) {
-            const result = await Country.bulkWrite(ops);
-            console.log(`Updated ${result.modifiedCount || 0} countries with population data.`);
-        } else {
-            console.log("No valid population records to update.");
-        }
-    } catch (err) {
-        console.error("Population batch update failed:", err.message);
-    }
-}
+//             // WB pop
+//             const wbPop = wbPopulationMap[cca3];
+//             const popValue = wbPop && wbPop > 0 ? wbPop : (c.population?.value || 0);
+//             const popYear = wbPop ? Number(year) : defaultYear;
+
+//             // WB area
+//             const wbArea = wbAreaMap[cca3];
+//             const areaValue = wbArea && wbArea > 0 ? wbArea : (c.area || 0);
+
+//             const density = areaValue > 0 ? popValue / areaValue : null;
+
+//             return {
+//                 updateOne: {
+//                     filter: { cca3 },
+//                     update: {
+//                         $set: {
+//                             population: { year: popYear, value: popValue },
+//                             area: areaValue,
+//                             populationDensity: density,
+//                             updatedAt: new Date()
+//                         }
+//                     }
+//                 }
+//             };
+//         });
+
+//         if (ops.length > 0) {
+//             const result = await Country.bulkWrite(ops);
+//             console.log(`Updated ${result.modifiedCount || 0} countries with population data.`);
+//         } else {
+//             console.log("No valid population records to update.");
+//         }
+//     } catch (err) {
+//         console.error("Population batch update failed:", err.message);
+//     }
+// }
 
 async function aggregateRegionsAndSubregions() {
     const regions = await Country.aggregate([
@@ -229,7 +206,7 @@ async function aggregateRegionsAndSubregions() {
         );
     }
 
-    console.log(`Đã tổng hợp ${regions.length} regions theo chuẩn 195 nước.`);
+    console.log(`aggregated ${regions.length} regions.`);
 }
 
 async function fetchGdpDataForALl() {
@@ -298,7 +275,7 @@ async function runScript() {
             await Promise.all(batch.map(c => transformAndUpsert(c)));
         }
 
-        await updateAllCountryStats();
+        // await updateAllCountryStats();
 
         await aggregateRegionsAndSubregions();
 

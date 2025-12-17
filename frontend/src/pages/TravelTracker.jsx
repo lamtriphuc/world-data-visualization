@@ -287,7 +287,6 @@ const TravelTracker = () => {
 	};
 
 	const handleSearchSelect = (country) => {
-		console.log(country)
 		if (country && mapRef.current) {
 			setSelectedCountryCode(country.cca3);
 
