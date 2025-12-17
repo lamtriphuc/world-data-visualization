@@ -181,7 +181,7 @@ const Dashboard = () => {
 				{/* Map Section */}
 				<div className='lg:flex-[2] relative w-full h-[500px] lg:h-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col'>
 					{/* Search & Filter Bar Overlay - Absolute */}
-					<div className='absolute top-4 left-4 right-4 z-[999] flex flex-col  gap-3 pointer-events-none'>
+					<div className='absolute top-4 left-4 right-4 z-[999] flex flex-row-reverse gap-3 pointer-events-none justify-end'>
 						<div className='pointer-events-auto w-full md:w-auto overflow-x-auto no-scrollbar shadow-xl rounded-md'>
 							<RegionFilter
 								regions={Object.keys(regionColors).filter(

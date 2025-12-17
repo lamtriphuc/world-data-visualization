@@ -177,7 +177,7 @@ const GDPPredictionChart = ({ countryCode }) => {
 
 			{/* AI Analysis */}
 			{data.analysis && (
-				<div className='mt-4 p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg'>
+				<div className='mt-4 p-3 bg-indigo-200 dark:bg-indigo-900/30 rounded-lg'>
 					<p className='text-sm text-indigo-700 dark:text-indigo-300'>
 						<span className='font-medium'>AI Analysis:</span> {data.analysis}
 					</p>
