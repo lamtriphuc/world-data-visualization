@@ -9,7 +9,7 @@ import {
 import { GrMoney } from 'react-icons/gr';
 import { FaMapPin } from 'react-icons/fa6';
 import { LuFlagTriangleRight } from 'react-icons/lu';
-import { IoIosHeart, IoMdTrendingUp } from 'react-icons/io';
+import { IoMdTrendingUp } from 'react-icons/io';
 import MiniMap from '../components/Map/MiniMap';
 import { useEffect, useState } from 'react';
 import { getCountryDetails } from '../services/country.service';
@@ -17,18 +17,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Loading from '../components/Layout/Loading';
 import translated from '../scripts/countries_translated.json';
-import {
-	addFavorite,
-	getFavoriteCodes,
-	removeFavorite,
-} from '../services/auth.service';
 import { translateCapital } from '../scripts/capital_names_vi';
 import GDPPredictionChart from '../components/Charts/GDPPredictionChart';
 
 const CountryDetails = () => {
 	const [countryDetails, setCountryDetails] = useState(null);
 	const [loading, setLoading] = useState(true);
-	const [favorites, setFavorites] = useState([]);
 	const { code } = useParams();
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
@@ -38,22 +32,6 @@ const CountryDetails = () => {
 		countryDetails?.population?.value / countryDetails?.area;
 	const gdp_per_capita =
 		countryDetails?.gdp?.at(-1)?.value / countryDetails?.population?.value;
-
-	useEffect(() => {
-		const fetchFavorites = async () => {
-			const token = localStorage.getItem('token');
-			if (!token) return;
-
-			try {
-				const data = await getFavoriteCodes();
-				setFavorites(data);
-			} catch (error) {
-				console.log('Get favorite fail: ', error);
-			}
-		};
-
-		fetchFavorites();
-	}, []);
 
 	useEffect(() => {
 		const fetchCountryDetails = async () => {
@@ -80,22 +58,6 @@ const CountryDetails = () => {
 		return found?.officialName_vi || officialName;
 	};
 
-	const toggleFavorite = async (countryCode, newState) => {
-		try {
-			if (newState) {
-				await addFavorite(countryCode);
-				setFavorites((prev) => [...prev, countryCode]);
-			} else {
-				await removeFavorite(countryCode);
-				setFavorites((prev) => prev.filter((c) => c !== countryCode));
-			}
-		} catch (error) {
-			console.log('Favorite err: ', error);
-		}
-	};
-
-	const isFavorite = favorites.includes(countryDetails?.cca3);
-
 	if (loading) return <Loading />;
 
 	return (
@@ -103,15 +65,6 @@ const CountryDetails = () => {
 			{/* Flag, name */}
 			<div className='rounded-lg overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_20px_40px_rgba(0,0,0,0.05)]'>
 				<div className='relative h-48 py-30 flex items-center justify-center dark:bg-gray-800 bg-gray-300'>
-					<button
-						onClick={() => toggleFavorite(countryDetails?.cca3, !isFavorite)}
-						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition'>
-						{isFavorite ? (
-							<IoIosHeart className='text-red-500 text-xl' />
-						) : (
-							<IoIosHeart className='text-gray-700 text-xl' />
-						)}
-					</button>
 					<img
 						className='h-24 sm:h-32 md:h-40 border-4 border-white rounded shadow-2xl object-contain'
 						src={countryDetails.flag}
@@ -185,9 +138,10 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${countryDetails.region === 'Antarctic'
-											? 'Antarctica'
-											: countryDetails.region
+										`main_region.${
+											countryDetails.region === 'Antarctic'
+												? 'Antarctica'
+												: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&

@@ -1,17 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import CountryCard from '../components/Cards/CountryCard';
-import CountrySearch from '../components/Layout/CountrySearch';
 import RegionDropdown from '../components/Layout/RegionDropdown';
 import SortOptions from '../components/Layout/SortOptions';
 import Loading from '../components/Layout/Loading';
 import { getAllCountries } from '../services/country.service';
-import {
-	addFavorite,
-	getFavoriteCodes,
-	removeFavorite,
-} from '../services/auth.service';
 import translated from '../scripts/countries_translated.json';
 import { HiSparkles } from 'react-icons/hi2';
 import { SlMagnifier } from 'react-icons/sl';
@@ -20,20 +14,14 @@ import { useDebounce } from '../hooks/useDebounce';
 const CountryList = () => {
 	const { t } = useTranslation();
 	const location = useLocation();
-	const navigate = useNavigate();
 
 	// States
 	const [countries, setCountries] = useState([]);
-	const [allCountries, setAllCountries] = useState([]);
 	const [totalPages, setTotalPages] = useState(1);
 	const [loading, setLoading] = useState(true);
-	const [favorites, setFavorites] = useState([]);
 	const [searchTerm, setSearchTerm] = useState('');
-	const [suggestions, setSuggestions] = useState([]);
-	const [showSuggestions, setShowSuggestions] = useState(false);
-	const [appliedSearch, setAppliedSearch] = useState('');
 
-	const debouncedSuggest = useDebounce(searchTerm, 300);
+	const debouncedSearch = useDebounce(searchTerm, 300);
 
 	// Smart Search from header navigation
 	const [smartSearchResults, setSmartSearchResults] = useState(null);
@@ -61,7 +49,7 @@ const CountryList = () => {
 	const sortOrderParam = searchParams.get('sortOrder')
 		? `&sortOrder=${searchParams.get('sortOrder')}`
 		: '';
-	const searchParam = appliedSearch ? `&search=${appliedSearch}` : '';
+	const searchParam = debouncedSearch ? `&search=${debouncedSearch}` : '';
 
 	// Handle smart search results from header navigation
 	useEffect(() => {
@@ -76,40 +64,6 @@ const CountryList = () => {
 			window.history.replaceState({}, document.title);
 		}
 	}, [location.state]);
-
-	// Fetch favorites on mount
-	useEffect(() => {
-		const fetchFavorites = async () => {
-			const token = localStorage.getItem('token');
-			if (!token) return;
-
-			try {
-				const data = await getFavoriteCodes();
-				setFavorites(data);
-			} catch (error) {
-				console.error('Get favorite fail:', error);
-			}
-		};
-
-		fetchFavorites();
-	}, []);
-
-	// Fetch all countries for search
-	useEffect(() => {
-		const fetchAllCountries = async () => {
-			try {
-				const response = await getAllCountries({
-					page: 1,
-					limit: 0,
-				});
-				setAllCountries(response.data);
-			} catch (error) {
-				console.error('Fetch all countries error:', error);
-			}
-		};
-
-		fetchAllCountries();
-	}, []);
 
 	// Reset to page 1 when filters change
 	useEffect(() => {
@@ -155,50 +109,6 @@ const CountryList = () => {
 		searchParam,
 	]);
 
-	useEffect(() => {
-		if (!debouncedSuggest) {
-			setSuggestions([]);
-			setShowSuggestions(false);
-			return;
-		}
-
-		const fetchSuggestions = async () => {
-			try {
-				const res = await getAllCountries({
-					page: 1,
-					search: `&search=${debouncedSuggest}`,
-				});
-
-				const list = res.data.slice(0, 7);
-				setSuggestions(list);
-
-				const exactMatch =
-					list.length === 1 &&
-					list[0].name.toLowerCase() === debouncedSuggest.toLowerCase();
-
-				setShowSuggestions(!exactMatch);
-			} catch (err) {
-				console.error('Suggestion error:', err);
-			}
-		};
-
-		fetchSuggestions();
-	}, [debouncedSuggest]);
-
-	useEffect(() => {
-		const handleOutside = () => setShowSuggestions(false);
-		window.addEventListener('click', handleOutside);
-		return () => window.removeEventListener('click', handleOutside);
-	}, []);
-
-	useEffect(() => {
-		if (searchTerm.trim() === '') {
-			setAppliedSearch('');
-			setSuggestions([]);
-			setShowSuggestions(false);
-		}
-	}, [searchTerm]);
-
 	// Helper functions
 	const getTranslatedName = (name) => {
 		const found = translated.find((c) => c.name === name);
@@ -209,22 +119,6 @@ const CountryList = () => {
 		const params = new URLSearchParams(searchParams);
 		params.set('page', newPage.toString());
 		setSearchParams(params);
-	};
-
-	const handleToggleFavorite = async (countryCode, newState) => {
-		try {
-			if (newState) {
-				await addFavorite(countryCode);
-			} else {
-				await removeFavorite(countryCode);
-			}
-		} catch (error) {
-			console.error('Favorite error:', error);
-		}
-	};
-
-	const handleCountrySelect = (country) => {
-		navigate(`/country/${country.cca3}`);
 	};
 
 	const clearSmartSearch = () => {
@@ -277,44 +171,10 @@ const CountryList = () => {
 							placeholder={t('search_placeholder')}
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
-							onFocus={() => {
-								if (
-									suggestions.length !== 1 ||
-									searchTerm.trim().toLowerCase() !==
-										suggestions[0]?.name.toLowerCase()
-								) {
-									setShowSuggestions(true);
-								}
-							}}
-							onKeyDown={(e) => {
-								if (e.key === 'Enter') {
-									setAppliedSearch(searchTerm);
-									setShowSuggestions(false);
-								}
-							}}
 							className='w-full bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 
                                 focus:outline-none'
 						/>
 					</div>
-
-					{showSuggestions && suggestions.length > 0 && (
-						<ul className='absolute left-0 right-0 mt-1 bg-white dark:bg-gray-800 shadow-lg rounded-md border z-20'>
-							{suggestions.map((item) => (
-								<li
-									key={item.cca3}
-									onClick={() => {
-										setSearchTerm(item.name);
-										setAppliedSearch(item.name);
-										setShowSuggestions(false);
-									}}
-									className='px-4 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700'>
-									{currentLang === 'vi'
-										? getTranslatedName(item.name)
-										: item.name}
-								</li>
-							))}
-						</ul>
-					)}
 				</div>
 				<div className='flex gap-4'>
 					<SortOptions />
@@ -337,10 +197,6 @@ const CountryList = () => {
 						capital={country.capital}
 						flag={country.flag}
 						code={country.cca3}
-						isFavorite={favorites.includes(country.cca3)}
-						onToggleFavorite={(name, newState) =>
-							handleToggleFavorite(country.cca3, newState)
-						}
 					/>
 				))}
 			</div>

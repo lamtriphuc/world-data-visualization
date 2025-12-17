@@ -1,19 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
-import { IoIosHeart } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { translateCapital } from '../../scripts/capital_names_vi';
 
-const CountryCard = ({
-	flag,
-	name,
-	population,
-	region,
-	capital,
-	code,
-	isFavorite = false,
-	onToggleFavorite,
-}) => {
+const CountryCard = ({ flag, name, population, region, capital, code }) => {
 	const [imageSrc, setImageSrc] = useState(null);
 	const imgRef = useRef();
 	const currentLang = localStorage.getItem('lang');
@@ -37,36 +27,6 @@ const CountryCard = ({
 
 	const { t } = useTranslation();
 
-	const [favorite, setFavorite] = useState(isFavorite);
-
-	const [user, setUser] = useState(null);
-
-	useEffect(() => {
-		const loadUser = () => {
-			const avatar = localStorage.getItem('avatar');
-			const name = localStorage.getItem('name');
-			if (avatar && name) setUser({ avatar, name });
-			else {
-				setUser(null);
-				setFavorite(favorite);
-			}
-		};
-
-		loadUser(); // chạy lần đầu
-
-		// Lắng nghe khi user thay đổi
-		window.addEventListener('userChanged', loadUser);
-
-		return () => window.removeEventListener('userChanged', loadUser);
-	}, [favorite]);
-
-	const handleFavoriteClick = (e) => {
-		e.stopPropagation(); // chặn event click lan ra ngoài
-		e.preventDefault();
-		setFavorite(!favorite);
-		onToggleFavorite(name, !favorite);
-	};
-
 	return (
 		<div className='relative flex flex-col'>
 			<div className='relative group'>
@@ -76,17 +36,6 @@ const CountryCard = ({
 					alt={name}
 					className='w-full h-40 object-cover'
 				/>
-				{/* Icon yêu thích */}
-				{user && (
-					<button
-						onClick={handleFavoriteClick}
-						className='absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition opacity-0 group-hover:opacity-100'>
-						<IoIosHeart
-							className={`w-6 h-6 cursor-pointer ${favorite ? 'fill-red-500 text-red-500' : 'text-gray-500'
-								}`}
-						/>
-					</button>
-				)}
 			</div>
 			<Link
 				to={`/country/${code}`}
@@ -101,7 +50,8 @@ const CountryCard = ({
 						{t(`main_region.${region === 'Antarctic' ? 'Antarctica' : region}`)}
 					</p>
 					<p>
-						{t('capital')}: {currentLang === 'vi' ? translateCapital(capital) : capital}
+						{t('capital')}:{' '}
+						{currentLang === 'vi' ? translateCapital(capital) : capital}
 					</p>
 				</div>
 			</Link>
