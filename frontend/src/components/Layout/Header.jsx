@@ -109,9 +109,8 @@ const Header = () => {
 				<div className='relative'>
 					<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
 						<HiSparkles
-							className={`w-4 h-4 ${
-								isLoading ? 'text-indigo-500 animate-pulse' : 'text-indigo-400'
-							}`}
+							className={`w-4 h-4 ${isLoading ? 'text-indigo-500 animate-pulse' : 'text-indigo-400'
+								}`}
 						/>
 					</div>
 					<input
@@ -170,7 +169,7 @@ const Header = () => {
 			</div>
 
 			{/* Navigation */}
-			<div className='flex items-center gap-4'>
+			<div className='flex items-center gap-2'>
 				<Link
 					to='/countries'
 					className='flex px-2 py-1 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 items-center gap-2 text-sm'>

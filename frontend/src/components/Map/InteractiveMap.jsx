@@ -161,10 +161,10 @@ const InteractiveMap = forwardRef((props, ref) => {
 				latitude: event.lngLat.lat,
 				name: props.name,
 				// Dùng pop_est, vì GeoJSON của bạn có thuộc tính này
-				population: newInfo.population
+				population: newInfo?.population
 					? newInfo.population.toLocaleString('en-US')
 					: props.pop_est.toLocaleString('en-US'),
-				area: newInfo.area
+				area: newInfo?.area
 					? newInfo.area.toLocaleString('en-US')
 					: props.pop_est.toLocaleString('en-US'),
 			});

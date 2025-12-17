@@ -19,7 +19,7 @@ const LanguageSwitcher = () => {
 			onClick={toggleLanguage}
 			className='flex items-center gap-2 px-2 py-1 rounded-lg
 			bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-sm font-medium'>
-			<FiGlobe className='text-lg' />
+			<FiGlobe className='text-sm' />
 			<span>{currentLang === 'en' ? 'Vietnamese' : 'Tiếng Anh'}</span>
 		</button>
 	);

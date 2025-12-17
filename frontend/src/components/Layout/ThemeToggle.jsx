@@ -9,12 +9,12 @@ const ThemeToggle = () => {
 	return (
 		<button onClick={toggleTheme}>
 			{theme === 'dark' ? (
-				<div className='flex items-center px-2 py-1 rounded-lg  dark:bg-gray-800 dark:hover:bg-gray-700 justify-center gap-2'>
+				<div className='flex items-center px-2 py-1 rounded-lg text-sm  dark:bg-gray-800 dark:hover:bg-gray-700 justify-center gap-2'>
 					<FiSun className='text-yellow-400' />
 					<span>{t('light_mode')}</span>
 				</div>
 			) : (
-				<div className='flex items-center px-2 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 justify-center gap-2'>
+				<div className='flex items-center text-sm px-2 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 justify-center gap-2'>
 					<FiMoon />
 					<span>{t('dark_mode')}</span>
 				</div>

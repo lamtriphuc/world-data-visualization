@@ -27,8 +27,7 @@ const ContinentChart = ({ chartData }) => {
 				<div className='bg-white p-3 rounded-lg shadow-lg border border-gray-200'>
 					<p className='text-gray-900'>
 						{t(
-							`main_region.${
-								chartData.name === 'Antarctic' ? 'Antarctica' : chartData.name
+							`main_region.${chartData.name === 'Antarctic' ? 'Antarctica' : chartData.name
 							}`
 						)}
 					</p>
@@ -57,12 +56,13 @@ const ContinentChart = ({ chartData }) => {
 							cy='50%'
 							outerRadius='80%'
 							fill='#8884d8'
-							label={({ name, percentage }) =>
-								`${t(
-									`main_region.${name === 'Antarctic' ? 'Antarctica' : name}`
-								)} (${percentage}%)`
-							}
-							labelLine={true}>
+						// label={({ name, percentage }) =>
+						// 	`${t(
+						// 		`main_region.${name === 'Antarctic' ? 'Antarctica' : name}`
+						// 	)} (${percentage}%)`
+						// }
+						// labelLine={true}
+						>
 							{chartData.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
 							))}
@@ -82,8 +82,7 @@ const ContinentChart = ({ chartData }) => {
 						<div className='flex-1 overflow-hidden'>
 							<p className='text-gray-700 dark:text-gray-300 text-sm truncate font-medium'>
 								{t(
-									`main_region.${
-										item.name === 'Antarctic' ? 'Antarctica' : item.name
+									`main_region.${item.name === 'Antarctic' ? 'Antarctica' : item.name
 									}`
 								)}
 							</p>

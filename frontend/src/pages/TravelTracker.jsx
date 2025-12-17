@@ -16,6 +16,7 @@ import InteractiveMap from '../components/Map/InteractiveMap';
 import { useTranslation } from 'react-i18next';
 import { getTranslatedName } from '../ultils';
 import { AITravelAdvisor } from '../components/AI';
+import CountrySearch from '../components/Layout/CountrySearch';
 
 const TRAVEL_COLORS = {
 	visited: '#10B981', // Xanh lá - Đã đi
@@ -37,10 +38,13 @@ const TravelTracker = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [stats, setStats] = useState({ visited: 0, bucket: 0, living: 0 });
+	const [selectedCountryCode, setSelectedCountryCode] = useState(null);
 
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [note, setNote] = useState('');
+
+	const mapContainerRef = useRef(null);
 
 	useEffect(() => {
 		fetch('/countries.geojson')
@@ -117,6 +121,49 @@ const TravelTracker = () => {
 		setShowModal(true);
 	};
 
+	// const updateCountryStatus = async (
+	// 	cca3,
+	// 	status,
+	// 	startDate,
+	// 	endDate,
+	// 	note
+	// ) => {
+	// 	const existing = countryStatus.find((x) => x.cca3 === cca3);
+
+	// 	if (status === 'none') {
+	// 		if (existing) {
+	// 			await deleteTravelTracker(cca3);
+	// 			setCountryStatus((prev) => prev.filter((c) => c.cca3 != existing.cca3));
+	// 		}
+	// 		setShowModal(false);
+	// 		return;
+	// 	}
+
+	// 	const payload = {
+	// 		cca3,
+	// 		status,
+	// 		note: note || '',
+	// 		startDate: startDate || null,
+	// 		endDate: status === 'visited' ? endDate || null : null,
+	// 	};
+
+	// 	let updatedList;
+
+	// 	// UPDATE (record đã tồn tại)
+	// 	if (existing) {
+	// 		const updated = await postTravelTracker(payload);
+	// 		updatedList = countryStatus.map((x) => (x.cca3 === cca3 ? updated : x));
+	// 	}
+	// 	// CREATE (chưa có record)
+	// 	else {
+	// 		const created = await postTravelTracker(payload);
+	// 		updatedList = [...countryStatus, created];
+	// 	}
+
+	// 	setCountryStatus(updatedList);
+	// 	setShowModal(false);
+	// };
+
 	const updateCountryStatus = async (
 		cca3,
 		status,
@@ -126,11 +173,29 @@ const TravelTracker = () => {
 	) => {
 		const existing = countryStatus.find((x) => x.cca3 === cca3);
 
+		// 🔥 CASE: chọn living → chỉ cho phép 1 nước living
+		if (status === 'living') {
+			const currentLiving = countryStatus.find(
+				(x) => x.status === 'living' && x.cca3 !== cca3
+			);
+
+			// Nếu đã có living khác → chuyển nó sang visited
+			if (currentLiving) {
+				await postTravelTracker({
+					...currentLiving,
+					status: 'visited',
+					endDate: new Date().toISOString().slice(0, 10),
+				});
+			}
+		}
+
+		// ❌ REMOVE
 		if (status === 'none') {
 			if (existing) {
 				await deleteTravelTracker(cca3);
-				setCountryStatus((prev) => prev.filter((c) => c.cca3 != existing.cca3));
-				return;
+				setCountryStatus((prev) =>
+					prev.filter((c) => c.cca3 !== cca3)
+				);
 			}
 			setShowModal(false);
 			return;
@@ -146,21 +211,30 @@ const TravelTracker = () => {
 
 		let updatedList;
 
-		// UPDATE (record đã tồn tại)
 		if (existing) {
 			const updated = await postTravelTracker(payload);
-			updatedList = countryStatus.map((x) => (x.cca3 === cca3 ? updated : x));
-		}
-		// CREATE (chưa có record)
-		else {
+			updatedList = countryStatus.map((x) =>
+				x.cca3 === cca3 ? updated : x
+			);
+		} else {
 			const created = await postTravelTracker(payload);
 			updatedList = [...countryStatus, created];
+		}
+
+		// 🔁 Update state local cho living cũ → visited
+		if (status === 'living') {
+			updatedList = updatedList.map((x) =>
+				x.status === 'living' && x.cca3 !== cca3
+					? { ...x, status: 'visited' }
+					: x
+			);
 		}
 
 		setCountryStatus(updatedList);
 		setShowModal(false);
 	};
-	console.log(lang);
+
+
 	const getStatusLabel = (status) => {
 		switch (status) {
 			case 'visited':
@@ -199,8 +273,6 @@ const TravelTracker = () => {
 			.sort((a, b) => a.name.localeCompare(b.name));
 	}, [countries, countryStatus]);
 
-	console.log(countryStatus);
-
 	const filteredCountries = useMemo(() => {
 		if (!searchTerm) return countryList;
 		return countryList.filter((c) =>
@@ -214,11 +286,53 @@ const TravelTracker = () => {
 		navigate(`/country/${cca3}`);
 	};
 
+	const handleSearchSelect = (country) => {
+		console.log(country)
+		if (country && mapRef.current) {
+			setSelectedCountryCode(country.cca3);
+
+			// Gọi hàm 'flyTo' của component con
+			mapRef.current.flyTo(
+				[country.latlng.lng, country.latlng.lat], // [Lng, Lat]
+				4 // Zoom
+			);
+		}
+	};
+
+	const allCountryNames = useMemo(() => {
+		return countries.map((c) => ({
+			cca3: c.cca3,
+			name: c.name,
+			flag: c.flag,
+			latlng: c.latlng
+		}));
+	}, [countries, lang]);
+
+	const markedCountries = useMemo(() => {
+		return countryList.filter((c) => c.status !== 'none');
+	}, [countryList]);
+
+	const flyToCountry = (cca3) => {
+		const country = countries.find((c) => c.cca3 === cca3);
+		if (!country || !mapRef.current) return;
+
+		// Scroll tới map
+		mapContainerRef.current?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+		});
+
+		mapRef.current.flyTo(
+			[country.latlng.lng, country.latlng.lat],
+			4
+		);
+	};
+
 	return (
 		<div className='space-y-6'>
 			{/* Statistics Cards */}
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-				<div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-green-500'>
+				<div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-green-500 '>
 					<div className='flex items-center justify-between'>
 						<div>
 							<p className='text-sm text-gray-600 dark:text-gray-300 mb-1'>
@@ -236,7 +350,7 @@ const TravelTracker = () => {
 					</div>
 				</div>
 
-				<div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-yellow-500'>
+				<div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-yellow-500 '>
 					<div className='flex items-center justify-between'>
 						<div>
 							<p className='text-sm text-gray-600 dark:text-gray-300  mb-1'>
@@ -260,10 +374,7 @@ const TravelTracker = () => {
 								{t('living')}
 							</p>
 							<p className='text-3xl font-bold text-gray-800 dark:text-gray-200'>
-								{stats.living}
-							</p>
-							<p className='text-xs text-gray-500 dark:text-gray-300 mt-1'>
-								{t('residence')}
+								{lang == 'vi' ? getTranslatedName(countryStatus.find(item => item.status === 'living')?.name) : countryStatus.find(item => item.status === 'living')?.name}
 							</p>
 						</div>
 						<BiHome className='text-blue-500' size={40} />
@@ -272,56 +383,71 @@ const TravelTracker = () => {
 			</div>
 
 			{/* Map Container */}
-			<div className='bg-white dark:bg-gray-800  rounded-xl shadow-md overflow-hidden'>
-				<div className='p-4 bg-gray-50 dark:bg-gray-800  border-b'>
-					<div className='flex items-center justify-between flex-wrap gap-4'>
-						<div className='flex items-center gap-4 text-sm flex-wrap'>
-							<span className='font-semibold text-gray-700 dark:text-gray-300'>
-								{t('legend')}:
-							</span>
-							<div className='flex items-center gap-2'>
-								<div
-									className='w-4 h-4 rounded'
-									style={{ backgroundColor: TRAVEL_COLORS.visited }}></div>
-								<span>{t('visited')}</span>
+			<div
+				ref={mapContainerRef}
+				className='bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden relative'
+			>
+				<div className='bg-white dark:bg-gray-800  rounded-xl shadow-md overflow-hidden relative'>
+					<div className='p-4 bg-gray-50 dark:bg-gray-800  border-b'>
+						<div className='flex items-center justify-between flex-wrap gap-4'>
+							<div className='flex items-center gap-4 text-sm flex-wrap'>
+								<span className='font-semibold text-gray-700 dark:text-gray-300'>
+									{t('legend')}:
+								</span>
+								<div className='flex items-center gap-2'>
+									<div
+										className='w-4 h-4 rounded'
+										style={{ backgroundColor: TRAVEL_COLORS.visited }}></div>
+									<span>{t('visited')}</span>
+								</div>
+								<div className='flex items-center gap-2'>
+									<div
+										className='w-4 h-4 rounded'
+										style={{ backgroundColor: TRAVEL_COLORS.bucket }}></div>
+									<span>{t('bucket')}</span>
+								</div>
+								<div className='flex items-center gap-2'>
+									<div
+										className='w-4 h-4 rounded'
+										style={{ backgroundColor: TRAVEL_COLORS.living }}></div>
+									<span>{t('living')}</span>
+								</div>
+								<div className='flex items-center gap-2'>
+									<div
+										className='w-4 h-4 rounded'
+										style={{ backgroundColor: TRAVEL_COLORS.default }}></div>
+									<span>{t('none')}</span>
+								</div>
 							</div>
-							<div className='flex items-center gap-2'>
-								<div
-									className='w-4 h-4 rounded'
-									style={{ backgroundColor: TRAVEL_COLORS.bucket }}></div>
-								<span>{t('bucket')}</span>
+							<div className='text-sm text-gray-600'>
+								Click vào quốc gia để đánh dấu
 							</div>
-							<div className='flex items-center gap-2'>
-								<div
-									className='w-4 h-4 rounded'
-									style={{ backgroundColor: TRAVEL_COLORS.living }}></div>
-								<span>{t('living')}</span>
-							</div>
-							<div className='flex items-center gap-2'>
-								<div
-									className='w-4 h-4 rounded'
-									style={{ backgroundColor: TRAVEL_COLORS.default }}></div>
-								<span>{t('none')}</span>
-							</div>
-						</div>
-						<div className='text-sm text-gray-600'>
-							Click vào quốc gia để đánh dấu
 						</div>
 					</div>
-				</div>
 
-				{/* Sử dụng InteractiveMap component */}
-				<div className='w-full h-[450px]'>
-					<InteractiveMap
-						ref={mapRef}
-						geoData={geoData}
-						regionColors={travelColors}
-						regionFilter='All'
-						selectedCountryCode={null}
-						onCountryClick={handleCountryClick}
-						countries={countries}
-						onTravel={true}
-					/>
+					<div className='absolute top-16 left-4 right-4 z-[999] pointer-events-none'>
+						<div className='pointer-events-auto w-full md:w-72 shadow-xl'>
+							<CountrySearch
+								countries={allCountryNames}
+								onSelect={handleSearchSelect}
+							/>
+						</div>
+					</div>
+
+					{/* Sử dụng InteractiveMap component */}
+
+					<div className='w-full h-[450px]'>
+						<InteractiveMap
+							ref={mapRef}
+							geoData={geoData}
+							regionColors={travelColors}
+							regionFilter='All'
+							selectedCountryCode={selectedCountryCode}
+							onCountryClick={handleCountryClick}
+							countries={countries}
+							onTravel={true}
+						/>
+					</div>
 				</div>
 			</div>
 
@@ -332,7 +458,7 @@ const TravelTracker = () => {
 			<div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6'>
 				<div className='flex justify-between items-center mb-4'>
 					<h2 className='text-2xl font-bold text-gray-800 dark:text-gray-300'>
-						{t('countries_list')} ({countries.length})
+						{t('countries_list')}
 					</h2>
 				</div>
 
@@ -351,29 +477,38 @@ const TravelTracker = () => {
 				</div>
 
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-96 overflow-y-auto'>
-					{filteredCountries.map((country) => (
+					{markedCountries.length === 0 && (
+						<p className='text-gray-500 col-span-full text-center'>
+							Chưa có quốc gia nào được đánh dấu
+						</p>
+					)}
+
+					{markedCountries.map((country) => (
 						<div
 							key={country.cca3}
 							onClick={() => {
 								const fullCountry = countries.find(
 									(c) => c.cca3 === country.cca3
 								);
+
+								flyToCountry(country.cca3);
+
 								setSelectedCountry({
 									...country,
 									country: fullCountry,
 								});
-								setShowModal(true);
 							}}
 							className='p-3 border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer'
 							style={{
-								borderLeftWidth: '4px',
+								borderLeftWidth: '8px',
 								borderLeftColor: getStatusColor(country.status),
-							}}>
+							}}
+						>
 							<div className='flex gap-4'>
-								<img src={country.flag} alt='' className='w-15' />
+								<img src={country.flag} alt='' className='w-20' />
 								<div>
 									<div className='font-semibold text-gray-800 dark:text-gray-300'>
-										{getTranslatedName(country.name)}
+										{lang == 'vi' ? getTranslatedName(country.name) : country.name}
 									</div>
 									<div className='text-sm text-gray-600 dark:text-gray-300'>
 										{getStatusLabel(country.status)}
@@ -387,8 +522,15 @@ const TravelTracker = () => {
 
 			{/* Modal */}
 			{showModal && selectedCountry && (
-				<div className='fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4'>
-					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6'>
+				<div className='fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4'
+					onClick={() => {
+						setShowModal(false);
+						setSelectedCountry(null);
+					}}
+				>
+					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6'
+						onClick={(e) => e.stopPropagation()}
+					>
 						<div className='flex justify-between items-start mb-4'>
 							<h3 className='text-2xl font-bold text-gray-800 dark:text-gray-300'>
 								{selectedCountry.name}
@@ -412,11 +554,10 @@ const TravelTracker = () => {
 										onClick={() =>
 											setSelectedCountry((s) => ({ ...s, status: 'visited' }))
 										}
-										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
-											selectedCountry.status === 'visited'
-												? 'border-green-600 bg-green-100'
-												: 'border-green-500 bg-green-50 hover:bg-green-100'
-										}`}>
+										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'visited'
+											? 'border-green-600 bg-green-100'
+											: 'border-green-500 bg-green-50 hover:bg-green-100'
+											}`}>
 										<BiMapPin className='text-green-600' size={24} />
 										<span className='font-semibold text-green-700'>
 											{t('visited')}
@@ -427,11 +568,10 @@ const TravelTracker = () => {
 										onClick={() =>
 											setSelectedCountry((s) => ({ ...s, status: 'bucket' }))
 										}
-										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
-											selectedCountry.status === 'bucket'
-												? 'border-yellow-600 bg-yellow-100'
-												: 'border-yellow-500 bg-yellow-50 hover:bg-yellow-100'
-										}`}>
+										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'bucket'
+											? 'border-yellow-600 bg-yellow-100'
+											: 'border-yellow-500 bg-yellow-50 hover:bg-yellow-100'
+											}`}>
 										<BiHeart className='text-yellow-600' size={24} />
 										<span className='font-semibold text-yellow-700'>
 											{t('bucket')}
@@ -442,11 +582,10 @@ const TravelTracker = () => {
 									onClick={() =>
 										setSelectedCountry((s) => ({ ...s, status: 'living' }))
 									}
-									className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
-										selectedCountry.status === 'living'
-											? 'border-blue-600 bg-blue-100'
-											: 'border-blue-500 bg-blue-50 hover:bg-blue-100'
-									}`}>
+									className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'living'
+										? 'border-blue-600 bg-blue-100'
+										: 'border-blue-500 bg-blue-50 hover:bg-blue-100'
+										}`}>
 									<BiHome className='text-blue-600' size={24} />
 									<span className='font-semibold text-blue-700'>
 										{t('living')}
@@ -457,38 +596,38 @@ const TravelTracker = () => {
 							{/* --- INPUT DATE --- */}
 							{(selectedCountry.status === 'visited' ||
 								selectedCountry.status === 'bucket') && (
-								<div className='space-y-3'>
-									{/* Ngày bắt đầu */}
-									<div>
-										<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
-											{selectedCountry.status === 'bucket'
-												? t('end_day')
-												: t('start_day')}
-										</label>
-										<input
-											type='date'
-											className='w-full border p-2 rounded-lg'
-											value={startDate}
-											onChange={(e) => setStartDate(e.target.value)}
-										/>
-									</div>
-
-									{/* Ngày kết thúc chỉ cho visited */}
-									{selectedCountry.status === 'visited' && (
+									<div className='space-y-3'>
+										{/* Ngày bắt đầu */}
 										<div>
 											<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
-												{t('end_day')}
+												{selectedCountry.status === 'bucket'
+													? t('end_day')
+													: t('start_day')}
 											</label>
 											<input
 												type='date'
 												className='w-full border p-2 rounded-lg'
-												value={endDate}
-												onChange={(e) => setEndDate(e.target.value)}
+												value={startDate}
+												onChange={(e) => setStartDate(e.target.value)}
 											/>
 										</div>
-									)}
-								</div>
-							)}
+
+										{/* Ngày kết thúc chỉ cho visited */}
+										{selectedCountry.status === 'visited' && (
+											<div>
+												<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
+													{t('end_day')}
+												</label>
+												<input
+													type='date'
+													className='w-full border p-2 rounded-lg'
+													value={endDate}
+													onChange={(e) => setEndDate(e.target.value)}
+												/>
+											</div>
+										)}
+									</div>
+								)}
 
 							{/* --- NOTE --- */}
 							<div>

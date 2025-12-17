@@ -324,10 +324,10 @@ const CountryDetails = () => {
 					<div className='mt-4 flex flex-wrap gap-2'>
 						{countryDetails.borders?.map((border) => (
 							<span
-								key={border}
+								key={border.cca3}
 								className='px-2 py-1 bg-gray-300 dark:bg-gray-800 rounded-lg cursor-pointer'
-								onClick={() => navigate(`/country/${border}`)}>
-								{getTranslatedName(border)}
+								onClick={() => navigate(`/country/${border.cca3}`)}>
+								{getTranslatedName(border.name)}
 							</span>
 						))}
 					</div>

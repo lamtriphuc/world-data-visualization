@@ -12,6 +12,10 @@ const userCountryStatusSchema = new mongoose.Schema({
         required: true,
         index: true
     },
+    name: {
+        type: String,
+        required: true,
+    },
 
     status: {
         type: String,
