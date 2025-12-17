@@ -97,7 +97,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className='flex flex-col lg:flex-row justify-between items-center gap-4 p-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow sticky top-0 z-10 w-full lg:px-28 lg:py-4'>
+		<header className='flex flex-col lg:flex-row justify-between items-center gap-4 p-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow sticky top-0 z-1000 w-full lg:px-28 lg:py-4'>
 			<Link to='/'>
 				<h1 className='text-xl font-semibold whitespace-nowrap'>
 					Where in the world?

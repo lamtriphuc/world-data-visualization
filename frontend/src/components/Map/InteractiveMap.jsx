@@ -120,7 +120,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 			matchExpression.push(code, color);
 		});
 
-		matchExpression.push('#e5e7eb'); // default xám
+		matchExpression.push('rgba(0,0,0,0)'); // default 
 
 		return {
 			id: 'travel-fill',
@@ -202,10 +202,26 @@ const InteractiveMap = forwardRef((props, ref) => {
 			mapStyle='mapbox://styles/mapbox/navigation-day-v1'
 			onMouseMove={onHover}
 			onClick={onClick}
-			interactiveLayerIds={[onTravel ? 'travel-fill' : 'countries-fill']}>
+			// interactiveLayerIds={[onTravel ? 'travel-fill' : 'countries-fill']}
+			interactiveLayerIds={['countries-click']}
+		// interactiveLayerIds={['countries-fill', 'travel-fill']}
+		>
 			{geoData && (
 				<Source type='geojson' data={geoData}>
-					<Layer {...(onTravel ? travelLayerStyle : fillLayerStyle)} />
+					{onTravel && travelLayerStyle && (
+						<Layer {...travelLayerStyle} />
+					)}
+
+					{!onTravel && fillLayerStyle && (
+						<Layer {...fillLayerStyle} />
+					)}
+
+					<Layer
+						id="countries-click"
+						type="fill"
+						paint={{ 'fill-opacity': 0 }}
+					/>
+
 					<Layer {...borderLayerStyle} />
 				</Source>
 			)}

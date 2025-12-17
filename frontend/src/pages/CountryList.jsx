@@ -65,6 +65,24 @@ const CountryList = () => {
 		}
 	}, [location.state]);
 
+
+	// Fetch all countries for search
+	useEffect(() => {
+		const fetchAllCountries = async () => {
+			try {
+				const response = await getAllCountries({
+					page: 1,
+					limit: 0,
+				});
+				setAllCountries(response.data);
+			} catch (error) {
+				console.error('Fetch all countries error:', error);
+			}
+		};
+
+		fetchAllCountries();
+	}, []);
+
 	// Reset to page 1 when filters change
 	useEffect(() => {
 		if (page !== 1 && !smartSearchResults) {
@@ -121,6 +139,7 @@ const CountryList = () => {
 		setSearchParams(params);
 	};
 
+
 	const clearSmartSearch = () => {
 		setSmartSearchResults(null);
 		setSmartSearchInterpretation('');
@@ -171,6 +190,21 @@ const CountryList = () => {
 							placeholder={t('search_placeholder')}
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
+							onFocus={() => {
+								if (
+									suggestions.length !== 1 ||
+									searchTerm.trim().toLowerCase() !==
+									suggestions[0]?.name.toLowerCase()
+								) {
+									setShowSuggestions(true);
+								}
+							}}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter') {
+									setAppliedSearch(searchTerm);
+									setShowSuggestions(false);
+								}
+							}}
 							className='w-full bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 
                                 focus:outline-none'
 						/>

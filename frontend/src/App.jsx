@@ -7,11 +7,9 @@ import Comparison from './pages/Comparison';
 import DashBoard from './pages/DashBoard';
 import Login from './pages/Login';
 import Loading from './components/Layout/Loading';
-import Favorite from './pages/Favorite';
 import Continent from './pages/Continent';
 import TravelTracker from './pages/TravelTracker';
 import { AIChatWidget } from './components/AI';
-import Analytic from './pages/Analytic';
 import Rankings from './pages/Rankings';
 
 const App = () => {
@@ -33,8 +31,6 @@ const App = () => {
 					<Route path='/country/:code' element={<CountryDetails />} />
 					<Route path='/comparison' element={<Comparison />} />
 					<Route path='/login' element={<Login />} />
-					<Route path='/favorite' element={<Favorite />} />
-					<Route path='/analytic' element={<Analytic />} />
 					<Route path='/travel-tracker' element={<TravelTracker />} />
 					<Route path='/continent/:region' element={<Continent />} />
 					<Route path='/rankings' element={<Rankings />} />
