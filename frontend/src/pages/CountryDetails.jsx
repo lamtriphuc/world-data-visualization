@@ -117,9 +117,7 @@ const CountryDetails = () => {
 						<div className='flex gap-2'>
 							<FiUsers className='w-4 h-4 sm:w-5 sm:h-5  text-green-500' />
 							<div className='flex flex-col'>
-								<span>
-									{t('population')} ({countryDetails.population?.year})
-								</span>
+								<span>{t('population')}</span>
 								<span>
 									{countryDetails.population?.value.toLocaleString() || 0}
 								</span>
@@ -276,9 +274,9 @@ const CountryDetails = () => {
 						<h1>{t('borders')}</h1>
 					</div>
 					<div className='mt-4 flex flex-wrap gap-2'>
-						{(!countryDetails.borders || countryDetails.borders.length === 0) && (
-							<span
-								className=' dark:bg-gray-800 cursor-pointer'>
+						{(!countryDetails.borders ||
+							countryDetails.borders.length === 0) && (
+							<span className=' dark:bg-gray-800 cursor-pointer'>
 								{t('no_border')}
 							</span>
 						)}
