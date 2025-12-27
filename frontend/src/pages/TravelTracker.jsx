@@ -7,14 +7,13 @@ import {
 import { useNavigate } from 'react-router-dom';
 import {
 	getAllCountries,
-	getAllCountryNames,
 } from '../services/country.service';
 import { CgKey } from 'react-icons/cg';
 import Loading from '../components/Layout/Loading';
 import { BiHeart, BiHome, BiMapPin, BiSearch, BiX } from 'react-icons/bi';
 import InteractiveMap from '../components/Map/InteractiveMap';
 import { useTranslation } from 'react-i18next';
-import { getTranslatedName } from '../ultils';
+import { getTranslatedName, toInputDate } from '../ultils';
 import { AITravelAdvisor } from '../components/AI';
 import CountrySearch from '../components/Layout/CountrySearch';
 
@@ -83,10 +82,12 @@ const TravelTracker = () => {
 
 	useEffect(() => {
 		if (showModal && selectedCountry) {
-			const found = countryStatus.find((x) => x.cca3 === selectedCountry.code);
+			const found = countryStatus.find(
+				(x) => x.cca3 === selectedCountry.cca3
+			);
 
-			setStartDate(found?.startDate ? found.startDate.slice(0, 10) : '');
-			setEndDate(found?.endDate ? found.endDate.slice(0, 10) : '');
+			setStartDate(toInputDate(found?.startDate));
+			setEndDate(toInputDate(found?.endDate));
 			setNote(found?.note || '');
 		}
 	}, [showModal, selectedCountry]);
@@ -445,6 +446,7 @@ const TravelTracker = () => {
 							onCountryClick={handleCountryClick}
 							countries={countries}
 							onTravel={true}
+							countryStatus={countryStatus}
 						/>
 					</div>
 				</div>

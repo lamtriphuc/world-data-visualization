@@ -35,6 +35,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 		onCountryClick,
 		countries,
 		onTravel = false,
+		countryStatus
 	} = props;
 	const { t } = useTranslation();
 	const currentLang = localStorage.getItem('lang');
@@ -145,6 +146,15 @@ const InteractiveMap = forwardRef((props, ref) => {
 		return map;
 	}, [countries]);
 
+	const countryStatusMap = useMemo(() => {
+		if (!countryStatus) return {};
+		const map = {};
+		countryStatus.forEach((item) => {
+			map[item.cca3] = item;
+		});
+		return map;
+	}, [countryStatus]);
+
 	// Xử lý khi rê chuột (Hover)
 	const onHover = (event) => {
 		const { features } = event;
@@ -153,7 +163,7 @@ const InteractiveMap = forwardRef((props, ref) => {
 		if (hoveredFeature) {
 			const props = hoveredFeature.properties;
 			const iso3 = props.iso_a3;
-
+			const travelInfo = countryStatusMap[iso3];
 			const newInfo = populationMap[iso3];
 
 			setHoverInfo({
@@ -167,6 +177,10 @@ const InteractiveMap = forwardRef((props, ref) => {
 				area: newInfo?.area
 					? newInfo.area.toLocaleString('en-US')
 					: props.pop_est.toLocaleString('en-US'),
+				status: travelInfo?.status || null,
+				startDate: travelInfo?.startDate || null,
+				endDate: travelInfo?.endDate || null,
+				note: travelInfo?.note || '',
 			});
 			event.target.getCanvas().style.cursor = 'pointer';
 		} else {
@@ -187,6 +201,14 @@ const InteractiveMap = forwardRef((props, ref) => {
 				onCountryClick(countryCode);
 			}
 		}
+	};
+
+	const formatDDMMYYYY = (dateString) => {
+		if (!dateString) return '';
+		const d = new Date(dateString);
+		return `${String(d.getDate()).padStart(2, '0')}/${String(
+			d.getMonth() + 1
+		).padStart(2, '0')}/${d.getFullYear()}`;
 	};
 
 	return (
@@ -241,7 +263,30 @@ const InteractiveMap = forwardRef((props, ref) => {
 								? getTranslatedName(hoverInfo.name)
 								: hoverInfo.name}
 						</h3>
-						{/* Đã sửa 'population' */}
+						{hoverInfo.status && (
+							<p className='text-sm font-semibold text-blue-600'>
+								{t(hoverInfo.status)}
+							</p>
+						)}
+
+						{hoverInfo.startDate && (
+							<p className='text-sm text-gray-600'>
+								{t('start_day')}: {formatDDMMYYYY(hoverInfo.startDate)}
+							</p>
+						)}
+
+						{hoverInfo.endDate && (
+							<p className='text-sm text-gray-600'>
+								{t('end_day')}: {formatDDMMYYYY(hoverInfo.endDate)}
+							</p>
+						)}
+
+						{hoverInfo.note && (
+							<p className='text-sm italic text-gray-500'>
+								{t('note')}: “{hoverInfo.note}”
+							</p>
+						)}
+						<hr />
 						<p className='text-sm text-gray-600'>
 							{t('population')}: {hoverInfo.population}
 						</p>
