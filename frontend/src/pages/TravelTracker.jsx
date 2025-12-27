@@ -5,9 +5,7 @@ import {
 	postTravelTracker,
 } from '../services/auth.service';
 import { useNavigate } from 'react-router-dom';
-import {
-	getAllCountries,
-} from '../services/country.service';
+import { getAllCountries } from '../services/country.service';
 import { CgKey } from 'react-icons/cg';
 import Loading from '../components/Layout/Loading';
 import { BiHeart, BiHome, BiMapPin, BiSearch, BiX } from 'react-icons/bi';
@@ -82,9 +80,7 @@ const TravelTracker = () => {
 
 	useEffect(() => {
 		if (showModal && selectedCountry) {
-			const found = countryStatus.find(
-				(x) => x.cca3 === selectedCountry.cca3
-			);
+			const found = countryStatus.find((x) => x.cca3 === selectedCountry.cca3);
 
 			setStartDate(toInputDate(found?.startDate));
 			setEndDate(toInputDate(found?.endDate));
@@ -194,9 +190,7 @@ const TravelTracker = () => {
 		if (status === 'none') {
 			if (existing) {
 				await deleteTravelTracker(cca3);
-				setCountryStatus((prev) =>
-					prev.filter((c) => c.cca3 !== cca3)
-				);
+				setCountryStatus((prev) => prev.filter((c) => c.cca3 !== cca3));
 			}
 			setShowModal(false);
 			return;
@@ -214,9 +208,7 @@ const TravelTracker = () => {
 
 		if (existing) {
 			const updated = await postTravelTracker(payload);
-			updatedList = countryStatus.map((x) =>
-				x.cca3 === cca3 ? updated : x
-			);
+			updatedList = countryStatus.map((x) => (x.cca3 === cca3 ? updated : x));
 		} else {
 			const created = await postTravelTracker(payload);
 			updatedList = [...countryStatus, created];
@@ -234,7 +226,6 @@ const TravelTracker = () => {
 		setCountryStatus(updatedList);
 		setShowModal(false);
 	};
-
 
 	const getStatusLabel = (status) => {
 		switch (status) {
@@ -304,7 +295,7 @@ const TravelTracker = () => {
 			cca3: c.cca3,
 			name: c.name,
 			flag: c.flag,
-			latlng: c.latlng
+			latlng: c.latlng,
 		}));
 	}, [countries, lang]);
 
@@ -322,10 +313,7 @@ const TravelTracker = () => {
 			block: 'start',
 		});
 
-		mapRef.current.flyTo(
-			[country.latlng.lng, country.latlng.lat],
-			4
-		);
+		mapRef.current.flyTo([country.latlng.lng, country.latlng.lat], 4);
 	};
 
 	return (
@@ -374,7 +362,13 @@ const TravelTracker = () => {
 								{t('living')}
 							</p>
 							<p className='text-3xl font-bold text-gray-800 dark:text-gray-200'>
-								{lang == 'vi' ? getTranslatedName(countryStatus.find(item => item.status === 'living')?.name) : countryStatus.find(item => item.status === 'living')?.name}
+								{lang == 'vi'
+									? getTranslatedName(
+											countryStatus.find((item) => item.status === 'living')
+												?.name
+									  )
+									: countryStatus.find((item) => item.status === 'living')
+											?.name}
 							</p>
 						</div>
 						<BiHome className='text-blue-500' size={40} />
@@ -385,8 +379,7 @@ const TravelTracker = () => {
 			{/* Map Container */}
 			<div
 				ref={mapContainerRef}
-				className='bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden relative'
-			>
+				className='bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden relative'>
 				<div className='bg-white dark:bg-gray-800  rounded-xl shadow-md overflow-hidden relative'>
 					<div className='p-4 bg-gray-50 dark:bg-gray-800  border-b'>
 						<div className='flex items-center justify-between flex-wrap gap-4'>
@@ -419,9 +412,7 @@ const TravelTracker = () => {
 									<span>{t('none')}</span>
 								</div>
 							</div>
-							<div className='text-sm text-gray-600'>
-								Click vào quốc gia để đánh dấu
-							</div>
+							<div className='text-sm text-gray-600'>{t('bookmark_desc')}</div>
 						</div>
 					</div>
 
@@ -503,13 +494,14 @@ const TravelTracker = () => {
 							style={{
 								borderLeftWidth: '8px',
 								borderLeftColor: getStatusColor(country.status),
-							}}
-						>
+							}}>
 							<div className='flex gap-4'>
 								<img src={country.flag} alt='' className='w-20' />
 								<div>
 									<div className='font-semibold text-gray-800 dark:text-gray-300'>
-										{lang == 'vi' ? getTranslatedName(country.name) : country.name}
+										{lang == 'vi'
+											? getTranslatedName(country.name)
+											: country.name}
 									</div>
 									<div className='text-sm text-gray-600 dark:text-gray-300'>
 										{getStatusLabel(country.status)}
@@ -523,15 +515,15 @@ const TravelTracker = () => {
 
 			{/* Modal */}
 			{showModal && selectedCountry && (
-				<div className='fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4'
+				<div
+					className='fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4'
 					onClick={() => {
 						setShowModal(false);
 						setSelectedCountry(null);
-					}}
-				>
-					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6'
-						onClick={(e) => e.stopPropagation()}
-					>
+					}}>
+					<div
+						className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6'
+						onClick={(e) => e.stopPropagation()}>
 						<div className='flex justify-between items-start mb-4'>
 							<h3 className='text-2xl font-bold text-gray-800 dark:text-gray-300'>
 								{selectedCountry.name}
@@ -555,10 +547,11 @@ const TravelTracker = () => {
 										onClick={() =>
 											setSelectedCountry((s) => ({ ...s, status: 'visited' }))
 										}
-										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'visited'
-											? 'border-green-600 bg-green-100'
-											: 'border-green-500 bg-green-50 hover:bg-green-100'
-											}`}>
+										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
+											selectedCountry.status === 'visited'
+												? 'border-green-600 bg-green-100'
+												: 'border-green-500 bg-green-50 hover:bg-green-100'
+										}`}>
 										<BiMapPin className='text-green-600' size={24} />
 										<span className='font-semibold text-green-700'>
 											{t('visited')}
@@ -569,10 +562,11 @@ const TravelTracker = () => {
 										onClick={() =>
 											setSelectedCountry((s) => ({ ...s, status: 'bucket' }))
 										}
-										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'bucket'
-											? 'border-yellow-600 bg-yellow-100'
-											: 'border-yellow-500 bg-yellow-50 hover:bg-yellow-100'
-											}`}>
+										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
+											selectedCountry.status === 'bucket'
+												? 'border-yellow-600 bg-yellow-100'
+												: 'border-yellow-500 bg-yellow-50 hover:bg-yellow-100'
+										}`}>
 										<BiHeart className='text-yellow-600' size={24} />
 										<span className='font-semibold text-yellow-700'>
 											{t('bucket')}
@@ -583,10 +577,11 @@ const TravelTracker = () => {
 									onClick={() =>
 										setSelectedCountry((s) => ({ ...s, status: 'living' }))
 									}
-									className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'living'
-										? 'border-blue-600 bg-blue-100'
-										: 'border-blue-500 bg-blue-50 hover:bg-blue-100'
-										}`}>
+									className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
+										selectedCountry.status === 'living'
+											? 'border-blue-600 bg-blue-100'
+											: 'border-blue-500 bg-blue-50 hover:bg-blue-100'
+									}`}>
 									<BiHome className='text-blue-600' size={24} />
 									<span className='font-semibold text-blue-700'>
 										{t('living')}
@@ -597,38 +592,38 @@ const TravelTracker = () => {
 							{/* --- INPUT DATE --- */}
 							{(selectedCountry.status === 'visited' ||
 								selectedCountry.status === 'bucket') && (
-									<div className='space-y-3'>
-										{/* Ngày bắt đầu */}
+								<div className='space-y-3'>
+									{/* Ngày bắt đầu */}
+									<div>
+										<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
+											{selectedCountry.status === 'bucket'
+												? t('end_day')
+												: t('start_day')}
+										</label>
+										<input
+											type='date'
+											className='w-full border p-2 rounded-lg'
+											value={startDate}
+											onChange={(e) => setStartDate(e.target.value)}
+										/>
+									</div>
+
+									{/* Ngày kết thúc chỉ cho visited */}
+									{selectedCountry.status === 'visited' && (
 										<div>
 											<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
-												{selectedCountry.status === 'bucket'
-													? t('end_day')
-													: t('start_day')}
+												{t('end_day')}
 											</label>
 											<input
 												type='date'
 												className='w-full border p-2 rounded-lg'
-												value={startDate}
-												onChange={(e) => setStartDate(e.target.value)}
+												value={endDate}
+												onChange={(e) => setEndDate(e.target.value)}
 											/>
 										</div>
-
-										{/* Ngày kết thúc chỉ cho visited */}
-										{selectedCountry.status === 'visited' && (
-											<div>
-												<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
-													{t('end_day')}
-												</label>
-												<input
-													type='date'
-													className='w-full border p-2 rounded-lg'
-													value={endDate}
-													onChange={(e) => setEndDate(e.target.value)}
-												/>
-											</div>
-										)}
-									</div>
-								)}
+									)}
+								</div>
+							)}
 
 							{/* --- NOTE --- */}
 							<div>

@@ -224,5 +224,6 @@
   "bubble_chart_note": "X-axis and Y-axis use logarithmic scale. Bubble size represents population density (population/area).",
   "density": "Density",
   "no_data": "No data available",
-  "rankings": "Rankings"
+  "rankings": "Rankings",
+  "bookmark_desc": "Click on the country to bookmark it"
 }

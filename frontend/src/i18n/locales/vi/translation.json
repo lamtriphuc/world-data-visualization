@@ -224,5 +224,6 @@
   "bubble_chart_note": "Trục X và trục Y sử dụng thang logarit. Kích thước bong bóng thể hiện mật độ dân số (dân số/diện tích).",
   "density": "Mật độ",
   "no_data": "Không có dữ liệu",
-  "rankings": "Xếp hạng"
+  "rankings": "Xếp hạng",
+  "bookmark_desc": "Nhấn vào quốc gia để đánh dấu"
 }
