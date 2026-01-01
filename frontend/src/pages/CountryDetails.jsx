@@ -136,10 +136,9 @@ const CountryDetails = () => {
 								<span>{t('region')}</span>
 								<span>
 									{t(
-										`main_region.${
-											countryDetails.region === 'Antarctic'
-												? 'Antarctica'
-												: countryDetails.region
+										`main_region.${countryDetails.region === 'Antarctic'
+											? 'Antarctica'
+											: countryDetails.region
 										}`
 									)}
 									{countryDetails.subregion &&
@@ -151,7 +150,8 @@ const CountryDetails = () => {
 							<FaMapPin className='w-4 h-4 sm:w-5 sm:h-5  text-violet-500' />
 							<div className='flex flex-col'>
 								<span>
-									{t('population_density')} ({countryDetails.population?.year})
+									{t('population_density')}
+									{/* ({countryDetails.population?.year}) */}
 								</span>
 								<span>
 									{population_density.toFixed(0)} {t('people')} / km²
@@ -198,11 +198,12 @@ const CountryDetails = () => {
 							<IoMdTrendingUp className='w-4 h-4 sm:w-5 sm:h-5 text-purple-500' />
 							<div className='flex flex-col'>
 								<span>
-									GDP (
+									GDP
+									{/* (
 									{countryDetails.gdp?.length
 										? countryDetails.gdp.at(-1)?.year
 										: ''}
-									)
+									) */}
 								</span>
 								<span>
 									{countryDetails.gdp.length
@@ -216,11 +217,12 @@ const CountryDetails = () => {
 							<GrMoney className='w-4 h-4 sm:w-5 sm:h-5 text-teal-500' />
 							<div className='flex flex-col'>
 								<span>
-									{t('gdp_per_capita')} (
+									{t('gdp_per_capita')}
+									{/* (
 									{countryDetails.gdp?.length
 										? countryDetails.gdp.at(-1)?.year
 										: ''}
-									)
+									) */}
 								</span>
 								<span>
 									{gdp_per_capita.toFixed(0)} $ / {t('year')}
@@ -276,10 +278,10 @@ const CountryDetails = () => {
 					<div className='mt-4 flex flex-wrap gap-2'>
 						{(!countryDetails.borders ||
 							countryDetails.borders.length === 0) && (
-							<span className=' dark:bg-gray-800 cursor-pointer'>
-								{t('no_border')}
-							</span>
-						)}
+								<span className=' dark:bg-gray-800 cursor-pointer'>
+									{t('no_border')}
+								</span>
+							)}
 						{countryDetails.borders?.map((border) => (
 							<span
 								key={border.cca3}
