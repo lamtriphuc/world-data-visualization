@@ -364,11 +364,11 @@ const TravelTracker = () => {
 							<p className='text-3xl font-bold text-gray-800 dark:text-gray-200'>
 								{lang == 'vi'
 									? getTranslatedName(
-											countryStatus.find((item) => item.status === 'living')
-												?.name
-									  )
+										countryStatus.find((item) => item.status === 'living')
+											?.name
+									)
 									: countryStatus.find((item) => item.status === 'living')
-											?.name}
+										?.name}
 							</p>
 						</div>
 						<BiHome className='text-blue-500' size={40} />
@@ -416,7 +416,7 @@ const TravelTracker = () => {
 						</div>
 					</div>
 
-					<div className='absolute top-16 left-4 right-4 z-[999] pointer-events-none'>
+					<div className='absolute top-16 left-4 right-4 z-[99] pointer-events-none'>
 						<div className='pointer-events-auto w-full md:w-72 shadow-xl'>
 							<CountrySearch
 								countries={allCountryNames}
@@ -516,13 +516,15 @@ const TravelTracker = () => {
 			{/* Modal */}
 			{showModal && selectedCountry && (
 				<div
-					className='fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4'
+					className='fixed top-16 left-0 right-0 bottom-0 
+             bg-opacity-50 flex items-center justify-center z-100 p-4'
 					onClick={() => {
 						setShowModal(false);
 						setSelectedCountry(null);
 					}}>
 					<div
-						className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6'
+						className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full 
+             						max-h-[90vh] overflow-y-auto p-6'
 						onClick={(e) => e.stopPropagation()}>
 						<div className='flex justify-between items-start mb-4'>
 							<h3 className='text-2xl font-bold text-gray-800 dark:text-gray-300'>
@@ -547,11 +549,10 @@ const TravelTracker = () => {
 										onClick={() =>
 											setSelectedCountry((s) => ({ ...s, status: 'visited' }))
 										}
-										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
-											selectedCountry.status === 'visited'
-												? 'border-green-600 bg-green-100'
-												: 'border-green-500 bg-green-50 hover:bg-green-100'
-										}`}>
+										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'visited'
+											? 'border-green-600 bg-green-100'
+											: 'border-green-500 bg-green-50 hover:bg-green-100'
+											}`}>
 										<BiMapPin className='text-green-600' size={24} />
 										<span className='font-semibold text-green-700'>
 											{t('visited')}
@@ -562,11 +563,10 @@ const TravelTracker = () => {
 										onClick={() =>
 											setSelectedCountry((s) => ({ ...s, status: 'bucket' }))
 										}
-										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
-											selectedCountry.status === 'bucket'
-												? 'border-yellow-600 bg-yellow-100'
-												: 'border-yellow-500 bg-yellow-50 hover:bg-yellow-100'
-										}`}>
+										className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'bucket'
+											? 'border-yellow-600 bg-yellow-100'
+											: 'border-yellow-500 bg-yellow-50 hover:bg-yellow-100'
+											}`}>
 										<BiHeart className='text-yellow-600' size={24} />
 										<span className='font-semibold text-yellow-700'>
 											{t('bucket')}
@@ -577,11 +577,10 @@ const TravelTracker = () => {
 									onClick={() =>
 										setSelectedCountry((s) => ({ ...s, status: 'living' }))
 									}
-									className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${
-										selectedCountry.status === 'living'
-											? 'border-blue-600 bg-blue-100'
-											: 'border-blue-500 bg-blue-50 hover:bg-blue-100'
-									}`}>
+									className={`w-full p-4 rounded-lg border-2 flex items-center gap-3 ${selectedCountry.status === 'living'
+										? 'border-blue-600 bg-blue-100'
+										: 'border-blue-500 bg-blue-50 hover:bg-blue-100'
+										}`}>
 									<BiHome className='text-blue-600' size={24} />
 									<span className='font-semibold text-blue-700'>
 										{t('living')}
@@ -592,38 +591,38 @@ const TravelTracker = () => {
 							{/* --- INPUT DATE --- */}
 							{(selectedCountry.status === 'visited' ||
 								selectedCountry.status === 'bucket') && (
-								<div className='space-y-3'>
-									{/* Ngày bắt đầu */}
-									<div>
-										<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
-											{selectedCountry.status === 'bucket'
-												? t('end_day')
-												: t('start_day')}
-										</label>
-										<input
-											type='date'
-											className='w-full border p-2 rounded-lg'
-											value={startDate}
-											onChange={(e) => setStartDate(e.target.value)}
-										/>
-									</div>
-
-									{/* Ngày kết thúc chỉ cho visited */}
-									{selectedCountry.status === 'visited' && (
+									<div className='space-y-3'>
+										{/* Ngày bắt đầu */}
 										<div>
 											<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
-												{t('end_day')}
+												{selectedCountry.status === 'bucket'
+													? t('end_day')
+													: t('start_day')}
 											</label>
 											<input
 												type='date'
 												className='w-full border p-2 rounded-lg'
-												value={endDate}
-												onChange={(e) => setEndDate(e.target.value)}
+												value={startDate}
+												onChange={(e) => setStartDate(e.target.value)}
 											/>
 										</div>
-									)}
-								</div>
-							)}
+
+										{/* Ngày kết thúc chỉ cho visited */}
+										{selectedCountry.status === 'visited' && (
+											<div>
+												<label className='block text-gray-700 dark:text-gray-300 font-semibold mb-1'>
+													{t('end_day')}
+												</label>
+												<input
+													type='date'
+													className='w-full border p-2 rounded-lg'
+													value={endDate}
+													onChange={(e) => setEndDate(e.target.value)}
+												/>
+											</div>
+										)}
+									</div>
+								)}
 
 							{/* --- NOTE --- */}
 							<div>
