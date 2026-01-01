@@ -425,7 +425,7 @@ const TravelTracker = () => {
 						</div>
 					</div>
 
-					<div className='absolute top-16 left-4 right-4 z-[999] pointer-events-none'>
+					<div className='absolute top-16 left-4 right-4 z-[99] pointer-events-none'>
 						<div className='pointer-events-auto w-full md:w-72 shadow-xl'>
 							<CountrySearch
 								countries={allCountryNames}
@@ -523,13 +523,15 @@ const TravelTracker = () => {
 
 			{/* Modal */}
 			{showModal && selectedCountry && (
-				<div className='fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4'
+				<div className='fixed top-20 left-0 right-0 bottom-0 
+             bg-opacity-50 flex items-center justify-center z-800 p-4'
 					onClick={() => {
 						setShowModal(false);
 						setSelectedCountry(null);
 					}}
 				>
-					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6'
+					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full 
+             max-h-[90vh] overflow-y-auto p-6'
 						onClick={(e) => e.stopPropagation()}
 					>
 						<div className='flex justify-between items-start mb-4'>
